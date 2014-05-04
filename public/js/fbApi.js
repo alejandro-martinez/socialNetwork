@@ -11,18 +11,20 @@ FB.init({
 
 FB.getLoginStatus(function(response) {
 	
-	FB.Event.subscribe('auth.login', function(response) {
+	FB.Event.subscribe('auth.statusChange', function(response) {
 		startApp();
 	});
 
 	startApp();
 });
 
-FB.login(function(response) {
- }, {
-   scope: 'publish_actions, user_photos, read_stream', 
-   return_scopes: true
- });
+FB.login(function(response){return null;},{ scope: 'publish_actions, user_photos, read_stream' });
+
+FB.Event.subscribe('edge.create', handleResponse);
+
+    var handleResponse = function(response) {
+       alert ('You liked the URL: ' + response);
+};
 
 function fbLogout(){
 	if(typeof FB.logout == 'function'){
@@ -75,7 +77,15 @@ function AppController(){
 			callback(model);
 		});	
 	},
-
+	this.newPost = function(mensaje, callback){
+		FB.api('/me/feed', 'post', { message: mensaje }, function(response) {
+		  if (!response || response.error) {
+		  		callback(response.error);
+		  } else {
+		    	callback(response)
+		  }
+		});
+	},
 	this.uploadPhoto = function (foto, esPerfil, callback){
 		var access_token = FB.getAuthResponse()['accessToken'];
 		var extension = foto.substring(1,11);

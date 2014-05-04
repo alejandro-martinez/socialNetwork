@@ -59,16 +59,27 @@ var Views = {
 		}
 	}),
 	NewPost: Backbone.View.extend({						//Nuevo Post 
-		el: $("#body"),
+		el: $("body"),
+		events: {
+			'click #publicarStatus': 'publishPost'
+		},
 		initialize: function(){
+			this.api = this.options.api;
 			this.render();
 		},
 		render: function(){
-			var This = this;
 			utils.loadTemplate("newPost",function(html){
             	$("#body").html(_.template(html));  
 			});
-	}	
+		},
+		publishPost: function(event){
+			this.api.newPost($('#post-text').val(), function(response){
+				if (response){
+					alert("post con id: " + response.id + " publicado")		//Actualizar muro con nuevo post
+				}
+			});
+
+		}
 	}),
 	Posts: Backbone.View.extend({
 		el: $("#content"),
