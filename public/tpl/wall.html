@@ -1,0 +1,13 @@
+<ul id="wall-template">
+<% _.each(updates, function(post) { %> 
+    <li data-post-id="<%= post.id %>">
+    	<div class="avatar">
+			<img src="http://graph.facebook.com/<%= post.attributes.from.id%>/picture?type=square">
+		</div>
+		<div class="post">
+			<%= post.attributes.name %>
+			<%= post.attributes.story %>
+		</div>
+    </li>
+<% }); %>
+</ul>
