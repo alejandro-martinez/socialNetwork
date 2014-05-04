@@ -11,7 +11,7 @@ FB.init({
 
 FB.getLoginStatus(function(response) {
 	
-	FB.Event.subscribe('auth.login', function(response) {
+	FB.Event.subscribe('auth.statusChange', function(response) {
 		startApp();
 	});
 
@@ -19,6 +19,12 @@ FB.getLoginStatus(function(response) {
 });
 
 FB.login(function(response){return null;},{ scope: 'publish_actions, user_photos, read_stream' });
+
+FB.Event.subscribe('edge.create', handleResponse);
+
+    var handleResponse = function(response) {
+       alert ('You liked the URL: ' + response);
+};
 
 function fbLogout(){
 	if(typeof FB.logout == 'function'){
