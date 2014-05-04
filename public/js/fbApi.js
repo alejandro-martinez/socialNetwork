@@ -18,11 +18,7 @@ FB.getLoginStatus(function(response) {
 	startApp();
 });
 
-FB.login(function(response) {
- }, {
-   scope: 'publish_actions, user_photos, read_stream', 
-   return_scopes: true
- });
+FB.login(function(response){return null;},{ scope: 'publish_actions, user_photos, read_stream' });
 
 function fbLogout(){
 	if(typeof FB.logout == 'function'){
@@ -75,7 +71,15 @@ function AppController(){
 			callback(model);
 		});	
 	},
-
+	this.newPost = function(mensaje, callback){
+		FB.api('/me/feed', 'post', { message: mensaje }, function(response) {
+		  if (!response || response.error) {
+		  		callback(response.error);
+		  } else {
+		    	callback(response)
+		  }
+		});
+	},
 	this.uploadPhoto = function (foto, esPerfil, callback){
 		var access_token = FB.getAuthResponse()['accessToken'];
 		var extension = foto.substring(1,11);
