@@ -102,7 +102,6 @@ function AppController(){
 	        }
 	    });
 	},
-
 	this.updateProfilePhoto = function (callback){
 		FB.api("/me",
 	    function (response) {
@@ -110,6 +109,15 @@ function AppController(){
 			callback(response.id);
 		  }
 	    });
+	},
+	this.updateWall = function (callback){
+		FB.api("/me/feed",
+		    function (response) {
+		      if (response && !response.error) {
+		       	  callback(response);
+		      }
+		    }
+		);
 	}
 }
 
