@@ -1,0 +1,19 @@
+<div id="content-posts">
+	<ul>
+		<script type="text/template" id="posts-template">
+		<% each(posts, function(post){ %>
+			<li data-post-id=<%= post.id %>>
+				<div class="avatar">
+					<img src=<%= post.user.avatar %> />
+				<!--
+					<img src="http://graph.facebook.com/{{ data.from.id }}/picture?type=large">
+				-->
+				</div>
+				<div class="post">
+					<%= post.message %><br>
+				</div>
+			</li>
+		<%});%>
+		</script>
+	</ul>
+</div>

@@ -1,0 +1,5 @@
+#ignorar miniaturas creadas por windows
+Thumbs.db
+#Ignorar archivos construidos por Visual Studio
+*.obj
+*.exe
