@@ -111,7 +111,7 @@ function AppController(){
 	    });
 	},
 	this.updateWall = function (callback){
-		FB.api("/me/feed",
+		FB.api("/me/posts",
 		    function (response) {
 		      if (response && !response.error) {
 		       	  callback(response);
