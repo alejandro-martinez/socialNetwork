@@ -79,7 +79,28 @@ var Views = {
 			var This = this;
 			utils.loadTemplate("posts",function(html){
 				template = _.template(html);
-            	This.$el.html(template(This.model));  
+            	This.$el.html(template({updates:This.model.data}));  
+			});
+		}
+	}),
+	Wall: Backbone.View.extend({
+		el: $("#body"),
+		initialize: function(){
+			this.render();
+		},
+		render: function(){
+		    var WallUpdates = Backbone.Model.extend({});
+			var updatesCollection = Backbone.Collection.extend({
+			    model: WallUpdates
+			});
+			var updates = new updatesCollection(this.model.data);
+		    var This = this;
+		    console.log(updates.models)
+			utils.loadTemplate("wall",function(html){
+				var template = _.template(html);
+            	$("#body").append(template({
+			        updates: updates.models
+			    }));
 			});
 		}
 	}),
