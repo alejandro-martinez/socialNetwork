@@ -21,6 +21,9 @@ var AppRouter = Backbone.Router.extend({
     	if (this.loggedUser) {
             if (!this.newPostView){
     			this.mainView = new Views.Main({api: this.api, model: this.data});					//Menu lateral
+                this.api.updateWall(function(response){
+                    this.wallView = new Views.Wall({model: response});    
+                });
     			this.newPostView = new Views.NewPost();								                //Nuevo post
             }
 		}
