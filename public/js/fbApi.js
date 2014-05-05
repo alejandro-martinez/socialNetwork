@@ -18,7 +18,7 @@ FB.getLoginStatus(function(response) {
 	startApp();
 });
 
-FB.login(function(response){return null;},{ scope: 'publish_actions, user_photos, read_stream' });
+FB.login(function(){},{ scope: 'publish_actions, user_photos, read_stream' });
 
 function fbLogout(){
 	if(typeof FB.logout == 'function'){
