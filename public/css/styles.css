@@ -350,4 +350,7 @@ width: 187px;}
 #header-info span{
 	float:right;
 }
+#friend-wall-template li{
+	width:300px;
+}
 /*Agregado*/
