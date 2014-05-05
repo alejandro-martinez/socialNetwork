@@ -10,10 +10,18 @@
 		<% _.each(wall, function(post) { %> 
 		    <li>
 		    	<div class="post-info">
-					<span><%= post.attributes.from.name%>
-						<% if (post.attributes.to != null){%>>><%= post.attributes.to.data[0].name%>
-						<% }%>	
-					</span>
+					<h3><%= post.attributes.from.name%>
+						<% if (post.attributes.to != null){%>>> <%= post.attributes.to.data[0].name%>
+						<% }%>
+					</h3>
+						<% if (post.attributes.story != null) { %>
+						<em><%= post.attributes.story %></em>  	
+					   <% }%>
+
+					   <% if (post.attributes.message != null) { %>
+						 <em><%= post.attributes.message %></em>
+					   <% }%>  	
+					</p>	
 				</div>
 		    </li>
 		<% }); %>
