@@ -187,7 +187,7 @@ var Views = {
 
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
-				console.log(wallUpdates)
+				$("#body").html('');
             	$("#body").html(template({
 			        friend: This.options.friendInfo,
 			        wall: wallUpdates.models
