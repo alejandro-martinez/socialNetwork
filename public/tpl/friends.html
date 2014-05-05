@@ -1,5 +1,5 @@
 <div id="friends">
 <% _.each(friends, function(friend) { %> 
-<h5><%= friend.attributes.name%></h5>
+<a href="/#friend/<%= friend.attributes.id%>"> <%= friend.attributes.name%></a><br>
 <% }); %>
 </div>
