@@ -8,6 +8,7 @@ body {
 /* Agregado */
 .hidden {display: none;}
 .show {display: block;}
+li{list-style: none;}
 /* Agregado */
 
 /* ---- INDEX ---- */
