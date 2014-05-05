@@ -1,19 +1,5 @@
 <div id="friends">
-	<ul>
-		<script type="text/template" id="friends-template">
-		<% each(friends, function(post){ %>
-			<li data-post-id=<%= post.id %>>
-				<div class="avatar">
-					<img src=<%= post.user.avatar %> />
-				<!--
-					<img src="http://graph.facebook.com/{{ data.from.id }}/picture?type=large">
-				-->
-				</div>
-				<div class="post">
-					<%= post.message %><br>
-				</div>
-			</li>
-		<%});%>
-		</script>
-	</ul>
+<% _.each(friends, function(friend) { %> 
+<h5><%= friend.attributes.name%></h5>
+<% }); %>
 </div>
