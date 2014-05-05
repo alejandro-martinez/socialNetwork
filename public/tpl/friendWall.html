@@ -1,0 +1,20 @@
+<div id="user-info">
+	<h3><%= post.attributes.from.id%></h3>
+	<h5></h5>
+</div>
+<div id="wall-user">
+	<ul id="friend-wall-template">
+		<% _.each(updates, function(post) { %> 
+		    <li>
+		    	<div class="avatar">
+					<img src="http://graph.facebook.com/<%= post.attributes.from.id%>/picture?type=square">
+				</div>
+				<div class="post">
+					<%= post.attributes.name %>
+					<%= post.attributes.story %>
+					<img src="<%= post.attributes.picture%>">
+				</div>
+		    </li>
+		<% }); %>
+	</ul>
+</div>

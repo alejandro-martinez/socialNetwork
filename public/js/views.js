@@ -174,20 +174,22 @@ var Views = {
 			});
 		}
 	}),
-	FriendProfile: Backbone.View.extend({
+	friendProfile: Backbone.View.extend({
 		el: $("#body"),
 		initialize: function(){
 			this.render();
 		},
 		render: function(){
-			var Friends = Backbone.Model.extend({});
-			var friendsCollection = Backbone.Collection.extend({model: Friends});
-			
-			var friends = new friendsCollection(this.model.data);
-			utils.loadTemplate("friends",function(html){
+			var This = this;
+			var FriendWall = Backbone.Model.extend({});
+			var friendUpdatesCollection = Backbone.Collection.extend({model: FriendWall});		
+			var wallUpdates = new friendUpdatesCollection(This.options.wall.data);
+
+			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
             	$("#body").html(template({
-			        friends: friends.models
+			        friend: This.options.friendInfo,
+			        wall: wallUpdates
 			    }));
 			});
 		}
