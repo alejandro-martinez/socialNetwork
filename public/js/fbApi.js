@@ -20,12 +20,6 @@ FB.getLoginStatus(function(response) {
 
 FB.login(function(response){return null;},{ scope: 'publish_actions, user_photos, read_stream' });
 
-FB.Event.subscribe('edge.create', handleResponse);
-
-    var handleResponse = function(response) {
-       alert ('You liked the URL: ' + response);
-};
-
 function fbLogout(){
 	if(typeof FB.logout == 'function'){
 		if (FB.getAuthResponse()) {
@@ -61,6 +55,16 @@ function AppController(){
 			    callback(model);
 			});	
 		}
+	},
+	this.getFriend = function(id, callback){
+		fbUser('/' + id, function(model){
+		    callback(model);
+		});	
+	},
+	this.getFriendsWall = function(id, callback){
+		fbUser('/' + id + '/feed', function(model){
+		    callback(model);
+		});	
 	},
 	this.getAlbums = function(callback){
 		fbUser('/me/albums', function(model){

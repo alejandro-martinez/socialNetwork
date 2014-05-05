@@ -174,4 +174,22 @@ var Views = {
 			});
 		}
 	}),
+	FriendProfile: Backbone.View.extend({
+		el: $("#body"),
+		initialize: function(){
+			this.render();
+		},
+		render: function(){
+			var Friends = Backbone.Model.extend({});
+			var friendsCollection = Backbone.Collection.extend({model: Friends});
+			
+			var friends = new friendsCollection(this.model.data);
+			utils.loadTemplate("friends",function(html){
+				var template = _.template(html);
+            	$("#body").html(template({
+			        friends: friends.models
+			    }));
+			});
+		}
+	}),
 }
