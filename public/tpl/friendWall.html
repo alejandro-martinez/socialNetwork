@@ -10,16 +10,16 @@
 		<% _.each(wall, function(post) { %> 
 		    <li>
 		    	<div class="post-info">
-					<h3><%= post.attributes.from.name%>
+					<h3 onMouseover="meSpeak.speak('De <%=post.attributes.from.name%>');"><%= post.attributes.from.name%>
 						<% if (post.attributes.to != null){%>>> <%= post.attributes.to.data[0].name%>
 						<% }%>
 					</h3>
 						<% if (post.attributes.story != null) { %>
-						<em><%= post.attributes.story %></em>  	
+						<em onMouseover="meSpeak.speak('<%=post.attributes.story%>');"><%= post.attributes.story %></em>
 					   <% }%>
 
 					   <% if (post.attributes.message != null) { %>
-						 <em><%= post.attributes.message %></em>
+						 <em onMouseover="meSpeak.speak('<%=post.attributes.message%>');"><%= post.attributes.message %></em>
 					   <% }%>  	
 					</p>	
 				</div>
