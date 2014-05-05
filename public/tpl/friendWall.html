@@ -1,18 +1,26 @@
-<div id="user-info">
-	<h3><%= post.attributes.from.id%></h3>
-	<h5></h5>
+<div id="header-info">
+	<img src="http://graph.facebook.com/<%= friend.id%>/picture?type=normal" />
+	<span>
+		<h1><%= friend.name%></h2>
+		<h2><%= friend.username%></h2>
+	</span>	
 </div>
-<div id="wall-user">
+<div id="wall-updates">
 	<ul id="friend-wall-template">
-		<% _.each(updates, function(post) { %> 
+		<% _.each(wall, function(post) { %> 
 		    <li>
 		    	<div class="avatar">
-					<img src="http://graph.facebook.com/<%= post.attributes.from.id%>/picture?type=square">
+					<span>
+						<h3><%= post.attributes.from.name%></h3>
+						<% if (post.attributes.to != null){%>
+							>>
+							<h5><%= post.attributes.to.data[0].name%></h5>	
+						<% }%>	
+					</span>
+					
 				</div>
 				<div class="post">
-					<%= post.attributes.name %>
-					<%= post.attributes.story %>
-					<img src="<%= post.attributes.picture%>">
+				
 				</div>
 		    </li>
 		<% }); %>
