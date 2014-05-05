@@ -106,7 +106,6 @@ var Views = {
 			});
 			var updates = new updatesCollection(this.model.data);
 		    var This = this;
-		    console.log(updates.models)
 			utils.loadTemplate("wall",function(html){
 				var template = _.template(html);
             	$("#body").append(template({
@@ -163,11 +162,15 @@ var Views = {
 			this.render();
 		},
 		render: function(){
-			var This = this;
+			var Friends = Backbone.Model.extend({});
+			var friendsCollection = Backbone.Collection.extend({model: Friends});
+			
+			var friends = new friendsCollection(this.model.data);
 			utils.loadTemplate("friends",function(html){
-				template = _.template(html);
-				console.log(This)
-            	$("#body").html(template(This.model.data));  
+				var template = _.template(html);
+            	$("#body").html(template({
+			        friends: friends.models
+			    }));
 			});
 		}
 	}),
