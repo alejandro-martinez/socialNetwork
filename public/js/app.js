@@ -42,6 +42,15 @@ var AppRouter = Backbone.Router.extend({
             this.friendsView = new Views.Friends({model: response}); 
         });
     },
+    friendProfile: function(id){
+        var This = this;
+        this.api.getFriend(id,function(response){
+            This.friendInfo = response;
+        });
+        this.api.getFriendsWall(id,function(response){
+            this.friendView = new Views.friendProfile({wall: response, friendInfo: This.friendInfo}); 
+        });
+    },
     photos: function(){
         this.api.getPhotos(function(response){
             this.photos = new Views.Photos({model: response});
