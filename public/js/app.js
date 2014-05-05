@@ -9,7 +9,8 @@ var AppRouter = Backbone.Router.extend({
         "photos/upload"          : "uploadPhoto",
 		"posts/:fbid"			 : "posts",
 		"post/:postid"			 : "post",
-		"friends/:fbid"			 : "friends"
+		"friends/:fbid"			 : "friends",
+        "friend/:id"             : "friendProfile"
 		
     },
     initialize: function (appC) {
