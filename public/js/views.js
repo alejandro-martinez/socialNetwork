@@ -150,9 +150,16 @@ var Views = {
 		},
 		render: function(){
 			var This = this;
+			var Album = Backbone.Model.extend({});
+			var albumsCollection = Backbone.Collection.extend({model: Album});		
+			var albums = new albumsCollection(This.options.model.data);
+			console.log(albums)
 			utils.loadTemplate("albums",function(html){
 				template = _.template(html);
-            	This.$el.html(template(This.model));  
+            	$("#body").html('');
+            	$("#body").html(template({
+			        albums: albums
+			    }));
 			});
 		}
 	}),

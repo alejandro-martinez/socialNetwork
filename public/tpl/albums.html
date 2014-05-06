@@ -1,9 +1,11 @@
 <div id="container-album">
 	<ul>
-		<li data-album-id='{{ album.id }}'></li>
-		<li data-album-id='{{ album.id }}'></li>
-		<li data-album-id='{{ album.id }}'></li>
-		<li data-album-id='{{ album.id }}'></li>
-		<li data-album-id='{{ album.id }}'></li>
+		<% _.each(albums, function(album) { %> 
+		<li>
+			<img src="https://graph.facebook.com/<%=album.id%>?fields=cover" />
+			
+			<a href="/#album/<%= album.attributes.id%>"> <%= album.attributes.name%></a><br>
+		</li>
+		<% }); %>
 	</ul>
 </div>
