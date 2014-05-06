@@ -153,12 +153,11 @@ var Views = {
 			var Album = Backbone.Model.extend({});
 			var albumsCollection = Backbone.Collection.extend({model: Album});		
 			var albums = new albumsCollection(This.options.model.data);
-			console.log(albums)
 			utils.loadTemplate("albums",function(html){
 				template = _.template(html);
             	$("#body").html('');
             	$("#body").html(template({
-			        albums: albums
+			        albums: albums.models
 			    }));
 			});
 		}
