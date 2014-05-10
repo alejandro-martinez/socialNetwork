@@ -1,0 +1,27 @@
+<div>
+	<ul id="wall-template">
+		<% _.each(news, function(post) { %> 
+		    <li>
+		    	<div class="post-info">
+					<h3 onMouseover="meSpeak.speak('De <%=post.from.name%>');"><%= post.from.name%>
+						<% if (post.to != null){%>>> <%= post.to.data[0].name%>
+						<% }%>
+					</h3>
+						<% if (post.story != null) { %>
+						<em onMouseover="meSpeak.speak('<%=post.story%>');"><%= post.story %></em>
+					   <% }%>
+
+					   <% if (post.message != null) { %>
+						 <em onMouseover="meSpeak.speak('<%=post.message%>');"><%= post.message %></em>
+					   <% }%>  	
+
+					   <% if (post.picture != null) { %>
+						 <img src="<%= post.picture%>" />
+					   <% }%>  	
+					</p>	
+				</div>
+		    </li>
+		<% }); %>
+	</ul>
+</div>
+
