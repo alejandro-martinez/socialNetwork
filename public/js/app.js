@@ -1,7 +1,6 @@
 /* Router App ---------------------------- */
 var AppRouter = Backbone.Router.extend({
     routes: {
-		""						 : "index",
 		"fbid/:fbid"			 : "index",
 		"albums/:fbid"			 : "albums",
 		"albums/:albumid/photos" : "albumPhotos",
@@ -24,8 +23,9 @@ var AppRouter = Backbone.Router.extend({
     			this.mainView = new Views.Main({api: this.api, model: this.data});					//Menu lateral
                 this.api.newsFeed(function(response){
                     this.newsFeed = new Views.NewsFeed({model: response});
+                    this.newPostView = new Views.NewPost();                                             //Que estas pensando
                 });
-                this.newPostView = new Views.NewPost();
+
             }
 		}
 		else {
@@ -53,6 +53,7 @@ var AppRouter = Backbone.Router.extend({
         });
     },
     posts: function(){
+        this.newPostView = new Views.NewPost();                                             //Que estas pensando
         this.api.updateWall(function(response){
             this.wallView = new Views.Wall({model: response});    
         });
