@@ -3,7 +3,7 @@
 
 FB.init({
     appId  : '527193310624003',
-    status : false, // check login status
+    status : true, // check login status
     cookie : true, // enable cookies to allow the server to access the session
     oauth  : true, // enable OAuth 2.0
 	xfbml  : true
@@ -17,10 +17,6 @@ FB.getLoginStatus(function(response) {
 
 	startApp();
 });
-
-function fbLogin(){
-	FB.login({ scope: 'publish_actions, user_photos, read_stream' });
-}
 
 function fbLogout(){
 	if(typeof FB.logout == 'function'){
@@ -43,7 +39,7 @@ function AppController(){
 		id: null,
 		username: 'No ha iniciado sesión',
 		logButtonText: 'Conectarme',
-		logButtonEvent: 'FB.login()',
+		logButtonEvent: "FB.login(function(response){},{ perms: 'publish_actions, user_photos, read_stream' });",
 		photo: 'img/def-user.jpg',
 	};
 
@@ -134,6 +130,15 @@ function AppController(){
 		      }
 		    }
 		);
+	},
+	this.newsFeed = function (callback){
+		FB.api("/me/home",
+		    function (response) {
+		      if (response && !response.error) {
+		       	  callback(response);
+		      }
+		    }
+		);
 	}
 }
 
@@ -168,4 +173,16 @@ function fbUser(fbid, callback){
 	FB.api(fbid, function(response){
 			callback(response);
 	});
+}
+
+function fqlQuery(query,callback){
+	FB.api(
+	  {
+	    method: 'fql.query',
+	    query: query
+	  },
+  		function(response) {
+    		callback(response)
+  		}
+	);
 }

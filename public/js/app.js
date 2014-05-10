@@ -32,6 +32,9 @@ var AppRouter = Backbone.Router.extend({
 			new Views.NotLoggedInView();						//Muestra logo de Facebook +
 		}   
 		new Views.Header({model: this.data});					//Barra superior con los datos del usuario
+        fqlQuery("SELECT notification_id, sender_id, title_html, body_html, href FROM notification WHERE recipient_id=me()",function(response){
+            console.log(response);
+        })
     },
     albums: function(){
         this.api.getAlbums(function(response){
