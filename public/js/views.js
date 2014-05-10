@@ -69,7 +69,7 @@ var Views = {
 		},
 		render: function(){
 			utils.loadTemplate("newPost",function(html){
-            	$("#body").html(_.template(html));  
+            	$("#body").prepend(_.template(html));  
 			});
 		},
 		publishPost: function(event){
@@ -103,7 +103,7 @@ var Views = {
 			var This = this;
 			utils.loadTemplate("newsFeed",function(html){
 				template = _.template(html);
-            	$("#body").append(template({news:This.model.data}));  
+            	$("#body").html(template({news:This.model.data}));  
 			});
 		}
 	}),
@@ -121,7 +121,7 @@ var Views = {
 		    var This = this;
 			utils.loadTemplate("wall",function(html){
 				var template = _.template(html);
-            	$("#body").append(template({
+            	$("#body").html(template({
 			        updates: updates.models
 			    }));
 			});
