@@ -22,19 +22,16 @@ var AppRouter = Backbone.Router.extend({
     	if (this.loggedUser) {
             if (!this.newPostView){
     			this.mainView = new Views.Main({api: this.api, model: this.data});					//Menu lateral
-                this.api.updateWall(function(response){
-                    this.wallView = new Views.Wall({model: response});    
+                this.api.newsFeed(function(response){
+                    this.newsFeed = new Views.NewsFeed({model: response});
                 });
                 this.newPostView = new Views.NewPost();
             }
 		}
 		else {
 			new Views.NotLoggedInView();						//Muestra logo de Facebook +
-		}   
+		}
 		new Views.Header({model: this.data});					//Barra superior con los datos del usuario
-        fqlQuery("SELECT notification_id, sender_id, title_html, body_html, href FROM notification WHERE recipient_id=me()",function(response){
-            console.log(response);
-        })
     },
     albums: function(){
         this.api.getAlbums(function(response){
@@ -53,6 +50,11 @@ var AppRouter = Backbone.Router.extend({
         });
         this.api.getFriendsWall(id,function(response){
             this.friendView = new Views.friendProfile({wall: response, friendInfo: This.friendInfo}); 
+        });
+    },
+    posts: function(){
+        this.api.updateWall(function(response){
+            this.wallView = new Views.Wall({model: response});    
         });
     },
     photos: function(){
