@@ -82,7 +82,7 @@ var Views = {
 		}
 	}),
 	Posts: Backbone.View.extend({
-		el: $("#content"),
+		el: $("#body"),
 		initialize: function(){
 			this.render();
 		},
@@ -90,7 +90,20 @@ var Views = {
 			var This = this;
 			utils.loadTemplate("posts",function(html){
 				template = _.template(html);
-            	This.$el.html(template({updates:This.model.data}));  
+            	$("#body").html(template({updates:This.model.data}));  
+			});
+		}
+	}),
+	NewsFeed: Backbone.View.extend({
+		el: $("#body"),
+		initialize: function(){
+			this.render();
+		},
+		render: function(){
+			var This = this;
+			utils.loadTemplate("newsFeed",function(html){
+				template = _.template(html);
+            	$("#body").append(template({news:This.model.data}));  
 			});
 		}
 	}),
