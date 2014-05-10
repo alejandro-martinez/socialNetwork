@@ -3,7 +3,7 @@
 
 FB.init({
     appId  : '527193310624003',
-    status : true, // check login status
+    status : false, // check login status
     cookie : true, // enable cookies to allow the server to access the session
     oauth  : true, // enable OAuth 2.0
 	xfbml  : true
@@ -18,7 +18,9 @@ FB.getLoginStatus(function(response) {
 	startApp();
 });
 
-FB.login(function(){},{ scope: 'publish_actions, user_photos, read_stream' });
+function fbLogin(){
+	FB.login({ scope: 'publish_actions, user_photos, read_stream' });
+}
 
 function fbLogout(){
 	if(typeof FB.logout == 'function'){
