@@ -348,6 +348,79 @@ width: 187px;}
 .post img{
 	max-height: 360px; 
 }
+/* ---- friends.html ---- */
+
+.flip-container {
+	perspective: 1000;
+	-webkit-perspective: 1000;
+	margin: 10px;
+	float:left;
+}
+
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg);; /* Safari and Chrome */
+}
+
+.flip-container, .front, .back {
+	width: 200px;
+	height: 200px;
+}
+
+.flipper {
+	transition: .6s;
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d; /* Safari and Chrome */
+	position: relative;
+}
+
+.front, .back {
+	backface-visibility: hidden;
+	-webkit-backface-visibility:hidden; /* Chrome and Safari */
+	-moz-backface-visibility:hidden; /* Firefox */
+	-ms-backface-visibility:hidden; /* Internet Explorer */
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.front {
+	box-shadow:inset 0px 0px 100px rgba(0,0,0,0.2);
+	z-index: 2;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top center;
+}
+
+.front .desc {
+	position:absolute;
+	background:rgba(0,0,0,0.5);
+	display:block;
+	width:auto;
+	bottom:0px;
+	padding:15px;
+	line-height:27px;
+	width: 170px
+}
+
+.front .desc span {
+	display:inline-block;
+	color:white;
+	font-size:.9em;
+}
+
+.back {
+	transform: rotateY(180deg);
+	-ms-transform:rotateY(180deg); /* IE 9 */
+	-webkit-transform:rotateY(180deg); /* Safari and Chrome */
+	background:#f0f0f0;
+	box-shadow:inset 0px 0px 50px rgba(0,0,0,0.2);
+	padding:25px;
+	width:150px;
+	height:150px;
+}
+
+
 /*Agregado*/
 /*Perfil de un amigo*/
 #header-info {
