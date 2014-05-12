@@ -19,7 +19,7 @@
 					<% }%>
 
 					<% if (post.source != null) { %>
-					<iframe width="470" height="350" src="<%= post.source %>" frameborder="0" allowfullscreen></iframe>
+					<iframe width="470" height="350" src="<%= post.source %>?autoplay=0" frameborder="0" allowfullscreen></iframe>
 					<%} else if (post.picture != null) { %>
 						<img src="<%= post.picture%>" />
 					<% }%>
