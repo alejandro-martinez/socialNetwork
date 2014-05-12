@@ -59,7 +59,7 @@ var Views = {
 		}
 	}),
 	NewPost: Backbone.View.extend({						//Nuevo Post 
-		el: $("body"),
+		el: $("#body"),
 		events: {
 			'click #publicarStatus': 'publishPost'
 		},
