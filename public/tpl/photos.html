@@ -1,8 +1,13 @@
-<h1>Fotos etiquetadas</h1>
-<ul>
-	<% _.each(photos, function(photo) { %> 
-	<li>
-		<img src="<%= photo.attributes.source%>" />	
-	</li>
-	<% }); %>
-</ul>
+<div id="photos">
+	<ul id="listPhotos">
+		<% _.each(photos, function(photo) { %> 
+		<li>
+			<img src="<%= photo.attributes.source %>" />	
+		</li>
+		<% }); %>
+	</ul>
+	<h1>Fotos etiquetadas</h1>
+	<div id="photo">
+		<img src="<%= photos[0].attributes.source %>">
+	</div>
+</div>
