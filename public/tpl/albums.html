@@ -1,10 +1,9 @@
 <div id="container-album">
 	<ul>
 		<% _.each(albums, function(album) { %> 
-		<li>
-			<img src="https://graph.facebook.com/<%=album.id%>?fields=cover" />
-			
-			<a href="/#album/<%= album.attributes.id%>"> <%= album.attributes.name%></a><br>
+		<li class="album" id="<%= album.attributes.id%>">
+			<img src="https://graph.facebook.com/<%=album.attributes.id%>/picture?type=album&access_token=<%=access_token%>" />
+			<span><%= album.attributes.name%></span>
 		</li>
 		<% }); %>
 	</ul>

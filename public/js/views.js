@@ -144,6 +144,7 @@ var Views = {
 	//Fotos del usuario
 	Photos: Backbone.View.extend({
 		el: $("#body"),
+
 		initialize: function(){
 			this.render();
 		},
@@ -162,20 +163,23 @@ var Views = {
 	}),
 	//Albums del usuario
 	Albums: Backbone.View.extend({
-		el: $("#body"),
+		el: $("#albums"),
 		initialize: function(){
 			this.render();
+			this.access_token = FB.getAuthResponse()['accessToken'];
 		},
 		render: function(){
 			var This = this;
 			var Album = Backbone.Model.extend({});
 			var albumsCollection = Backbone.Collection.extend({model: Album});		
-			var albums = new albumsCollection(This.options.model.data);
+			var albums = new albumsCollection(This.model.data);
+
 			utils.loadTemplate("albums",function(html){
 				template = _.template(html);
             	$("#body").html('');
             	$("#body").html(template({
-			        albums: albums.models
+			        albums: albums.models,
+			        access_token: This.access_token
 			    }));
 			});
 		}
