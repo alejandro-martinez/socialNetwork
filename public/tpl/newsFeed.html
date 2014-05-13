@@ -19,10 +19,12 @@
 					<% }%>
 
 					<% if (post.source != null) { %>
-					<iframe width="470" height="350" src="<%= post.source %>?autoplay=0" frameborder="0" allowfullscreen></iframe>
-					<%} else if (post.picture != null) { %>
-						<img src="<%= post.picture%>" />
-					<% }%>
+						<iframe width="470" height="350" src="<%= post.source %>?autoplay=0" frameborder="0" allowfullscreen>
+						</iframe>
+					<% } else if (post.object_id != null) { %>
+							<%var foto = post.picture;%>
+							<img src="<%= foto.replace('s.jpg','n.jpg')%>" />
+					<% } %>
 				</div>
 			</li>
 		<% }); %>
