@@ -39,7 +39,7 @@ function AppController(){
 		id: null,
 		username: 'No ha iniciado sesión',
 		logButtonText: 'Conectarme',
-		logButtonEvent: "FB.login(function(response){},{ perms: 'publish_actions, user_photos, read_stream' });",
+		logButtonEvent: "FB.login(function(response){},{ scope: 'publish_actions, user_photos, read_stream' });",
 		photo: 'img/def-user.jpg',
 	};
 
