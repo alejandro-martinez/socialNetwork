@@ -1,24 +1,35 @@
+<div id="wall">
 <ul id="wall-template">
-	<% _.each(updates, function(post) { %> 
+	<% _.each(updates, function(post) { 
+		post = post.attributes;
+		%> 
 	    <li>
-	    	<div class="post-info">
-				<h3 onMouseover="meSpeak.speak('De <%=post.attributes.from.name%>');"><%= post.attributes.from.name%>
-					<% if (post.attributes.to != null){%>
-						>> <%= post.attributes.to.data[0].name%>
-					<% }%>
-				</h3>
-					<% if (post.attributes.story != null) { %>
-						<em onMouseover="meSpeak.speak('<%=post.attributes.story%>');"><%= post.attributes.story %></em>
+		    <div class="post">
+			    <div class="avatar" style="background-image: url(http://graph.facebook.com/<%= post.from.id %>/picture)"></div>
+				<h1 onMouseover="meSpeak.speak('De <%=post.from.name%>');"><%= post.from.name%>
+						<% if (post.to != null){%>
+							>> <%= post.to.data[0].name%>
+						<% }%>
+					</h1>
+					<% if (post.story != null) { %>
+						<div class="text" onMouseover="meSpeak.speak('<%=post.story%>');"><%= post.story %></div>
 					<% }%>
 
-					<% if (post.attributes.message != null) { %>
-						<em onMouseover="meSpeak.speak('<%=post.attributes.message%>');"><%= post.attributes.message %></em>
+					<% if (post.message != null) { %>
+						<div class="text" onMouseover="meSpeak.speak('<%=post.message%>');"><%= post.message %></div>
 					<% }%>
-					<div class="created_time" style="color: red"><%= post.attributes.created_time|date('d-m-Y HH:mm') %></div>
+
+					<% if (post.source != null) { %>
+						<iframe width="470" height="350" src="<%= post.source %>?autoplay=0" frameborder="0" allowfullscreen>
+						</iframe>
+					<% } else if (post.object_id != null) { %>
+							<%var foto = post.picture;%>
+							<img src="<%= foto.replace('s.jpg','n.jpg')%>" />
+					<% } %>
 				</p>	
 			</div>
 		</li>
 	<% }); %>
 </ul>
-
+</div>
 
