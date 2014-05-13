@@ -89,6 +89,7 @@ button:active{
 	width: 750px;
 	margin: 0 auto;
 	margin-top: 15%;
+	position: relative;
 }
 #logo-home>h1, #logo-home>h2{
 	font-family: 'Arial';
@@ -99,9 +100,9 @@ button:active{
 	margin: 0;
 }
 #logo-home>h2{
-	width: 790px;
+	width: 670px;
 	text-align: right;
-	margin-top: -170px;
+	margin-top: 10px;
 }
 .pulse {
 	-webkit-animation-name: pulse;
