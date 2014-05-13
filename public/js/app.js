@@ -53,9 +53,9 @@ var AppRouter = Backbone.Router.extend({
         });
     },
     posts: function(){
-        this.newPostView = new Views.NewPost();                                             //Que estas pensando
         this.api.updateWall(function(response){
             this.wallView = new Views.Wall({model: response});    
+            this.newPostView = new Views.NewPost();                                             //Que estas pensando
         });
     },
     photos: function(){
