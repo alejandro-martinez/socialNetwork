@@ -4,10 +4,10 @@
 		<div class="flipper">"
 			<div class="front" style="background-image:url('http://graph.facebook.com/<%= friend.attributes.id %>/picture?type=large')">
 				<div class="desc">
-					<span id="<%= friend.attributes.id %>"><%= friend.attributes.name %></span>
+					<span><%= friend.attributes.name %></span>
 				</div>
 			</div>
-			<div class="back" onMouseover="meSpeak.speak('<%= friend.attributes.name %>',{speed:125});">
+			<div class="back" id="<%=friend.attributes.id%>" onMouseover="meSpeak.speak('<%= friend.attributes.name %>',{speed:125});">
 				<label><%= friend.attributes.name %></label>
 			</div>
 		</div>
