@@ -176,7 +176,10 @@ var Views = {
 		}
 	}),
 	Friends: Backbone.View.extend({
-		el: $("#body"),
+		el: $("body"),
+		events: {
+        'click .back' : 'goFriendProfile',
+	    },
 		initialize: function(){
 			this.render();
 		},
@@ -185,12 +188,22 @@ var Views = {
 			var friendsCollection = Backbone.Collection.extend({model: Friends});
 			
 			var friends = new friendsCollection(this.model.data);
+			console.log(friends)
 			utils.loadTemplate("friends",function(html){
 				var template = _.template(html);
             	$("#body").html(template({
 			        friends: friends.models
 			    }));
 			});
+		},
+		goFriendProfile: function(ev){
+			idFriend = ev.currentTarget.id;
+			var This = this;
+			var ws = new AppRouter({ac: This.options.api});
+			Backbone.history.stop();
+			Backbone.history.start();
+			ws.navigate('#friend/' + idFriend );
+
 		}
 	}),
 	friendProfile: Backbone.View.extend({
