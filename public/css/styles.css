@@ -426,7 +426,7 @@ width: 187px;}
 	position:relative;
 	height:130px;
 }
-#header-info h1,h2{
+#header-info h1,#header-info h2{
 	position:absolute;
 	margin:0;
 	top:0;
