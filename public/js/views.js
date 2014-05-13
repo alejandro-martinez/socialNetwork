@@ -178,7 +178,7 @@ var Views = {
 	Friends: Backbone.View.extend({
 		el: $("body"),
 		events: {
-        'click .back' : 'goFriendProfile',
+        'click div.flip-container' : 'goFriendProfile',
 	    },
 		initialize: function(){
 			this.render();
@@ -186,9 +186,8 @@ var Views = {
 		render: function(){
 			var Friends = Backbone.Model.extend({});
 			var friendsCollection = Backbone.Collection.extend({model: Friends});
-			
 			var friends = new friendsCollection(this.model.data);
-			console.log(friends)
+
 			utils.loadTemplate("friends",function(html){
 				var template = _.template(html);
             	$("#body").html(template({
@@ -197,13 +196,10 @@ var Views = {
 			});
 		},
 		goFriendProfile: function(ev){
-			idFriend = ev.currentTarget.id;
-			var This = this;
-			var ws = new AppRouter({ac: This.options.api});
+			var ws = new AppRouter({ac: this.options.api});
 			Backbone.history.stop();
 			Backbone.history.start();
-			ws.navigate('#friend/' + idFriend );
-
+			ws.navigate('#friend/' + ev.currentTarget.id );
 		}
 	}),
 	friendProfile: Backbone.View.extend({
@@ -216,7 +212,7 @@ var Views = {
 			var FriendWall = Backbone.Model.extend({});
 			var friendUpdatesCollection = Backbone.Collection.extend({model: FriendWall});		
 			var wallUpdates = new friendUpdatesCollection(This.options.wall.data);
-
+			console.log(wallUpdates);
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
 				$("#body").html('');

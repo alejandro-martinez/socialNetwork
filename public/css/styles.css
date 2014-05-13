@@ -420,17 +420,17 @@ width: 187px;}
 	height:150px;
 }
 
-
-/*Agregado*/
 /*Perfil de un amigo*/
 #header-info {
-	width:345px;	
+	position:relative;
+	height:130px;
 }
-
-#header-info span{
-	float:right;
+#header-info h1,h2{
+	position:absolute;
+	margin:0;
+	top:0;
+	left:130px;
 }
-#friend-wall-template li{
-	width:300px;
+#header-info h2{
+	top:42px;
 }
-/*Agregado*/

@@ -61,6 +61,7 @@ function AppController(){
 	},
 	this.getFriendsWall = function(id, callback){
 		fbUser('/' + id + '/feed', function(model){
+			console.log(model);
 		    callback(model);
 		});	
 	},
@@ -75,7 +76,7 @@ function AppController(){
 		});	
 	},
 	this.getFriends = function(callback){
-		fbUser('/me/friends', function(model){
+		fbUser('/me/friends?fields=id,name,username', function(model){
 			callback(model);
 		});	
 	},
@@ -163,7 +164,6 @@ function startApp(){
 		var ws = new AppRouter({ac: ac});
 		Backbone.history.stop();													
 		Backbone.history.start();
-
 		ws.navigate('/fbid/me', true );												
 	});
 	

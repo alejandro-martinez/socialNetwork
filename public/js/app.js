@@ -39,17 +39,17 @@ var AppRouter = Backbone.Router.extend({
         });   
     },
     friends: function(){
+        var This = this;
         this.api.getFriends(function(response){
-            this.friendsView = new Views.Friends({model: response}); 
+            this.friendsView = new Views.Friends({api: This.api,model: response}); 
         });
     },
     friendProfile: function(id){
         var This = this;
-        this.api.getFriend(id,function(response){
-            This.friendInfo = response;
-        });
-        this.api.getFriendsWall(id,function(response){
-            this.friendView = new Views.friendProfile({wall: response, friendInfo: This.friendInfo}); 
+        this.api.getFriend(id,function(friendInfo){
+            This.api.getFriendsWall(friendInfo.id,function(friendWall){
+                This.friendView = new Views.friendProfile({wall: friendWall, friendInfo: friendInfo}); 
+            });
         });
     },
     posts: function(){
