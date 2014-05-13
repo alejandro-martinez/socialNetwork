@@ -1,13 +1,13 @@
 <div id="friends">
 	<% _.each(friends, function(friend) { %> 
-	<div class="flip-container">
+	<div class="flip-container" id="<%=friend.attributes.username%>">
 		<div class="flipper">"
 			<div class="front" style="background-image:url('http://graph.facebook.com/<%= friend.attributes.id %>/picture?type=large')">
 				<div class="desc">
 					<span><%= friend.attributes.name %></span>
 				</div>
 			</div>
-			<div class="back" id="<%=friend.attributes.username%>" onMouseover="meSpeak.speak('<%= friend.attributes.name %>',{speed:125});">
+			<div class="back" onMouseover="meSpeak.speak('<%= friend.attributes.name %>',{speed:125});">
 				<label><%= friend.attributes.name %></label>
 			</div>
 		</div>
