@@ -22,8 +22,10 @@ var AppRouter = Backbone.Router.extend({
             if (!this.newPostView){
     			this.mainView = new Views.Main({api: this.api, model: this.data});					//Menu lateral
                 this.api.newsFeed(function(response){
-                    this.newsFeed = new Views.NewsFeed({model: response});
-                    this.newPostView = new Views.NewPost();                                             //Que estas pensando
+			    	if(window.location.hash.split('/')[0] == "#fbid") {
+	                    this.newsFeed = new Views.NewsFeed({model: response});
+	                    this.newPostView = new Views.NewPost();                                             //Que estas pensando
+			    	}
                 });
 
             }
