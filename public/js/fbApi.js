@@ -160,11 +160,16 @@ function startApp(){
     		ac.dataDefault.id = response.id;
     		ac.dataDefault.photo = "http://graph.facebook.com/" + ac.currentUser.id + "/picture?type=normal";
     	}
-		
+		var loc = window.location.hash.split("#")[1]
+		console.log(loc)
 		var ws = new AppRouter({ac: ac});
 		Backbone.history.stop();													
 		Backbone.history.start();
-		ws.navigate('/fbid/me', true );												
+
+		ws.navigate('/fbid/me', true);
+		if(loc){
+			ws.navigate('/'+loc, true );
+		}
 	});
 	
 }
