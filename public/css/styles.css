@@ -38,14 +38,14 @@ button{
 	font-size: 18px;
 	line-height: 49px;
 	color: #FFF;
-	padding: 0 15px
+	padding: 0 15px;
 }
 button:active{
 	margin: 12px 8px 8px 12px;
 }
 #login-button{
 	float: right;
-	padding-right: 50px
+	padding-right: 50px;
 }
 #login-button>img{
 	position: absolute;
@@ -122,18 +122,18 @@ button:active{
 	font-size: 3em;
 }
 
-.icon-photos:before{content:"\e005"}
-.icon-albums:before{content: "\e004"}
-.icon-posts:before{content: "\e01c"}
-.icon-friends:before{content: "\e03b"}
+.icon-photos:before{content:"\e005";}
+.icon-albums:before{content: "\e004";}
+.icon-posts:before{content: "\e01c";}
+.icon-friends:before{content: "\e03b";}
 
-.bg-color-blueDark{background-color:#2B5797!important}
-.bg-color-orangeDark{background-color:#DA532C!important}
-.bg-color-pinkDark{background-color:#7E3878!important}
-.bg-color-greenLight{background-color:#99B433!important}
-.bg-color-green{background-color:#00A300!important}
-.bg-color-blue{background-color:#2D89EF!important}
-.bg-color-darken{background-color:#1D1D1D!important}
+.bg-color-blueDark{background-color:#2B5797!important;}
+.bg-color-orangeDark{background-color:#DA532C!important;}
+.bg-color-pinkDark{background-color:#7E3878!important;}
+.bg-color-greenLight{background-color:#99B433!important;}
+.bg-color-green{background-color:#00A300!important;}
+.bg-color-blue{background-color:#2D89EF!important;}
+.bg-color-darken{background-color:#1D1D1D!important;}
 
 #nav-user-control>ul{
 	list-style: none;
@@ -180,13 +180,13 @@ button:active{
 	background-position: center;
 }
 /* ---- newPost.html ---- */
-#que-estas-pensando{
+#que-estas-pensando {
 	display: inline-block;
 	margin: 0 auto;
 	width: 100%;
 	text-align: center;
 }
-#que-estas-pensando>input[type='text']{
+#que-estas-pensando>input[type='text'] {
 	font-family: 'Aladin';
 	font-size: 4em;
 	color:black;
@@ -194,7 +194,7 @@ button:active{
 	width: calc(100% - 20px);
 	padding: 0 10px;
 }
-#publish-post{
+#publish-post {
 	margin: 0 auto;
 	padding: 0;
 	background-color: #f2f2f2;
@@ -205,10 +205,10 @@ button:active{
 
 
 .container-album {
-position: relative;
-float: left;
-top: 50px;
-margin-left: 41px;
+	position: relative;
+	float: left;
+	top: 50px;
+	margin-left: 41px;
 }
 .container-album{	
 	width: 100%;
@@ -219,35 +219,41 @@ margin-left: 41px;
 	margin-top: 65px;
 }
 
-.container-album img{	border: none;
-		width: 100%;
+.container-album img {
+	border: none;
+	width: 100%;
 }
 
 
 /* ---- albums.html ---- */
-.container-album ul{	list-style: none;
+.container-album ul {
+	list-style: none;
 	margin-top: 5%;
-	padding: 0;}
-.container-album li{		float: left;
-		position: relative;
-		padding: 10px 10px 25px 10px;
-		background: #eee;
-		border: 1px solid #fff;
-		box-shadow: 1px 2px 10px #333;
-		margin-left: 2%;
-		max-width: 28%;
-		min-width: 180px;
-		}
+	padding: 0;
+}
+.container-album li{
+	float: left;
+	position: relative;
+	padding: 10px 10px 25px 10px;
+	background: #eee;
+	border: 1px solid #fff;
+	box-shadow: 1px 2px 10px #333;
+	margin-left: 2%;
+	max-width: 28%;
+	min-width: 180px;
+}
 .container-album li {
-color: red;
-font-weight: 500;}
-.container-album span{	padding-top: 2%;
-		padding-left: 45%;
-		font-family: 'Century Gothic';
-		font-size: 0.8em;
-		max-width: 28%;
-		min-width: 180px;		
-		}
+	color: red;
+	font-weight: 500;
+}
+.container-album span{
+	padding-top: 2%;
+	padding-left: 45%;
+	font-family: 'Century Gothic';
+	font-size: 0.8em;
+	max-width: 28%;
+	min-width: 180px;		
+}
 
 
 .container-album  li:nth-child(even){	
@@ -255,18 +261,20 @@ font-weight: 500;}
 	transform: rotate(-10deg);
 	-webkit-transform: rotate(-10deg);
     background: url(../img/user.png) no-repeat -3px 24px white;
-background-size: contain;
-height: 192px;
-width: 187px;}
+	background-size: contain;
+	height: 192px;
+	width: 187px;
+}
 
 .container-album  li:nth-child(odd){	
 	z-index: 1;
 	transform: rotate(10deg);
 	-webkit-transform: rotate(10deg);
     background: url(../img/user.png) no-repeat -3px 24px white;
-background-size: contain;
-height: 192px;
-width: 187px;}
+	background-size: contain;
+	height: 192px;
+	width: 187px;
+}
 
 .container-album  li:hover{
 	z-index: 10;
@@ -373,7 +381,7 @@ width: 187px;}
 	bottom:0px;
 	padding:15px;
 	line-height:27px;
-	width: 170px
+	width: 170px;
 }
 
 .front .desc span {
@@ -399,30 +407,17 @@ width: 187px;}
 }
 #photos{
 	position: absolute;
-	width: calc(100% - 230px);
-	height: calc(100% - 70px);
+	width: calc(100% - 250px);
+	height: calc(100% - 90px);
 }
-#photos h1, #photo{
+#photo{
 	width: calc(80% - 20px);
-	max-height: 80%;
+	text-align: center;
 	float: left;
 }
 #photo img{
 	max-width: 100%;
 	max-height: 100%;
-}
-#listPhotos {
-	width: 20%;
-	max-height: 100%;
-	float: right;
-	display: inline-block;
-	padding: 0;
-	overflow: auto;
-}
-#listPhotos li, 
-#listPhotos img {
-	cursor: pointer;
-	width: 100%;
 }
 /*Perfil de un amigo*/
 #header-info {

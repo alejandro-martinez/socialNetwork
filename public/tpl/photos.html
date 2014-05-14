@@ -1,13 +1,12 @@
 <div id="photos">
-	<ul id="listPhotos">
-		<% _.each(photos, function(photo) { %> 
-		<li>
-			<img src="<%= photo.attributes.source %>" />	
-		</li>
-		<% }); %>
-	</ul>
-	<h1>Fotos etiquetadas</h1>
-	<div id="photo">
-		<img src="<%= photos[0].attributes.source %>">
+	<div id="banner-fade">
+		<ul class="bjqs">
+			<% _.each(photos, function(photo) { %> 
+			<li><a src="<%= photo.attributes.source %>"></a></li>
+			<% }); %>
+		</ul>
 	</div>
 </div>
+<script type="text/javascript">
+	$("#banner-fade").bjqs({height:'100%',width:'100%',responsive:true, nexttext:'<img src="/img/next.png">', prevtext:'<img src="/img/prev.png">'})
+</script>
