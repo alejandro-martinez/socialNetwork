@@ -66,9 +66,11 @@ var Views = {
 		}
 	}),
 	NewPost: Backbone.View.extend({						//Nuevo Post 
-		el: $("#body"),
+		el: $("body"),
 		events: {
-			'click #publicarStatus': 'publishPost'
+			'click button#publicarStatus': 'publishPost',
+			'mouseover .speak': 'speak',
+			'mouseout .speak': 'shutUp'
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -79,13 +81,20 @@ var Views = {
             	$("#body").prepend(_.template(html));  
 			});
 		},
+		speak: function(ev){
+			speak(ev.target.attributes['data-voice'].nodeValue);
+		},
+		shutUp: function(){
+			shutUp();
+		},
 		publishPost: function(event){
-			this.api.newPost($('#post-text').val(), function(response){
-				if (response){
-					alert("post con id: " + response.id + " publicado")		//Actualizar muro con nuevo post
-				}
-			});
-
+			 if( $('#post-text').val() ) {
+				this.api.newPost($('#post-text').val(), function(response){
+					if (response.id){
+						speak("Mensaje publicado");
+					}
+				});
+			}
 		}
 	}),
 	Posts: Backbone.View.extend({

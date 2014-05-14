@@ -18,13 +18,14 @@ var AppRouter = Backbone.Router.extend({
     	this.loggedUser = appC.ac.loggedUser;					
     },
     index: function(){
+        var This = this;
     	if (this.loggedUser) {
             if (!this.newPostView){
     			this.mainView = new Views.Main({api: this.api, model: this.data});					//Menu lateral
                 this.api.newsFeed(function(response){
 			    	if(window.location.hash.split('/')[0] == "#fbid") {
 	                    this.newsFeed = new Views.NewsFeed({model: response});
-	                    this.newPostView = new Views.NewPost();                                             //Que estas pensando
+	                    this.newPostView = new Views.NewPost({api: This.api});                                             //Que estas pensando
 			    	}
                 });
 
@@ -55,9 +56,10 @@ var AppRouter = Backbone.Router.extend({
         });
     },
     posts: function(){
+        var This = this;
         this.api.updateWall(function(response){
             this.wallView = new Views.Wall({model: response});    
-            this.newPostView = new Views.NewPost();                                             //Que estas pensando
+            this.newPostView = new Views.NewPost({api: This.api});                                             //Que estas pensando
         });
     },
     photos: function(){
