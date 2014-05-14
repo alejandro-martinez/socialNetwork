@@ -88,10 +88,12 @@ var Views = {
 			shutUp();
 		},
 		publishPost: function(event){
-			 if( $('#post-text').val() ) {
+			var This = this;
+			if( $('#post-text').val() ) {
 				this.api.newPost($('#post-text').val(), function(response){
 					if (response.id){
-						speak("Mensaje publicado");
+						var ws = new AppRouter({ac: This.api})
+						ws.navigate('/#fbid/me',true);
 					}
 				});
 			}
