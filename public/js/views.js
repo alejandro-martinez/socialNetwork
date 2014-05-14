@@ -15,7 +15,9 @@ var Views = {
 	Main: Backbone.View.extend({						//Muestra el menu lateral
 		el: $("#content"),
 		events: {
-        'drop #user-photo' : 'dropProfilePhoto',
+        	'drop #user-photo' : 'dropProfilePhoto',
+			'mouseover .speak': 'speak',
+			'mouseout .speak': 'shutUp'
 	    },
 
 	    dropProfilePhoto: function(event) {				//Drag&drop foto de perfil
@@ -55,7 +57,12 @@ var Views = {
 				template = _.template(html);
             	This.$el.html(template(This.model));  
 			});
-
+		},
+		speak: function(ev){
+			speak(ev.target.attributes['data-voice'].nodeValue);
+		},
+		shutUp: function(){
+			shutUp();
 		}
 	}),
 	NewPost: Backbone.View.extend({						//Nuevo Post 
@@ -82,7 +89,11 @@ var Views = {
 		}
 	}),
 	Posts: Backbone.View.extend({
-		el: $("#body"),
+		el: $("body"),
+		events: {
+			'mouseover .speak': 'speak',
+			'mouseout .speak': 'shutUp'
+		},
 		initialize: function(){
 			this.render();
 		},
@@ -92,10 +103,20 @@ var Views = {
 				template = _.template(html);
             	$("#body").html(template({updates:This.model.data}));  
 			});
+		},
+		speak: function(ev){
+			speak(ev.target.attributes['data-voice'].nodeValue);
+		},
+		shutUp: function(){
+			shutUp();
 		}
 	}),
 	NewsFeed: Backbone.View.extend({
-		el: $("#body"),
+		el: $("#wall"),
+		events: {
+			'mouseover .speak': 'speak',
+			'mouseout .speak': 'shutUp'
+		},
 		initialize: function(){
 			this.render();
 		},
@@ -105,10 +126,20 @@ var Views = {
 				template = _.template(html);
             	$("#body").html(template({news:This.model.data}));  
 			});
+		},
+		speak: function(ev){
+			speak(ev.target.attributes['data-voice'].nodeValue);
+		},
+		shutUp: function(){
+			shutUp();
 		}
 	}),
 	Wall: Backbone.View.extend({
-		el: $("#body"),
+		el: $("body"),
+		events: {
+			'mouseover .speak': 'speak',
+			'mouseout .speak': 'shutUp'
+		},
 		initialize: function(){
 			this.render();
 		},
@@ -125,6 +156,12 @@ var Views = {
 			        updates: updates.models
 			    }));
 			});
+		},
+		speak: function(ev){
+			speak(ev.target.attributes[0].nodeValue);
+		},
+		shutUp: function(){
+			shutUp();
 		}
 	}),
 	//La barra superior con Nombre y boton Conectar
@@ -144,7 +181,6 @@ var Views = {
 	//Fotos del usuario
 	Photos: Backbone.View.extend({
 		el: $("#body"),
-
 		initialize: function(){
 			this.render();
 		},
@@ -185,9 +221,10 @@ var Views = {
 		}
 	}),
 	Friends: Backbone.View.extend({
-		el: $("body"),
+		el: $("#friends"),
 		events: {
-        'click div.flip-container' : 'goFriendProfile',
+			'mouseover .speak': 'speak',
+			'mouseout .speak': 'shutUp',
 	    },
 		initialize: function(){
 			this.render();
@@ -204,15 +241,19 @@ var Views = {
 			    }));
 			});
 		},
-		goFriendProfile: function(ev){
-			var ws = new AppRouter({ac: this.options.api});
-			Backbone.history.stop();
-			Backbone.history.start();
-			ws.navigate('#friend/' + ev.currentTarget.id );
+		speak: function(ev){
+			speak(ev.target.attributes['data-voice'].nodeValue);
+		},
+		shutUp: function(){
+			shutUp();
 		}
 	}),
 	friendProfile: Backbone.View.extend({
-		el: $("#body"),
+		el: $("body"),
+		events: {
+			'mouseover .speak': 'speak',
+			'mouseout .speak': 'shutUp'
+		},
 		initialize: function(){
 			this.render();
 		},
@@ -221,7 +262,7 @@ var Views = {
 			var FriendWall = Backbone.Model.extend({});
 			var friendUpdatesCollection = Backbone.Collection.extend({model: FriendWall});		
 			var wallUpdates = new friendUpdatesCollection(This.options.wall.data);
-			console.log(wallUpdates);
+			
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
 				$("#body").html('');
@@ -230,6 +271,12 @@ var Views = {
 			        wall: wallUpdates.models
 			    }));
 			});
+		},
+		speak: function(ev){
+			speak(ev.target.attributes['data-voice'].nodeValue);
+		},
+		shutUp: function(){
+			shutUp();
 		}
 	}),
 }

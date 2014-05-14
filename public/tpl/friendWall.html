@@ -1,29 +1,28 @@
 <div id="header-info">
 	<img src="http://graph.facebook.com/<%= friend.id%>/picture?type=normal" />
 	<span>
-		<h1><%= friend.name%></h2>
-		<h2><%= friend.username%></h2>
+		<h1 class="speak" data-voice="<%= friend.name%>"><%= friend.name%></h2>
+		<h2 class="speak" data-voice="<%= friend.username%>"><%= friend.username%></h2>
 	</span>	
 </div>
 <div id="wall">
 	<ul id="wall-template">
 		<% _.each(wall, function(post) { %> 
-
 		    <li>
 		    	<div class="post">
 				    <div class="avatar" style="background-image: url(http://graph.facebook.com/<%= post.id %>/picture)">
 					</div>
-					<h1 onMouseover="meSpeak.speak('De <%=post.attributes.from.name%>');"><%= post.attributes.from.name%>
+					<h1 class="speak" data-voice="De <%=post.attributes.from.name%>"><%= post.attributes.from.name%>
 						<% if (post.attributes.to != null){%>
 							>> <%= post.attributes.to.data[0].name%>
 						<% }%>
 					</h1>
 					<% if (post.attributes.story != null) { %>
-						<div class="text" onMouseover="meSpeak.speak('<%=post.attributes.story%>');"><%= post.attributes.story %></div>
+						<div class="text speak" data-voice="<%=post.attributes.story%>"><%= post.attributes.story %></div>
 					<% }%>
 
 					<% if (post.attributes.message != null) { %>
-						<div class="text" onMouseover="meSpeak.speak('<%=post.attributes.message%>');"><%= post.attributes.message %></div>
+						<div class="text speak" data-voice="<%=post.attributes.message%>"><%= post.attributes.message %></div>
 					<% }%>
 
 					<% if (post.attributes.source != null) { %>

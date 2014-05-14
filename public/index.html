@@ -46,6 +46,25 @@
             return false;
        	});
     });
+    
+
+    function speak(texto){    
+    	//Evita la pronunciacion de simbolos raros y url's
+		texto = texto.replace(/(\b(https?|ftp|file):\/\/[\-A-Z0-9+&@#\/%?=~_|!:,.;]*[\-A-Z09+&@#\/%=~_|])/img, '');
+		//texto = texto.replace(/[^A-Za-z ]/g,'')		
+		texto = texto.replace('ñ','ni')		
+		msg = new SpeechSynthesisUtterance();
+		msg.volume = 1; // 0 to 1
+		msg.rate = 1; // 0.1 to 10
+		msg.pitch = 2; //0 to 2
+		msg.text = texto;
+		msg.lang = 'es-ES';
+		speechSynthesis.speak(msg);
+    }
+
+    function shutUp(){
+    	speechSynthesis.cancel();
+    }
     </script>
 	<a class='inline' id="selectFbProfile" target="_blank" href="#image-preview"></a>
 	<div id="image-preview" class="hidden">
