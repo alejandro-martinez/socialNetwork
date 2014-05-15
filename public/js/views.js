@@ -22,6 +22,7 @@ var Views = {
 
 	    dropProfilePhoto: function(event) {				//Drag&drop foto de perfil
 	    	var This = this;
+	    	$('#user-photo').addClass('loading');
 	        var reader = new FileReader();
 	        reader.readAsDataURL(event.originalEvent.dataTransfer.files[0]);	//Lee la foto arrastrada al perfil
 	        reader.onloadend = function () {
@@ -30,6 +31,7 @@ var Views = {
 	        		$('#image-preview').attr('class','show');
 	        		$('#image-preview a').attr('href',"https://www.facebook.com/photo.php?fbid="+response.id+"&makeprofile=1");
 	        		$('#selectFbProfile').trigger("click");	        		
+	        		$('#user-photo').removeClass('loading');
 	        	});
 	        };
 	        
@@ -38,7 +40,7 @@ var Views = {
 		initialize: function(){
 			this.api = this.options.api;
 			var This = this;
-			$(".inline").colorbox({inline:true,width:"50%",height:"80%",
+			$(".inline").colorbox({inline:true,width:"45%",height:"80%",
 		    onComplete: function() {
 		        closeEvent = function() {
 		            $('#image-preview').attr('class','hidden'); 				 //esconde vista previa
