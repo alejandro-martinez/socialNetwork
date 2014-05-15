@@ -42,8 +42,8 @@ var AppRouter = Backbone.Router.extend({
     	   this.albumsView = new Views.Albums({model: response});
         });   
     },
-    albumPhotos: function(){
-        this.api.getAlbumPhotos(function(response){
+    albumPhotos: function(id){
+        this.api.getAlbumPhotos(id,function(response){
            this.albumsPhotoView = new Views.APlbumPhotos({model: response});
         });   
     },
