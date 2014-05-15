@@ -424,28 +424,37 @@ button:active{
 	width: 100%;
 	height:100px;
 }
+#header-info span{
+	width: calc(100% - 380px);
+	margin: 0 20px;
+	display: inline-block;
+	float: left;
+}
 #profilePhoto{
-	width: 100px;
-	height: 100px;
+	width: 96px;
+	height: 96px;
 	float: left;
 	border-radius: 100%;
+	border: 2px solid #AAA;
+	background-size: contain;
+	background-position: center;
+	background-color: #CCC;
+	background-repeat: no-repeat;
 }
 #name{
-	width: calc(100% - 240px);
+	display: inline;
 	line-height: 100px;
-	float: left;
-	margin: 0 20px;
+	cursor: default;
 }
-#friendPhotos{
+.botonCircular{
 	font-family: iconFont;
-	font-size: 1.8em;
 	text-align: center;
 	text-decoration: none;
 	width: 100px;
 	line-height: 100px;
-	background-color: red;
-	color: #FFF;
 	display: block;
 	border-radius: 100%;
 	float: left;
+	color: #FFF;
+	margin: 0 10px;
 }

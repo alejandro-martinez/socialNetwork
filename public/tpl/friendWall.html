@@ -1,7 +1,8 @@
 <div id="header-info">
-	<div id="profilePhoto" style="background-image:url('http://graph.facebook.com/<%= friend.id%>/picture?type=normal')"></div>
-	<h1 id="name" class="speak" data-voice="<%= friend.name%>"><%= friend.name%></h2>
-	<a id="friendPhotos" href="/#friendPhotos/<%= friend.id%>"><h1 class="icon-photos speak" data-voice="ver fotos de <%= friend.name%>"></h1></a>
+	<div id="profilePhoto" style="background-image:url('http://graph.facebook.com/<%= friend.id %>/picture?type=normal')"></div>
+	<span><h1 id="name" class="speak" data-voice="<%= friend.name %>"><%= friend.name%></h2></span>
+	<a id="friendPhotos" href="/#friendPhotos/<%= friend.username %>"><h1 class="icon-photos botonCircular bg-color-pinkDark speak" data-voice="ver fotos de <%= friend.name%>"></h1></a>
+	<a id="friendAlbums" href="/#albums/<%= friend.id %>/photos"><h1 class="icon-albums botonCircular bg-color-green speak" data-voice="ver albums de <%= friend.name%>"></h1></a>
 </div>
 <div id="wall">
 	<ul id="wall-template">
@@ -10,7 +11,7 @@
 		    	<div class="post">
 				    <div class="avatar" style="background-image: url(http://graph.facebook.com/<%= post.id %>/picture)">
 					</div>
-					<h1 class="speak" data-voice="De <%=post.attributes.from.name%>"><%= post.attributes.from.name%>
+					<h1 class="speak" data-voice="Publicado por <%=post.attributes.from.name %>"><%= post.attributes.from.name%>
 						<% if (post.attributes.to != null){%>
 							>> <%= post.attributes.to.data[0].name%>
 						<% }%>
