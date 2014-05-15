@@ -279,6 +279,8 @@ var Views = {
 			        friend: This.options.friendInfo,
 			        wall: wallUpdates.models
 			    }));
+			    console.log(This.options.friendInfo)
+			    console.log(wallUpdates.models)
 			});
 		},
 		speak: function(ev){
