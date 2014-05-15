@@ -42,9 +42,9 @@ var AppRouter = Backbone.Router.extend({
     	   this.albumsView = new Views.Albums({model: response});
         });   
     },
-    albumPhotos: function(){
-        this.api.getAlbumPhotos(function(response){
-           this.albumsPhotoView = new Views.APlbumPhotos({model: response});
+    albumPhotos: function(id){
+        this.api.getAlbumPhotos(id,function(response){
+           this.albumsPhotoView = new Views.albumPhotos({model: response});
         });   
     },
     friends: function(){
@@ -73,8 +73,8 @@ var AppRouter = Backbone.Router.extend({
             this.photos = new Views.Photos({model: response});
         });
     },
-    friendPhotos: function(){
-        this.api.getFriendPhotos(function(response){
+    friendPhotos: function(id){
+        this.api.getFriendPhotos(id,function(response){
             this.friendPhotos = new Views.friendPhotos({model: response});
         });
     },

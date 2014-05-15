@@ -208,6 +208,25 @@ var Views = {
 			});
 		}
 	}),
+		//Fotos del usuario
+	friendPhotos: Backbone.View.extend({
+		el: $("#body"),
+		initialize: function(){
+			this.render();
+		},
+		render: function(){
+			var This = this;
+			var Photos = Backbone.Model.extend({});
+			var photosCollection = Backbone.Collection.extend({model: Photos});		
+			var photos = new photosCollection(This.model.data);
+			utils.loadTemplate("photos",function(html){
+				template = _.template(html);
+            	$("#body").html(template({
+			        photos: photos.models
+			    }));
+			});
+		}
+	}),
 	//Albums del usuario
 	Albums: Backbone.View.extend({
 		el: $("#albums"),
