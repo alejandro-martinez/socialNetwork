@@ -6,6 +6,7 @@ var AppRouter = Backbone.Router.extend({
 		"albums/:albumid/photos" : "albumPhotos",
 		"photos/:fbid"			 : "photos",
         "photos/upload"          : "uploadPhoto",
+        "friendPhotos/:id"       : "friendPhotos",
 		"posts/:fbid"			 : "posts",
 		"post/:postid"			 : "post",
 		"friends/:fbid"			 : "friends",
@@ -41,6 +42,11 @@ var AppRouter = Backbone.Router.extend({
     	   this.albumsView = new Views.Albums({model: response});
         });   
     },
+    albumPhotos: function(){
+        this.api.getAlbumPhotos(function(response){
+           this.albumsPhotoView = new Views.APlbumPhotos({model: response});
+        });   
+    },
     friends: function(){
         var This = this;
         this.api.getFriends(function(response){
@@ -65,6 +71,11 @@ var AppRouter = Backbone.Router.extend({
     photos: function(){
         this.api.getPhotos(function(response){
             this.photos = new Views.Photos({model: response});
+        });
+    },
+    friendPhotos: function(){
+        this.api.getFriendPhotos(function(response){
+            this.friendPhotos = new Views.friendPhotos({model: response});
         });
     },
 });
