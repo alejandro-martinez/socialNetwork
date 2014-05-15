@@ -70,6 +70,11 @@ function AppController(){
 			callback(model);
 		});	
 	},
+	this.getAlbumPhotos = function(id,callback){
+		fbUser('/'+id+'/photos', function(model){
+			callback(model);
+		});	
+	},
 	this.getPhotos = function(callback){
 		fbUser('/me/photos', function(model){
 			callback(model);
