@@ -231,7 +231,7 @@ var Views = {
 		}
 	}),
 	//Fotos de albums
-	AlbumPhotos: Backbone.View.extend({
+	albumPhotos: Backbone.View.extend({
 		el: $("#body"),
 		initialize: function(){
 			this.render();
