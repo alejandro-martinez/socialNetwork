@@ -16,7 +16,7 @@ var Views = {
 		el: $("#content"),
 		events: {
         	'drop #user-photo' : 'dropProfilePhoto',
-			'mouseover .speak': 'speak',
+			'hover .speak': 'speak',
 			'mouseout .speak': 'shutUp'
 	    },
 
@@ -69,7 +69,7 @@ var Views = {
 		el: $("body"),
 		events: {
 			'click button#publicarStatus': 'publishPost',
-			'mouseover .speak': 'speak',
+			'hover .speak': 'speak',
 			'mouseout .speak': 'shutUp'
 		},
 		initialize: function(){
@@ -102,7 +102,7 @@ var Views = {
 	Posts: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'mouseover .speak': 'speak',
+			'hover .speak': 'speak',
 			'mouseout .speak': 'shutUp'
 		},
 		initialize: function(){
@@ -125,7 +125,7 @@ var Views = {
 	NewsFeed: Backbone.View.extend({
 		el: $("#wall"),
 		events: {
-			'mouseover .speak': 'speak',
+			'hover .speak': 'speak',
 			'mouseout .speak': 'shutUp'
 		},
 		initialize: function(){
@@ -148,7 +148,7 @@ var Views = {
 	Wall: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'mouseover .speak': 'speak',
+			'hover .speak': 'speak',
 			'mouseout .speak': 'shutUp'
 		},
 		initialize: function(){
@@ -271,7 +271,7 @@ var Views = {
 	Friends: Backbone.View.extend({
 		el: $("#friends"),
 		events: {
-			'mouseover .speak': 'speak',
+			'hover .speak': 'speak',
 			'mouseout .speak': 'shutUp',
 	    },
 		initialize: function(){
@@ -299,7 +299,7 @@ var Views = {
 	friendProfile: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'mouseover .speak': 'speak',
+			'hover .speak': 'speak',
 			'mouseout .speak': 'shutUp'
 		},
 		initialize: function(){
