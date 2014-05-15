@@ -4,10 +4,10 @@
 		<div class="flipper">"
 			<div class="front" style="background-image:url('http://graph.facebook.com/<%= friend.attributes.id %>/picture?type=large')">
 				<div class="desc">
-					<a href="/#friend/<%= friend.attributes.username%>"><%= friend.attributes.name %></span>
+					<span><%= friend.attributes.name %></span>
 				</div>
 			</div>
-			<div class="back speak" data-voice="<%= friend.attributes.name %>">
+			<div class="back speak" data-voice="<%= friend.attributes.name %>" onclick="window.location.href='/#friend/<%= friend.attributes.username%>'">
 				<label><%= friend.attributes.name %></label>
 			</div>
 		</div>
