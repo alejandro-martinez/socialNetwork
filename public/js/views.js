@@ -220,13 +220,31 @@ var Views = {
 			var Album = Backbone.Model.extend({});
 			var albumsCollection = Backbone.Collection.extend({model: Album});		
 			var albums = new albumsCollection(This.model.data);
-
 			utils.loadTemplate("albums",function(html){
 				template = _.template(html);
             	$("#body").html('');
             	$("#body").html(template({
 			        albums: albums.models,
 			        access_token: This.access_token
+			    }));
+			});
+		}
+	}),
+	//Fotos de albums
+	AlbumPhotos: Backbone.View.extend({
+		el: $("#body"),
+		initialize: function(){
+			this.render();
+		},
+		render: function(){
+			var This = this;
+			var Photos = Backbone.Model.extend({});
+			var photosCollection = Backbone.Collection.extend({model: Photos});		
+			var photos = new photosCollection(This.model.data);
+			utils.loadTemplate("photos",function(html){
+				template = _.template(html);
+            	$("#body").html(template({
+			        photos: photos.models
 			    }));
 			});
 		}
