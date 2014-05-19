@@ -86,7 +86,7 @@ function AppController(){
 		});	
 	},
 	this.getFriends = function(callback){
-		fbUser('/me/friends?fields=id,name,username', function(model){
+		fbUser('/me/friends?fields=id,name,username&limit=8', function(model){
 			console.log(model);
 			callback(model);
 		});	
