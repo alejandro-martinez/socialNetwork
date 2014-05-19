@@ -92,21 +92,12 @@ var Views = {
 			}
 		}
 	}),
-	Posts: Backbone.View.extend({
-		el: $("body"),
-		initialize: function(){
-			this.render();
-		},
-		render: function(){
-			var This = this;
-			utils.loadTemplate("posts",function(html){
-				template = _.template(html);
-				$("#body").html(template({updates:This.model.data}));
-			});
-		}
-	}),
 	NewsFeed: Backbone.View.extend({
-		el: $("#wall"),
+		el: $("#content"),
+		events: {
+			'click .nextPage' : 'nextPage',
+			'click .prevPage'	: 'prevPage'
+		},
 		initialize: function(){
 			this.render();
 		},
@@ -116,10 +107,24 @@ var Views = {
 				template = _.template(html);
 				$("#body").html(template({news:This.model.data}));
 			});
-		}
+		},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	},
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	}
 	}),
 	Wall: Backbone.View.extend({
-		el: $("body"),
+		el: $("#wall"),
 		initialize: function(){
 			this.render();
 		},
@@ -136,7 +141,22 @@ var Views = {
 					updates: updates.models
 				}));
 			});
-		}
+		},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	},
+    	
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	}
 	}),
 	//La barra superior con Nombre y boton Conectar
 	Header: Backbone.View.extend({
@@ -272,4 +292,29 @@ var Views = {
 			});
 		},
 	}),
+	Paginator: Backbone.View.extend({
+
+	    className: "pagination pagination-centered",
+
+	    initialize:function () {
+	        this.model.bind("reset", this.render, this);
+	        this.render();
+	    },
+
+	    render:function () {
+
+	        var items = this.model.models;
+	        var len = items.length;
+	        var pageCount = Math.ceil(len / 8);
+
+	        $(this.el).html('<ul />');
+
+	        for (var i=0; i < pageCount; i++) {
+	            $('ul', this.el).append("<li" + ((i + 1) === this.options.page ? " class='active'" : "") + "><a href='#wines/page/"+(i+1)+"'>" + (i+1) + "</a></li>");
+	        }
+
+	        return this;
+	    }
+	})
+
 }
