@@ -61,7 +61,6 @@ function AppController(){
 	},
 	this.getFriendsWall = function(id, callback){
 		fbUser('/' + id + '/feed', function(model){
-			console.log(model);
 		    callback(model);
 		});	
 	},
@@ -88,6 +87,7 @@ function AppController(){
 	},
 	this.getFriends = function(callback){
 		fbUser('/me/friends?fields=id,name,username', function(model){
+			console.log(model);
 			callback(model);
 		});	
 	},
@@ -135,7 +135,7 @@ function AppController(){
 	    });
 	},
 	this.updateWall = function (callback){
-		FB.api("/me/posts",
+		FB.api("/me/feed?limit=1",
 		    function (response) {
 		      if (response && !response.error) {
 		       	  callback(response);
@@ -144,7 +144,7 @@ function AppController(){
 		);
 	},
 	this.newsFeed = function (callback){
-		FB.api("/me/home",
+		FB.api("/me/home?limit=1",
 		    function (response) {
 		      if (response && !response.error) {
 		       	  callback(response);
