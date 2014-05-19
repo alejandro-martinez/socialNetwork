@@ -122,15 +122,18 @@ button:active{
 	background-color: #EBEBEB;
 	width: 210px;
 	float: left;
+    position: fixed;
 }
 
 #body{
 	position:relative;
 	display: inline-block;
 	height: auto;
-	width: calc(100% - 270px);
-	margin: 0 20px;
-    padding:10px;    
+	width: calc(100% - 249px);
+	margin: 0 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 235px;
 }
 .nav-button [class*="icon-"]{
 	position:absolute;
@@ -339,7 +342,8 @@ width: 187px;}
 }
 .post img{
 	margin: 0 auto;
-	max-height: 470px;
+	margin-top: 10px;
+    max-height: 450px;
 	max-width: 100%;
 }
 /* ---- friends.html ---- */
@@ -419,8 +423,8 @@ width: 187px;}
 	padding: 0;
 }
 #photos {
-	position: absolute;
-	width: calc(100% - 230px);
+	position: relative;
+	width: calc(100% - 100px);
 	height: calc(100% - 70px);
 }
 #photos h1, #photo {
@@ -464,37 +468,38 @@ width: 187px;}
 
 
 div#container-home {
-position: relative;
-height: 100%;
-width: 100%;
+    position: relative;
+    height: 100%;
+    width: 100%;
 }
 
 .header-home-left {
-width: auto;
-position: relative;
-float: left;
+    width: auto;
+    position: relative;
+    float: left;
+    display: none;
 }
 .header-home-left > h1 {
-  color: white;
-  margin-left: 50px;
-  margin-top: 19px;
-  font-size: 1.8em;
-  font-weight: normal;
+    color: white;
+    margin-left: 50px;
+    margin-top: 19px;
+    font-size: 1.8em;
+    font-weight: normal;
 }
 
 .header-home-right {
-float: right;
-width: auto;
-color: white;
-margin-right: 50px;
+    float: right;
+    width: auto;
+    color: white;
+    margin-right: 50px;
 }
 
 .logo-home-header {
-width: 750px;
-margin: 0 auto;
-margin-left: 15%;
-position: relative;
-padding-top: 60px;
+    width: 750px;
+    margin: 0 auto;
+    margin-left: 15%;
+    position: relative;
+    padding-top: 60px;
 }
 
 .logo-home-header > h1, .logo-home-header > h2{
