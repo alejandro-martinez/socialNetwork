@@ -308,8 +308,8 @@ width: 187px;}
 }
 .avatar {
 	float: left;
-	width: 50px;
-	height: 50px;
+	width: 70px;
+	height: 70px;
 	overflow: hidden;
 	margin-right: 20px;
 	border-radius: 10px;
@@ -317,10 +317,12 @@ width: 187px;}
 	-moz-border-radius: 10px;
 	-ms-border-radius: 10px;
 	-o-border-radius: 10px;
+	background-position: center;
+	background-size: cover;
 }
 .post{
 	word-wrap: break-word;
-	font-size: 12pt;
+	font-size: 16pt;
 	line-height: 15pt;
 	padding: 15px;
 	background-color: #ECF0F1;
@@ -331,8 +333,15 @@ width: 187px;}
 	border-radius: 8px;
 }
 .post h1{
-	font-size: 15px;
-	line-height: 50px;
+	font-size: 24px;
+	line-height: 70px;
+}
+.post h1>a{
+	text-decoration: none;
+	color: #000;
+}
+.post h1>a:hover{
+	text-decoration: underline;
 }
 .post .text{
 	margin: 15px 0;
@@ -445,19 +454,47 @@ width: 187px;}
 	cursor: pointer;
 	width: 100%;
 }
-/*Perfil de un amigo*/
+
+/* ---- friendWall.html ---- */
 #header-info {
-	position:relative;
-	height:130px;
+	width: 100%;
+	height:100px;
 }
-#header-info h1,#header-info h2 {
-	position:absolute;
-	margin:0;
-	top:0;
-	left:130px;
+#header-info span{
+	width: calc(100% - 380px);
+	margin: 0 20px;
+	display: inline-block;
+	float: left;
 }
-#header-info h2 { 
-	top:42px;
+#profilePhoto{
+	width: 96px;
+	height: 96px;
+	float: left;
+	border-radius: 100%;
+	border: 2px solid #AAA;
+	background-size: contain;
+	background-position: center;
+	background-color: #CCC;
+	background-repeat: no-repeat;
+}
+#name{
+	display: inline;
+	line-height: 100px;
+	cursor: default;
+	font-size: 2.5em;
+	color: #FFF;
+}
+.botonCircular{
+	font-family: iconFont;
+	text-align: center;
+	text-decoration: none;
+	width: 100px;
+	line-height: 100px;
+	display: block;
+	border-radius: 100%;
+	float: left;
+	color: #FFF;
+	margin: 0 10px;
 }
 
 /** INICIO **/
