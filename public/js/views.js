@@ -216,7 +216,11 @@ var Views = {
 	}),
 	//Albums del usuario
 	Albums: Backbone.View.extend({
-		el: $("#albums"),
+		el: $("body"),
+		events: {
+			'click a.albums.nextPage' : 'nextPage',
+			'click a.albums.prevPage'	: 'prevPage'
+		},
 		initialize: function(){
 			this.render();
 			this.access_token = FB.getAuthResponse()['accessToken'];
@@ -234,7 +238,22 @@ var Views = {
 					access_token: This.access_token
 				}));
 			});
-		}
+		},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	},
+    	
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	}
 	}),
 	//Fotos de albums
 	albumPhotos: Backbone.View.extend({
