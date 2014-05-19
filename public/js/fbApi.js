@@ -65,7 +65,7 @@ function AppController(){
 		});	
 	},
 	this.getAlbums = function(callback){
-		fbUser('/me/albums', function(model){
+		fbUser('/me/albums?limit=8', function(model){
 			callback(model);
 		});	
 	},
