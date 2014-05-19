@@ -5,6 +5,8 @@
 	<a id="friendAlbums" href="/#albums/<%= friend.id %>/photos"><h1 class="icon-albums botonCircular bg-color-green speak" data-voice="ver albums de <%= friend.name%>"></h1></a>
 </div>
 <div id="wall">
+	<a class="prevPage friendWall" href="javascript:void(0)"></a>
+	<a class="nextPage friendWall" href="javascript:void(0)"></a>
 	<ul id="wall-template">
 		<% _.each(wall, function(post) { %> 
 		    <li>
