@@ -3,6 +3,14 @@
 		<% _.each(news, function(post) { %> 
 		    <li>
 		    	<div class="post">
+		    		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%= post.from.id %>/picture?type=normal)"></div>
+					<h1>
+						<a class="speak" data-voice="Publicado por <%=post.from.name %>" href="/#friend/<%= post.from.id%>"><%= post.from.name%></a>
+						<% if (post.to != null){%>
+						>> <a class="speak" data-voice="para <%= post.to.data[0].name %>" href="/#friend/<%= post.to.data[0].id%>"><%= post.to.data[0].name %></a>
+						<% }%>
+					</h1> 
+					<!--
 				    <div class="avatar" style="background-image: url(http://graph.facebook.com/<%= post.from.id %>/picture)">
 					</div>
 					<h1 data-voice="De <%=post.from.name%>" class="speak"><%= post.from.name%>
@@ -10,6 +18,7 @@
 							>> <%= post.to.data[0].name%>
 						<% }%>
 					</h1>
+				-->
 					<% if (post.story != null) { %>
 						<div data-voice="<%=post.story%>" class="text speak"><%= post.story %></div>
 					<% }%>

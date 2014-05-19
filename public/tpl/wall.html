@@ -2,31 +2,32 @@
 <ul id="wall-template">
 	<% _.each(updates, function(post) { 
 		post = post.attributes;
+		console.log(post)
 		%> 
 	    <li>
 		    <div class="post">
-			    <div class="avatar" style="background-image: url(http://graph.facebook.com/<%= post.from.id %>/picture)"></div>
-				<h1 data-voice="De <%=post.from.name%>" class="speak"><%= post.from.name%>
-						<% if (post.to != null){%>
-							>> <%= post.to.data[0].name%>
-						<% }%>
-					</h1>
-					<% if (post.story != null) { %>
-						<div class="text speak" data-voice="<%=post.story%>"><%= post.story %></div>
+		    	<div class="avatar" style="background-image: url(http://graph.facebook.com/<%= post.from.id %>/picture?type=normal)"></div>
+				<h1>
+					<a class="speak" data-voice="Publicado por <%=post.from.name %>" href="/#friend/<%= post.from.id%>"><%= post.from.name%></a>
+					<% if (post.to != null){%>
+					>> <a class="speak" data-voice="para <%= post.to.data[0].name %>" href="/#friend/<%= post.to.data[0].id%>"><%= post.to.data[0].name %></a>
 					<% }%>
+				</h1> 
+				<% if (post.story != null) { %>
+					<div class="text speak" data-voice="<%=post.story%>"><%= post.story %></div>
+				<% }%>
 
-					<% if (post.message != null) { %>
-						<div class="text speak" data-voice="<%=post.message%>"><%= post.message %></div>
-					<% }%>
+				<% if (post.message != null) { %>
+					<div class="text speak" data-voice="<%=post.message%>"><%= post.message %></div>
+				<% }%>
 
-					<% if (post.source != null) { %>
-						<iframe width="470" height="350" src="<%= post.source %>?autoplay=0" frameborder="0" allowfullscreen>
-						</iframe>
-					<% } else if (post.object_id != null) { %>
-							<%var foto = post.picture;%>
-							<img src="<%= foto.replace('s.jpg','n.jpg')%>" />
-					<% } %>
-				</p>	
+				<% if (post.source != null) { %>
+					<iframe width="470" height="350" src="<%= post.source %>?autoplay=0" frameborder="0" allowfullscreen>
+					</iframe>
+				<% } else if (post.object_id != null) { %>
+						<%var foto = post.picture;%>
+						<img src="<%= foto.replace('s.jpg','n.jpg')%>" />
+				<% } %>
 			</div>
 		</li>
 	<% }); %>

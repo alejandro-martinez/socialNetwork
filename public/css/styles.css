@@ -315,6 +315,13 @@ width: 187px;}
 	font-size: 24px;
 	line-height: 70px;
 }
+.post h1>a{
+	text-decoration: none;
+	color: #000;
+}
+.post h1>a:hover{
+	text-decoration: underline;
+}
 .post .text{
 	margin: 15px 0;
 }
