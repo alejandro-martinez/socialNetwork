@@ -256,7 +256,11 @@ var Views = {
 		}
 	}),
 	Friends: Backbone.View.extend({
-		el: $("#friends"),
+		el: $("body"),
+		events: {
+			'click a.friends.nextPage' : 'nextPage',
+			'click a.friends.prevPage'	: 'prevPage'
+		},
 		initialize: function(){
 			this.render();
 		},
@@ -271,7 +275,22 @@ var Views = {
 					friends: friends.models
 				}));
 			});
-		}
+		},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	},
+    	
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	}
 	}),
 	friendProfile: Backbone.View.extend({
 		el: $("body"),
