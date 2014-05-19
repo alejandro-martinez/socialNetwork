@@ -63,7 +63,7 @@ button{
 	margin: 10px;
 	background-color: #2D89EF;
 	border: none;
-	font-family: 'Segoe UI', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+	font-family: Arial;
 	font-size: 18px;
 	line-height: 49px;
 	color: #FFF;
@@ -267,7 +267,7 @@ color: red;
 font-weight: 500;}
 .container-album span{	padding-top: 2%;
 		padding-left: 45%;
-		font-family: 'Century Gothic';
+		font-family: Arial;
 		font-size: 0.8em;
 		max-width: 28%;
 		min-width: 180px;		
@@ -539,7 +539,7 @@ padding-top: 60px;
 }
 
 .logo-home-header > h1, .logo-home-header > h2{
-	font-family: 'Arial';
+	font-family: Arial;
     font-weight: 200;
     font-size: 10em;
     float: left;
