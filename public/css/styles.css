@@ -187,19 +187,22 @@ button:active{
 	text-align: center;
 }
 #que-estas-pensando>input[type='text']{
-	font-family: 'Aladin';
-	font-size: 4em;
+	font-family: Arial;
+	line-height: 79px;
+	font-size: 3em;
 	color:black;
-	border-radius: 10px 10px 0px 0px;
-	width: calc(100% - 20px);
+	border-radius: 10px 0 0 10px;
+	width: calc(100% - 120px);
 	padding: 0 10px;
+	float: left;
 }
-#publish-post{
+#publicarStatus{
+	float: left;
 	margin: 0 auto;
-	padding: 0;
-	background-color: #f2f2f2;
-	width: calc(100% - -4px);
+	width: 96px;
+	height: 83px;
 	text-align: right;
+	border-radius: 0 10px 10px 0;
 }
 
 
@@ -354,6 +357,7 @@ width: 187px;}
 	transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d; /* Safari and Chrome */
 	position: relative;
+	cursor: pointer;
 }
 
 .front, .back {
