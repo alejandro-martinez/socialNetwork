@@ -287,8 +287,8 @@ width: 187px;}
 }
 .avatar {
 	float: left;
-	width: 50px;
-	height: 50px;
+	width: 70px;
+	height: 70px;
 	overflow: hidden;
 	margin-right: 20px;
 	border-radius: 10px;
@@ -296,10 +296,12 @@ width: 187px;}
 	-moz-border-radius: 10px;
 	-ms-border-radius: 10px;
 	-o-border-radius: 10px;
+	background-position: center;
+	background-size: cover;
 }
 .post{
 	word-wrap: break-word;
-	font-size: 12pt;
+	font-size: 16pt;
 	line-height: 15pt;
 	padding: 15px;
 	background-color: #ECF0F1;
@@ -310,8 +312,8 @@ width: 187px;}
 	border-radius: 8px;
 }
 .post h1{
-	font-size: 15px;
-	line-height: 50px;
+	font-size: 24px;
+	line-height: 70px;
 }
 .post .text{
 	margin: 15px 0;
