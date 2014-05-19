@@ -92,21 +92,12 @@ var Views = {
 			}
 		}
 	}),
-	Posts: Backbone.View.extend({
-		el: $("body"),
-		initialize: function(){
-			this.render();
-		},
-		render: function(){
-			var This = this;
-			utils.loadTemplate("posts",function(html){
-				template = _.template(html);
-				$("#body").html(template({updates:This.model.data}));
-			});
-		}
-	}),
 	NewsFeed: Backbone.View.extend({
-		el: $("#wall"),
+		el: $("#content"),
+		events: {
+			'click a.newsFeed.nextPage' : 'nextPage',
+			'click a.newsFeed.prevPage'	: 'prevPage'
+		},
 		initialize: function(){
 			this.render();
 		},
@@ -116,10 +107,28 @@ var Views = {
 				template = _.template(html);
 				$("#body").html(template({news:This.model.data}));
 			});
-		}
+		},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	},
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	}
 	}),
 	Wall: Backbone.View.extend({
 		el: $("body"),
+		events: {
+			'click a.wall.nextPage' : 'nextPage',
+			'click a.wall.prevPage'	: 'prevPage'
+		},
 		initialize: function(){
 			this.render();
 		},
@@ -136,7 +145,22 @@ var Views = {
 					updates: updates.models
 				}));
 			});
-		}
+		},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	},
+    	
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	}
 	}),
 	//La barra superior con Nombre y boton Conectar
 	Header: Backbone.View.extend({
@@ -232,7 +256,11 @@ var Views = {
 		}
 	}),
 	Friends: Backbone.View.extend({
-		el: $("#friends"),
+		el: $("body"),
+		events: {
+			'click a.friends.nextPage' : 'nextPage',
+			'click a.friends.prevPage'	: 'prevPage'
+		},
 		initialize: function(){
 			this.render();
 		},
@@ -247,7 +275,22 @@ var Views = {
 					friends: friends.models
 				}));
 			});
-		}
+		},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	},
+    	
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	}
 	}),
 	friendProfile: Backbone.View.extend({
 		el: $("body"),
@@ -267,9 +310,8 @@ var Views = {
 					friend: This.options.friendInfo,
 					wall: wallUpdates.models
 				}));
-				console.log(This.options.friendInfo)
-				console.log(wallUpdates.models)
 			});
 		},
-	}),
+	})
+
 }

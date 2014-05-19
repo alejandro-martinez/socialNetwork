@@ -17,12 +17,32 @@ body>.bg{
 	background-size: cover;
 	background-position: center;
 }
+
 *{margin: 0; padding: 0}
-/* Agregado */
+
+li{list-style: none;}
+
+/* Clases generales */
+
 .hidden {display: none;}
 .show {display: block;}
-li{list-style: none;}
-/* Agregado */
+
+.nextPage, .prevPage {
+	position:absolute;
+	display:block;
+	height:45px;
+	width:50px;
+	top:300px;
+}
+.nextPage {
+	right:30px;
+	background-image: url(../img/next.png);
+}
+.prevPage {
+	left:30px;
+	background-image: url(../img/prev.png);
+}
+/* Clases generales */
 
 /* ---- INDEX ---- */
 #header{
@@ -105,6 +125,7 @@ button:active{
 }
 
 #body{
+	position:relative;
 	display: inline-block;
 	height: auto;
 	width: calc(100% - 270px);
