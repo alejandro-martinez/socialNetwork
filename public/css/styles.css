@@ -119,7 +119,7 @@ button:active{
 }
 
 #nav-user-control{
-	background-color: #EBEBEB;
+	background-color: rgba(255, 255, 255, .8);
 	width: 210px;
 	float: left;
     position: fixed;
@@ -359,12 +359,12 @@ width: 187px;}
 	max-width: 100%;
 }
 /* ---- friends.html ---- */
-#friends{
+#friends, #container-album{
 	width: 600px;
 	margin: 0 auto;
 }
-.flechasAmigos{
-	margin: 0 -50px;
+.friends, .albums{
+	margin: 0 -40px;
 }
 .flip-container {
 	perspective: 1000;
