@@ -567,3 +567,20 @@ div#container-home {
     float: right;
     margin-right: -223px;
 }
+
+/*  ALBUMS */
+div#container-album {
+    position: relative;
+    width: 800px;
+    margin-left: 160px;
+    margin-top: 70px;
+}
+div#container-album .prevPage {
+left: -100px;
+}
+
+div#container-album .nextPage {
+right: -12%;
+position: absolute;
+}
+}
