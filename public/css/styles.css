@@ -354,7 +354,7 @@ width: 187px;}
 .post img{
 	margin: 0 auto;
 	margin-top: 10px;
-    max-height: 450px;
+    max-height: 350px;
 	max-width: 100%;
 }
 /* ---- friends.html ---- */
@@ -565,4 +565,21 @@ div#container-home {
     margin-top: -294px;
     float: right;
     margin-right: -223px;
+}
+
+/*  ALBUMS */
+div#container-album {
+    position: relative;
+    width: 800px;
+    margin-left: 160px;
+    margin-top: 70px;
+}
+div#container-album .prevPage {
+left: -100px;
+}
+
+div#container-album .nextPage {
+right: -12%;
+position: absolute;
+}
 }
