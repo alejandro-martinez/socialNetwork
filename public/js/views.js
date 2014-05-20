@@ -313,15 +313,20 @@ var Views = {
 	}),
 	friendProfile: Backbone.View.extend({
 		el: $("body"),
+		events: {
+			'click a.friendWall.nextPage' : 'nextPage',
+			'click a.friendWall.prevPage'	: 'prevPage'
+		},
 		initialize: function(){
 			this.render();
+			console.log(this.options.wall.data)
 		},
 		render: function(){
 			var This = this;
 			var FriendWall = Backbone.Model.extend({});
 			var friendUpdatesCollection = Backbone.Collection.extend({model: FriendWall});
 			var wallUpdates = new friendUpdatesCollection(This.options.wall.data);
-
+			
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
 				$("#body").html('');
@@ -331,6 +336,20 @@ var Views = {
 				}));
 			});
 		},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.options.wall.paging.next + '&callback=?', function(response){
+				This.options.wall = response;
+				This.render();
+			});
+    	},
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.options.wall.paging.previous + '&callback=?', function(response){
+				This.options.wall = response;
+				This.render();
+			});
+    	}
 	})
 
 }

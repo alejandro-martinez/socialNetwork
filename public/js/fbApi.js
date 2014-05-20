@@ -60,7 +60,7 @@ function AppController(){
 		});	
 	},
 	this.getFriendsWall = function(id, callback){
-		fbUser('/' + id + '/feed', function(model){
+		fbUser('/' + id + '/posts?limit=1', function(model){
 		    callback(model);
 		});	
 	},
