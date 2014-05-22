@@ -1,0 +1,5 @@
+<div id="search">
+	<% _.each(friends, function(friend) { %> 
+	<h2><a href="/#friend/<%=friend.attributes.uid%>"><%=friend.attributes.name%></a></h2>
+	<% }); %>
+</div>

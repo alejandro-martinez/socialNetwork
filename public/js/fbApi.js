@@ -54,6 +54,11 @@ function AppController(){
 			});	
 		}
 	},
+	this.searchFriend = function(text, callback){
+		fqlQuery("select uid, name, sex from user where uid in (SELECT uid2 FROM friend WHERE uid1 = me())and (strpos(lower(name),'"+text+"')>=0 OR strpos(name,'"+text+"')>=0)",function(response){
+			callback(response);
+		});		
+	},
 	this.getFriend = function(id, callback){
 		fbUser('/' + id, function(model){
 		    callback(model);

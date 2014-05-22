@@ -17,13 +17,26 @@ var Views = {
 		events: {
 			'drop #user-photo' : 'dropProfilePhoto',
 			'hover .speak': 'speak',
-			'mouseout .speak': 'shutUp'
+			'mouseout .speak': 'shutUp',
+			'keypress :input#buscador': 'search'
 		},
 		speak: function(ev){
 			speak(ev.target.attributes['data-voice'].nodeValue);
 		},
 		shutUp: function(){
 			shutUp();
+		},
+		search: function(ev){
+			var This = this;
+			This.api.searchFriend(ev.currentTarget.value,function(response){				 //Buscar amigo
+				var SearchResults = Backbone.Model.extend({});
+				var friendsCollection = Backbone.Collection.extend({model: SearchResults});
+				var results = new friendsCollection(response);
+				utils.loadTemplate("search",function(html){
+					template = _.template(html);
+					$('#body').html(template({friends:results.models}));
+				});	
+			});
 		},
 		dropProfilePhoto: function(event) {				//Drag&drop foto de perfil
 			var This = this;
