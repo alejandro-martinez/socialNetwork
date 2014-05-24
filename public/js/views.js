@@ -166,7 +166,8 @@ var Views = {
 	Header: Backbone.View.extend({
 		el: $("#header"),
 		events: {
-			'keypress :input#buscador': 'search'
+			'keyup :input': 'search',
+    		'keypress :input': 'search'
 		},
 		search: function(ev){
 			var This = this;
