@@ -11,32 +11,19 @@ var Views = {
 				This.$el.append(_.template(html));  
 			});
 		}
-	}),
+	}), 
 	Main: Backbone.View.extend({						//Muestra el menu lateral
 		el: $("#content"),
 		events: {
 			'drop #user-photo' : 'dropProfilePhoto',
 			'hover .speak': 'speak',
-			'mouseout .speak': 'shutUp',
-			'keypress :input#buscador': 'search'
+			'mouseout .speak': 'shutUp'
 		},
 		speak: function(ev){
 			speak(ev.target.attributes['data-voice'].nodeValue);
 		},
 		shutUp: function(){
 			shutUp();
-		},
-		search: function(ev){
-			var This = this;
-			This.api.searchFriend(ev.currentTarget.value,function(response){				 //Buscar amigo
-				var SearchResults = Backbone.Model.extend({});
-				var friendsCollection = Backbone.Collection.extend({model: SearchResults});
-				var results = new friendsCollection(response);
-				utils.loadTemplate("search",function(html){
-					template = _.template(html);
-					$('#body').html(template({friends:results.models}));
-				});	
-			});
 		},
 		dropProfilePhoto: function(event) {				//Drag&drop foto de perfil
 			var This = this;
@@ -178,7 +165,24 @@ var Views = {
 	//La barra superior con Nombre y boton Conectar
 	Header: Backbone.View.extend({
 		el: $("#header"),
+		events: {
+			'keypress :input#buscador': 'search'
+		},
+		search: function(ev){
+			var This = this;
+			This.api.searchFriend(ev.currentTarget.value,function(response){				 //Buscar amigo
+				var SearchResults = Backbone.Model.extend({});
+				var friendsCollection = Backbone.Collection.extend({model: SearchResults});
+				var results = new friendsCollection(response);
+				utils.loadTemplate("search",function(html){
+					template = _.template(html);
+					$('#body').html(template({friends:results.models}));
+				});	
+			});
+		},
 		initialize: function(){
+			this.api = this.options.api;
+			var This = this;
 			this.render();
 		},
 		render: function(){

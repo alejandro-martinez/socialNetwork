@@ -35,7 +35,7 @@ var AppRouter = Backbone.Router.extend({
 		else {
 			new Views.NotLoggedInView();						//Muestra logo de Facebook +
 		}
-		new Views.Header({model: this.data});					//Barra superior con los datos del usuario
+		new Views.Header({model: this.data,api: this.api});					//Barra superior con los datos del usuario
     },
     albums: function(){
         this.api.getAlbums(function(response){
