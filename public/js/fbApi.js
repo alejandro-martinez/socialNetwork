@@ -29,7 +29,7 @@ function fbLogout(){
 }
 
 function AppController(){
-
+	this.locale = 'es_ES';
 	this.id = null;
 	this.currentUser = null;
 	this.loggedUser = false;											//Boolean para saber si el usuario esta logueado
@@ -48,46 +48,46 @@ function AppController(){
 			callback(This.currentUser);
 		}
 		else {
-			fbUser('/me', function(model){
+			fbUser('/me?locale='+This.locale, function(model){
 			    This.currentUser = model;
 			    callback(model);
 			});	
 		}
 	},
 	this.getFriend = function(id, callback){
-		fbUser('/' + id, function(model){
+		fbUser('/' + id + '?locale='+This.locale, function(model){
 		    callback(model);
 		});	
 	},
 	this.getFriendsWall = function(id, callback){
-		fbUser('/' + id + '/posts?limit=1', function(model){
+		fbUser('/' + id + '/posts?limit=1&locale='+This.locale, function(model){
 		    callback(model);
 		});	
 	},
 	this.getAlbums = function(callback){
-		fbUser('/me/albums?limit=8', function(model){
+		fbUser('/me/albums?limit=8&locale='+This.locale, function(model){
 			callback(model);
 		});	
 	},
 	this.getAlbumPhotos = function(id,callback){
-		fbUser('/'+id+'/photos', function(model){
+		fbUser('/'+id+'/photos?locale='+This.locale, function(model){
 			callback(model);
 		});	
 	},
 	this.getPhotos = function(callback){
-		fbUser('/me/photos', function(model){
+		fbUser('/me/photos?locale='+This.locale, function(model){
 			callback(model);
 		});	
 	},
 	this.getFriendPhotos = function(id,callback){
-		fbUser('/'+id+'/photos/uploaded', function(model){
+		fbUser('/'+id+'/photos/uploaded?locale='+This.locale, function(model){
 			console.log(model)
 			callback(model);
 		});	
 	},
 	this.getFriends = function(callback){
-		fbUser('/me/friends?fields=id,name,username&limit=9', function(model){
-			console.log(model);
+		fbUser('/me/friends?fields=id,name&limit=9&locale='+This.locale, function(model){
+			console.log(model)
 			callback(model);
 		});	
 	},
@@ -135,7 +135,7 @@ function AppController(){
 	    });
 	},
 	this.updateWall = function (callback){
-		FB.api("/me/feed?limit=1",
+		FB.api("/me/feed?limit=1&locale="+This.locale,
 		    function (response) {
 		      if (response && !response.error) {
 		       	  callback(response);
@@ -144,7 +144,7 @@ function AppController(){
 		);
 	},
 	this.newsFeed = function (callback){
-		FB.api("/me/home?limit=1",
+		FB.api("/me/home?limit=1&locale="+This.locale,
 		    function (response) {
 		      if (response && !response.error) {
 		       	  callback(response);
