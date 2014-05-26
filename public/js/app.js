@@ -10,7 +10,8 @@ var AppRouter = Backbone.Router.extend({
 		"posts/:fbid"			 : "posts",
 		"post/:postid"			 : "post",
 		"friends/:fbid"			 : "friends",
-        "friend/:id"             : "friendProfile"
+        "friend/:id"             : "friendProfile",
+        "friendAdd/:id"          : "friendAdd"
 		
     },
     initialize: function (appC) {
@@ -35,7 +36,7 @@ var AppRouter = Backbone.Router.extend({
 		else {
 			new Views.NotLoggedInView();						//Muestra logo de Facebook +
 		}
-		new Views.Header({model: this.data});					//Barra superior con los datos del usuario
+		new Views.Header({model: this.data,api: this.api});					//Barra superior con los datos del usuario
     },
     albums: function(){
         this.api.getAlbums(function(response){
@@ -56,10 +57,16 @@ var AppRouter = Backbone.Router.extend({
     friendProfile: function(id){
         var This = this;
         this.api.getFriend(id,function(friendInfo){
+            This.api.isFriend(id, function(response){
+                ((response.data.length == 1) ? This.esAmigo = true : This.esAmigo = false);
+            });
             This.api.getFriendsWall(friendInfo.id,function(friendWall){
-                This.friendView = new Views.friendProfile({wall: friendWall, friendInfo: friendInfo}); 
+                This.friendView = new Views.friendProfile({wall: friendWall, friendInfo: friendInfo, amigo: This.esAmigo}); 
             });
         });
+    },
+    friendAdd: function(id){
+        this.api.addFriend(id);
     },
     posts: function(){
         var This = this;
