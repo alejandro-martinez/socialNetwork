@@ -150,7 +150,7 @@ button:active{
 .icon-albums:before{content: "\e004"}
 .icon-posts:before{content: "\e01c"}
 .icon-friends:before{content: "\e03b"}
-.icon-friend-add:before{content: "\e098"}
+.icon-friend-add:before{content: "\e083"}
 
 .bg-color-blueDark{background-color:#2B5797!important}
 .bg-color-orangeDark{background-color:#DA532C!important}
