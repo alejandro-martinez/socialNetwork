@@ -4,19 +4,16 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<title>Red Social</title>
-
 	<link rel="stylesheet" href="css/normalize.min.css">
 	<link href="css/styles.css" rel="stylesheet">
 	<link href="css/colorbox.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/bjqs.css">
-	<script src="js/jquery-1.8.2.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="js/underscore-min.js"></script>
 	<script src="js/backbone-min.js"></script>
 </head>
 <body>
-
 	<div class="bg"></div>
 	<header id="header" class="bg-color-darken"></header>
 	<section id="content"></section>
@@ -24,51 +21,11 @@
 	<div id="fb-root"></div>
 	<script src="js/fbApi.js"></script>
 	<script src="js/views.js"></script>
-	<script src="lib/jquery.speechtotext.js"></script>
-	<script src="lib/mespeak.js"></script>
-	<script src="lib/mespeak-config.js"></script>
 	<script src="js/utils.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/jquery.colorbox-min.js"></script>
 	<script src="js/bjqs-1.3.min.js"></script>
-	<script>
-	$(document).ready(function() {
-		$('.newWindow').click(function (event){
-			event.preventDefault();
-			var windowSizeArray = [ "width=800,height=700","width=800,height=700,scrollbars=no" ];
-			var url = $(this).attr("href");
-			var windowSize = windowSizeArray[$(this).attr("rel")];
-			window.open(url, 'popup', windowSize);
-		});
-		$(document.body).bind("dragover", function(e) {
-			e.preventDefault();
-			return false;
-		});
-
-		$(document.body).bind("drop", function(e){
-			e.preventDefault();
-			return false;
-		});
-	});
-
-	function speak(texto){    
-		//Evita la pronunciacion de simbolos raros y url's
-		texto = texto.replace(/(\b(https?|ftp|file):\/\/[\-A-Z0-9+&@#\/%?=~_|!:,.;]*[\-A-Z09+&@#\/%=~_|])/img, '');
-		//texto = texto.replace(/[^A-Za-z ]/g,'');
-		texto = texto.replace('ñ','ni');
-		msg = new SpeechSynthesisUtterance();
-		msg.volume = 1; // 0 to 1
-		msg.rate = 1; // 0.1 to 10
-		msg.pitch = 2; //0 to 2
-		msg.text = texto;
-		msg.lang = 'es-ES';
-		speechSynthesis.speak(msg);
-	}
-
-	function shutUp(){
-		speechSynthesis.cancel();
-	}
-	</script>
+	<script src="js/voiceApi.js"></script>
 	<a class='inline' id="selectFbProfile" target="_blank" href="#image-preview"></a>
 	<div id="image-preview" class="hidden">
 		<img /><br>

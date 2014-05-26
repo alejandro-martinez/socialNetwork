@@ -337,20 +337,19 @@ var Views = {
 		},
 		initialize: function(){
 			this.render();
-			console.log(this.options.wall.data)
 		},
 		render: function(){
 			var This = this;
+
 			var FriendWall = Backbone.Model.extend({});
 			var friendUpdatesCollection = Backbone.Collection.extend({model: FriendWall});
 			var wallUpdates = new friendUpdatesCollection(This.options.wall.data);
-			
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
-				$("#body").html('');
 				$("#body").html(template({
 					friend: This.options.friendInfo,
-					wall: wallUpdates.models
+					wall: wallUpdates.models,
+					amigo: This.options.amigo
 				}));
 			});
 		},

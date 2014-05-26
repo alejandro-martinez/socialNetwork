@@ -131,6 +131,16 @@ function AppController(){
 	        }
 	    });
 	},
+	this.addFriend = function (id){
+		FB.ui({ method: 'friends.add', id: id });
+	},
+	this.isFriend = function(id, callback){
+		FB.api("/me/friends/" + id,
+	    function (response) {
+			callback(response);
+	    });
+	}
+	
 	this.updateProfilePhoto = function (callback){
 		FB.api("/me",
 	    function (response) {
