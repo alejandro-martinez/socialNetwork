@@ -54,6 +54,11 @@ function AppController(){
 			});	
 		}
 	},
+	this.searchFriend = function(text, callback){
+		fqlQuery("select uid, name, sex from user where uid in (SELECT uid2 FROM friend WHERE uid1 = me())and (strpos(lower(name),'"+text+"')>=0 OR strpos(name,'"+text+"')>=0)",function(response){
+			callback(response);
+		});		
+	},
 	this.getFriend = function(id, callback){
 		fbUser('/' + id + '?locale='+This.locale, function(model){
 		    callback(model);
@@ -126,6 +131,16 @@ function AppController(){
 	        }
 	    });
 	},
+	this.addFriend = function (id){
+		FB.ui({ method: 'friends.add', id: id });
+	},
+	this.isFriend = function(id, callback){
+		FB.api("/me/friends/" + id,
+	    function (response) {
+			callback(response);
+	    });
+	}
+	
 	this.updateProfilePhoto = function (callback){
 		FB.api("/me",
 	    function (response) {

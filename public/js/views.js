@@ -11,7 +11,7 @@ var Views = {
 				This.$el.append(_.template(html));  
 			});
 		}
-	}),
+	}), 
 	Main: Backbone.View.extend({						//Muestra el menu lateral
 		el: $("#content"),
 		events: {
@@ -165,7 +165,25 @@ var Views = {
 	//La barra superior con Nombre y boton Conectar
 	Header: Backbone.View.extend({
 		el: $("#header"),
+		events: {
+			'keyup :input': 'search',
+    		'keypress :input': 'search'
+		},
+		search: function(ev){
+			var This = this;
+			This.api.searchFriend(ev.currentTarget.value,function(response){				 //Buscar amigo
+				var SearchResults = Backbone.Model.extend({});
+				var friendsCollection = Backbone.Collection.extend({model: SearchResults});
+				var results = new friendsCollection(response);
+				utils.loadTemplate("search",function(html){
+					template = _.template(html);
+					$('#body').html(template({friends:results.models}));
+				});	
+			});
+		},
 		initialize: function(){
+			this.api = this.options.api;
+			var This = this;
 			this.render();
 		},
 		render: function(){
@@ -319,20 +337,19 @@ var Views = {
 		},
 		initialize: function(){
 			this.render();
-			console.log(this.options.wall.data)
 		},
 		render: function(){
 			var This = this;
+
 			var FriendWall = Backbone.Model.extend({});
 			var friendUpdatesCollection = Backbone.Collection.extend({model: FriendWall});
 			var wallUpdates = new friendUpdatesCollection(This.options.wall.data);
-			
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
-				$("#body").html('');
 				$("#body").html(template({
 					friend: This.options.friendInfo,
-					wall: wallUpdates.models
+					wall: wallUpdates.models,
+					amigo: This.options.amigo
 				}));
 			});
 		},

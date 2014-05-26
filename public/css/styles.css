@@ -150,6 +150,7 @@ button:active{
 .icon-albums:before{content: "\e004"}
 .icon-posts:before{content: "\e01c"}
 .icon-friends:before{content: "\e03b"}
+.icon-friend-add:before{content: "\e083"}
 
 .bg-color-blueDark{background-color:#2B5797!important}
 .bg-color-orangeDark{background-color:#DA532C!important}
@@ -477,7 +478,7 @@ width: 187px;}
 	height:100px;
 }
 #header-info span{
-	width: calc(100% - 380px);
+	width: calc(100% - 500px);
 	margin: 0 20px;
 	display: inline-block;
 	float: left;
