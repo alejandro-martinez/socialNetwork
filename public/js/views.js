@@ -165,32 +165,40 @@ var Views = {
 	//La barra superior con Nombre y boton Conectar
 	Header: Backbone.View.extend({
 		el: $("#header"),
-		events: {
-			'keyup :input': 'search',
-    		'keypress :input': 'search'
-		},
-		search: function(ev){
-			var This = this;
-			This.api.searchFriend(ev.currentTarget.value,function(response){				 //Buscar amigo
-				var SearchResults = Backbone.Model.extend({});
-				var friendsCollection = Backbone.Collection.extend({model: SearchResults});
-				var results = new friendsCollection(response);
-				utils.loadTemplate("search",function(html){
-					template = _.template(html);
-					$('#body').html(template({friends:results.models}));
-				});	
-			});
-		},
 		initialize: function(){
 			this.api = this.options.api;
 			var This = this;
-			this.render();
+	        this.render();
+
 		},
 		render: function(){
 			var This = this;
 			utils.loadTemplate("header",function(html){
 				template = _.template(html);
 				This.$el.html(template(This.model));
+				
+				var contactos = new Bloodhound({
+				    datumTokenizer: function (d) {
+				        return Bloodhound.tokenizers.whitespace(d.value);
+				    },
+				    queryTokenizer: Bloodhound.tokenizers.whitespace,
+				    remote: {
+				        url: 'https://graph.facebook.com/search?q=%QUERY&type=user&access_token='+FB.getAuthResponse()['accessToken'],
+				        filter: function (contactos) {
+				            return $.map(contactos.data, function (contacto) {
+				                return {
+				                    value: contacto.name
+				                };
+				            });
+				        }
+				    }
+				});
+				contactos.initialize();
+
+				$('.typeahead').typeahead(null, {
+				    displayKey: 'value',
+				    source: contactos.ttAdapter()
+				});
 			});
 		}
 	}),
