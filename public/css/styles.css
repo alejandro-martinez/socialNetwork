@@ -584,12 +584,6 @@ position: absolute;
 }
 }
 /*Plugin de autocompletar de Twitter*/
-/* custom font! */
-/* ------------ */
-
-/* scaffolding */
-/* ----------- */
-
 html {
   overflow-y: scroll;
   *overflow-x: hidden;
@@ -664,7 +658,10 @@ p {
 }
 
 .typeahead {
-  background-color: #fff;
+	position: absolute;
+	top: 7px;
+	left: 357px;
+  	background-color: #fff;
 }
 
 .typeahead:focus {

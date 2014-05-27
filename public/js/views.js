@@ -177,29 +177,45 @@ var Views = {
 				template = _.template(html);
 				This.$el.html(template(This.model));
 				
-				var contactos = new Bloodhound({
-				    datumTokenizer: function (d) {
-				        return Bloodhound.tokenizers.whitespace(d.value);
-				    },
-				    queryTokenizer: Bloodhound.tokenizers.whitespace,
-				    remote: {
-				        url: 'https://graph.facebook.com/search?q=%QUERY&type=user&access_token='+FB.getAuthResponse()['accessToken'],
-				        filter: function (contactos) {
-				            return $.map(contactos.data, function (contacto) {
-				                return {
-				                    value: contacto.name
-				                };
-				            });
-				        }
-				    }
-				});
-				contactos.initialize();
-
-				$('.typeahead').typeahead(null, {
-				    displayKey: 'value',
-				    source: contactos.ttAdapter()
-				});
+    			$(function() {
+				 $( ".typeahead" ).autocomplete({
+			        source: function( request, response ) {
+			        $.ajax({
+			          url: "https://graph.facebook.com/me/friends?access_token="+FB.getAuthResponse()['accessToken']+"&callback=?",
+			          dataType: "jsonp",
+			          data: {
+			            featureClass: "P",
+			            style: "full",
+			            maxRows: 12,
+			            name_startsWith: request.term
+			          },
+			          success: function( data ) {
+			            res = $.map( data.data, function( item ) {
+			              if (item.name.toLowerCase().indexOf(request.term.toLowerCase()) >= 0){
+			                return {
+			                  label: item.name,
+			                  value: item.id
+			                }
+			              }
+			            });
+			            response(res);
+			          }
+			        });
+			      },
+			      minLength: 0,
+			      select: function( event, ui ) {
+						var ws = new AppRouter({ac: This.api})
+						ws.navigate('/#friend/'+ui.item.value,true);
+			      },
+			      open: function() {
+			        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+			      },
+			      close: function() {
+			        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+			      }
+			    });
 			});
+		});
 		}
 	}),
 	//Fotos del usuario
@@ -345,7 +361,6 @@ var Views = {
 		},
 		initialize: function(){
 			this.render();
-			console.log(this.options.wall.data)
 		},
 		render: function(){
 			var This = this;
