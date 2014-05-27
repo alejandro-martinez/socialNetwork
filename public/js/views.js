@@ -165,33 +165,59 @@ var Views = {
 	//La barra superior con Nombre y boton Conectar
 	Header: Backbone.View.extend({
 		el: $("#header"),
-		events: {
-			'keyup :input': 'search',
-    		'keypress :input': 'search'
-		},
-		search: function(ev){
-			var This = this;
-			This.api.searchFriend(ev.currentTarget.value,function(response){				 //Buscar amigo
-				var SearchResults = Backbone.Model.extend({});
-				var friendsCollection = Backbone.Collection.extend({model: SearchResults});
-				var results = new friendsCollection(response);
-				utils.loadTemplate("search",function(html){
-					template = _.template(html);
-					$('#body').html(template({friends:results.models}));
-				});	
-			});
-		},
 		initialize: function(){
 			this.api = this.options.api;
 			var This = this;
-			this.render();
+	        this.render();
 		},
 		render: function(){
 			var This = this;
 			utils.loadTemplate("header",function(html){
 				template = _.template(html);
 				This.$el.html(template(This.model));
+				
+    			$(function() {
+				 $( ".typeahead" ).autocomplete({
+			        source: function( request, response ) {
+			        $.ajax({
+			          url: "https://graph.facebook.com/search?q="+request.term+"&type=user&access_token="+FB.getAuthResponse()['accessToken']+"&callback=?",
+			          dataType: "jsonp",
+			          data: {
+			            featureClass: "P",
+			            style: "full",
+			            maxRows: 12,
+			          },
+			           beforeSend: function(){
+						  $('.typeahead').addClass('searching');     
+					   },
+			          success: function( data ) {
+			          	$('.typeahead').removeClass('searching');
+			            res = $.map( data.data, function( item ) {
+			              if (item.name.toLowerCase().indexOf(request.term.toLowerCase()) >= 0){
+			                return {
+			                  label: item.name,
+			                  value: item.id
+			                }
+			              }
+			            });
+			            response(res);
+			          }
+			        });
+			      },
+			      minLength: 0,
+			      select: function( event, ui ) {
+						var ws = new AppRouter({ac: This.api})
+						ws.navigate('/#friend/'+ui.item.value,true);
+			      },
+			      open: function() {
+			        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+			      },
+			      close: function() {
+			        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+			      }
+			    });
 			});
+		});
 		}
 	}),
 	//Fotos del usuario
@@ -340,16 +366,17 @@ var Views = {
 		},
 		render: function(){
 			var This = this;
-
 			var FriendWall = Backbone.Model.extend({});
 			var friendUpdatesCollection = Backbone.Collection.extend({model: FriendWall});
 			var wallUpdates = new friendUpdatesCollection(This.options.wall.data);
+			
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
+				$("#body").html('');
 				$("#body").html(template({
 					friend: This.options.friendInfo,
 					wall: wallUpdates.models,
-					amigo: This.options.amigo
+					amigo: This.options.esAmigo
 				}));
 			});
 		},
