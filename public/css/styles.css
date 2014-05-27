@@ -747,3 +747,8 @@ p {
 .example-arabic .tt-dropdown-menu {
   text-align: right;
 }
+
+.searching { 
+	background: #fff url('../img/ajax-loader.gif') no-repeat;
+	background-position: 380px 8px;
+}

@@ -169,7 +169,6 @@ var Views = {
 			this.api = this.options.api;
 			var This = this;
 	        this.render();
-
 		},
 		render: function(){
 			var This = this;
@@ -181,15 +180,18 @@ var Views = {
 				 $( ".typeahead" ).autocomplete({
 			        source: function( request, response ) {
 			        $.ajax({
-			          url: "https://graph.facebook.com/me/friends?access_token="+FB.getAuthResponse()['accessToken']+"&callback=?",
+			          url: "https://graph.facebook.com/search?q="+request.term+"&type=user&access_token="+FB.getAuthResponse()['accessToken']+"&callback=?",
 			          dataType: "jsonp",
 			          data: {
 			            featureClass: "P",
 			            style: "full",
 			            maxRows: 12,
-			            name_startsWith: request.term
 			          },
+			           beforeSend: function(){
+						  $('.typeahead').addClass('searching');     
+					   },
 			          success: function( data ) {
+			          	$('.typeahead').removeClass('searching');
 			            res = $.map( data.data, function( item ) {
 			              if (item.name.toLowerCase().indexOf(request.term.toLowerCase()) >= 0){
 			                return {
@@ -364,16 +366,16 @@ var Views = {
 		},
 		render: function(){
 			var This = this;
-
 			var FriendWall = Backbone.Model.extend({});
 			var friendUpdatesCollection = Backbone.Collection.extend({model: FriendWall});
 			var wallUpdates = new friendUpdatesCollection(This.options.wall.data);
+			
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
+				$("#body").html('');
 				$("#body").html(template({
 					friend: This.options.friendInfo,
-					wall: wallUpdates.models,
-					amigo: This.options.amigo
+					wall: wallUpdates.models
 				}));
 			});
 		},
