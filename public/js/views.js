@@ -375,7 +375,8 @@ var Views = {
 				$("#body").html('');
 				$("#body").html(template({
 					friend: This.options.friendInfo,
-					wall: wallUpdates.models
+					wall: wallUpdates.models,
+					amigo: This.options.esAmigo
 				}));
 			});
 		},
