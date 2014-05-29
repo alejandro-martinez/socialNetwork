@@ -155,7 +155,7 @@ var Views = {
 	Header: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'click a.icon-notificaciones'	: 'showNotifications',
+			'click h1.icon-notificaciones'	: 'showNotifications',
 			'click a.notifications.nextPage' : 'nextPage',
 			'click a.notifications.prevPage'	: 'prevPage'
 		},

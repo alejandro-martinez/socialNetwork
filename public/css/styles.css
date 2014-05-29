@@ -524,21 +524,22 @@ div#container-home {
 }
 
 .header-right {
-    width: 515px;
+    width: 530px;
     color: white;
     margin-right: 50px;
     position: absolute;
     left: 220px;
 }
+.icon-notificaciones:before{content:"\e037"}
 
-.header-right > .icon-notificaciones{
+.header-right > h1.icon-notificaciones{
     position:absolute;
-	
-    top: 2px;
+    top: 3px;
+    cursor:pointer;
+	line-height:60px;
 	right:0;
-	background-image: url('../img/notificaciones.png');
-	width:50px;
-	height:56px;
+	width:60px;
+	height:60px;
 }
 .header-right > .icon-notificaciones span{
 	font-weight: bold;
