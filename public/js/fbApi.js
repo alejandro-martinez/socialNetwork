@@ -54,6 +54,16 @@ function AppController(){
 			});	
 		}
 	},
+	this.getNotifications = function(callback){
+		FB.api(
+		    "/me/notifications?include_read=1",
+		    function (response) {
+		      if (response && !response.error) {
+		        callback(response);
+		      }
+		    }
+		);
+	},
 	this.searchFriend = function(text, callback){
 		fqlQuery("select uid, name from user where uid in (SELECT uid2 FROM friend WHERE uid1 = me())and (strpos(lower(name),'"+text+"')>=0 OR strpos(name,'"+text+"')>=0)",function(response){
 			callback(response);
@@ -86,13 +96,11 @@ function AppController(){
 	},
 	this.getFriendPhotos = function(id,callback){
 		fbUser('/'+id+'/photos/uploaded?locale='+This.locale, function(model){
-			console.log(model)
 			callback(model);
 		});	
 	},
 	this.getFriends = function(callback){
 		fbUser('/me/friends?fields=id,name&limit=9&locale='+This.locale, function(model){
-			console.log(model)
 			callback(model);
 		});	
 	},
@@ -187,7 +195,6 @@ function startApp(){
     		ac.dataDefault.photo = "http://graph.facebook.com/" + ac.currentUser.id + "/picture?type=normal";
     	}
 		var loc = window.location.hash.split("#")[1]
-		console.log(loc)
 		var ws = new AppRouter({ac: ac});
 		Backbone.history.stop();													
 		Backbone.history.start();

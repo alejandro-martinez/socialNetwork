@@ -45,17 +45,6 @@ var Views = {
 		initialize: function(){
 			this.api = this.options.api;
 			var This = this;
-			$(".inline").colorbox({inline:true,width:"45%",height:"80%",
-			onComplete: function() {
-				closeEvent = function() {
-					$('#image-preview').attr('class','hidden'); 				 //esconde vista previa
-					This.api.updateProfilePhoto(function(response){				 //Recargar foto de perfil
-						$('#user-photo').attr('style',"background-image:url('http://graph.facebook.com/"+response+"/picture?type=normal')");	
-					})
-				}
-			},
-			onClosed: function() { closeEvent() }
-			});
 			this.render();
 		},
 		render: function(){
@@ -164,18 +153,42 @@ var Views = {
 	}),
 	//La barra superior con Nombre y boton Conectar
 	Header: Backbone.View.extend({
-		el: $("#header"),
+		el: $("body"),
+		events: {
+			'click a.icon-notificaciones'	: 'showNotifications'
+		},
 		initialize: function(){
 			this.api = this.options.api;
-			var This = this;
+			//this.checkNotifications();
 	        this.render();
+		},
+		showNotifications: function(){
+			var This = this;
+			This.api.getNotifications(function(response){
+				utils.loadTemplate("notifications",function(html){
+					template = _.template(html);
+					var popup = template({notifications: response.data});
+					$.colorbox({title:'Notificaciones',width:'700px',height:'500px',html: popup});
+				});
+			});
+			
+		},
+		checkNotifications: function(){
+			var This = this;
+			window.setInterval(function(){
+  				This.api.getNotifications(function(response){
+					utils.loadTemplate("header",function(html){
+						template = _.template(html);
+						$("#header").html(template({notifications_count: response.summary}));
+					});
+				});
+			}, 60000);
 		},
 		render: function(){
 			var This = this;
 			utils.loadTemplate("header",function(html){
 				template = _.template(html);
-				This.$el.html(template(This.model));
-				
+				$("#header").html(template(This.model));
     			$(function() {
 				 $( ".typeahead" ).autocomplete({
 			        source: function( request, response ) {
