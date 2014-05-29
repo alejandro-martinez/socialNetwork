@@ -548,7 +548,11 @@ div#container-home {
 	top: 5px;
 }
 .notificaciones .post {height: 60px;}
-.notificaciones li {margin-bottom:2px;}
+.notificaciones li {
+	margin-bottom:2px;
+	width: 72%;
+	margin: 0 auto;
+}
 
 .logo-home-header {
     width: 750px;

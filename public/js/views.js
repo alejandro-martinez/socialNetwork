@@ -155,7 +155,9 @@ var Views = {
 	Header: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'click a.icon-notificaciones'	: 'showNotifications'
+			'click a.icon-notificaciones'	: 'showNotifications',
+			'click a.notifications.nextPage' : 'nextPage',
+			'click a.notifications.prevPage'	: 'prevPage'
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -165,25 +167,39 @@ var Views = {
 		showNotifications: function(){
 			var This = this;
 			This.api.getNotifications(function(response){
-				utils.loadTemplate("notifications",function(html){
+				This.model = response;
+				This.loadNotifications(response);
+			});
+		},
+    	loadNotifications: function(model){
+			utils.loadTemplate("notifications",function(html){
+				template = _.template(html);
+				$.colorbox({title:'Notificaciones',width:'70%',height:'85%',html: template({notifications: model.data})});
+			});
+    	},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.loadNotifications(response);
+			});
+    	},
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.loadNotifications(response);
+			});
+    	},
+		/*checkNotifications: function(){
+			var This = this;
+			This.api.getNotifications(function(response){
+				utils.loadTemplate("header",function(html){
 					template = _.template(html);
-					var popup = template({notifications: response.data});
-					$.colorbox({title:'Notificaciones',width:'700px',height:'500px',html: popup});
+					$("#header").html(template({notifications_count: response.summary}));
 				});
 			});
-			
-		},
-		checkNotifications: function(){
-			var This = this;
-			window.setInterval(function(){
-  				This.api.getNotifications(function(response){
-					utils.loadTemplate("header",function(html){
-						template = _.template(html);
-						$("#header").html(template({notifications_count: response.summary}));
-					});
-				});
-			}, 60000);
-		},
+		},*/
 		render: function(){
 			var This = this;
 			utils.loadTemplate("header",function(html){
