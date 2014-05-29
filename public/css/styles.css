@@ -614,6 +614,11 @@ html {
 
 /* Buscador */
 
+.searching { 
+	background: #fff url('../img/ajax-loader.gif') no-repeat;
+	background-position: 380px 8px;
+}
+
 .typeahead,
 .tt-query,
 .tt-hint {
