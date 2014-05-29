@@ -56,7 +56,7 @@ function AppController(){
 	},
 	this.getNotifications = function(callback){
 		FB.api(
-		    "/me/notifications?include_read=1",
+		    "/me/notifications?include_read=1&locale="+This.locale,
 		    function (response) {
 		      if (response && !response.error) {
 		        callback(response);
