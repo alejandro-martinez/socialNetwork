@@ -16,11 +16,11 @@ var Views = {
 		el: $("#content"),
 		events: {
 			'drop #user-photo' : 'dropProfilePhoto',
-			'hover .speak': 'speak',
+			'mouseover .speak': 'speak',
 			'mouseout .speak': 'shutUp'
 		},
 		speak: function(ev){
-			speak(ev.target.attributes['data-voice'].nodeValue);
+			speak(ev.currentTarget.attributes['data-voice'].nodeValue);
 		},
 		shutUp: function(){
 			shutUp();
@@ -52,6 +52,7 @@ var Views = {
 			utils.loadTemplate("main",function(html){
 				template = _.template(html);
 				This.$el.html(template(This.model));
+				This.delegateEvents();
 			});
 		}
 	}),
@@ -65,6 +66,7 @@ var Views = {
 			this.render();
 		},
 		render: function(){
+			var This = this;
 			utils.loadTemplate("newPost",function(html){
 				$("#body").prepend(_.template(html));  
 			});
