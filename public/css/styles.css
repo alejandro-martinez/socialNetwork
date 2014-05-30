@@ -151,6 +151,9 @@ button:active{
 .icon-posts:before{content: "\e01c"}
 .icon-friends:before{content: "\e03b"}
 .icon-friend-add:before{content: "\e083"}
+.icon-notificaciones:before{content:"\e037"}
+.icon-comments:before{content:"\e039"}
+.icon-likes:before{content:"\e04d"}
 
 .bg-color-blueDark{background-color:#2B5797!important}
 .bg-color-orangeDark{background-color:#DA532C!important}
@@ -458,6 +461,17 @@ width: 187px;}
 	max-width: 100%;
 	max-height: 100%;
 }
+#photos .bjqs h2 {
+	background-color:#050;
+	line-height:53px;
+	opacity:0.9;
+	width:55px;
+	height:55px;
+	position:absolute;
+	top:10px;
+	right:142px;
+	cursor:pointer;
+}
 #listPhotos {
 	width: 20%;
 	max-height: 100%;
@@ -471,7 +485,6 @@ width: 187px;}
 	cursor: pointer;
 	width: 100%;
 }
-
 /* ---- friendWall.html ---- */
 #header-info {
 	width: 100%;
@@ -530,8 +543,6 @@ div#container-home {
     position: absolute;
     left: 220px;
 }
-.icon-notificaciones:before{content:"\e037"}
-
 .header-right > h1.icon-notificaciones{
     position:absolute;
     top: 3px;

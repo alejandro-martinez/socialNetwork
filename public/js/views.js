@@ -52,7 +52,6 @@ var Views = {
 			utils.loadTemplate("main",function(html){
 				template = _.template(html);
 				This.$el.html(template(This.model));
-				This.delegateEvents();
 			});
 		}
 	}),
@@ -124,17 +123,13 @@ var Views = {
 			this.render();
 		},
 		render: function(){
-			var WallUpdates = Backbone.Model.extend({});
-			var updatesCollection = Backbone.Collection.extend({
-				model: WallUpdates
-			});
-			var updates = new updatesCollection(this.model.data);
 			var This = this;
+			var WallUpdates = Backbone.Model.extend({});
+			var updatesCollection = Backbone.Collection.extend({model: WallUpdates});
+			var updates = new updatesCollection(this.model.data);
 			utils.loadTemplate("wall",function(html){
 				var template = _.template(html);
-				$("#body").html(template({
-					updates: updates.models
-				}));
+				$("#body").html(template({updates: updates.models}));
 			});
 		},
 		nextPage: function(){
@@ -253,7 +248,12 @@ var Views = {
 	}),
 	//Fotos del usuario
 	Photos: Backbone.View.extend({
-		el: $("#body"),
+		el: $("body"),
+		events: {
+			'click h2'	: 'showLikesAndComments',
+			'click a.comments.nextPage' : 'nextPage',
+			'click a.comments.prevPage'	: 'prevPage'
+		},
 		initialize: function(){
 			this.render();
 		},
@@ -264,13 +264,34 @@ var Views = {
 			var photos = new photosCollection(This.model.data);
 			utils.loadTemplate("photos",function(html){
 				template = _.template(html);
-				$("#body").html(template({
-					photos: photos.models
-				}));
+				$("#body").html(template({photos: photos.models}));
 			});
-		}
+		},
+		showLikesAndComments: function(ev){
+			var id = ev.currentTarget.attributes['href'].nodeValue;
+			$.colorbox({
+				title:'Comentarios y likes',
+				width:'70%',
+				height:'85%',
+				html: $(id).html()
+			});
+    	},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.loadComments(response);
+			});
+    	},
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.loadComments(response);
+			});
+    	},
 	}),
-		//Fotos del usuario
+	//Fotos de amigos
 	friendPhotos: Backbone.View.extend({
 		el: $("#body"),
 		initialize: function(){
@@ -307,7 +328,6 @@ var Views = {
 			var albums = new albumsCollection(This.model.data);
 			utils.loadTemplate("albums",function(html){
 				template = _.template(html);
-				$("#body").html('');
 				$("#body").html(template({
 					albums: albums.models,
 					access_token: This.access_token
@@ -321,7 +341,6 @@ var Views = {
 				This.render();
 			});
     	},
-    	
     	prevPage: function(){
     		var This = this;
 			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
@@ -343,9 +362,7 @@ var Views = {
 			var photos = new photosCollection(This.model.data);
 			utils.loadTemplate("photos",function(html){
 				template = _.template(html);
-				$("#body").html(template({
-					photos: photos.models
-				}));
+				$("#body").html(template({photos: photos.models}));
 			});
 		}
 	}),
@@ -362,12 +379,9 @@ var Views = {
 			var Friends = Backbone.Model.extend({});
 			var friendsCollection = Backbone.Collection.extend({model: Friends});
 			var friends = new friendsCollection(this.model.data);
-
 			utils.loadTemplate("friends",function(html){
 				var template = _.template(html);
-				$("#body").html(template({
-					friends: friends.models
-				}));
+				$("#body").html(template({friends: friends.models}));
 			});
 		},
 		nextPage: function(){
@@ -377,7 +391,6 @@ var Views = {
 				This.render();
 			});
     	},
-    	
     	prevPage: function(){
     		var This = this;
 			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
@@ -403,7 +416,6 @@ var Views = {
 			
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
-				$("#body").html('');
 				$("#body").html(template({
 					friend: This.options.friendInfo,
 					wall: wallUpdates.models,
