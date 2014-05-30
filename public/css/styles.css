@@ -151,6 +151,9 @@ button:active{
 .icon-posts:before{content: "\e01c"}
 .icon-friends:before{content: "\e03b"}
 .icon-friend-add:before{content: "\e083"}
+.icon-notificaciones:before{content:"\e037"}
+.icon-comments:before{content:"\e039"}
+.icon-likes:before{content:"\e04d"}
 
 .bg-color-blueDark{background-color:#2B5797!important}
 .bg-color-orangeDark{background-color:#DA532C!important}
@@ -458,6 +461,17 @@ width: 187px;}
 	max-width: 100%;
 	max-height: 100%;
 }
+#photos .bjqs h2 {
+	background-color:#050;
+	line-height:53px;
+	opacity:0.9;
+	width:55px;
+	height:55px;
+	position:absolute;
+	top:10px;
+	right:142px;
+	cursor:pointer;
+}
 #listPhotos {
 	width: 20%;
 	max-height: 100%;
@@ -471,7 +485,6 @@ width: 187px;}
 	cursor: pointer;
 	width: 100%;
 }
-
 /* ---- friendWall.html ---- */
 #header-info {
 	width: 100%;
@@ -523,25 +536,34 @@ div#container-home {
     width: 100%;
 }
 
-.header-home-left {
-    width: auto;
-    position: relative;
-    float: left;
-    display: none;
-}
-.header-home-left > h1 {
-    color: white;
-    margin-left: 50px;
-    margin-top: 19px;
-    font-size: 1.8em;
-    font-weight: normal;
-}
-
-.header-home-right {
-    float: right;
-    width: auto;
+.header-right {
+    width: 530px;
     color: white;
     margin-right: 50px;
+    position: absolute;
+    left: 220px;
+}
+.header-right > h1.icon-notificaciones{
+    position:absolute;
+    top: 3px;
+    cursor:pointer;
+	line-height:60px;
+	right:0;
+	width:60px;
+	height:60px;
+}
+.header-right > .icon-notificaciones span{
+	font-weight: bold;
+	color: #FFF;
+	position: absolute;
+	left: 26px;
+	top: 5px;
+}
+.notificaciones .post {height: 60px;}
+.notificaciones li {
+	margin-bottom:2px;
+	width: 72%;
+	margin: 0 auto;
 }
 
 .logo-home-header {
@@ -601,46 +623,11 @@ html {
   text-align: left;
 }
 
-/* base styles */
-/* ----------- */
+/* Buscador */
 
-html {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 18px;
-  line-height: 1.2;
-  color: #333;
-}
-
-.title,
-.example-name {
-  font-family: Prociono;
-}
-
-p {
-  margin: 0 0 10px 0;
-}
-
-/* site theme */
-/* ---------- */
-
-.title {
-  margin: 20px 0 0 0;
-  font-size: 64px;
-}
-
-.example {
-  padding: 30px 0;
-}
-
-.example-name {
-  margin: 20px 0;
-  font-size: 32px;
-}
-
-.demo {
-  position: relative;
-  *z-index: 1;
-  margin: 50px 0;
+.searching { 
+	background: #fff url('../img/ajax-loader.gif') no-repeat;
+	background-position: 380px 8px;
 }
 
 .typeahead,
@@ -661,7 +648,6 @@ p {
 .typeahead {
 	position: absolute;
 	top: 7px;
-	left: 357px;
   	background-color: #fff;
 }
 
@@ -703,7 +689,6 @@ p {
 .tt-suggestion.tt-cursor {
   color: #fff;
   background-color: #0097cf;
-
 }
 
 .tt-suggestion p {
@@ -712,43 +697,4 @@ p {
 
 .gist {
   font-size: 14px;
-}
-
-/* example specific styles */
-/* ----------------------- */
-
-.example-twitter-oss .tt-suggestion {
-  padding: 8px 20px;
-}
-
-.example-twitter-oss .tt-suggestion + .tt-suggestion {
-  border-top: 1px solid #ccc;
-}
-
-.example-twitter-oss .repo-language {
-  float: right;
-  font-style: italic;
-}
-
-.example-twitter-oss .repo-name {
-  font-weight: bold;
-}
-
-.example-twitter-oss .repo-description {
-  font-size: 14px;
-}
-
-.example-sports .league-name {
-  margin: 0 20px 5px 20px;
-  padding: 3px 0;
-  border-bottom: 1px solid #ccc;
-}
-
-.example-arabic .tt-dropdown-menu {
-  text-align: right;
-}
-
-.searching { 
-	background: #fff url('../img/ajax-loader.gif') no-repeat;
-	background-position: 380px 8px;
 }

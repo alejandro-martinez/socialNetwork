@@ -16,11 +16,11 @@ var Views = {
 		el: $("#content"),
 		events: {
 			'drop #user-photo' : 'dropProfilePhoto',
-			'hover .speak': 'speak',
+			'mouseover .speak': 'speak',
 			'mouseout .speak': 'shutUp'
 		},
 		speak: function(ev){
-			speak(ev.target.attributes['data-voice'].nodeValue);
+			speak(ev.currentTarget.attributes['data-voice'].nodeValue);
 		},
 		shutUp: function(){
 			shutUp();
@@ -45,17 +45,6 @@ var Views = {
 		initialize: function(){
 			this.api = this.options.api;
 			var This = this;
-			$(".inline").colorbox({inline:true,width:"45%",height:"80%",
-			onComplete: function() {
-				closeEvent = function() {
-					$('#image-preview').attr('class','hidden'); 				 //esconde vista previa
-					This.api.updateProfilePhoto(function(response){				 //Recargar foto de perfil
-						$('#user-photo').attr('style',"background-image:url('http://graph.facebook.com/"+response+"/picture?type=normal')");	
-					})
-				}
-			},
-			onClosed: function() { closeEvent() }
-			});
 			this.render();
 		},
 		render: function(){
@@ -76,6 +65,7 @@ var Views = {
 			this.render();
 		},
 		render: function(){
+			var This = this;
 			utils.loadTemplate("newPost",function(html){
 				$("#body").prepend(_.template(html));  
 			});
@@ -133,17 +123,13 @@ var Views = {
 			this.render();
 		},
 		render: function(){
-			var WallUpdates = Backbone.Model.extend({});
-			var updatesCollection = Backbone.Collection.extend({
-				model: WallUpdates
-			});
-			var updates = new updatesCollection(this.model.data);
 			var This = this;
+			var WallUpdates = Backbone.Model.extend({});
+			var updatesCollection = Backbone.Collection.extend({model: WallUpdates});
+			var updates = new updatesCollection(this.model.data);
 			utils.loadTemplate("wall",function(html){
 				var template = _.template(html);
-				$("#body").html(template({
-					updates: updates.models
-				}));
+				$("#body").html(template({updates: updates.models}));
 			});
 		},
 		nextPage: function(){
@@ -164,18 +150,58 @@ var Views = {
 	}),
 	//La barra superior con Nombre y boton Conectar
 	Header: Backbone.View.extend({
-		el: $("#header"),
+		el: $("body"),
+		events: {
+			'click h1.icon-notificaciones'	: 'showNotifications',
+			'click a.notifications.nextPage' : 'nextPage',
+			'click a.notifications.prevPage'	: 'prevPage'
+		},
 		initialize: function(){
 			this.api = this.options.api;
-			var This = this;
+			//this.checkNotifications();
 	        this.render();
 		},
+		showNotifications: function(){
+			var This = this;
+			This.api.getNotifications(function(response){
+				This.model = response;
+				This.loadNotifications(response);
+			});
+		},
+    	loadNotifications: function(model){
+			utils.loadTemplate("notifications",function(html){
+				template = _.template(html);
+				$.colorbox({title:'Notificaciones',width:'70%',height:'85%',html: template({notifications: model.data})});
+			});
+    	},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.loadNotifications(response);
+			});
+    	},
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.loadNotifications(response);
+			});
+    	},
+		/*checkNotifications: function(){
+			var This = this;
+			This.api.getNotifications(function(response){
+				utils.loadTemplate("header",function(html){
+					template = _.template(html);
+					$("#header").html(template({notifications_count: response.summary}));
+				});
+			});
+		},*/
 		render: function(){
 			var This = this;
 			utils.loadTemplate("header",function(html){
 				template = _.template(html);
-				This.$el.html(template(This.model));
-				
+				$("#header").html(template(This.model));
     			$(function() {
 				 $( ".typeahead" ).autocomplete({
 			        source: function( request, response ) {
@@ -222,7 +248,12 @@ var Views = {
 	}),
 	//Fotos del usuario
 	Photos: Backbone.View.extend({
-		el: $("#body"),
+		el: $("body"),
+		events: {
+			'click h2'	: 'showLikesAndComments',
+			'click a.comments.nextPage' : 'nextPage',
+			'click a.comments.prevPage'	: 'prevPage'
+		},
 		initialize: function(){
 			this.render();
 		},
@@ -233,13 +264,34 @@ var Views = {
 			var photos = new photosCollection(This.model.data);
 			utils.loadTemplate("photos",function(html){
 				template = _.template(html);
-				$("#body").html(template({
-					photos: photos.models
-				}));
+				$("#body").html(template({photos: photos.models}));
 			});
-		}
+		},
+		showLikesAndComments: function(ev){
+			var id = ev.currentTarget.attributes['href'].nodeValue;
+			$.colorbox({
+				title:'Comentarios y likes',
+				width:'70%',
+				height:'85%',
+				html: $(id).html()
+			});
+    	},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.loadComments(response);
+			});
+    	},
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.loadComments(response);
+			});
+    	},
 	}),
-		//Fotos del usuario
+	//Fotos de amigos
 	friendPhotos: Backbone.View.extend({
 		el: $("#body"),
 		initialize: function(){
@@ -276,7 +328,6 @@ var Views = {
 			var albums = new albumsCollection(This.model.data);
 			utils.loadTemplate("albums",function(html){
 				template = _.template(html);
-				$("#body").html('');
 				$("#body").html(template({
 					albums: albums.models,
 					access_token: This.access_token
@@ -290,7 +341,6 @@ var Views = {
 				This.render();
 			});
     	},
-    	
     	prevPage: function(){
     		var This = this;
 			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
@@ -312,9 +362,7 @@ var Views = {
 			var photos = new photosCollection(This.model.data);
 			utils.loadTemplate("photos",function(html){
 				template = _.template(html);
-				$("#body").html(template({
-					photos: photos.models
-				}));
+				$("#body").html(template({photos: photos.models}));
 			});
 		}
 	}),
@@ -331,12 +379,9 @@ var Views = {
 			var Friends = Backbone.Model.extend({});
 			var friendsCollection = Backbone.Collection.extend({model: Friends});
 			var friends = new friendsCollection(this.model.data);
-
 			utils.loadTemplate("friends",function(html){
 				var template = _.template(html);
-				$("#body").html(template({
-					friends: friends.models
-				}));
+				$("#body").html(template({friends: friends.models}));
 			});
 		},
 		nextPage: function(){
@@ -346,7 +391,6 @@ var Views = {
 				This.render();
 			});
     	},
-    	
     	prevPage: function(){
     		var This = this;
 			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
@@ -372,7 +416,6 @@ var Views = {
 			
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
-				$("#body").html('');
 				$("#body").html(template({
 					friend: This.options.friendInfo,
 					wall: wallUpdates.models,
