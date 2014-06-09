@@ -12,7 +12,6 @@ var AppRouter = Backbone.Router.extend({
 		"friends/:fbid"			 : "friends",
         "friend/:id"             : "friendProfile",
         "friendAdd/:id"          : "friendAdd"
-		
     },
     initialize: function (appC) {
     	this.api = appC.ac;    									//Objeto AppController 
@@ -27,7 +26,8 @@ var AppRouter = Backbone.Router.extend({
                 this.api.newsFeed(function(response){
 			    	if(window.location.hash.split('/')[0] == "#fbid") {
 	                    this.newsFeed = new Views.NewsFeed({model: response});
-	                    this.newPostView = new Views.NewPost({api: This.api});                                             //Que estas pensando
+	                    this.newPostView = new Views.NewPost({api: This.api});                      //Que estas pensando
+                        this.searchView = new Views.Search();                                       //Buscador
 			    	}
                 });
 

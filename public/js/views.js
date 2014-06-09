@@ -192,17 +192,30 @@ var Views = {
 			utils.loadTemplate("header",function(html){
 				template = _.template(html);
 				$("#header").html(template(This.model));
-    			$(function() {
-				 $( ".typeahead" ).autocomplete({
-				 	create: function() {
-				        $(this).data('ui-autocomplete')._renderItem =	function( ul, item ) {
-						    var image_url = "http://graph.facebook.com/" + item.value +"/picture";
-						    return $( "<li>" ).append($("<img style=''>").attr('src',image_url))
-						    .append( $( "<a>" ).text( item.label ) )
-						    .appendTo( ul );
-						 }
-				    },
-			        source: function( request, response ) {
+	    	});
+		}
+	}),
+	Search: Backbone.View.extend({
+		el: $("#header"),
+		initialize: function(){
+			this.render();
+		},
+		render: function(){
+			var This = this;
+			utils.loadTemplate("search",function(html){
+				template = _.template(html);
+				$("#header").append(template);
+
+							 $( ".typeahead" ).autocomplete({
+			 	create: function() {
+			        $(this).data('ui-autocomplete')._renderItem =	function( ul, item ) {
+					    var image_url = "http://graph.facebook.com/" + item.value +"/picture";
+					    return $( "<li>" ).append($("<img style=''>").attr('src',image_url))
+					    .append( $( '<a href="/#friend/'+item.value+'">' ).text( item.label ) )
+					    .appendTo( ul );
+					 }
+			    },
+		        source: function( request, response ) {
 			        $.ajax({
 			          url: "https://graph.facebook.com/search?q="+request.term+"&type=user&limit=12&access_token="+FB.getAuthResponse()['accessToken']+"&callback=?",
 			          dataType: "jsonp",
@@ -227,22 +240,17 @@ var Views = {
 			            response(res);
 			          }
 			        });
-			      },
-			      minLength: 0,
-			      select: function( event, ui ) {
-						var ws = new AppRouter({ac: This.api})
-						ws.navigate('/#friend/'+ui.item.value,true);
-			      },
-			      open: function() {
-			        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-			      },
-			      close: function() {
-			        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-			      }
-			    });
+		      },
+		      minLength: 3,
+		      open: function() {
+		        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+		      },
+		      close: function() {
+		        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+		      }
+		    });
 			});
-		});
-		}
+		},
 	}),
 	//Fotos del usuario
 	Photos: Backbone.View.extend({
