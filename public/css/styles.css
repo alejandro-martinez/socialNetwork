@@ -473,6 +473,13 @@ width: 187px;}
 	cursor:pointer;
 }
 .likes {display:none;}
+.photo-comments .post{ 
+	width: calc(100% - 25px);
+	margin: 5px auto;
+	height: auto;
+	display: inline-block;
+	padding: 10px;
+}
 #listPhotos {
 	width: 20%;
 	max-height: 100%;
@@ -527,6 +534,36 @@ width: 187px;}
 	color: #FFF;
 	margin: 0 10px;
 }
+/* ---- notifications.html ---- */
+
+.notificaciones .post{
+	height: auto;
+	padding: 0;
+	margin: 5px 0;
+	display: inline-block;
+	width: 100%;
+	padding: 10px
+}
+.notificaciones .avatar {
+	float: left;
+	width: 70px;
+	height: 70px;
+	overflow: hidden;
+	margin-right: 20px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+	background-position: center;
+	background-size: cover;
+}
+
+.notificaciones li {
+	margin-bottom:2px;
+	width: 72%;
+	margin: 0 auto;
+}
 
 /** INICIO **/
 
@@ -559,12 +596,6 @@ div#container-home {
 	position: absolute;
 	left: 26px;
 	top: 5px;
-}
-.notificaciones .post {height: 60px;}
-.notificaciones li {
-	margin-bottom:2px;
-	width: 72%;
-	margin: 0 auto;
 }
 
 .logo-home-header {
@@ -711,3 +742,4 @@ html {
 .gist {
   font-size: 14px;
 }
+
