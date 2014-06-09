@@ -204,9 +204,17 @@ var Views = {
 				$("#header").html(template(This.model));
     			$(function() {
 				 $( ".typeahead" ).autocomplete({
+				 	create: function() {
+				        $(this).data('ui-autocomplete')._renderItem =	function( ul, item ) {
+						    var image_url = "http://graph.facebook.com/" + item.value +"/picture";
+						    return $( "<li>" ).append($("<img style=''>").attr('src',image_url))
+						    .append( $( "<a>" ).text( item.label ) )
+						    .appendTo( ul );
+						 }
+				    },
 			        source: function( request, response ) {
 			        $.ajax({
-			          url: "https://graph.facebook.com/search?q="+request.term+"&type=user&access_token="+FB.getAuthResponse()['accessToken']+"&callback=?",
+			          url: "https://graph.facebook.com/search?q="+request.term+"&type=user&limit=12&access_token="+FB.getAuthResponse()['accessToken']+"&callback=?",
 			          dataType: "jsonp",
 			          data: {
 			            featureClass: "P",
@@ -268,6 +276,7 @@ var Views = {
 			});
 		},
 		showLikesAndComments: function(ev){
+			console.debug(ev);
 			var id = ev.currentTarget.attributes['href'].nodeValue;
 			$.colorbox({
 				title:'Comentarios y likes',
@@ -294,9 +303,24 @@ var Views = {
 	//Fotos de amigos
 	friendPhotos: Backbone.View.extend({
 		el: $("#body"),
+		events: {
+			'click h2'	: 'showLikesAndComments',
+			'click a.comments.nextPage' : 'nextPage',
+			'click a.comments.prevPage'	: 'prevPage'
+		},
 		initialize: function(){
 			this.render();
 		},
+		showLikesAndComments: function(ev){
+			console.debug(ev);
+			var id = ev.currentTarget.attributes['href'].nodeValue;
+			$.colorbox({
+				title:'Comentarios y likes',
+				width:'70%',
+				height:'85%',
+				html: $(id).html()
+			});
+    	},
 		render: function(){
 			var This = this;
 			var Photos = Backbone.Model.extend({});

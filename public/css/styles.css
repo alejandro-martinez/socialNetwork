@@ -472,6 +472,7 @@ width: 187px;}
 	right:142px;
 	cursor:pointer;
 }
+.likes {display:none;}
 #listPhotos {
 	width: 20%;
 	max-height: 100%;
