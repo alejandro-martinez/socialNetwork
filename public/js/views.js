@@ -204,9 +204,17 @@ var Views = {
 				$("#header").html(template(This.model));
     			$(function() {
 				 $( ".typeahead" ).autocomplete({
+				 	create: function() {
+				        $(this).data('ui-autocomplete')._renderItem =	function( ul, item ) {
+						    var image_url = "http://graph.facebook.com/" + item.value +"/picture";
+						    return $( "<li>" ).append($("<img style=''>").attr('src',image_url))
+						    .append( $( "<a>" ).text( item.label ) )
+						    .appendTo( ul );
+						 }
+				    },
 			        source: function( request, response ) {
 			        $.ajax({
-			          url: "https://graph.facebook.com/search?q="+request.term+"&type=user&access_token="+FB.getAuthResponse()['accessToken']+"&callback=?",
+			          url: "https://graph.facebook.com/search?q="+request.term+"&type=user&limit=12&access_token="+FB.getAuthResponse()['accessToken']+"&callback=?",
 			          dataType: "jsonp",
 			          data: {
 			            featureClass: "P",
