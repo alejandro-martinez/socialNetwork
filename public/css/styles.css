@@ -625,7 +625,19 @@ html {
 }
 
 /* Buscador */
-
+.ui-menu-item{
+	display: flex;
+}
+.ui-menu-item img{
+	float: left;
+}
+.ui-menu-item a{
+	float: left;
+	width: 400px;
+}
+.ui-menu-item li{
+	width: 420px;
+}
 .searching { 
 	background: #fff url('../img/ajax-loader.gif') no-repeat;
 	background-position: 380px 8px;
