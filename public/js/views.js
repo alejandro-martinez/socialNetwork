@@ -268,6 +268,7 @@ var Views = {
 			});
 		},
 		showLikesAndComments: function(ev){
+			console.debug(ev);
 			var id = ev.currentTarget.attributes['href'].nodeValue;
 			$.colorbox({
 				title:'Comentarios y likes',
@@ -294,9 +295,24 @@ var Views = {
 	//Fotos de amigos
 	friendPhotos: Backbone.View.extend({
 		el: $("#body"),
+		events: {
+			'click h2'	: 'showLikesAndComments',
+			'click a.comments.nextPage' : 'nextPage',
+			'click a.comments.prevPage'	: 'prevPage'
+		},
 		initialize: function(){
 			this.render();
 		},
+		showLikesAndComments: function(ev){
+			console.debug(ev);
+			var id = ev.currentTarget.attributes['href'].nodeValue;
+			$.colorbox({
+				title:'Comentarios y likes',
+				width:'70%',
+				height:'85%',
+				html: $(id).html()
+			});
+    	},
 		render: function(){
 			var This = this;
 			var Photos = Backbone.Model.extend({});
