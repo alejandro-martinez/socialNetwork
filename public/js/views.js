@@ -158,7 +158,6 @@ var Views = {
 		},
 		initialize: function(){
 			this.api = this.options.api;
-			//this.checkNotifications();
 	        this.render();
 		},
 		showNotifications: function(){
@@ -188,15 +187,6 @@ var Views = {
 				This.loadNotifications(response);
 			});
     	},
-		/*checkNotifications: function(){
-			var This = this;
-			This.api.getNotifications(function(response){
-				utils.loadTemplate("header",function(html){
-					template = _.template(html);
-					$("#header").html(template({notifications_count: response.summary}));
-				});
-			});
-		},*/
 		render: function(){
 			var This = this;
 			utils.loadTemplate("header",function(html){
@@ -276,7 +266,6 @@ var Views = {
 			});
 		},
 		showLikesAndComments: function(ev){
-			console.debug(ev);
 			var id = ev.currentTarget.attributes['href'].nodeValue;
 			$.colorbox({
 				title:'Comentarios y likes',
@@ -284,29 +273,13 @@ var Views = {
 				height:'85%',
 				html: $(id).html()
 			});
-    	},
-		nextPage: function(){
-			var This = this;
-			$.getJSON(this.model.paging.next + '&callback=?', function(response){
-				This.model = response;
-				This.loadComments(response);
-			});
-    	},
-    	prevPage: function(){
-    		var This = this;
-			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
-				This.model = response;
-				This.loadComments(response);
-			});
-    	},
+    	}
 	}),
 	//Fotos de amigos
 	friendPhotos: Backbone.View.extend({
-		el: $("#body"),
+		el: $("body"),
 		events: {
-			'click h2'	: 'showLikesAndComments',
-			'click a.comments.nextPage' : 'nextPage',
-			'click a.comments.prevPage'	: 'prevPage'
+			'click h2'	: 'showLikesAndComments'
 		},
 		initialize: function(){
 			this.render();
