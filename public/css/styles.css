@@ -442,6 +442,10 @@ width: 187px;}
 	padding: 15px;
 	display: inline-block;
 }
+
+.back label{
+	margin-left: -5px;
+	}
 /* ---- photos.html ---- */
 #photos *{
 	margin: 0;

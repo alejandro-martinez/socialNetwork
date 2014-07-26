@@ -4,13 +4,22 @@
 	<% _.each(friends, function(friend) { %> 
 	<div class="flip-container">
 		<div class="flipper">"
-			<div class="front" style="background-image:url('http://graph.facebook.com/<%= friend.attributes.id %>/picture?type=large')">
+			<div class="front" data-voice="<%= friend.attributes.name %>" style="background-image:url('http://graph.facebook.com/<%= friend.attributes.id %>/picture?type=large')">
 				<div class="desc">
 					<span><%= friend.attributes.name %></span>
 				</div>
 			</div>
 			<div class="back speak" data-voice="<%= friend.attributes.name %>" onclick="window.location.href='/#friend/<%= friend.attributes.id%>'">
-				<label><%= friend.attributes.name %></label>
+				<label><strong>Nombre:</strong><%= friend.attributes.name %></label></br>
+				<% if (friend.attributes.birthday != null){%>
+					<label><strong>Nacimiento:</strong><%= friend.attributes.birthday %></label></br>
+				<% }%>
+				<% if (friend.attributes.hometown != null){%>
+					<label><strong>Vive en:</strong><%= friend.attributes.hometown.name %></label></br>
+				<% }%>
+				<% if (friend.attributes.location != null){%>
+					<label><strong>De:</strong><%= friend.attributes.location.name %></label></br>
+				<% }%>
 			</div>
 		</div>
 	</div>

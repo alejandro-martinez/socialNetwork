@@ -39,7 +39,7 @@ function AppController(){
 		id: null,
 		username: 'No ha iniciado sesión',
 		logButtonText: 'Conectarme',
-		logButtonEvent: "FB.login(function(response){},{ scope: 'publish_actions,manage_notifications, user_photos,friends_photos, read_stream' });",
+		logButtonEvent: "FB.login(function(response){},{ scope: 'publish_actions,manage_notifications, user_photos,friends_photos,friends_birthday,friends_hometown,friends_location read_stream' });",
 		photo: 'img/def-user.jpg',
 	};
 
@@ -100,7 +100,7 @@ function AppController(){
 		});	
 	},
 	this.getFriends = function(callback){
-		fbUser('/me/friends?fields=id,name&limit=9&locale='+This.locale, function(model){
+		fbUser('/me/friends?fields=id,name,birthday,gender,hometown,location&limit=9&locale='+This.locale, function(model){
 			callback(model);
 		});	
 	},
