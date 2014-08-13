@@ -155,13 +155,27 @@ button:active{
 .icon-comments:before{content:"\e039"}
 .icon-likes:before{content:"\e04d"}
 
-.bg-color-blueDark{background-color:#2B5797!important}
-.bg-color-orangeDark{background-color:#DA532C!important}
-.bg-color-pinkDark{background-color:#7E3878!important}
-.bg-color-greenLight{background-color:#99B433!important}
-.bg-color-green{background-color:#00A300!important}
-.bg-color-blue{background-color:#2D89EF!important}
-.bg-color-darken{background-color:transparent}
+.bg-color-blue{background-color:#2d89ef!important;}
+.bg-color-blueLight{background-color:#eff4ff!important;}
+.bg-color-blueDark{background-color:#2b5797!important;}
+.bg-color-green{background-color:#00a300!important;}
+.bg-color-greenLight{background-color:#99b433!important;}
+.bg-color-greenDark{background-color:#1e7145!important;}
+.bg-color-red{background-color:#b91d47!important;}
+.bg-color-yellow{background-color:#ffc40d!important;}
+.bg-color-orange{background-color:#e3a21a!important;}
+.bg-color-orangeDark{background-color:#da532c!important;}
+.bg-color-pink{background-color:#9f00a7!important;}
+.bg-color-pinkDark{background-color:#7e3878!important;}
+.bg-color-purple{background-color:#603cba!important;}
+.bg-color-darken{background-color:transparent!important;}
+/*.bg-color-darken{background-color:#1d1d1d!important;}*/
+.bg-color-lighten{background-color:#d5e7ec!important;}
+.bg-color-white{background-color:#ffffff!important;}
+.bg-color-grayDark{background-color:#525252!important;}
+.bg-color-magenta{background-color:#ff0097!important;}
+.bg-color-teal{background-color:#00aba9!important;}
+.bg-color-redLight{background-color:#ee1111!important;}
 
 #nav-user-control>ul{
 	list-style: none;
@@ -186,6 +200,7 @@ button:active{
 	font-size: 1.5em;
 	margin: 10px;
 	padding: 0;
+	text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
 }
 .nav-button:hover{
 	border: solid 3px black;
