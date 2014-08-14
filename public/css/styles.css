@@ -162,7 +162,8 @@ button:active{
 .bg-color-greenLight{background-color:#99b433!important;}
 .bg-color-greenDark{background-color:#1e7145!important;}
 .bg-color-red{background-color:#b91d47!important;}
-.bg-color-yellow{background-color:#ffc40d!important;}
+.bg-color-purple{background-color:#4444dd!important;}
+.bg-color-yellow{background-color:#ff9933!important;}
 .bg-color-orange{background-color:#e3a21a!important;}
 .bg-color-orangeDark{background-color:#da532c!important;}
 .bg-color-pink{background-color:#9f00a7!important;}
@@ -329,6 +330,7 @@ width: 187px;}
 	display: inline-block;
 	margin: 20px;
 	width: calc(100% - 40px);
+	margin-top: 10%;
 }
 .avatar {
 	float: left;
