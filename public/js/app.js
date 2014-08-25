@@ -11,7 +11,9 @@ var AppRouter = Backbone.Router.extend({
 		"post/:postid"			 : "post",
 		"friends/:fbid"			 : "friends",
         "friend/:id"             : "friendProfile",
-        "friendAdd/:id"          : "friendAdd"
+        "friendAdd/:id"          : "friendAdd",
+        "groupList"              : "groups",
+        "groupFeed/:id"                  : "groupFeed",
     },
     initialize: function (appC) {
     	this.api = appC.ac;    									//Objeto AppController 
@@ -83,6 +85,16 @@ var AppRouter = Backbone.Router.extend({
     friendPhotos: function(id){
         this.api.getFriendPhotos(id,function(response){
             this.friendPhotos = new Views.friendPhotos({model: response});
+        });
+    },
+    groupsList: function(id){
+        this.api.getUserGroups(id,function(response){
+            this.groupsView = new Views.Groups({model: response});
+        });
+    },
+    groupFeed: function(id){
+        this.api.getGroupFeed(id,function(response){
+            this.groupFeedView = new Views.GroupFeed({model: response});
         });
     },
 });

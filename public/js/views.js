@@ -56,9 +56,9 @@ var Views = {
 		}
 	}),
 	NewPost: Backbone.View.extend({						//Nuevo Post 
-		el: $("body"),
+		el: $("#que-estas-pensando"),
 		events: {
-			'click button#publicarStatus': 'publishPost'
+			'click #publicarStatus': 'publishPost'
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -96,6 +96,68 @@ var Views = {
 			utils.loadTemplate("newsFeed",function(html){
 				template = _.template(html);
 				$("#body").html(template({news:This.model.data}));
+			});
+		},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	},
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	}
+	}),
+	Groups: Backbone.View.extend({
+		el: $("#content"),
+		events: {
+			'click a.groups.nextPage' : 'nextPage',
+			'click a.groups.prevPage'	: 'prevPage'
+		},
+		initialize: function(){
+			this.render();
+		},
+		render: function(){
+			var This = this;
+			utils.loadTemplate("groups",function(html){
+				template = _.template(html);
+				$("#body").html(template({groups:This.model.data}));
+			});
+		},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	},
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	}
+	}),
+	GroupFeed: Backbone.View.extend({
+		el: $("#content"),
+		events: {
+			'click a.group.nextPage' : 'nextPage',
+			'click a.group.prevPage'	: 'prevPage'
+		},
+		initialize: function(){
+			this.render();
+		},
+		render: function(){
+			var This = this;
+			utils.loadTemplate("group",function(html){
+				template = _.template(html);
+				$("#body").html(template({group:This.model.data}));
 			});
 		},
 		nextPage: function(){
