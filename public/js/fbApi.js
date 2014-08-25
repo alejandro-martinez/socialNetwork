@@ -96,6 +96,7 @@ function AppController(){
 	},
 	this.getUserGroups = function(callback){
 		fbUser('/me/groups/?locale='+This.locale, function(model){
+			console.log(model);
 			callback(model);
 		});	
 	},
@@ -114,8 +115,10 @@ function AppController(){
 			callback(model);
 		});	
 	},
-	this.newPost = function(mensaje, callback){
-		FB.api('/me/feed', 'post', { message: mensaje }, function(response) {
+	this.newPost = function(id,mensaje, callback){
+		console.log(id);
+		console.log(mensaje);
+		FB.api('/'+id+'/feed', 'post', { message: mensaje }, function(response) {
 		  if (!response || response.error) {
 		  		callback(response.error);
 		  } else {

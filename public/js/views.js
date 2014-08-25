@@ -56,7 +56,7 @@ var Views = {
 		}
 	}),
 	NewPost: Backbone.View.extend({						//Nuevo Post 
-		el: $("#que-estas-pensando"),
+		el: "#body",
 		events: {
 			'click #publicarStatus': 'publishPost'
 		},
@@ -72,14 +72,15 @@ var Views = {
 		},
 		publishPost: function(event){
 			var This = this;
-			if( $('#post-text').val() ) {
-				this.api.newPost($('#post-text').val(), function(response){
+			if($('#post-text').val()) {
+				this.api.newPost($('#destinoPost').val(),$('#post-text').val(), function(response){
 					if (response.id){
 						var ws = new AppRouter({ac: This.api})
-						ws.navigate('/#fbid/me',true);
+						window.location.reload();
 					}
 				});
 			}
+			$('#post-text').val('');				//Reset input
 		}
 	}),
 	NewsFeed: Backbone.View.extend({
@@ -155,7 +156,7 @@ var Views = {
 		},
 		render: function(){
 			var This = this;
-			utils.loadTemplate("group",function(html){
+			utils.loadTemplate("search",function(html){
 				template = _.template(html);
 				$("#body").html(template({group:This.model.data}));
 			});
