@@ -156,9 +156,10 @@ var Views = {
 		},
 		render: function(){
 			var This = this;
-			utils.loadTemplate("search",function(html){
+			utils.loadTemplate("groupFeed",function(html){
 				template = _.template(html);
-				$("#body").html(template({group:This.model.data}));
+				console.log(This.model.data);
+				$("#body").html(template({updates:This.model.data}));
 			});
 		},
 		nextPage: function(){
@@ -356,7 +357,6 @@ var Views = {
 			this.render();
 		},
 		showLikesAndComments: function(ev){
-			console.debug(ev);
 			var id = ev.currentTarget.attributes['href'].nodeValue;
 			$.colorbox({
 				title:'Comentarios y likes',

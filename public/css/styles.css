@@ -154,6 +154,7 @@ button:active{
 .icon-notificaciones:before{content:"\e037"}
 .icon-comments:before{content:"\e039"}
 .icon-likes:before{content:"\e04d"}
+.icon-groups:before{content:"\e13d"}
 
 .bg-color-blue{background-color:#2d89ef!important;}
 .bg-color-blueLight{background-color:#eff4ff!important;}
@@ -376,6 +377,31 @@ width: 187px;}
     max-height: 350px;
 	max-width: 100%;
 }
+/* ---- groups.html ---- */
+#groups{
+	width: 600px;
+	margin: 0 auto;
+}
+#groups ul {
+	width: 100%;
+	list-style: none;
+}
+#groups li a{
+	width: 500px;
+	padding: 25px;
+	margin: 10px auto;
+	display: block;
+	font-size: 25px;
+	text-decoration: none;
+	color: black;
+	background-color: #ECF0F1;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+	border-radius: 8px;
+}
+
 /* ---- friends.html ---- */
 #friends, #container-album{
 	width: 600px;
@@ -397,8 +423,6 @@ width: 187px;}
 	transform: rotateY(180deg);
 	-webkit-transform: rotateY(180deg);; /* Safari and Chrome */
 }
-
-
 
 .flipper {
 	transition: .6s;
