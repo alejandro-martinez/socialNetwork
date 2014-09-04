@@ -156,10 +156,10 @@ var Views = {
 		},
 		render: function(){
 			var This = this;
+			console.log(This.options);
 			utils.loadTemplate("groupFeed",function(html){
 				template = _.template(html);
-				console.log(This.model.data);
-				$("#body").html(template({updates:This.model.data}));
+				$("#body").html(template({updates:This.model.data, destinoPost: This.options.group_id}));
 			});
 		},
 		nextPage: function(){

@@ -95,7 +95,7 @@ var AppRouter = Backbone.Router.extend({
     groupFeed: function(id){
         var This = this;
         this.api.getGroupFeed(id,function(response){
-            this.groupFeedView = new Views.GroupFeed({model: response});
+            this.groupFeedView = new Views.GroupFeed({model: response, group_id:id});
             this.newPostView = new Views.NewPost({api: This.api});
         });
     },
