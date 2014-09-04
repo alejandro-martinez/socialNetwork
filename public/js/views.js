@@ -56,9 +56,9 @@ var Views = {
 		}
 	}),
 	NewPost: Backbone.View.extend({						//Nuevo Post 
-		el: $("body"),
+		el: "#body",
 		events: {
-			'click button#publicarStatus': 'publishPost'
+			'click #publicarStatus': 'publishPost'
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -72,14 +72,15 @@ var Views = {
 		},
 		publishPost: function(event){
 			var This = this;
-			if( $('#post-text').val() ) {
-				this.api.newPost($('#post-text').val(), function(response){
+			if($('#post-text').val()) {
+				this.api.newPost($('#destinoPost').val(),$('#post-text').val(), function(response){
 					if (response.id){
 						var ws = new AppRouter({ac: This.api})
-						ws.navigate('/#fbid/me',true);
+						window.location.reload();
 					}
 				});
 			}
+			$('#post-text').val('');				//Reset input
 		}
 	}),
 	NewsFeed: Backbone.View.extend({
@@ -91,11 +92,49 @@ var Views = {
 		initialize: function(){
 			this.render();
 		},
+		refreshFeed: function(){
+			var This = this;
+			utils.loadTemplate("newsFeed",function(html){
+				template = _.template(html);
+				$("#body #wall").replaceWith(template({news:This.model.data}));
+			});
+		},
 		render: function(){
 			var This = this;
 			utils.loadTemplate("newsFeed",function(html){
 				template = _.template(html);
 				$("#body").html(template({news:This.model.data}));
+			});
+		},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.refreshFeed();
+			});
+    	},
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.refreshFeed();
+			});
+    	}
+	}),
+	Groups: Backbone.View.extend({
+		el: $("#content"),
+		events: {
+			'click a.groups.nextPage' : 'nextPage',
+			'click a.groups.prevPage'	: 'prevPage'
+		},
+		initialize: function(){
+			this.render();
+		},
+		render: function(){
+			var This = this;
+			utils.loadTemplate("groups",function(html){
+				template = _.template(html);
+				$("#body").html(template({groups:This.model.data}));
 			});
 		},
 		nextPage: function(){
@@ -110,6 +149,45 @@ var Views = {
 			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
 				This.model = response;
 				This.render();
+			});
+    	}
+	}),
+	GroupFeed: Backbone.View.extend({
+		el: $("#content"),
+		events: {
+			'click a.group.nextPage' : 'nextPage',
+			'click a.group.prevPage'	: 'prevPage'
+		},
+		initialize: function(){
+			this.render();
+		},
+		render: function(){
+			var This = this;
+			console.log(This.options);
+			utils.loadTemplate("groupFeed",function(html){
+				template = _.template(html);
+				$("#body").html(template({updates:This.model.data, destinoPost: This.options.group_id}));
+			});
+		},
+		refreshFeed: function(){
+			var This = this;
+			utils.loadTemplate("groupFeed",function(html){
+				template = _.template(html);
+				$("#body #wall").replaceWith(template({updates:This.model.data}));
+			});
+		},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.refreshFeed();
+			});
+    	},
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.refreshFeed();
 			});
     	}
 	}),
@@ -293,7 +371,6 @@ var Views = {
 			this.render();
 		},
 		showLikesAndComments: function(ev){
-			console.debug(ev);
 			var id = ev.currentTarget.attributes['href'].nodeValue;
 			$.colorbox({
 				title:'Comentarios y likes',

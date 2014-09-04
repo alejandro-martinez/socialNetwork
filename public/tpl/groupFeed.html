@@ -1,10 +1,9 @@
 <div id="wall">
 	<ul id="wall-template">
-		<input hidden="" id="destinoPost" value="me">
-		<a class="prevPage wall" href="javascript:void(0)"></a>
-		<a class="nextPage wall" href="javascript:void(0)"></a>
-		<% _.each(updates, function(post) { 
-			post = post.attributes;
+		<input type="hidden" id="destinoPost" value="<%= destinoPost%>">
+		<a class="prevPage group" href="javascript:void(0)"></a>
+		<a class="nextPage group" href="javascript:void(0)"></a>
+		<% _.each(updates, function(post) {
 			%> 
 		    <li>
 			    <div class="post">

@@ -39,7 +39,7 @@ function AppController(){
 		id: null,
 		username: 'No ha iniciado sesión',
 		logButtonText: 'Conectarme',
-		logButtonEvent: "FB.login(function(response){},{ scope: 'publish_actions,manage_notifications, user_photos,friends_photos,friends_birthday,friends_hometown,friends_location read_stream' });",
+		logButtonEvent: "FB.login(function(response){},{ scope: 'user_groups,publish_actions,manage_notifications, user_photos,friends_photos,friends_birthday,friends_hometown,friends_location read_stream' });",
 		photo: 'img/def-user.jpg',
 	};
 
@@ -94,6 +94,17 @@ function AppController(){
 			callback(model);
 		});	
 	},
+	this.getUserGroups = function(callback){
+		fbUser('/me/groups/?locale='+This.locale+'&limit=5', function(model){
+			console.log(model);
+			callback(model);
+		});	
+	},
+	this.getGroupFeed = function(id,callback){
+		fbUser('/'+id+'/feed/?locale='+This.locale+'&limit=1', function(model){
+			callback(model);
+		});	
+	},
 	this.getFriendPhotos = function(id,callback){
 		fbUser('/'+id+'/photos/uploaded?locale='+This.locale, function(model){
 			callback(model);
@@ -104,8 +115,10 @@ function AppController(){
 			callback(model);
 		});	
 	},
-	this.newPost = function(mensaje, callback){
-		FB.api('/me/feed', 'post', { message: mensaje }, function(response) {
+	this.newPost = function(id,mensaje, callback){
+		console.log(id);
+		console.log(mensaje);
+		FB.api('/'+id+'/feed', 'post', { message: mensaje }, function(response) {
 		  if (!response || response.error) {
 		  		callback(response.error);
 		  } else {
