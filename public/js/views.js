@@ -92,6 +92,13 @@ var Views = {
 		initialize: function(){
 			this.render();
 		},
+		refreshFeed: function(){
+			var This = this;
+			utils.loadTemplate("newsFeed",function(html){
+				template = _.template(html);
+				$("#body #wall").replaceWith(template({news:This.model.data}));
+			});
+		},
 		render: function(){
 			var This = this;
 			utils.loadTemplate("newsFeed",function(html){
@@ -103,14 +110,14 @@ var Views = {
 			var This = this;
 			$.getJSON(this.model.paging.next + '&callback=?', function(response){
 				This.model = response;
-				This.render();
+				This.refreshFeed();
 			});
     	},
     	prevPage: function(){
     		var This = this;
 			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
 				This.model = response;
-				This.render();
+				This.refreshFeed();
 			});
     	}
 	}),
@@ -162,18 +169,25 @@ var Views = {
 				$("#body").html(template({updates:This.model.data, destinoPost: This.options.group_id}));
 			});
 		},
+		refreshFeed: function(){
+			var This = this;
+			utils.loadTemplate("groupFeed",function(html){
+				template = _.template(html);
+				$("#body #wall").replaceWith(template({updates:This.model.data}));
+			});
+		},
 		nextPage: function(){
 			var This = this;
 			$.getJSON(this.model.paging.next + '&callback=?', function(response){
 				This.model = response;
-				This.render();
+				This.refreshFeed();
 			});
     	},
     	prevPage: function(){
     		var This = this;
 			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
 				This.model = response;
-				This.render();
+				This.refreshFeed();
 			});
     	}
 	}),
