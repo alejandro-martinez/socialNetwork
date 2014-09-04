@@ -95,13 +95,13 @@ function AppController(){
 		});	
 	},
 	this.getUserGroups = function(callback){
-		fbUser('/me/groups/?locale='+This.locale, function(model){
+		fbUser('/me/groups/?locale='+This.locale+'&limit=5', function(model){
 			console.log(model);
 			callback(model);
 		});	
 	},
 	this.getGroupFeed = function(id,callback){
-		fbUser('/'+id+'/feed/?locale='+This.locale, function(model){
+		fbUser('/'+id+'/feed/?locale='+This.locale+'&limit=1', function(model){
 			callback(model);
 		});	
 	},
