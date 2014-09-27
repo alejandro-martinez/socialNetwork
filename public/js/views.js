@@ -159,8 +159,8 @@ var Views = {
 	Groups: Backbone.View.extend({
 		el: $("#content"),
 		events: {
-			'click a.groups.nextPage' : 'nextPage',
-			'click a.groups.prevPage'	: 'prevPage'
+			'click a.groups.nextPage'	: 'nextPage',
+			'click a.groups.prevPage'	: 'prevPage',
 		},
 		initialize: function(){
 			this.render();
@@ -191,24 +191,29 @@ var Views = {
 		el: $("#content"),
 		events: {
 			'click a.group.nextPage' : 'nextPage',
-			'click a.group.prevPage'	: 'prevPage'
+			'click a.group.prevPage'	: 'prevPage',
+			'click .post a.like'		: 'like',
+			'click .post a.unlike'	: 'unlike',
+			'click a.postInfo'		: 'showLikesAndComments',
 		},
 		initialize: function(){
+			this.api = this.options.api;
+			this.miID = this.api.currentUser.id;
+			var This = this;
 			this.render();
 		},
 		render: function(){
 			var This = this;
-			console.log(This.options);
 			utils.loadTemplate("groupFeed",function(html){
 				template = _.template(html);
-				$("#body").html(template({updates:This.model.data, destinoPost: This.options.group_id}));
+				$("#body").html(template({updates:This.model.data, destinoPost: This.options.group_id, miID: This.miID}));
 			});
 		},
 		refreshFeed: function(){
 			var This = this;
 			utils.loadTemplate("groupFeed",function(html){
 				template = _.template(html);
-				$("#body #wall").replaceWith(template({updates:This.model.data}));
+				$("#body #wall").replaceWith(template({updates:This.model.data, miID: This.miID}));
 			});
 		},
 		nextPage: function(){
@@ -224,7 +229,36 @@ var Views = {
 				This.model = response;
 				This.refreshFeed();
 			});
-    	}
+    	},
+    	like: function(ev){
+    		var This = this;
+    		var id = ev.currentTarget.attributes['id'].value;
+    		This.api.like(id,function(response){
+    			if (response == true)
+    				$(ev.currentTarget).text("Te gusta esto!");
+    		});
+    	},
+    	unlike: function(ev){
+    		var This = this;
+    		var id = ev.currentTarget.attributes['id'].value;
+    		This.api.unlike(id,function(response){
+    			if (response == true)
+    				$(ev.currentTarget).text("Me gusta!");
+    				$(ev.currentTarget).removeClass("unlike");
+    				$(ev.currentTarget).addClass("like");
+    		});
+    	},
+		showLikesAndComments: function(ev){
+			var This = this;
+			var id = ev.currentTarget.attributes['name'].value;
+			var popup = $("#" + id).html();
+			$.colorbox({
+				title:'Comentarios y likes',
+				width:'40%',
+				height:'60%',
+				html: popup
+			});
+    	},
 	}),
 	Wall: Backbone.View.extend({
 		el: $("body"),
