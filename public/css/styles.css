@@ -380,14 +380,35 @@ width: 187px;}
 	max-width: 100%;
 }
 
+/* Div para comentar en posts y fotos */
 #div-comment{
+	position: relative;
+	margin-top: 54px;
+}
+#div-comment h3{
+	position: absolute;
+	top:-15px;
+	left:5px;
+	color:#2d89ef;
+}
+#div-comment textarea {
+	height: 75px;
+	width: 97%;
+	margin-left: 7px;
 	margin-top: 13px;
 }
-
-#div-comment textarea{
-	height: 69px;
-	width: 480px;
+#div-comment button {
+	position: absolute;
+	bottom: -71px;
+	right: 0px;
 }
+#div-comment img {
+	position: absolute;
+	bottom: -62px;
+	right: 124px;
+}
+
+/* Div para comentar en posts y fotos */
 
 /* ---- groups.html ---- */
 #groups{

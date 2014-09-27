@@ -87,7 +87,6 @@ var Views = {
 		el: $("#content"),
 		events: {
 			'click a.postInfo'			: 'showLikes',
-			'click #publicarComentario'	: 'publishComment',
 			'click a.comments'			: 'showComments',
 			'click a.newsFeed.nextPage' : 'nextPage',
 			'click a.newsFeed.prevPage'	: 'prevPage',
@@ -122,14 +121,20 @@ var Views = {
 			});
     	},
     	publishComment: function(ev){
-    		
     		this.api = ev.handleObj.data;
     		var id = ev.currentTarget.attributes['data-comment-id'].value;
-    		var mensaje = $('#mensaje').val();
-    		if (mensaje) {
-	    		this.api.comment(id,mensaje,function(response){
-	    				console.log(response);
-	    		});
+    		var mensaje = $('#cboxLoadedContent textarea').val();
+    		if (mensaje){
+				utils.utf8_encode($('#mensaje').val(),function(encoded_message){
+					mensaje = encoded_message;
+				});
+			
+    		this.api.comment(id,mensaje,function(response){
+    				if(response)
+    					$('#div-comment .ok').removeClass('hidden');
+    				else
+    					$('#div-comment .error').removeClass('hidden');
+    		});
     		}
     	},
     	prevPage: function(){
@@ -170,6 +175,9 @@ var Views = {
 				html: popup
 			});
 			$('#div-comment #publicarComentario').on('click',This.api,This.publishComment);	
+			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
+			    $('#div-comment img').addClass('hidden');
+			});				
     	},
 		showLikes: function(ev){
 			var This = this;
@@ -292,12 +300,12 @@ var Views = {
 	Wall: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'click a.postInfo'		: 'showLikesAndComments',
+			'click a.postInfo'		: 'showLikes',
 			'click a.wall.nextPage' : 'nextPage',
 			'click a.wall.prevPage'	: 'prevPage',
 			'click .post a.like'	: 'like',
 			'click .post a.unlike'	: 'unlike',
-			'click .newComment'		: "newComment", 
+			'click a.comments'		: 'showComments',
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -329,13 +337,6 @@ var Views = {
 				This.render();
 			});
     	},
-    	comment: function(ev){
-    		var This = this;
-    		var mensaje = $('.mensaje')
-    		This.api.comment(id,mensaje,function(response){
-    				console.log(response)
-    		});
-    	},
     	like: function(ev){
     		var This = this;
     		var id = ev.currentTarget.attributes['id'].value;
@@ -356,7 +357,7 @@ var Views = {
     				$(ev.currentTarget).addClass("like");
     		});
     	},
-		showLikesAndComments: function(ev){
+		showLikes: function(ev){
 			var This = this;
 			var id = ev.currentTarget.attributes['name'].value;
 			var popup = $("#" + id).html();
@@ -366,6 +367,38 @@ var Views = {
 				height:'60%',
 				html: popup
 			});
+    	},
+    	publishComment: function(ev){
+    		this.api = ev.handleObj.data;
+    		var id = ev.currentTarget.attributes['data-comment-id'].value;
+    		var mensaje = $('#cboxLoadedContent textarea').val();
+    		if (mensaje){
+				utils.utf8_encode($('#mensaje').val(),function(encoded_message){
+					mensaje = encoded_message;
+				});
+			
+    		this.api.comment(id,mensaje,function(response){
+    				if(response)
+    					$('#div-comment .ok').removeClass('hidden');
+    				else
+    					$('#div-comment .error').removeClass('hidden');
+    		});
+    		}
+    	},
+		showComments: function(ev){
+			var This = this;
+			var id = ev.currentTarget.attributes['name'].value;
+			var popup = $("#" + id).html();
+			$.colorbox({
+				title:'Comentarios',
+				width:'55%',
+				height:'70%',
+				html: popup
+			});
+			$('#div-comment #publicarComentario').on('click',This.api,This.publishComment);	
+			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
+			    $('#div-comment img').addClass('hidden');
+			});				
     	},
 	}),
 	//La barra superior con Nombre y boton Conectar
@@ -508,6 +541,10 @@ var Views = {
 			$('#colorbox .like').on('click', This.api, this.like);	
 			$('#colorbox .unlike').on('click', This.api, this.unlike);	
 			$('#colorbox .postInfo').on('click',this.showAuthorsLikes);	
+			$('#div-comment #publicarComentario').on('click',This.api,This.publishComment);	
+			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
+			    $('#div-comment img').addClass('hidden');
+			});			
     	},
     	showAuthorsLikes: function(ev){
     		var This = this;
@@ -519,6 +556,23 @@ var Views = {
 				height:'65%',
 				html: popup
 			});
+    	},
+    	publishComment: function(ev){
+    		this.api = ev.handleObj.data;
+    		var id = ev.currentTarget.attributes['data-comment-id'].value;
+    		var mensaje = $('#cboxLoadedContent textarea').val();
+    		if (mensaje){
+				utils.utf8_encode($('#mensaje').val(),function(encoded_message){
+					mensaje = encoded_message;
+				});
+			
+    		this.api.comment(id,mensaje,function(response){
+    				if(response)
+    					$('#div-comment .ok').removeClass('hidden');
+    				else
+    					$('#div-comment .error').removeClass('hidden');
+    		});
+    		}
     	},
     	like: function(ev){
     		this.api = ev.handleObj.data;

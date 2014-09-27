@@ -94,7 +94,10 @@
 							<%});%>
 							</li>
 							<div id="div-comment">
-								<textarea id="mensaje" placeholder="Escribe tu mensaje" data-voice="click para publicar comentario" class="speak"></textarea>
+								<h3>Escribe un comentario</h3>
+								<textarea id="comentario" class="speak" data-voice="Qué estás pensando?"></textarea>
+								<img src="http://png-1.findicons.com/files/icons/2015/24x24_free_application/24/error.png" class="hidden error"/>
+								<img src="https://cdn2.iconfinder.com/data/icons/oxygen/48x48/actions/ok.png" class="hidden ok"/>
 								<button id="publicarComentario" data-comment-id="<%=post.id%>" class="speak image-button bg-color-blue fg-color-white" data-voice="click para publicar comentario">Publicar</button>
 							</div>	
 						</ul>	
