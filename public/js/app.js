@@ -65,7 +65,7 @@ var AppRouter = Backbone.Router.extend({
                 ((response.data.length == 1) ? This.esAmigo = true : This.esAmigo = false);
             });
             This.api.getFriendsWall(friendInfo.id,function(friendWall){
-                This.friendView = new Views.friendProfile({wall: friendWall, friendInfo: friendInfo, amigo: This.esAmigo}); 
+                This.friendView = new Views.friendProfile({wall: friendWall, friendInfo: friendInfo, amigo: This.esAmigo, api: This.api}); 
             });
         });
     },
@@ -86,8 +86,9 @@ var AppRouter = Backbone.Router.extend({
         });
     },
     friendPhotos: function(id){
+        var This = this;
         this.api.getFriendPhotos(id,function(response){
-            this.friendPhotos = new Views.friendPhotos({model: response});
+            this.friendPhotos = new Views.friendPhotos({model: response,api: This.api});
         });
     },
     groupsList: function(){
@@ -98,7 +99,7 @@ var AppRouter = Backbone.Router.extend({
     groupFeed: function(id){
         var This = this;
         this.api.getGroupFeed(id,function(response){
-            This.groupFeedView = new Views.GroupFeed({model: response, group_id:id});
+            This.groupFeedView = new Views.GroupFeed({model: response, group_id:id, api: This.api});
             This.newGroupPostView = new Views.NewPost({api: This.api});
         });
     },

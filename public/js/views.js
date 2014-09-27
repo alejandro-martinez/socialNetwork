@@ -143,7 +143,18 @@ var Views = {
     				$(ev.currentTarget).removeClass("unlike");
     				$(ev.currentTarget).addClass("like");
     		});
-    	}
+    	},
+		showLikesAndComments: function(ev){
+			var This = this;
+			var id = ev.currentTarget.attributes['name'].value;
+			var popup = $("#" + id).html();
+			$.colorbox({
+				title:'Comentarios y likes',
+				width:'40%',
+				height:'60%',
+				html: popup
+			});
+    	},
 	}),
 	Groups: Backbone.View.extend({
 		el: $("#content"),
@@ -463,12 +474,18 @@ var Views = {
 	friendPhotos: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'click h2'	: 'showLikesAndComments'
+			'click h2'	: 'showLikesAndComments',
+			'click .post a.like'	: 'like',
+			'click .post a.unlike'	: 'unlike'
 		},
 		initialize: function(){
+			this.api = this.options.api;
+			this.miID = this.api.currentUser.id;
+			var This = this;
 			this.render();
 		},
 		showLikesAndComments: function(ev){
+			var This = this;
 			var id = ev.currentTarget.attributes['href'].value;
 			$.colorbox({
 				title:'Comentarios y likes',
@@ -476,6 +493,9 @@ var Views = {
 				height:'85%',
 				html: $(id).html()
 			});
+			$('#colorbox .like').on('click', This.api, this.like);	
+			$('#colorbox .unlike').on('click', This.api, this.unlike);	
+			$('#colorbox .postInfo').on('click',this.showAuthorsLikes);	
     	},
 		render: function(){
 			var This = this;
@@ -485,10 +505,30 @@ var Views = {
 			utils.loadTemplate("photos",function(html){
 				template = _.template(html);
 				$("#body").html(template({
-					photos: photos.models
+					photos: photos.models,
+					miID: This.miID
 				}));
 			});
-		}
+		},
+
+    	like: function(ev){
+    		var This = this;
+    		var id = ev.currentTarget.attributes['id'].value;
+    		This.api.like(id,function(response){
+    			if (response == true)
+    				$(ev.currentTarget).text("Te gusta esto!");
+    		});
+    	},
+    	unlike: function(ev){
+    		var This = this;
+    		var id = ev.currentTarget.attributes['id'].value;
+    		This.api.unlike(id,function(response){
+    			if (response == true)
+    				$(ev.currentTarget).text("Me gusta!");
+    				$(ev.currentTarget).removeClass("unlike");
+    				$(ev.currentTarget).addClass("like");
+    		});
+    	}
 	}),
 	//Albums del usuario
 	Albums: Backbone.View.extend({
@@ -583,9 +623,15 @@ var Views = {
 		el: $("body"),
 		events: {
 			'click a.friendWall.nextPage' : 'nextPage',
-			'click a.friendWall.prevPage' : 'prevPage'
+			'click a.friendWall.prevPage' : 'prevPage',
+			'click a.postInfo'		: 'showLikesAndComments',
+			'click .post a.like'	: 'like',
+			'click .post a.unlike'	: 'unlike'
 		},
 		initialize: function(){
+			this.api = this.options.api;
+			this.miID = this.api.currentUser.id;
+			var This = this;
 			this.render();
 		},
 		render: function(){
@@ -599,7 +645,8 @@ var Views = {
 				$("#body").html(template({
 					friend: This.options.friendInfo,
 					wall: wallUpdates.models,
-					amigo: This.options.esAmigo
+					amigo: This.options.esAmigo,
+					miID: This.miID
 				}));
 			});
 		},
@@ -616,7 +663,37 @@ var Views = {
 				This.options.wall = response;
 				This.render();
 			});
-    	}
+    	},
+
+    	like: function(ev){
+    		var This = this;
+    		var id = ev.currentTarget.attributes['id'].value;
+    		This.api.like(id,function(response){
+    			if (response == true)
+    				$(ev.currentTarget).text("Te gusta esto!");
+    		});
+    	},
+    	unlike: function(ev){
+    		var This = this;
+    		var id = ev.currentTarget.attributes['id'].value;
+    		This.api.unlike(id,function(response){
+    			if (response == true)
+    				$(ev.currentTarget).text("Me gusta!");
+    				$(ev.currentTarget).removeClass("unlike");
+    				$(ev.currentTarget).addClass("like");
+    		});
+    	},
+		showLikesAndComments: function(ev){
+			var This = this;
+			var id = ev.currentTarget.attributes['name'].value;
+			var popup = $("#" + id).html();
+			$.colorbox({
+				title:'Comentarios y likes',
+				width:'40%',
+				height:'60%',
+				html: popup
+			});
+    	},
 	})
 
 }

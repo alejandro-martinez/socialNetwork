@@ -37,8 +37,56 @@
 							<%var foto = post.attributes.picture;%>
 							<img src="<%= foto.replace('s.jpg','n.jpg')%>" />
 					<% } %>
+
+					
+					<% var postInfo = "A nadie le gusta esto";
+						var likeText = "Me gusta";
+						var likeClass="like"
+					if (post.likes != null) {
+						var likes = post.likes.data;
+						var count = post.likes.data.length;
+						if(count == 1){ 
+							if(likes[0].id == miID){
+								postInfo = "Te gusta esto!"
+								likeText = "Ya no me gusta!"
+								likeClass="unlike"
+							}
+							else{
+								postInfo = "A " + likes[0].name + " le gusta esto!"
+							}
+						}
+						else {
+							if (count > 1) { 
+								total = count - 1;
+								if(likes[0].id == miID){
+									postInfo = "A ti y a " + total + " personas les gusta esto"
+									likeText = "Ya no me gusta!"
+									likeClass="unlike"
+								}
+								else
+									postInfo = "A " + likes[0].name + " y a " + total + " personas les gusta esto"
+							}
+						} 
+					}%>
+					<br>
+					<a href="javascript:void(0)" class="postInfo" name="infoLikes-<%=post.id%>"><%=postInfo %></a><br><br>
+
+					<a href="javascript:void(0)" id="<%=post.id%>" class="<%=likeClass %>"><%=likeText %></a>
+					<%if (post.likes != null) {
+						var likes = post.likes.data;%>
+						<div id="infoLikes-<%=post.id%>" class="hidden">
+							<ul class="photo-comments">
+								<% _.each(post.likes.data, function(autorLike) { %> 
+										<div class="post">
+								    		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=autorLike.id%>/picture?type=square)">
+								    		</div>
+								    		<h5><%=autorLike.name%><h5>
+								    	</div>	
+								<% });%>    
+					    	</ul>
+						</div>	
+					<%}%>	
 				</div>
-				<a href="javascript:void(0)" id="ASD">Me gusta</a>
 			</li>
 		<% }); %>
 	</ul>
