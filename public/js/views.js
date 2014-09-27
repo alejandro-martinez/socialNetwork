@@ -132,6 +132,8 @@ var Views = {
     		This.api.like(id,function(response){
     			if (response == true)
     				$(ev.currentTarget).text("Te gusta esto!");
+    				$(ev.currentTarget).removeClass("like");
+    				$(ev.currentTarget).addClass("unlike");
     		});
     	},
     	unlike: function(ev){
@@ -236,6 +238,8 @@ var Views = {
     		This.api.like(id,function(response){
     			if (response == true)
     				$(ev.currentTarget).text("Te gusta esto!");
+    				$(ev.currentTarget).removeClass("like");
+    				$(ev.currentTarget).addClass("unlike");
     		});
     	},
     	unlike: function(ev){
@@ -551,6 +555,8 @@ var Views = {
     		This.api.like(id,function(response){
     			if (response == true)
     				$(ev.currentTarget).text("Te gusta esto!");
+    				$(ev.currentTarget).removeClass("like");
+    				$(ev.currentTarget).addClass("unlike");
     		});
     	},
     	unlike: function(ev){
@@ -705,6 +711,8 @@ var Views = {
     		This.api.like(id,function(response){
     			if (response == true)
     				$(ev.currentTarget).text("Te gusta esto!");
+    				$(ev.currentTarget).removeClass("like");
+    				$(ev.currentTarget).addClass("unlike");
     		});
     	},
     	unlike: function(ev){
