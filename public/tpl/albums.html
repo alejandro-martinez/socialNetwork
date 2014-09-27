@@ -15,4 +15,23 @@
 			</div>	
 		</div>
 	<% }); %>
+	<button id="create-album" class="big image-button bg-color-darken fg-color-white login-button">
+	Crear album<img src="img/azul.png"></button>
+</div>
+
+<div id="uploadAlbumForm" class="hidden">
+	<ul class="albumInfo">
+		<li><input type="text" id="nombre" placeholder="Nombre de album" class="speak" data-voice="Nombre de album"/></li>
+		<li><input type="text" id="message" placeholder="Descripcion del album" class="speak" data-voice="Descripcion del album"/></li>
+		<li>
+			<select class="speak" id="privacidad" data-voice="Quiénes pueden ver el album?">
+			  <option value="EVERYONE">Público</option>
+			  <option value="ALL_FRIENDS">Amigos</option>
+			  <option value="FRIENDS_OF_FRIENDS">Amigos de mis amigos</option>
+			  <option value="SELF">Yo solo</option>
+			</select>
+			<button id="saveAlbum" class="speak image-button bg-color-blue fg-color-white" data-voice="click para publicar album">Publicar album</button>
+		</li>
+	</ul>	
+	
 </div>

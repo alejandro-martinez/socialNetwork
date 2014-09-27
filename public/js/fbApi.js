@@ -157,6 +157,22 @@ function AppController(){
 		    }
 		);
 	},
+	this.createAlbum = function(datosAlbumcallback){
+		FB.api(
+		    "/me/albums",
+		    "POST",
+		    {
+		        "name": datosAlbum.nombre,
+		        "message": datosAlbum.descripcion,
+		        "privacy": datosAlbum.privacidad"
+		    },
+		    function (response) {
+		      if (response && !response.error) {
+		        callback(response);
+		      }
+		    }
+		);
+	},
 	this.uploadPhoto = function (foto, esPerfil, callback){
 		var access_token = FB.getAuthResponse()['accessToken'];
 		var extension = foto.substring(1,11);

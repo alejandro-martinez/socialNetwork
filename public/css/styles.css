@@ -72,6 +72,11 @@ button{
 button:active{
 	margin: 12px 8px 8px 12px;
 }
+#login-button,#create-album{
+	float: right;
+	padding-right: 50px;
+    border: 1px solid white;
+}
 #login-button{
 	float: right;
 	padding-right: 50px;
@@ -249,13 +254,26 @@ button:active{
 	border-radius: 0 10px 10px 0;
 }
 
+.albumInfo {
+	margin:12px;
+}
 
+.albumInfo li{
+	margin:12px;
+}
+.albumInfo input{
+	width:500px;
+	padding:9px;
+}
+.albumInfo select{
+	padding:9px;
+}
 
 .container-album {
-position: relative;
-float: left;
-top: 50px;
-margin-left: 41px;
+	position: relative;
+	float: left;
+	top: 50px;
+	margin-left: 41px;
 }
 .container-album{	
 	width: 100%;

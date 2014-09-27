@@ -696,9 +696,13 @@ var Views = {
 		el: $("body"),
 		events: {
 			'click a.albums.nextPage' : 'nextPage',
-			'click a.albums.prevPage'	: 'prevPage'
+			'click a.albums.prevPage'	: 'prevPage',
+			'click #create-album'		: 'createAlbum',
+			'click #saveAlbum'			: 'saveAlbum',
 		},
 		initialize: function(){
+			this.api = this.options.api;
+			var This = this;
 			this.render();
 			this.access_token = FB.getAuthResponse()['accessToken'];
 		},
@@ -728,7 +732,33 @@ var Views = {
 				This.model = response;
 				This.render();
 			});
-    	}
+    	},
+		uploadPhotos: function(){
+			var This = this;
+			$('#loadPhotos #loadPhoto').on('click',This.api,This.uploadPhoto);
+			$('#loadPhotos #removePhoto').on('click',This.api,This.removePhoto);
+    	},
+    	saveAlbum: function(){
+    		var This = this;
+    		var datosAlbum = {nombre: $('#uploadAlbumForm #nombre').val(), 
+    		descripcion:$('#uploadAlbumForm #descripcion').val(), 
+    		privacidad: $('#uploadAlbumForm #privacidad  option:selected').val()}
+
+    		this.api.createAlbum(datosAlbum,function(){
+    			var ws = new AppRouter({ac: This.api})
+				ws.navigate('/updateAlbum/'+response.id, true);	
+    		});
+    		
+    	},
+    	createAlbum: function(){
+			var This = this;
+			$.colorbox({
+				title:'Crear Album',
+				width:'45%',
+				height:'45%',
+				html: $('#uploadAlbumForm').html()
+			});
+    	},
 	}),
 	//Fotos de albums
 	albumPhotos: Backbone.View.extend({
@@ -778,7 +808,7 @@ var Views = {
 				This.model = response;
 				This.render();
 			});
-    	}
+    	},
 	}),
 	friendProfile: Backbone.View.extend({
 		el: $("body"),
