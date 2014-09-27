@@ -695,8 +695,9 @@ var Views = {
 	UpdateAlbum: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'click #loadPhotos #loadPhoto'	: 'uploadPhoto',
-			'click #loadPhotos #removePhoto': 'removePhoto',
+			'drop #dropPhotos' 			:'uploadPhotos',
+			'click button#selectPhotos'	: 'selectPhotos',
+//			'click #loadPhotos #removePhoto': 'removePhoto',
 			'click a.albumPhotos.nextPage' : 'nextPage',
 			'click a.albumPhotos.prevPage'	: 'prevPage'
 		},
@@ -708,8 +709,26 @@ var Views = {
 		removePhoto: function(){
 		
     	},
-    	uploadPhoto: function(){
-		
+    	selectPhotos: function(){
+    		$.colorbox({
+				title:'Subir fotos al album',
+				width:'50%',
+				height:'50%',
+				html: '<h1>Arrastra las fotos aqui para subirlas al album</h1>'
+			});
+    	},
+    	uploadPhotos: function(){
+			var reader = new FileReader();
+			reader.readAsDataURL(event.originalEvent.dataTransfer.files[0]);	//Lee la foto arrastrada al perfil
+			reader.onloadend = function () {
+				This.api.uploadPhoto(reader.result, true, function(response){	//Sube la foto a FB
+					$('#image-preview img').attr('src',reader.result);
+					$('#image-preview').attr('class','show');
+					$('#image-preview a').attr('href',"https://www.facebook.com/photo.php?fbid="+response.id+"&makeprofile=1");
+					$('#selectFbProfile').trigger("click");					
+					$('#user-photo').removeClass('loading');
+				});
+			};
     	},
 		render: function(){
 			var This = this;

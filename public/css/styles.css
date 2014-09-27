@@ -288,8 +288,17 @@ button:active{
 		width: 100%;
 }
 
+#albumActions {
+	position: absolute;
+	bottom: -184px;
+}
+
+#albumActions ul{
+	display: inline-flex;
+}
 
 /* ---- albums.html ---- */
+
 .container-album ul{	list-style: none;
 	margin-top: 5%;
 	padding: 0;}
