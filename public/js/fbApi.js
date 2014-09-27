@@ -84,8 +84,8 @@ function AppController(){
 			callback(model);
 		});	
 	},
-	this.getAlbumPhotos = function(id,callback){
-		fbUser('/'+id+'/photos?locale='+This.locale, function(model){
+	this.getAlbumPhotos = function(id,limit,callback){
+		fbUser('/'+id+'/photos?locale='+This.locale+'&limit='+limit, function(model){
 			callback(model);
 		});	
 	},
