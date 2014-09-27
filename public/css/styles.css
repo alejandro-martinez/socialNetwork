@@ -517,7 +517,13 @@ width: 187px;}
 	right:142px;
 	cursor:pointer;
 }
+
+a.postInfo{
+	font-size: 18px;
+}
+
 .likes {display:none;}
+
 .photo-comments .post{ 
 	width: calc(100% - 25px);
 	margin: 5px auto;

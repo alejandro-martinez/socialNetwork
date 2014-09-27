@@ -23,17 +23,19 @@ var AppRouter = Backbone.Router.extend({
     index: function(){
         var This = this;
     	if (this.loggedUser) {
-            if (!this.newPostView){
+            //if (!this.newPostView){
     			this.mainView = new Views.Main({api: this.api, model: this.data});					//Menu lateral
                 this.api.newsFeed(function(response){
 			    	if(window.location.hash.split('/')[0] == "#fbid") {
-	                    this.newsFeed = new Views.NewsFeed({model: response});
-                        this.newPostView = new Views.NewPost({api: This.api});    //Que estas pensando
+	                    this.newsFeed = new Views.NewsFeed({model: response, api: This.api});
+                        //if (!this.newPostView){
+                            this.newPostView = new Views.NewPost({api: This.api});    //Que estas pensando
+                        //}
                         this.searchView = new Views.Search();                                       //Buscador
 			    	}
                 });
 
-            }
+            //}
 		}
 		else {
 			new Views.NotLoggedInView();						//Muestra logo de Facebook +
@@ -73,13 +75,14 @@ var AppRouter = Backbone.Router.extend({
     posts: function(){
         var This = this;
         this.api.updateWall(function(response){
-            this.wallView = new Views.Wall({model: response});    
+            this.wallView = new Views.Wall({model: response, api: This.api});    
             this.newPostView = new Views.NewPost({api: This.api});                                             //Que estas pensando
         });
     },
     photos: function(){
+        var This = this;
         this.api.getPhotos(function(response){
-            this.photos = new Views.Photos({model: response});
+            this.photos = new Views.Photos({model: response,api: This.api});
         });
     },
     friendPhotos: function(id){
@@ -95,8 +98,8 @@ var AppRouter = Backbone.Router.extend({
     groupFeed: function(id){
         var This = this;
         this.api.getGroupFeed(id,function(response){
-            this.groupFeedView = new Views.GroupFeed({model: response, group_id:id});
-            this.newPostView = new Views.NewPost({api: This.api});
+            This.groupFeedView = new Views.GroupFeed({model: response, group_id:id});
+            This.newGroupPostView = new Views.NewPost({api: This.api});
         });
     },
 });

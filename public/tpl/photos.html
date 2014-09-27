@@ -11,19 +11,29 @@
 		<div class="likes">
 		<% _.each(photos, function(photo) { %> 
 			<div id="photo-<%=photo.attributes.id%>">
+				<a class="like" id="<%=photo.attributes.id%>" href="javascript:void(0)">Me gusta</a>
 				<%if (photo.attributes.likes != null) {
 					var likes = photo.attributes.likes.data;
 					var count = photo.attributes.likes.data.length;
 
-					if(count == 1){ %>
-						<h3>A <%=likes[0].name%> le gusta esto</h3>
-					<%} 
-					else {
-						if (count > 1) { %>
-							<h3>A <%=likes[0].name%> y otras <%=count%> personas les gusta esto</h3>
-						<%} %>			
-					<%}
+						if(count == 1){ 
+							if(likes[0].id == miID) {%>
+								<h3>Te gusta esto!</h3>
+							<% }else{ %>
+								<h3>A <%=likes[0].name%> le gusta esto!</h3>
+							<%}
+						else {
+							if (count > 1) { 
+								if(likes[0].id == miID){%>
+									<h3>A ti y a <%=count%> personas les gusta esto</h3>
+								<%}else{%>
+									<h3>A ti y a <%=likes[0].name%> y a <%=count%> personas les gusta esto</h3>
+								<%}	
+							} 
+						}
+					}
 				}
+
 				if (photo.attributes.comments != null){%>
 					<ul class="photo-comments">
 						<% _.each(photo.attributes.comments.data, function(comment) { %> 

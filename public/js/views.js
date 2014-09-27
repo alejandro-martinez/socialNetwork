@@ -20,7 +20,7 @@ var Views = {
 			'mouseout .speak': 'shutUp'
 		},
 		speak: function(ev){
-			speak(ev.currentTarget.attributes['data-voice'].nodeValue);
+			speak(ev.currentTarget.attributes['data-voice'].value);
 		},
 		shutUp: function(){
 			shutUp();
@@ -86,24 +86,29 @@ var Views = {
 	NewsFeed: Backbone.View.extend({
 		el: $("#content"),
 		events: {
+			'click a.postInfo'			: 'showLikesAndComments',
 			'click a.newsFeed.nextPage' : 'nextPage',
-			'click a.newsFeed.prevPage'	: 'prevPage'
+			'click a.newsFeed.prevPage'	: 'prevPage',
+			'click .post a.like'		: 'like'
 		},
 		initialize: function(){
+			this.api = this.options.api;
+			this.miID = this.api.currentUser.id;
+			var This = this;
 			this.render();
 		},
 		refreshFeed: function(){
 			var This = this;
 			utils.loadTemplate("newsFeed",function(html){
 				template = _.template(html);
-				$("#body #wall").replaceWith(template({news:This.model.data}));
+				$("#body #wall").replaceWith(template({news:This.model.data, miID: This.miID}));
 			});
 		},
 		render: function(){
 			var This = this;
 			utils.loadTemplate("newsFeed",function(html){
 				template = _.template(html);
-				$("#body").html(template({news:This.model.data}));
+				$("#body").html(template({news:This.model.data, miID: This.miID}));
 			});
 		},
 		nextPage: function(){
@@ -119,7 +124,26 @@ var Views = {
 				This.model = response;
 				This.refreshFeed();
 			});
-    	}
+    	},
+    	like: function(ev){
+    		var This = this;
+    		var id = ev.currentTarget.attributes['id'].value;
+    		This.api.like(id,function(response){
+    			if (response == true)
+    				$(ev.currentTarget).text("Te gusta esto!");
+    		});
+    	},
+    	showLikesAndComments: function(ev){
+			var This = this;
+			var id = ev.currentTarget.attributes['name'].value;
+			var popup = $("#" + id).html();
+			$.colorbox({
+				title:'Comentarios y likes',
+				width:'40%',
+				height:'60%',
+				html: popup
+			});
+    	},
 	}),
 	Groups: Backbone.View.extend({
 		el: $("#content"),
@@ -195,9 +219,13 @@ var Views = {
 		el: $("body"),
 		events: {
 			'click a.wall.nextPage' : 'nextPage',
-			'click a.wall.prevPage'	: 'prevPage'
+			'click a.wall.prevPage'	: 'prevPage',
+			'click .post a.like'	: 'like'
 		},
 		initialize: function(){
+			this.api = this.options.api;
+			var This = this;
+			this.miID = this.api.currentUser.id;
 			this.render();
 		},
 		render: function(){
@@ -207,7 +235,7 @@ var Views = {
 			var updates = new updatesCollection(this.model.data);
 			utils.loadTemplate("wall",function(html){
 				var template = _.template(html);
-				$("#body").html(template({updates: updates.models}));
+				$("#body").html(template({updates: updates.models,miID: This.miID}));
 			});
 		},
 		nextPage: function(){
@@ -217,13 +245,21 @@ var Views = {
 				This.render();
 			});
     	},
-    	
     	prevPage: function(){
     		var This = this;
 			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
 				This.model = response;
 				This.render();
 			});
+    	},
+    	like: function(ev){
+    		var This = this;
+    		var id = ev.currentTarget.attributes['id'].value;
+    		console.log($(id))
+    		This.api.like(id,function(response){
+    			if (response == true)
+    				$(ev.currentTarget).text("Te gusta esto!");
+    		});
     	}
 	}),
 	//La barra superior con Nombre y boton Conectar
@@ -336,9 +372,11 @@ var Views = {
 		events: {
 			'click h2'	: 'showLikesAndComments',
 			'click a.comments.nextPage' : 'nextPage',
-			'click a.comments.prevPage'	: 'prevPage'
+			'click a.comments.prevPage'	: 'prevPage',
 		},
 		initialize: function(){
+			this.api = this.options.api;
+			var This = this;
 			this.render();
 		},
 		render: function(){
@@ -352,13 +390,23 @@ var Views = {
 			});
 		},
 		showLikesAndComments: function(ev){
-			var id = ev.currentTarget.attributes['href'].nodeValue;
+			var This = this;
+			var id = ev.currentTarget.attributes['href'].value;
 			$.colorbox({
 				title:'Comentarios y likes',
 				width:'70%',
 				height:'85%',
 				html: $(id).html()
 			});
+			$('#colorbox .like').on('click', This.api, this.like);	
+    	},
+    	like: function(ev){
+    		this.api = ev.handleObj.data;
+    		var id = ev.currentTarget.attributes['id'].value;
+    		this.api.like(id,function(response){
+    			if (response == true)
+    				$(ev.currentTarget).text("Te gusta esto!");
+    		});
     	}
 	}),
 	//Fotos de amigos
@@ -371,7 +419,7 @@ var Views = {
 			this.render();
 		},
 		showLikesAndComments: function(ev){
-			var id = ev.currentTarget.attributes['href'].nodeValue;
+			var id = ev.currentTarget.attributes['href'].value;
 			$.colorbox({
 				title:'Comentarios y likes',
 				width:'70%',

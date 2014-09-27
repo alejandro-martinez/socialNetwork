@@ -30,6 +30,15 @@
 						<%var foto = post.picture;%>
 						<center><img src="<%= foto.replace('s.jpg','n.jpg')%>" /></center>
 				<% } %>
+					<%	meGusta = "Me gusta"
+						if (post.likes != null) {
+							_.each(post.likes.data, function(autorLike) {
+						 		if (autorLike.id == miID)
+						 			meGusta = "Te gusta esto!"
+							});
+						}
+					%>
+					<a href="javascript:void(0)" id="<%=post.id%>" class="like"><%=meGusta %></a>
 				</div>
 			</li>
 		<% }); %>
