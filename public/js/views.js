@@ -397,7 +397,6 @@ var Views = {
 			'click h2'	: 'showLikesAndComments',
 			'click a.comments.nextPage' : 'nextPage',
 			'click a.comments.prevPage'	: 'prevPage',
-			'click .post a.unlike'	: 'unlike'
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -426,6 +425,18 @@ var Views = {
 			});
 			$('#colorbox .like').on('click', This.api, this.like);	
 			$('#colorbox .unlike').on('click', This.api, this.unlike);	
+			$('#colorbox .postInfo').on('click',this.showAuthorsLikes);	
+    	},
+    	showAuthorsLikes: function(ev){
+    		var This = this;
+			var id = ev.currentTarget.attributes['name'].value;
+			var popup = $("#" + id).html();
+			$.colorbox({
+				title:'Likes',
+				width:'45%',
+				height:'65%',
+				html: popup
+			});
     	},
     	like: function(ev){
     		this.api = ev.handleObj.data;
@@ -572,7 +583,7 @@ var Views = {
 		el: $("body"),
 		events: {
 			'click a.friendWall.nextPage' : 'nextPage',
-			'click a.friendWall.prevPage'	: 'prevPage'
+			'click a.friendWall.prevPage' : 'prevPage'
 		},
 		initialize: function(){
 			this.render();

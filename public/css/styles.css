@@ -523,11 +523,13 @@ a.postInfo{
 }
 
 .likes {display:none;}
-.likes  a.like {
+#colorbox a.like,a.unlike {
 	position: absolute;
 	top: 1px;
 	font-weight: bold;
-	right: 25px;
+	right: 25px;	
+	font-size: 20px;
+
 }
 
 .photo-comments .post{ 

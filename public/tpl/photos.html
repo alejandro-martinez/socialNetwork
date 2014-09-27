@@ -11,7 +11,7 @@
 		</ul>
 		<div class="likes">
 		<% _.each(photos, function(photo) { %> 
-			<div id="photo-<%=photo.attributes.id%>">
+			<div class="photo" id="photo-<%=photo.attributes.id%>">
 				<%if (photo.attributes.likes != null) {
 					var likes = photo.attributes.likes.data;
 					var count = photo.attributes.likes.data.length;
@@ -22,9 +22,9 @@
 								likeText = "Ya no me gusta!"
 								likeClass="unlike"
 								%>
-								<h3>Te gusta esto!</h3>
+								<a href="javascript:void(0)">Te gusta esto!</a>
 							<% }else{ %>
-								<h3>A <%=likes[0].name%> le gusta esto!</h3>
+								<a href="javascript:void(0)" class="postInfo" name="infoLikes-<%=photo.attributes.id%>">A <%=likes[0].name%> le gusta esto!</a>
 							<%}
 						}
 						else {
@@ -33,9 +33,9 @@
 									likeText = "Ya no me gusta!"
 									likeClass="unlike"
 									%>
-									<h3>A ti y a <%=count%> personas les gusta esto</h3>
+									<a class="postInfo" href="javascript:void(0)" name="infoLikes-<%=photo.attributes.id%>" href="javascript:void(0)">A ti y a <%=count%> personas les gusta esto</a>
 								<%}else{%>
-									<h3>A <%=likes[0].name%> y a <%=count%> personas les gusta esto</h3>
+									<a class="postInfo" href="javascript:void(0)" name="infoLikes-<%=photo.attributes.id%>">A <%=likes[0].name%> y a <%=count%> personas les gusta esto</a>
 								<%}	
 							} 
 						}
@@ -55,6 +55,21 @@
 						<%});%>
 					</ul>	
 				<%}%>			
+				<%if (photo.attributes.likes != null) {
+						var likes = photo.attributes.likes.data;%>
+						<div id="infoLikes-<%=photo.attributes.id%>" class="hidden">
+							<ul class="photo-comments">
+								<% _.each(photo.attributes.likes.data, function(autorLike) { %> 
+										<div class="post">
+								    		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=autorLike.id%>/picture?type=square)">
+								    		</div>
+								    		<h5><%=autorLike.name%><h5>
+								    	</div>	
+								<% });%>    
+					    	</ul>
+						</div>	
+				<%}%>	
+
 			</div>	
 		<% }); %>
 		</div>
