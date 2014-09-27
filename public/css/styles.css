@@ -555,12 +555,7 @@ a.postInfo{
 
 .likes {display:none;}
 #colorbox a.like,a.unlike {
-	position: absolute;
-	top: 1px;
-	font-weight: bold;
-	right: 25px;	
 	font-size: 20px;
-
 }
 
 .photo-comments .post{ 

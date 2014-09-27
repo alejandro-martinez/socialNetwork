@@ -751,9 +751,10 @@ var Views = {
 		events: {
 			'click a.friendWall.nextPage' : 'nextPage',
 			'click a.friendWall.prevPage' : 'prevPage',
-			'click a.postInfo'		: 'showLikesAndComments',
+			'click a.postInfo'			: 'showLikes',
 			'click .post a.like'	: 'like',
-			'click .post a.unlike'	: 'unlike'
+			'click .post a.unlike'	: 'unlike',
+			'click a.comments'		: 'showComments',
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -766,7 +767,7 @@ var Views = {
 			var FriendWall = Backbone.Model.extend({});
 			var friendUpdatesCollection = Backbone.Collection.extend({model: FriendWall});
 			var wallUpdates = new friendUpdatesCollection(This.options.wall.data);
-			
+			console.log(This.options.wall.data.models);
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
 				$("#body").html(template({
@@ -812,7 +813,23 @@ var Views = {
     				$(ev.currentTarget).addClass("like");
     		});
     	},
-		showLikesAndComments: function(ev){
+    	publishComment: function(ev){
+    		this.api = ev.handleObj.data;
+    		var id = ev.currentTarget.attributes['data-comment-id'].value;
+    		var mensaje = $('#cboxLoadedContent textarea').val();
+    		if (mensaje){
+				utils.utf8_encode($('#mensaje').val(),function(encoded_message){
+					mensaje = encoded_message;
+				});
+    		this.api.comment(id,mensaje,function(response){
+    				if(response)
+    					$('#div-comment .ok').removeClass('hidden');
+    				else
+    					$('#div-comment .error').removeClass('hidden');
+    		});
+    		}
+    	},
+		showLikes: function(ev){
 			var This = this;
 			var id = ev.currentTarget.attributes['name'].value;
 			var popup = $("#" + id).html();
@@ -822,6 +839,21 @@ var Views = {
 				height:'60%',
 				html: popup
 			});
+    	},
+    	showComments: function(ev){
+			var This = this;
+			var id = ev.currentTarget.attributes['name'].value;
+			var popup = $("#" + id).html();
+			$.colorbox({
+				title:'Comentarios',
+				width:'55%',
+				height:'70%',
+				html: popup
+			});
+			$('#div-comment #publicarComentario').on('click',This.api,This.publishComment);	
+			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
+			    $('#div-comment img').addClass('hidden');
+			});				
     	},
 	})
 
