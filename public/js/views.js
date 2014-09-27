@@ -344,7 +344,7 @@ var Views = {
 		initialize: function(){
 			this.api = this.options.api;
 			var This = this;
-			this.miID = this.api.currentUser.id;
+			This.miID = this.api.currentUser.id;
 			this.render();
 		},
 		render: function(){
@@ -691,14 +691,58 @@ var Views = {
     		});
     	}
 	}),
+	//Update Album
+	UpdateAlbum: Backbone.View.extend({
+		el: $("body"),
+		events: {
+			'click #loadPhotos #loadPhoto'	: 'uploadPhoto',
+			'click #loadPhotos #removePhoto': 'removePhoto',
+			'click a.albumPhotos.nextPage' : 'nextPage',
+			'click a.albumPhotos.prevPage'	: 'prevPage'
+		},
+		initialize: function(){
+			this.api = this.options.api;
+			var This = this;
+			this.render();
+		},
+		removePhoto: function(){
+		
+    	},
+    	uploadPhoto: function(){
+		
+    	},
+		render: function(){
+			var This = this;
+			var Photos = Backbone.Model.extend({});
+			var photosCollection = Backbone.Collection.extend({model: Photos});
+			var photos = new photosCollection(This.model.data);
+			utils.loadTemplate("updateAlbum",function(html){
+				template = _.template(html);
+				$("#body").html(template({photos: photos.models}));
+			});
+		},
+		nextPage: function(){
+			var This = this;
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	},
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.render();
+			});
+    	},
+	}),
 	//Albums del usuario
 	Albums: Backbone.View.extend({
 		el: $("body"),
 		events: {
 			'click a.albums.nextPage' : 'nextPage',
 			'click a.albums.prevPage'	: 'prevPage',
-			'click #create-album'		: 'createAlbum',
-			'click #saveAlbum'			: 'saveAlbum',
+			'click #create-album'		: 'createAlbum'
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -733,20 +777,13 @@ var Views = {
 				This.render();
 			});
     	},
-		uploadPhotos: function(){
-			var This = this;
-			$('#loadPhotos #loadPhoto').on('click',This.api,This.uploadPhoto);
-			$('#loadPhotos #removePhoto').on('click',This.api,This.removePhoto);
-    	},
-    	saveAlbum: function(){
-    		var This = this;
-    		var datosAlbum = {nombre: $('#uploadAlbumForm #nombre').val(), 
-    		descripcion:$('#uploadAlbumForm #descripcion').val(), 
-    		privacidad: $('#uploadAlbumForm #privacidad  option:selected').val()}
-
-    		this.api.createAlbum(datosAlbum,function(){
-    			var ws = new AppRouter({ac: This.api})
-				ws.navigate('/updateAlbum/'+response.id, true);	
+    	saveAlbum: function(ev){
+    		this.api = ev.handleObj.data;
+    		privacidad = $('#privacidad  option:selected').val();
+    		nombre = $('#cboxLoadedContent #nombre').val();
+    		descripcion = $('#cboxLoadedContent #descripcion').val();
+    		this.api.createAlbum(nombre, descripcion, privacidad,function(response){
+    			window.location.href ='/#updateAlbum/'+response.id;
     		});
     		
     	},
@@ -758,12 +795,16 @@ var Views = {
 				height:'45%',
 				html: $('#uploadAlbumForm').html()
 			});
+			$('#cboxLoadedContent #saveAlbum').on('click',This.api,This.saveAlbum);	
     	},
 	}),
 	//Fotos de albums
 	albumPhotos: Backbone.View.extend({
 		el: $("#body"),
 		initialize: function(){
+			this.api = this.options.api;
+			this.miID = this.api.currentUser.id;
+			var This = this;
 			this.render();
 		},
 		render: function(){
@@ -773,7 +814,7 @@ var Views = {
 			var photos = new photosCollection(This.model.data);
 			utils.loadTemplate("photos",function(html){
 				template = _.template(html);
-				$("#body").html(template({photos: photos.models}));
+				$("#body").html(template({photos: photos.models,miID: This.miID}));
 			});
 		}
 	}),

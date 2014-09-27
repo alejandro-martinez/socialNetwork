@@ -157,14 +157,14 @@ function AppController(){
 		    }
 		);
 	},
-	this.createAlbum = function(datosAlbumcallback){
+	this.createAlbum = function(nombre,descripcion,privacidad,callback){
 		FB.api(
 		    "/me/albums",
 		    "POST",
 		    {
-		        "name": datosAlbum.nombre,
-		        "message": datosAlbum.descripcion,
-		        "privacy": datosAlbum.privacidad"
+		        "name": nombre,
+		        "message": descripcion,
+		        //"privacy": privacidad
 		    },
 		    function (response) {
 		      if (response && !response.error) {

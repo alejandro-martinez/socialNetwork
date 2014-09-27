@@ -1,0 +1,15 @@
+<a class="prevPage albumPhotos" href="javascript:void(0)"></a>
+<a class="nextPage albumPhotos" href="javascript:void(0)"></a>
+<div id="albumPhotos">
+	<% _.each(photos, function(photo) { %> 
+	<div class="flip-container">
+		<div class="flipper">"
+			<div class="front">
+				<img src="<%= photo.attributes.source %>" width="100%" />
+				<div class="desc">
+				</div>
+			</div>
+		</div>
+	</div>
+	<% }); %>
+</div>

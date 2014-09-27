@@ -4,6 +4,7 @@ var AppRouter = Backbone.Router.extend({
 		"fbid/:fbid"			 : "index",
 		"albums/:fbid"			 : "albums",
 		"albums/:albumid/photos" : "albumPhotos",
+        "updateAlbum/:albumid"   : "updateAlbum",
 		"photos/:fbid"			 : "photos",
         "photos/upload"          : "uploadPhoto",
         "friendPhotos/:id"       : "friendPhotos",
@@ -42,20 +43,22 @@ var AppRouter = Backbone.Router.extend({
 		}
 		new Views.Header({model: this.data,api: this.api});					//Barra superior con los datos del usuario
     },
-    albums: function(){
-        this.api.getAlbums(function(response){
-    	   this.albumsView = new Views.Albums({model: response});
-        });   
-    },
     albumPhotos: function(id){
+        var This = this;
         this.api.getAlbumPhotos(id,function(response){
-           this.albumsPhotoView = new Views.albumPhotos({model: response});
+           this.albumsPhotoView = new Views.albumPhotos({model: response, api: This.api});
         });   
     },
     albums: function(){
         var This = this;
         this.api.getAlbums(function(response){
            this.albumsView = new Views.Albums({model: response, api: This.api});
+        });   
+    },
+    updateAlbum: function(id){
+        var This = this;
+        this.api.getAlbumPhotos(id,function(response){
+           this.UpdateAlbumView = new Views.UpdateAlbum({model: response, api: This.api});
         });   
     },
     friends: function(){
