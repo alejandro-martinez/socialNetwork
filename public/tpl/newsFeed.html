@@ -52,10 +52,11 @@
 						}
 						else {
 							if (count > 1) { 
+								total = count - 1;
 								if(likes[0].id == miID)
-									postInfo = "A ti y a" + count + "personas les gusta esto"
+									postInfo = "A ti y a" + total + "personas les gusta esto"
 								else
-									postInfo = "A " + likes[0].name + " y a " + count + " personas les gusta esto"
+									postInfo = "A " + likes[0].name + " y a " + total + " personas les gusta esto"
 							}
 						} 
 					}%>

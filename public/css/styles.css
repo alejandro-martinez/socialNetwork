@@ -523,6 +523,12 @@ a.postInfo{
 }
 
 .likes {display:none;}
+.likes  a.like {
+	position: absolute;
+	top: 1px;
+	font-weight: bold;
+	right: 25px;
+}
 
 .photo-comments .post{ 
 	width: calc(100% - 25px);

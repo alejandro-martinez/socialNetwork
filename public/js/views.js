@@ -89,7 +89,8 @@ var Views = {
 			'click a.postInfo'			: 'showLikesAndComments',
 			'click a.newsFeed.nextPage' : 'nextPage',
 			'click a.newsFeed.prevPage'	: 'prevPage',
-			'click .post a.like'		: 'like'
+			'click .post a.like'		: 'like',
+			'click .post a.unlike'	: 'unlike'
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -133,17 +134,16 @@ var Views = {
     				$(ev.currentTarget).text("Te gusta esto!");
     		});
     	},
-    	showLikesAndComments: function(ev){
-			var This = this;
-			var id = ev.currentTarget.attributes['name'].value;
-			var popup = $("#" + id).html();
-			$.colorbox({
-				title:'Comentarios y likes',
-				width:'40%',
-				height:'60%',
-				html: popup
-			});
-    	},
+    	unlike: function(ev){
+    		var This = this;
+    		var id = ev.currentTarget.attributes['id'].value;
+    		This.api.unlike(id,function(response){
+    			if (response == true)
+    				$(ev.currentTarget).text("Me gusta!");
+    				$(ev.currentTarget).removeClass("unlike");
+    				$(ev.currentTarget).addClass("like");
+    		});
+    	}
 	}),
 	Groups: Backbone.View.extend({
 		el: $("#content"),
@@ -218,9 +218,11 @@ var Views = {
 	Wall: Backbone.View.extend({
 		el: $("body"),
 		events: {
+			'click a.postInfo'		: 'showLikesAndComments',
 			'click a.wall.nextPage' : 'nextPage',
 			'click a.wall.prevPage'	: 'prevPage',
-			'click .post a.like'	: 'like'
+			'click .post a.like'	: 'like',
+			'click .post a.unlike'	: 'unlike'
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -255,12 +257,34 @@ var Views = {
     	like: function(ev){
     		var This = this;
     		var id = ev.currentTarget.attributes['id'].value;
-    		console.log($(id))
     		This.api.like(id,function(response){
     			if (response == true)
     				$(ev.currentTarget).text("Te gusta esto!");
+    				$(ev.currentTarget).removeClass("like");
+    				$(ev.currentTarget).addClass("unlike");
     		});
-    	}
+    	},
+    	unlike: function(ev){
+    		var This = this;
+    		var id = ev.currentTarget.attributes['id'].value;
+    		This.api.unlike(id,function(response){
+    			if (response == true)
+    				$(ev.currentTarget).text("Me gusta!");
+    				$(ev.currentTarget).removeClass("unlike");
+    				$(ev.currentTarget).addClass("like");
+    		});
+    	},
+		showLikesAndComments: function(ev){
+			var This = this;
+			var id = ev.currentTarget.attributes['name'].value;
+			var popup = $("#" + id).html();
+			$.colorbox({
+				title:'Comentarios y likes',
+				width:'40%',
+				height:'60%',
+				html: popup
+			});
+    	},
 	}),
 	//La barra superior con Nombre y boton Conectar
 	Header: Backbone.View.extend({
@@ -373,9 +397,11 @@ var Views = {
 			'click h2'	: 'showLikesAndComments',
 			'click a.comments.nextPage' : 'nextPage',
 			'click a.comments.prevPage'	: 'prevPage',
+			'click .post a.unlike'	: 'unlike'
 		},
 		initialize: function(){
 			this.api = this.options.api;
+			this.miID = this.api.currentUser.id;
 			var This = this;
 			this.render();
 		},
@@ -386,7 +412,7 @@ var Views = {
 			var photos = new photosCollection(This.model.data);
 			utils.loadTemplate("photos",function(html){
 				template = _.template(html);
-				$("#body").html(template({photos: photos.models}));
+				$("#body").html(template({photos: photos.models,miID: This.miID}));
 			});
 		},
 		showLikesAndComments: function(ev){
@@ -399,13 +425,26 @@ var Views = {
 				html: $(id).html()
 			});
 			$('#colorbox .like').on('click', This.api, this.like);	
+			$('#colorbox .unlike').on('click', This.api, this.unlike);	
     	},
     	like: function(ev){
     		this.api = ev.handleObj.data;
     		var id = ev.currentTarget.attributes['id'].value;
     		this.api.like(id,function(response){
     			if (response == true)
-    				$(ev.currentTarget).text("Te gusta esto!");
+    				$(ev.currentTarget).text("Ya no me gusta!");
+    				$(ev.currentTarget).addClass("unlike");
+    				$(ev.currentTarget).removeClass("like");
+    		});
+    	},
+    	unlike: function(ev){
+    		this.api = ev.handleObj.data;
+    		var id = ev.currentTarget.attributes['id'].value;
+    		this.api.unlike(id,function(response){
+    			if (response == true)
+    				$(ev.currentTarget).text("Me gusta!");
+    				$(ev.currentTarget).removeClass("unlike");
+    				$(ev.currentTarget).addClass("like");
     		});
     	}
 	}),

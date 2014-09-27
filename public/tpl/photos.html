@@ -1,7 +1,8 @@
 <div id="photos">
 	<div id="banner-fade">
 		<ul class="bjqs">
-			<% _.each(photos, function(photo) { %> 
+			<%
+			 _.each(photos, function(photo) { %> 
 				<li>
 					<h2 href="#photo-<%=photo.attributes.id%>" class="icon-likes botonCircular bg-color-green"></h2>
 					<a src="<%= photo.attributes.source %>"></a>
@@ -11,29 +12,37 @@
 		<div class="likes">
 		<% _.each(photos, function(photo) { %> 
 			<div id="photo-<%=photo.attributes.id%>">
-				<a class="like" id="<%=photo.attributes.id%>" href="javascript:void(0)">Me gusta</a>
 				<%if (photo.attributes.likes != null) {
 					var likes = photo.attributes.likes.data;
 					var count = photo.attributes.likes.data.length;
-
+					var likeText = "Me gusta";
+					var likeClass="like"
 						if(count == 1){ 
-							if(likes[0].id == miID) {%>
+							if(likes[0].id == miID) {
+								likeText = "Ya no me gusta!"
+								likeClass="unlike"
+								%>
 								<h3>Te gusta esto!</h3>
 							<% }else{ %>
 								<h3>A <%=likes[0].name%> le gusta esto!</h3>
 							<%}
+						}
 						else {
 							if (count > 1) { 
-								if(likes[0].id == miID){%>
+								if(likes[0].id == miID){
+									likeText = "Ya no me gusta!"
+									likeClass="unlike"
+									%>
 									<h3>A ti y a <%=count%> personas les gusta esto</h3>
 								<%}else{%>
-									<h3>A ti y a <%=likes[0].name%> y a <%=count%> personas les gusta esto</h3>
+									<h3>A <%=likes[0].name%> y a <%=count%> personas les gusta esto</h3>
 								<%}	
 							} 
 						}
 					}
-				}
-
+				%>
+				<a href="javascript:void(0)" id="<%=photo.attributes.id%>" class="<%=likeClass %>"><%=likeText %></a>
+				<%
 				if (photo.attributes.comments != null){%>
 					<ul class="photo-comments">
 						<% _.each(photo.attributes.comments.data, function(comment) { %> 
