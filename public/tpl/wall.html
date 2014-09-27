@@ -64,6 +64,7 @@
 					<a href="javascript:void(0)" class="postInfo" name="infoLikes-<%=post.id%>"><%=postInfo %></a><br><br>
 
 					<a href="javascript:void(0)" id="<%=post.id%>" class="<%=likeClass %>"><%=likeText %></a>
+					<a href="javascript:void(0)" class="comentarios">Comentarios</a>
 					<%if (post.likes != null) {
 						var likes = post.likes.data;%>
 						<div id="infoLikes-<%=post.id%>" class="hidden">

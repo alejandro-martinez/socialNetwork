@@ -125,8 +125,7 @@ function AppController(){
 		});
 	},
 	this.like = function(id,callback){
-		FB.api(
-		    "/"+id+"/likes",
+		FB.api("/"+id+"/likes",
 		    "POST",
 		    function (response) {
 		      if (response && !response.error) {
@@ -136,12 +135,24 @@ function AppController(){
 		);
 	},
 	this.unlike = function(id,callback){
-		FB.api(
-		    "/"+id+"/likes",
+		FB.api("/"+id+"/likes",
 		    "DELETE",
 		    function (response) {
 		      if (response && !response.error) {
 		        callback(response);
+		      }
+		    }
+		);
+	},
+	this.comment = function(id,mensaje,callback){
+		FB.api("/"+id+"/comments",
+		    "POST",
+		    {
+		        "message": mensaje
+		    },
+		    function (response) {
+		      if (response && !response.error) {
+		        callback(response)
 		      }
 		    }
 		);

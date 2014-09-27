@@ -86,11 +86,13 @@ var Views = {
 	NewsFeed: Backbone.View.extend({
 		el: $("#content"),
 		events: {
-			'click a.postInfo'			: 'showLikesAndComments',
+			'click a.postInfo'			: 'showLikes',
+			'click #publicarComentario'	: 'publishComment',
+			'click a.comments'			: 'showComments',
 			'click a.newsFeed.nextPage' : 'nextPage',
 			'click a.newsFeed.prevPage'	: 'prevPage',
 			'click .post a.like'		: 'like',
-			'click .post a.unlike'	: 'unlike'
+			'click .post a.unlike'		: 'unlike'
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -119,6 +121,17 @@ var Views = {
 				This.refreshFeed();
 			});
     	},
+    	publishComment: function(ev){
+    		
+    		this.api = ev.handleObj.data;
+    		var id = ev.currentTarget.attributes['data-comment-id'].value;
+    		var mensaje = $('#mensaje').val();
+    		if (mensaje) {
+	    		this.api.comment(id,mensaje,function(response){
+	    				console.log(response);
+	    		});
+    		}
+    	},
     	prevPage: function(){
     		var This = this;
 			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
@@ -146,7 +159,19 @@ var Views = {
     				$(ev.currentTarget).addClass("like");
     		});
     	},
-		showLikesAndComments: function(ev){
+		showComments: function(ev){
+			var This = this;
+			var id = ev.currentTarget.attributes['name'].value;
+			var popup = $("#" + id).html();
+			$.colorbox({
+				title:'Comentarios',
+				width:'55%',
+				height:'70%',
+				html: popup
+			});
+			$('#div-comment #publicarComentario').on('click',This.api,This.publishComment);	
+    	},
+		showLikes: function(ev){
 			var This = this;
 			var id = ev.currentTarget.attributes['name'].value;
 			var popup = $("#" + id).html();
@@ -271,7 +296,8 @@ var Views = {
 			'click a.wall.nextPage' : 'nextPage',
 			'click a.wall.prevPage'	: 'prevPage',
 			'click .post a.like'	: 'like',
-			'click .post a.unlike'	: 'unlike'
+			'click .post a.unlike'	: 'unlike',
+			'click .newComment'		: "newComment", 
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -302,6 +328,13 @@ var Views = {
 				This.model = response;
 				This.render();
 			});
+    	},
+    	comment: function(ev){
+    		var This = this;
+    		var mensaje = $('.mensaje')
+    		This.api.comment(id,mensaje,function(response){
+    				console.log(response)
+    		});
     	},
     	like: function(ev){
     		var This = this;

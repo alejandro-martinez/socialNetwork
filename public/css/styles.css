@@ -379,6 +379,16 @@ width: 187px;}
     max-height: 350px;
 	max-width: 100%;
 }
+
+#div-comment{
+	margin-top: 13px;
+}
+
+#div-comment textarea{
+	height: 69px;
+	width: 480px;
+}
+
 /* ---- groups.html ---- */
 #groups{
 	width: 600px;
