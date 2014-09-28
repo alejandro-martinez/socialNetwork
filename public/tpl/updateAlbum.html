@@ -13,8 +13,14 @@
 	</div>
 	<% }); %>
 </div>
-<div id="albumActions">
+<div id="albumActions" draggable="true">
 			<button id="selectPhotos" class="big image-button login-button">
 	Subir fotos</button>
 </div>	
-
+<div id="uploadForm" class="hidden">
+	<div draggable="true">
+		<div id="uploadPreview" class="loading"></div>
+		<h1>Haz click en el boton Examinar para subir fotos al album</h1>
+		<input id="examinar" multiple="multiple" class="big image-button login-button" type="file" value="Examinar"
+	</div>
+</div>

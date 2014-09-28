@@ -297,6 +297,10 @@ button:active{
 	display: inline-flex;
 }
 
+#uploadPreview img {
+	width:100px;
+	width:100px;
+}
 /* ---- albums.html ---- */
 
 .container-album ul{	list-style: none;

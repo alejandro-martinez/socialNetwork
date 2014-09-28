@@ -31,7 +31,8 @@ var Views = {
 			var reader = new FileReader();
 			reader.readAsDataURL(event.originalEvent.dataTransfer.files[0]);	//Lee la foto arrastrada al perfil
 			reader.onloadend = function () {
-				This.api.uploadPhoto(reader.result, true, function(response){	//Sube la foto a FB
+				console.log(reader.result)
+		/*		This.api.uploadPhoto(reader.result, true, function(response){	//Sube la foto a FB
 					$('#image-preview img').attr('src',reader.result);
 					$('#image-preview').attr('class','show');
 					$('#image-preview a').attr('href',"https://www.facebook.com/photo.php?fbid="+response.id+"&makeprofile=1");
@@ -39,7 +40,7 @@ var Views = {
 					$('#user-photo').removeClass('loading');
 				});
 			};
-			
+		*/	};
 			return false;
 		},
 		initialize: function(){
@@ -695,7 +696,7 @@ var Views = {
 	UpdateAlbum: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'drop #dropPhotos' 			:'uploadPhotos',
+			'drop #albumActions' 	:'uploadPhotos',
 			'click button#selectPhotos'	: 'selectPhotos',
 //			'click #loadPhotos #removePhoto': 'removePhoto',
 			'click a.albumPhotos.nextPage' : 'nextPage',
@@ -703,32 +704,91 @@ var Views = {
 		},
 		initialize: function(){
 			this.api = this.options.api;
+			this.albumId = this.options.albumId;
 			var This = this;
 			this.render();
+			/*$("#cboxLoadedContent").bind("dragover", function(e) {
+				e.preventDefault();
+				return false;
+			});
+
+			$("#cboxLoadedContent").bind("drop", function(e){
+				e.preventDefault();
+				reader.readAsDataURL(e.originalEvent.dataTransfer.files);
+				for (var i = 0; i < e.originalEvent.dataTransfer.files.length; i++) {
+	  				reader.onloadend = function () {
+	  					console.log(reader.result);
+	  				}
+	  			}
+				return false;
+			});*/
 		},
 		removePhoto: function(){
 		
     	},
-    	selectPhotos: function(){
+    	selectPhotos: function(event){
+    		var This = this;
     		$.colorbox({
 				title:'Subir fotos al album',
 				width:'50%',
 				height:'50%',
-				html: '<h1>Arrastra las fotos aqui para subirlas al album</h1>'
+				html: $('#uploadForm').html()
 			});
+			$("#cboxLoadedContent #upload").on('click',This.uploadPhotos);
+			$("#cboxLoadedContent #examinar").on('change',function (e) {
+			    if(this.disabled) return alert('File upload not supported!');
+			    var F = this.files;
+			    if(F && F[0]) for(var i=0; i<F.length; i++) 
+			    	This.readImage( F[i] );
+			});
+/*
+			var reader = new FileReader();
+			fotosArrastradas = event.originalEvent.dataTransfer.files;
+			reader.readAsDataURL(fotosArrastradas);
+			for (var i = 0; i < fotosArrastradas.length; i++) {
+  				reader.onloadend = function () {
+  					console.log(reader.result);
+				/*	This.api.uploadPhoto(reader.result, true, function(response){	//Sube la foto a FB
+						$('#image-preview img').attr('src',reader.result);
+						$('#image-preview').attr('class','show');
+						$('#image-preview a').attr('href',"https://www.facebook.com/photo.php?fbid="+response.id+"&makeprofile=1");
+						$('#selectFbProfile').trigger("click");					
+						$('#user-photo').removeClass('loading');
+					});
+				};
+  			}*/
+
+    	},
+    	readImage: function(file, albumId){
+    		$('#cboxLoadedContent img').addClass('loading');
+    		var This = this;
+    		var reader = new FileReader();
+		    var image  = new Image();
+		    reader.readAsDataURL(file);  
+/*		    reader.onload = function(_file) {
+		    	
+		        image.src    = _file.target.result;              // url.createObjectURL(file);
+		        image.onload = function() {
+		            $('#cboxLoadedContent #uploadPreview').append('<img src="'+ this.src +'"/>');
+		        };
+		        image.onerror= function() {
+		            alert('Invalid file type: '+ file.type);
+		        };      
+		    };*/
+		    reader.onloadend = function () {
+					//Subir imagen a Facebook
+					$('#cboxLoadedContent #uploadPreview').append('<img src="'+ reader.result +'"/>');
+		            This.api.uploadPhotos(reader.result,This.albumId,function(response){
+		            	$('#cboxLoadedContent img').removeClass('loading');
+		            });
+		    };
     	},
     	uploadPhotos: function(){
-			var reader = new FileReader();
-			reader.readAsDataURL(event.originalEvent.dataTransfer.files[0]);	//Lee la foto arrastrada al perfil
-			reader.onloadend = function () {
-				This.api.uploadPhoto(reader.result, true, function(response){	//Sube la foto a FB
-					$('#image-preview img').attr('src',reader.result);
-					$('#image-preview').attr('class','show');
-					$('#image-preview a').attr('href',"https://www.facebook.com/photo.php?fbid="+response.id+"&makeprofile=1");
-					$('#selectFbProfile').trigger("click");					
-					$('#user-photo').removeClass('loading');
-				});
-			};
+			$("#examinar").change(function (e) {
+			    if(this.disabled) return alert('File upload not supported!');
+			    var F = this.files;
+			    if(F && F[0]) for(var i=0; i<F.length; i++) readImage( F[i] );
+			});
     	},
 		render: function(){
 			var This = this;
