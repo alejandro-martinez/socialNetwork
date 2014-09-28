@@ -42,19 +42,20 @@
 					}
 				%>
 				<a href="javascript:void(0)" id="<%=photo.attributes.id%>" class="<%=likeClass %>"><%=likeText %></a>
-				<%
-				if (photo.attributes.comments != null){%>
+					
 					<ul class="photo-comments">
-						<% _.each(photo.attributes.comments.data, function(comment) { %> 
-						<li>
-					    	<div class="post">
-					    		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=comment.from.id%>/picture?type=square)">
-					    		</div>
-					    		<h5><%=comment.from.name%><h5>
-					    		<span><%=comment.message%></span>
-					    	</div>	
-					    </li>	
-						<%});%>
+						<%if (photo.attributes.comments != null){
+							_.each(photo.attributes.comments.data, function(comment) { %> 
+								<li>
+							    	<div class="post">
+							    		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=comment.from.id%>/picture?type=square)">
+							    		</div>
+							    		<h5><%=comment.from.name%><h5>
+							    		<span><%=comment.message%></span>
+							    	</div>	
+							    </li>	
+								<%});
+						}%>
 						<li>
 							<div id="div-comment">
 									<h3>Escribe un comentario</h3>
@@ -65,7 +66,6 @@
 							</div>
 						</li>
 					</ul>	
-				<%}%>			
 				<%if (photo.attributes.likes != null) {
 						var likes = photo.attributes.likes.data;%>
 						<div id="infoLikes-<%=photo.attributes.id%>" class="hidden">

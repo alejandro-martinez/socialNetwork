@@ -77,22 +77,22 @@
 					    	</ul>
 						</div>	
 					<%}%>	
-					<%
-					var totalComentarios=0;
-					if (post.comments != null){
-						totalComentarios = post.comments.data.length;
-					%>
 						<ul id="comments-post-<%=post.id%>" class="hidden photo-comments">
-							<% _.each(post.comments.data, function(comment) { %> 
-							<li>
-						    	<div class="post">
-						    		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=comment.from.id%>/picture?type=square)">
-						    		</div>
-						    		<h5><%=comment.from.name%><h5>
-						    		<span><%=comment.message%></span>
-						    	</div>	
-							<%});%>
-							</li>
+							<%
+							var totalComentarios=0;
+							if (post.comments != null){
+								totalComentarios = post.comments.data.length;
+									_.each(post.comments.data, function(comment) { %> 
+								<li>
+							    	<div class="post">
+							    		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=comment.from.id%>/picture?type=square)">
+							    		</div>
+							    		<h5><%=comment.from.name%><h5>
+							    		<span><%=comment.message%></span>
+							    	</div>	
+							    </li>	
+								<%});%>
+							<%}%>
 							<div id="div-comment">
 								<h3>Escribe un comentario</h3>
 								<textarea id="comentario" class="speak" data-voice="Qué estás pensando?"></textarea>
@@ -101,7 +101,6 @@
 								<button id="publicarComentario" data-comment-id="<%=post.id%>" class="speak image-button bg-color-blue fg-color-white" data-voice="click para publicar comentario">Publicar</button>
 							</div>	
 						</ul>	
-					<%}%>			
 					<a href="javascript:void(0)" class="comments" name="comments-post-<%=post.id%>">Comentarios (<%=totalComentarios%>)</a>
 				</div>
 			</li>
