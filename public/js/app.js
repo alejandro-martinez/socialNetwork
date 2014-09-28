@@ -71,7 +71,7 @@ var AppRouter = Backbone.Router.extend({
         var This = this;
         this.api.getFriend(id,function(friendInfo){
             This.api.isFriend(id, function(response){
-                ((response.data.length == 1) ? This.esAmigo = true : This.esAmigo = false);
+                (response.data.length > 0) ? This.esAmigo = true : This.esAmigo = false;
             });
             This.api.getFriendsWall(friendInfo.id,function(friendWall){
                 This.friendView = new Views.friendProfile({wall: friendWall, friendInfo: friendInfo, amigo: This.esAmigo, api: This.api}); 

@@ -902,13 +902,13 @@ var Views = {
 			var FriendWall = Backbone.Model.extend({});
 			var friendUpdatesCollection = Backbone.Collection.extend({model: FriendWall});
 			var wallUpdates = new friendUpdatesCollection(This.options.wall.data);
-			console.log(This.options.wall.data.models);
+			console.log(This.options.amigo);
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
 				$("#body").html(template({
 					friend: This.options.friendInfo,
 					wall: wallUpdates.models,
-					amigo: This.options.esAmigo,
+					amigo: This.options.amigo,
 					miID: This.miID
 				}));
 			});
