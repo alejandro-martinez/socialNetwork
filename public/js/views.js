@@ -98,6 +98,12 @@ var Views = {
 			var This = this;
 			this.render();
 		},
+		speak: function(ev){
+			speak(ev.currentTarget.attributes['data-voice'].value);
+		},
+		shutUp: function(){
+			shutUp();
+		},
 		refreshFeed: function(){
 			var This = this;
 			utils.loadTemplate("newsFeed",function(html){
@@ -177,6 +183,8 @@ var Views = {
 			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
 			    $('#div-comment img').addClass('hidden');
 			});				
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);	
     	},
 		showLikes: function(ev){
 			var This = this;
@@ -188,6 +196,8 @@ var Views = {
 				height:'60%',
 				html: popup
 			});
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);	
     	},
 	}),
 	Groups: Backbone.View.extend({
@@ -236,6 +246,12 @@ var Views = {
 			this.miID = this.api.currentUser.id;
 			var This = this;
 			this.render();
+		},
+		speak: function(ev){
+			speak(ev.currentTarget.attributes['data-voice'].value);
+		},
+		shutUp: function(){
+			shutUp();
 		},
 		render: function(){
 			var This = this;
@@ -295,6 +311,8 @@ var Views = {
 				height:'60%',
 				html: popup
 			});
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);	
     	},
     	showComments: function(ev){
 			var This = this;
@@ -309,7 +327,9 @@ var Views = {
 			$('#div-comment #publicarComentario').on('click',This.api,This.publishComment);	
 			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
 			    $('#div-comment img').addClass('hidden');
-			});				
+			});
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);					
     	},
     	publishComment: function(ev){
     		this.api = ev.handleObj.data;
@@ -345,6 +365,12 @@ var Views = {
 			var This = this;
 			This.miID = this.api.currentUser.id;
 			this.render();
+		},
+		speak: function(ev){
+			speak(ev.currentTarget.attributes['data-voice'].value);
+		},
+		shutUp: function(){
+			shutUp();
 		},
 		render: function(){
 			var This = this;
@@ -400,6 +426,8 @@ var Views = {
 				height:'60%',
 				html: popup
 			});
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);					
     	},
     	publishComment: function(ev){
     		this.api = ev.handleObj.data;
@@ -432,6 +460,8 @@ var Views = {
 			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
 			    $('#div-comment img').addClass('hidden');
 			});				
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);					
     	},
 	}),
 	//La barra superior con Nombre y boton Conectar
@@ -552,6 +582,12 @@ var Views = {
 			var This = this;
 			this.render();
 		},
+		speak: function(ev){
+			speak(ev.currentTarget.attributes['data-voice'].value);
+		},
+		shutUp: function(){
+			shutUp();
+		},
 		render: function(){
 			var This = this;
 			var Photos = Backbone.Model.extend({});
@@ -578,6 +614,8 @@ var Views = {
 			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
 			    $('#div-comment img').addClass('hidden');
 			});			
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);	
     	},
     	showAuthorsLikes: function(ev){
     		var This = this;
@@ -589,6 +627,8 @@ var Views = {
 				height:'65%',
 				html: popup
 			});
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);	
     	},
     	publishComment: function(ev){
     		this.api = ev.handleObj.data;
@@ -642,6 +682,12 @@ var Views = {
 			var This = this;
 			this.render();
 		},
+		speak: function(ev){
+			speak(ev.currentTarget.attributes['data-voice'].value);
+		},
+		shutUp: function(){
+			shutUp();
+		},
 		showLikesAndComments: function(ev){
 			var This = this;
 			var id = ev.currentTarget.attributes['href'].value;
@@ -654,6 +700,8 @@ var Views = {
 			$('#colorbox .like').on('click', This.api, this.like);	
 			$('#colorbox .unlike').on('click', This.api, this.unlike);	
 			$('#colorbox .postInfo').on('click',this.showAuthorsLikes);	
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);	
     	},
 		render: function(){
 			var This = this;
@@ -899,6 +947,12 @@ var Views = {
 			var This = this;
 			this.render();
 		},
+		speak: function(ev){
+			speak(ev.currentTarget.attributes['data-voice'].value);
+		},
+		shutUp: function(){
+			shutUp();
+		},
 		render: function(){
 			var This = this;
 			var FriendWall = Backbone.Model.extend({});
@@ -976,6 +1030,8 @@ var Views = {
 				height:'60%',
 				html: popup
 			});
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);	
     	},
     	showComments: function(ev){
 			var This = this;
@@ -991,6 +1047,8 @@ var Views = {
 			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
 			    $('#div-comment img').addClass('hidden');
 			});				
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);	
     	},
 	})
 

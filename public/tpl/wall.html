@@ -61,9 +61,9 @@
 						} 
 					}%>
 					<br>
-					<a href="javascript:void(0)" class="postInfo" name="infoLikes-<%=post.id%>"><%=postInfo %></a><br><br>
+					<a href="javascript:void(0)" class="postInfo speak" data-voice="<%=postInfo %>" name="infoLikes-<%=post.id%>"><%=postInfo %></a><br><br>
 
-					<a href="javascript:void(0)" id="<%=post.id%>" class="<%=likeClass %>"><%=likeText %></a>
+					<a href="javascript:void(0)" id="<%=post.id%>" class="<%=likeClass %> speak" data-voice="<%=likeText %>"><%=likeText %></a>
 					<%if (post.likes != null) {
 						var likes = post.likes.data;%>
 						<div id="infoLikes-<%=post.id%>" class="hidden">
@@ -72,7 +72,7 @@
 										<div class="post">
 								    		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=autorLike.id%>/picture?type=square)">
 								    		</div>
-								    		<h5><%=autorLike.name%><h5>
+								    		<h5><a href="/#friend/<%=autorLike.id%>" class="speak" data-voice="<%=autorLike.name%>"><%=autorLike.name%></a><h5>
 								    	</div>	
 								<% });%>    
 					    	</ul>
@@ -88,21 +88,21 @@
 							    	<div class="post">
 							    		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=comment.from.id%>/picture?type=square)">
 							    		</div>
-							    		<h5><%=comment.from.name%><h5>
-							    		<span><%=comment.message%></span>
+							    		<h5><a href="/#friend/<%=comment.from.id%>" class="speak" data-voice="<%=comment.from.name%>"><%=comment.from.name%></a><h5>
+							    		<span class="speak" data-voice="<%=comment.message%>"><%=comment.message%></span>
 							    	</div>	
 							    </li>	
 								<%});%>
 							<%}%>
 							<div id="div-comment">
-								<h3>Escribe un comentario</h3>
+								<h3 class="speak" data-voice="Escribe un comentario">Escribe un comentario</h3>
 								<textarea id="comentario" class="speak" data-voice="Qué estás pensando?"></textarea>
 								<img src="http://png-1.findicons.com/files/icons/2015/24x24_free_application/24/error.png" class="hidden error"/>
 								<img src="https://cdn2.iconfinder.com/data/icons/oxygen/48x48/actions/ok.png" class="hidden ok"/>
 								<button id="publicarComentario" data-comment-id="<%=post.id%>" class="speak image-button bg-color-blue fg-color-white" data-voice="click para publicar comentario">Publicar</button>
 							</div>	
 						</ul>	
-					<a href="javascript:void(0)" class="comments" name="comments-post-<%=post.id%>">Comentarios (<%=totalComentarios%>)</a>
+					<a href="javascript:void(0)" class="comments speak" data-voice="<%=totalComentarios%> Comentarios " name="comments-post-<%=post.id%>">Comentarios (<%=totalComentarios%>)</a>
 				</div>
 			</li>
 		<% }); %>
