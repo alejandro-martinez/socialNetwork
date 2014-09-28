@@ -776,6 +776,7 @@ var Views = {
 		},
 		initialize: function(){
 			this.api = this.options.api;
+			this.friendId = this.options.friendId;
 			var This = this;
 			this.render();
 			this.access_token = FB.getAuthResponse()['accessToken'];
@@ -789,7 +790,8 @@ var Views = {
 				template = _.template(html);
 				$("#body").html(template({
 					albums: albums.models,
-					access_token: This.access_token
+					access_token: This.access_token,
+					friendId: This.friendId
 				}));
 			});
 		},

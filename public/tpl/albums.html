@@ -1,5 +1,7 @@
 <a class="prevPage albums" href="javascript:void(0)"></a>
 <a class="nextPage albums" href="javascript:void(0)"></a>
+<% (friendId == 'me') ? soyYo = true: soyYo = false;
+	%>
 <div id="container-album">
 	<% _.each(albums, function(album) { %> 
 		<div class="flip-container">
@@ -12,15 +14,19 @@
 				<div class="back speak" data-voice="<%= album.attributes.name %>" onclick="window.location.href = '/#albums/<%=album.attributes.id%>/photos'">
 					<label><%= album.attributes.name %></label>
 					<br><br>
-					<a href="#/updateAlbum/<%=album.attributes.id%>" class="speak" data-voice="Agregar fotos a este album">Editar album</a>
+					<% if(soyYo){%>
+						<a href="#/updateAlbum/<%=album.attributes.id%>" class="speak" data-voice="Agregar fotos a este album">Editar album</a>
+					<%}%>
 				</div>
 			</div>	
 		</div>
-	<% }); %>
+	<% }); 
+	 if(soyYo){%>
 	<button id="create-album" class="big image-button bg-color-darken fg-color-white login-button">
 	Crear album<img src="img/azul.png"></button>
+	<%}%>
 </div>
-
+<%if(soyYo){%>
 <div id="uploadAlbumForm" class="hidden">
 	<ul class="albumInfo">
 		<li><input type="text" id="nombre" placeholder="Nombre de album" class="speak" data-voice="Nombre de album"/></li>
@@ -37,3 +43,4 @@
 	</ul>	
 	
 </div>
+<%}%>

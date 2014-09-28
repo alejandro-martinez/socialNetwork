@@ -79,8 +79,8 @@ function AppController(){
 		    callback(model);
 		});	
 	},
-	this.getAlbums = function(callback){
-		fbUser('/me/albums?limit=8&locale='+This.locale, function(model){
+	this.getAlbums = function(id,callback){
+		fbUser('/'+id+'/albums?limit=8&locale='+This.locale, function(model){
 			callback(model);
 		});	
 	},

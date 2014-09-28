@@ -49,10 +49,10 @@ var AppRouter = Backbone.Router.extend({
            this.albumsPhotoView = new Views.albumPhotos({model: response, api: This.api});
         });   
     },
-    albums: function(){
+    albums: function(id){
         var This = this;
-        this.api.getAlbums(function(response){
-           this.albumsView = new Views.Albums({model: response, api: This.api});
+        this.api.getAlbums(id,function(response){
+           this.albumsView = new Views.Albums({model: response, api: This.api, friendId: id});
         });   
     },
     updateAlbum: function(id){
