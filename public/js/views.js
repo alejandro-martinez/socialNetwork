@@ -741,46 +741,18 @@ var Views = {
 			    if(F && F[0]) for(var i=0; i<F.length; i++) 
 			    	This.readImage( F[i] );
 			});
-/*
-			var reader = new FileReader();
-			fotosArrastradas = event.originalEvent.dataTransfer.files;
-			reader.readAsDataURL(fotosArrastradas);
-			for (var i = 0; i < fotosArrastradas.length; i++) {
-  				reader.onloadend = function () {
-  					console.log(reader.result);
-				/*	This.api.uploadPhoto(reader.result, true, function(response){	//Sube la foto a FB
-						$('#image-preview img').attr('src',reader.result);
-						$('#image-preview').attr('class','show');
-						$('#image-preview a').attr('href',"https://www.facebook.com/photo.php?fbid="+response.id+"&makeprofile=1");
-						$('#selectFbProfile').trigger("click");					
-						$('#user-photo').removeClass('loading');
-					});
-				};
-  			}*/
-
     	},
     	readImage: function(file, albumId){
-    		$('#cboxLoadedContent img').addClass('loading');
+    		$('#cboxLoadedContent #uploadPreview').addClass('loading');
     		var This = this;
     		var reader = new FileReader();
 		    var image  = new Image();
 		    reader.readAsDataURL(file);  
-/*		    reader.onload = function(_file) {
-		    	
-		        image.src    = _file.target.result;              // url.createObjectURL(file);
-		        image.onload = function() {
-		            $('#cboxLoadedContent #uploadPreview').append('<img src="'+ this.src +'"/>');
-		        };
-		        image.onerror= function() {
-		            alert('Invalid file type: '+ file.type);
-		        };      
-		    };*/
 		    reader.onloadend = function () {
-					//Subir imagen a Facebook
-					$('#cboxLoadedContent #uploadPreview').append('<img src="'+ reader.result +'"/>');
-		            This.api.uploadPhotos(reader.result,This.albumId,function(response){
-		            	$('#cboxLoadedContent img').removeClass('loading');
-		            });
+				$('#cboxLoadedContent #uploadPreview').append('<img src="'+ reader.result +'"/>');
+	            This.api.uploadPhotos(reader.result,This.albumId,function(response){
+	            	$('#cboxLoadedContent #uploadPreview').removeClass('loading');
+	            });
 		    };
     	},
     	uploadPhotos: function(){

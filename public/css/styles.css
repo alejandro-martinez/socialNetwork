@@ -23,7 +23,9 @@ body>.bg{
 li{list-style: none;}
 
 /* Clases generales */
-
+.loading {
+	background:url(colorbox/loading.gif) no-repeat center center;
+}
 .hidden {display: none;}
 .show {display: block;}
 
@@ -297,9 +299,19 @@ button:active{
 	display: inline-flex;
 }
 
+#uploadPreview {
+	width:100%;
+	height:100px;
+}
 #uploadPreview img {
 	width:100px;
-	width:100px;
+	height:100px;
+}
+
+#examinar {
+	position:absolute;
+	left:40%;
+	bottom:50px;
 }
 /* ---- albums.html ---- */
 
