@@ -31,7 +31,6 @@ var Views = {
 			var reader = new FileReader();
 			reader.readAsDataURL(event.originalEvent.dataTransfer.files[0]);	//Lee la foto arrastrada al perfil
 			reader.onloadend = function () {
-				console.log(reader.result)
 				This.api.uploadPhotos(reader.result, me, function(response){	//Sube la foto a FB
 					$('#image-preview img').attr('src',reader.result);
 					$('#image-preview').attr('class','show');
@@ -39,7 +38,6 @@ var Views = {
 					$('#selectFbProfile').trigger("click");					
 					$('#user-photo').removeClass('loading');
 				});
-			};
 			};
 			return false;
 		},
@@ -696,6 +694,7 @@ var Views = {
 	UpdateAlbum: Backbone.View.extend({
 		el: $("body"),
 		events: {
+			'click a.deletePhoto'		: 'deletePhotos',
 			'click button#selectPhotos'	: 'selectPhotos',
 			'click a.albumPhotos.nextPage' : 'nextPage',
 			'click a.albumPhotos.prevPage'	: 'prevPage'
@@ -706,8 +705,12 @@ var Views = {
 			var This = this;
 			this.render();
 		},
-		removePhoto: function(){
-		
+		deletePhotos: function(ev){
+			var id = ev.currentTarget.attributes['data-photo-id'].value;
+			this.api.deletePhoto(id,function(response){
+				console.log(response)
+	            	$(ev.currentTarget).parents('.flip-container').remove();
+	        });
     	},
     	selectPhotos: function(event){
     		var This = this;

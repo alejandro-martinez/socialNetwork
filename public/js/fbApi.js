@@ -173,6 +173,17 @@ function AppController(){
 		    }
 		);
 	},
+	this.deletePhoto = function(id,callback){
+		FB.api(
+		    "/"+id,
+		    "DELETE",
+		    function (response) {
+		      if (response && !response.error) {
+		      	callback(response);
+		      }
+		    }
+		);
+	},
 	this.uploadPhotos = function (foto,albumId, callback){
 		var access_token = FB.getAuthResponse()['accessToken'];
 		var extension = foto.substring(1,11);

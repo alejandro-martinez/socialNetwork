@@ -11,6 +11,8 @@
 				</div>
 				<div class="back speak" data-voice="<%= album.attributes.name %>" onclick="window.location.href = '/#albums/<%=album.attributes.id%>/photos'">
 					<label><%= album.attributes.name %></label>
+					<br><br>
+					<a href="#/updateAlbum/<%=album.attributes.id%>" class="speak" data-voice="Agregar fotos a este album">Editar album</a>
 				</div>
 			</div>	
 		</div>

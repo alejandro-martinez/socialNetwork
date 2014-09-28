@@ -292,7 +292,8 @@ button:active{
 
 #albumActions {
 	position: absolute;
-	bottom: -184px;
+	top: 6px;
+	right: 40px;
 }
 
 #albumActions ul{
@@ -314,6 +315,11 @@ button:active{
 	bottom:50px;
 }
 /* ---- albums.html ---- */
+
+#albumPhotos{
+	width: 600px;
+	margin: 0 auto;
+}
 
 .container-album ul{	list-style: none;
 	margin-top: 5%;
