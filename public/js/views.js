@@ -745,7 +745,7 @@ var Views = {
 			'click a.deletePhoto'		: 'deletePhotos',
 			'click button#selectPhotos'	: 'selectPhotos',
 			'click a.albumPhotos.nextPage' : 'nextPage',
-			'click a.albumPhotos.prevPage'	: 'prevPage'
+			'click a.albumPhotos.prevPage'	: 'prevPage',
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -753,10 +753,15 @@ var Views = {
 			var This = this;
 			this.render();
 		},
+		speak: function(ev){
+			speak(ev.currentTarget.attributes['data-voice'].value);
+		},
+		shutUp: function(){
+			shutUp();
+		},
 		deletePhotos: function(ev){
 			var id = ev.currentTarget.attributes['data-photo-id'].value;
 			this.api.deletePhoto(id,function(response){
-				console.log(response)
 	            	$(ev.currentTarget).parents('.flip-container').remove();
 	        });
     	},
@@ -765,9 +770,11 @@ var Views = {
     		$.colorbox({
 				title:'Subir fotos al album',
 				width:'75%',
-				height:'40%',
+				height:'73%',
 				html: $('#uploadForm').html()
 			});
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);	
 			$("#cboxLoadedContent #upload").on('click',This.uploadPhotos);
 			$("#cboxLoadedContent #examinar").on('change',function (e) {
 			    if(this.disabled) return alert('File upload not supported!');
@@ -775,17 +782,36 @@ var Views = {
 			    if(F && F[0]) for(var i=0; i<F.length; i++) 
 			    	This.readImage( F[i] );
 			});
+			$('#cboxLoadedContent #drop_zone').on('drop',function(e){
+				$('#cboxLoadedContent h1.speak').addClass('loading');
+		        if(e.originalEvent.dataTransfer){
+		            if(e.originalEvent.dataTransfer.files.length) {
+		                e.preventDefault();
+		                e.stopPropagation();
+		                var reader = new FileReader();
+		                for (var i = 0, f; f = e.originalEvent.dataTransfer.files[i]; i++) {
+						    reader.readAsDataURL(f);  
+						    reader.onloadend = function () {
+					            This.api.uploadPhotos(reader.result,This.albumId,function(response){
+					            	$('#cboxLoadedContent #uploadPreview').append('<img src="'+ reader.result +'"/>');
+					            	$('#cboxLoadedContent h1.speak').removeClass('loading');
+					            });
+						    };
+		            }   
+		        }
+			    }
+			});
+        	
     	},
     	readImage: function(file, albumId){
-    		$('#cboxLoadedContent #uploadPreview').addClass('loading');
+    		$('#cboxLoadedContent h1.speak').addClass('loading');
     		var This = this;
     		var reader = new FileReader();
-		    var image  = new Image();
 		    reader.readAsDataURL(file);  
 		    reader.onloadend = function () {
 	            This.api.uploadPhotos(reader.result,This.albumId,function(response){
 	            	$('#cboxLoadedContent #uploadPreview').append('<img src="'+ reader.result +'"/>');
-	            	$('#cboxLoadedContent #uploadPreview').removeClass('loading');
+	            	$('#cboxLoadedContent h1.speak').removeClass('loading');
 	            });
 		    };
     	},

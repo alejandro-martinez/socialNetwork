@@ -24,7 +24,7 @@ li{list-style: none;}
 
 /* Clases generales */
 .loading {
-	background:url(colorbox/loading.gif) no-repeat center center;
+	background:url(colorbox/loading.gif) no-repeat no-repeat 350px;
 }
 .hidden {display: none;}
 .show {display: block;}
@@ -301,8 +301,11 @@ button:active{
 }
 
 #uploadPreview {
-	width:100%;
-	height:100px;
+	width: 100%;
+	height: 100px;
+	position: absolute;
+	top: 58px;
+	left: 18px;
 }
 #uploadPreview img {
 	width:100px;
@@ -320,7 +323,12 @@ button:active{
 	width: 600px;
 	margin: 0 auto;
 }
-
+#drop_zone{
+	border: 2px solid blueviolet;
+	padding: 2px;
+	height: 70%;
+	margin: 14px;
+}
 .container-album ul{	list-style: none;
 	margin-top: 5%;
 	padding: 0;}
