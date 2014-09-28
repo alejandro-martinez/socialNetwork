@@ -32,7 +32,7 @@ var Views = {
 			reader.readAsDataURL(event.originalEvent.dataTransfer.files[0]);	//Lee la foto arrastrada al perfil
 			reader.onloadend = function () {
 				console.log(reader.result)
-		/*		This.api.uploadPhoto(reader.result, true, function(response){	//Sube la foto a FB
+				This.api.uploadPhotos(reader.result, me, function(response){	//Sube la foto a FB
 					$('#image-preview img').attr('src',reader.result);
 					$('#image-preview').attr('class','show');
 					$('#image-preview a').attr('href',"https://www.facebook.com/photo.php?fbid="+response.id+"&makeprofile=1");
@@ -40,7 +40,7 @@ var Views = {
 					$('#user-photo').removeClass('loading');
 				});
 			};
-		*/	};
+			};
 			return false;
 		},
 		initialize: function(){
@@ -696,9 +696,7 @@ var Views = {
 	UpdateAlbum: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'drop #albumActions' 	:'uploadPhotos',
 			'click button#selectPhotos'	: 'selectPhotos',
-//			'click #loadPhotos #removePhoto': 'removePhoto',
 			'click a.albumPhotos.nextPage' : 'nextPage',
 			'click a.albumPhotos.prevPage'	: 'prevPage'
 		},
@@ -707,21 +705,6 @@ var Views = {
 			this.albumId = this.options.albumId;
 			var This = this;
 			this.render();
-			/*$("#cboxLoadedContent").bind("dragover", function(e) {
-				e.preventDefault();
-				return false;
-			});
-
-			$("#cboxLoadedContent").bind("drop", function(e){
-				e.preventDefault();
-				reader.readAsDataURL(e.originalEvent.dataTransfer.files);
-				for (var i = 0; i < e.originalEvent.dataTransfer.files.length; i++) {
-	  				reader.onloadend = function () {
-	  					console.log(reader.result);
-	  				}
-	  			}
-				return false;
-			});*/
 		},
 		removePhoto: function(){
 		
@@ -730,8 +713,8 @@ var Views = {
     		var This = this;
     		$.colorbox({
 				title:'Subir fotos al album',
-				width:'50%',
-				height:'50%',
+				width:'75%',
+				height:'40%',
 				html: $('#uploadForm').html()
 			});
 			$("#cboxLoadedContent #upload").on('click',This.uploadPhotos);
@@ -749,18 +732,11 @@ var Views = {
 		    var image  = new Image();
 		    reader.readAsDataURL(file);  
 		    reader.onloadend = function () {
-				$('#cboxLoadedContent #uploadPreview').append('<img src="'+ reader.result +'"/>');
 	            This.api.uploadPhotos(reader.result,This.albumId,function(response){
+	            	$('#cboxLoadedContent #uploadPreview').append('<img src="'+ reader.result +'"/>');
 	            	$('#cboxLoadedContent #uploadPreview').removeClass('loading');
 	            });
 		    };
-    	},
-    	uploadPhotos: function(){
-			$("#examinar").change(function (e) {
-			    if(this.disabled) return alert('File upload not supported!');
-			    var F = this.files;
-			    if(F && F[0]) for(var i=0; i<F.length; i++) readImage( F[i] );
-			});
     	},
 		render: function(){
 			var This = this;

@@ -199,32 +199,6 @@ function AppController(){
 	        }
 	    });
 	},
-	this.uploadPhoto = function (foto, esPerfil, callback){
-		var access_token = FB.getAuthResponse()['accessToken'];
-		var extension = foto.substring(1,11);
-		
-		try{
-	        blob = utils.dataURItoBlob(foto.replace("data:image/jpeg;base64,",""),"image/" + extension);
-		}
-		catch(e){console.log(e);}
-
-		var form = utils.newForm({'accessToken':access_token,'source':blob,'message':''});
-
-		$.ajax({
-	        url:"https://graph.facebook.com/me/photos?access_token="+access_token,
-	        type:"POST",
-	        data:form,
-	        processData:false,
-	        contentType:false,
-	        cache:false,
-	        success:function(data){
-	        	callback(data);
-	        },
-	        error:function(shr,status,data){
-	            callback(data);
-	        }
-	    });
-	},
 	this.addFriend = function (id){
 		FB.ui({ method: 'friends.add', id: id });
 	},
