@@ -243,17 +243,26 @@ button:active{
 	font-size: 3em;
 	color:black;
 	border-radius: 10px 0 0 10px;
-	width: calc(100% - 120px);
+	width: calc(100% - 216px);
 	padding: 0 10px;
 	float: left;
 }
+#adjuntarFoto{
+	float: left;
+	margin: 0 auto;
+	width: 96px;
+	height: 83px;
+	line-height: 24px;
+	text-align: right;
+	border-radius: 0 10px 10px 0;
+}
+
 #publicarStatus{
 	float: left;
 	margin: 0 auto;
 	width: 96px;
 	height: 83px;
 	text-align: right;
-	border-radius: 0 10px 10px 0;
 }
 
 .albumInfo {
