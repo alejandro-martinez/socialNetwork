@@ -894,3 +894,13 @@ html {
   font-size: 14px;
 }
 
+#adjuntarFoto h1.icon-photos {
+  position: absolute;
+  color: #fff;
+  top: 30px;
+  right: 21px;
+  font-family: iconFont;
+  z-index: 1002;
+  margin: 0px;
+  font-size: 3em;
+}
