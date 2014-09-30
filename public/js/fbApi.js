@@ -115,8 +115,13 @@ function AppController(){
 			callback(model);
 		});	
 	},
-	this.newPost = function(id,mensaje, callback){
-		FB.api('/'+id+'/feed', 'post', { message: mensaje }, function(response) {
+	this.newPost = function(id,foto, mensaje, callback){
+		if (foto)
+			message = {message: mensaje, object_attachment: foto}
+		else
+			message = {message: mensaje}
+
+		FB.api('/'+id+'/feed', 'post', message, function(response) {
 		  if (!response || response.error) {
 		  		callback(response.error);
 		  } else {
@@ -184,7 +189,7 @@ function AppController(){
 		    }
 		);
 	},
-	this.uploadPhotos = function (foto,albumId, callback){
+	this.uploadPhotos = function (foto,albumId, mensaje, callback){
 		var access_token = FB.getAuthResponse()['accessToken'];
 		var extension = foto.substring(1,11);
 		
@@ -193,7 +198,7 @@ function AppController(){
 		}
 		catch(e){console.log(e);}
 
-		var form = utils.newForm({'accessToken':access_token,'source':blob,'message':''});
+		var form = utils.newForm({'accessToken':access_token,'source':blob,'message':mensaje});
 
 		$.ajax({
 	        url:"https://graph.facebook.com/"+albumId+"/photos?access_token="+access_token,
