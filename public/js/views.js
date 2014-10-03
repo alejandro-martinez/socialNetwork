@@ -20,10 +20,10 @@ var Views = {
 			'mouseout .speak': 'shutUp'
 		},
 		speak: function(ev){
-			speak(ev.currentTarget.attributes['data-voice'].value);
+			Speech.speak(ev.currentTarget.attributes['data-voice'].value);
 		},
 		shutUp: function(){
-			shutUp();
+			Speech.shutUp();
 		},
 		dropProfilePhoto: function(event) {				//Drag&drop foto de perfil
 			var This = this;
@@ -154,10 +154,10 @@ var Views = {
 			this.render();
 		},
 		speak: function(ev){
-			speak(ev.currentTarget.attributes['data-voice'].value);
+			Speech.speak(ev.currentTarget.attributes['data-voice'].value);
 		},
 		shutUp: function(){
-			shutUp();
+			Speech.shutUp();
 		},
 		refreshFeed: function(){
 			var This = this;
@@ -303,10 +303,10 @@ var Views = {
 			this.render();
 		},
 		speak: function(ev){
-			speak(ev.currentTarget.attributes['data-voice'].value);
+			Speech.speak(ev.currentTarget.attributes['data-voice'].value);
 		},
 		shutUp: function(){
-			shutUp();
+			Speech.shutUp();
 		},
 		render: function(){
 			var This = this;
@@ -422,10 +422,10 @@ var Views = {
 			this.render();
 		},
 		speak: function(ev){
-			speak(ev.currentTarget.attributes['data-voice'].value);
+			Speech.speak(ev.currentTarget.attributes['data-voice'].value);
 		},
 		shutUp: function(){
-			shutUp();
+			Speech.shutUp();
 		},
 		render: function(){
 			var This = this;
@@ -568,6 +568,9 @@ var Views = {
 	}),
 	Search: Backbone.View.extend({
 		el: $("#header"),
+		events: {
+			'click #SpeechConf': 'mute'
+		},
 		initialize: function(){
 			this.render();
 		},
@@ -622,6 +625,17 @@ var Views = {
 		    });
 			});
 		},
+		mute: function(){
+			if(Speech.config.mute){
+				$('#SpeechConf h1').removeClass('icon-volume-off');
+				$('#SpeechConf h1').addClass('icon-volume-on');
+				Speech.config.mute = false;
+			} else {
+				$('#SpeechConf h1').removeClass('icon-volume-on');
+				$('#SpeechConf h1').addClass('icon-volume-off');
+				Speech.config.mute = true;
+			}
+		}
 	}),
 	//Fotos del usuario
 	Photos: Backbone.View.extend({
@@ -638,10 +652,10 @@ var Views = {
 			this.render();
 		},
 		speak: function(ev){
-			speak(ev.currentTarget.attributes['data-voice'].value);
+			Speech.speak(ev.currentTarget.attributes['data-voice'].value);
 		},
 		shutUp: function(){
-			shutUp();
+			Speech.shutUp();
 		},
 		render: function(){
 			var This = this;
@@ -738,10 +752,10 @@ var Views = {
 			this.render();
 		},
 		speak: function(ev){
-			speak(ev.currentTarget.attributes['data-voice'].value);
+			Speech.speak(ev.currentTarget.attributes['data-voice'].value);
 		},
 		shutUp: function(){
-			shutUp();
+			Speech.shutUp();
 		},
 		showLikesAndComments: function(ev){
 			var This = this;
@@ -809,10 +823,10 @@ var Views = {
 			this.render();
 		},
 		speak: function(ev){
-			speak(ev.currentTarget.attributes['data-voice'].value);
+			Speech.speak(ev.currentTarget.attributes['data-voice'].value);
 		},
 		shutUp: function(){
-			shutUp();
+			Speech.shutUp();
 		},
 		deletePhotos: function(ev){
 			var id = ev.currentTarget.attributes['data-photo-id'].value;
@@ -1029,10 +1043,10 @@ var Views = {
 			this.render();
 		},
 		speak: function(ev){
-			speak(ev.currentTarget.attributes['data-voice'].value);
+			Speech.speak(ev.currentTarget.attributes['data-voice'].value);
 		},
 		shutUp: function(){
-			shutUp();
+			Speech.shutUp();
 		},
 		render: function(){
 			var This = this;

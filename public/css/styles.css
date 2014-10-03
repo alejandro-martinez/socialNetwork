@@ -162,6 +162,8 @@ button:active{
 .icon-comments:before{content:"\e039"}
 .icon-likes:before{content:"\e04d"}
 .icon-groups:before{content:"\e13d"}
+.icon-volume-on:before{content:"\e1a0";}
+.icon-volume-off:before{content:"\e1a1";}
 
 .bg-color-blue{background-color:#2d89ef!important;}
 .bg-color-blueLight{background-color:#eff4ff!important;}
@@ -685,6 +687,18 @@ a.postInfo{
 	color: #FFF;
 	margin: 0 10px;
 }
+.botonCircularChico{
+	font-family: iconFont;
+	text-align: center;
+	text-decoration: none;
+	width: 55px;
+	line-height: 55px;
+	display: block;
+	border-radius: 100%;
+	float: left;
+	color: #FFF;
+	margin: 5px 15px;
+}
 /* ---- notifications.html ---- */
 
 .notificaciones .post{
@@ -726,15 +740,11 @@ div#container-home {
 }
 
 .header-right {
-    width: 530px;
     color: white;
     margin-right: 50px;
-    position: absolute;
-    left: 220px;
 }
 .header-right > h1.icon-notificaciones{
-    position:absolute;
-    top: 3px;
+	position: relative;
     cursor:pointer;
 	line-height:60px;
 	right:0;
@@ -841,9 +851,9 @@ html {
 }
 
 .typeahead {
-	position: absolute;
-	top: 7px;
+	margin: 7px 0px 7px 130px;
   	background-color: #fff;
+  	float: left;
 }
 
 .typeahead:focus {
