@@ -127,7 +127,7 @@ var Views = {
 		publishPost: function(event){
 			var This = this;
 			if($('#post-text').val()) {
-				this.api.newPost($('#destinoPost').val(),$('#post-text').val(), function(response){
+				this.api.newPost($('#destinoPost').val(), false, $('#post-text').val(), function(response){
 					if (response.id){
 						var ws = new AppRouter({ac: This.api})
 						window.location.reload();

@@ -19,7 +19,20 @@ var AppRouter = Backbone.Router.extend({
     initialize: function (appC) {
     	this.api = appC.ac;    									//Objeto AppController 
     	this.data = appC.ac.dataDefault;						//Info de usuario logueado
-    	this.loggedUser = appC.ac.loggedUser;					
+    	this.loggedUser = appC.ac.loggedUser;
+        This = this;
+
+        // instancio y actualizo por primera vez las colecciones criticas
+        actualizarListas = function(){ 
+            This.api.get.home(function(response){           // voy a actualizar
+                Colls.home.add(response.data);              // constantemente
+            });                                             // solo el home
+            This.api.get.notifications(function(response){  // y las notificaciones
+                Colls.notifications.add(response.data);     // que es la unica
+            });                                             // informacion critica
+        }
+        // intervalo de actualizacion de modelos
+        setInterval(actualizarListas(), 300000); // 300000 ms = 5 minutos
     },
     index: function(){
         var This = this;
