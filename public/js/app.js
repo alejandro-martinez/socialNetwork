@@ -32,7 +32,9 @@ var AppRouter = Backbone.Router.extend({
             });                                             // informacion critica
         }
         // intervalo de actualizacion de modelos
+        /*
         setInterval(actualizarListas(), 300000); // 300000 ms = 5 minutos
+        */
     },
     index: function(){
         var This = this;
