@@ -115,13 +115,9 @@ function AppController(){
 			callback(model);
 		});	
 	},
-	this.newPost = function(id,foto, mensaje, callback){
-		if (foto)
-			message = {message: mensaje, object_attachment: foto}
-		else
-			message = {message: mensaje}
+	this.newPost = function(id,mensaje, callback){
 
-		FB.api('/'+id+'/feed', 'post', message, function(response) {
+		FB.api('/'+id+'/feed', 'post', {message: mensaje}, function(response) {
 		  if (!response || response.error) {
 		  		callback(response.error);
 		  } else {

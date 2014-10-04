@@ -1,5 +1,4 @@
-var Views = {
-	
+var Views = {	
 	NotLoggedInView: Backbone.View.extend({				//Muestra + Logo central
 		el: $("#content"),
 		initialize: function(){
@@ -67,76 +66,44 @@ var Views = {
 		render: function(){
 			var This = this;
 			utils.loadTemplate("newPost",function(html){
-				$("#body").prepend(_.template(html));  
+				$("#body #wall").prepend(_.template(html));  
 			});
 		},
-		selectPhotos: function(event){
+		selectPhotos: function(){
     		var This = this;
-    		($('#post-text').val()) ? mensaje = $('#post-text').val() : mensaje = null;
-    		$.colorbox({
-				title:'Adjuntar foto al post',
-				width:'45%',
-				height:'43%',
-				html: $('#uploadForm').html()
-			});
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);	
-			$("#cboxLoadedContent #upload").on('click',This.uploadPhotos);
-			$("#cboxLoadedContent #examinar").on('change',function (e) {
+    		$("#examinar").on('change',function (e) {
 			    var F = this.files;
-			    if(F && F[0]) for(var i=0; i<F.length; i++) 
-			    	This.readImage( F[i] );
+			    if(F && F[0]) {
+			    	var reader = new FileReader();
+				    reader.readAsDataURL(F[0]);  
+				    reader.onloadend = function () {
+				    	This.attachment = reader.result;
+				    }			
+				}            
 			});
-			$('#cboxLoadedContent #drop_zone').on('drop',function(e){
-				$('#cboxLoadedContent h1.speak').addClass('loading');
-		        if(e.originalEvent.dataTransfer){
-		            if(e.originalEvent.dataTransfer.files.length) {
-		                e.preventDefault();
-		                e.stopPropagation();
-		                var reader = new FileReader();
-		                for (var i = 0, f; f = e.originalEvent.dataTransfer.files[i]; i++) {
-						    reader.readAsDataURL(f);  
-						    reader.onloadend = function () {
-					            This.api.uploadPhotos(reader.result,'me',mensaje,function(response){
-					            	$('#cboxLoadedContent #uploadPreview').append('<img src="'+ reader.result +'"/>');
-					            	$('#cboxLoadedContent h1.speak').removeClass('loading');
-					            	$.colorbox.close();
-					            	window.location.reload();
-					            });
-						    };
-		            }   
-		        }
-			    }
-			});	        	
-    	},
-    	readImage: function(file, albumId){
-    		($('#post-text').val()) ? mensaje = $('#post-text').val() : mensaje = null;
-    		$('#cboxLoadedContent h1.speak').addClass('loading');
-    		var This = this;
-    		var reader = new FileReader();
-		    reader.readAsDataURL(file);  
-		    reader.onloadend = function () {
-	            This.api.uploadPhotos(reader.result,'me',mensaje,function(response){
-	            	$('#cboxLoadedContent #uploadPreview').append('<img src="'+ reader.result +'"/>');
-	            	$('#cboxLoadedContent h1.speak').removeClass('loading');
-	            	$.colorbox.close();
-					window.location.reload();
-	            });
-		    };
+			$("#examinar").trigger('click');
     	},
 		publishPost: function(event){
 			var This = this;
-			if($('#post-text').val()) {
-				this.api.newPost($('#destinoPost').val(), false, $('#post-text').val(), function(response){
-					if (response.id){
-						var ws = new AppRouter({ac: This.api})
-						window.location.reload();
-					}
-				});
+			($('#post-text').val()) ? mensaje = $('#post-text').val() : mensaje = "";
+			if (This.attachment){
+				$('#post-text').addClass('loading');
+				This.api.uploadPhotos(This.attachment,'me',mensaje,function(response){
+	            	$('#post-text').removeClass('loading');
+					window.location.reload();
+	            });
 			}
-			$('#post-text').val('');				//Reset input
+			else {
+				if($('#post-text').val()) {
+					this.api.newPost($('#destinoPost').val(), $('#post-text').val(), function(response){
+						if (response.id)
+							window.location.reload();
+					});
+				}
+			}
+			$('#post-text').val('');	
 		}
-	}),
+	}), 
 	NewsFeed: Backbone.View.extend({
 		el: $("#content"),
 		events: {
@@ -1146,5 +1113,4 @@ var Views = {
 			$('#colorbox .speak').on('mouseout', this.shutUp);	
     	},
 	})
-
 }

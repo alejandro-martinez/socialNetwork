@@ -18,13 +18,13 @@ body>.bg{
 	background-position: center;
 }
 
-*{margin: 0; padding: 0}
+*{margin: 0; padding: 0; }
 
 li{list-style: none;}
 
 /* Clases generales */
 .loading {
-	background:url(colorbox/loading.gif) no-repeat no-repeat 350px;
+	background:#fff url(colorbox/loading.gif) no-repeat no-repeat 600px;
 }
 .hidden {display: none;}
 .show {display: block;}
@@ -325,8 +325,7 @@ button:active{
 
 #examinar {
 	position:absolute;
-	left:40%;
-	bottom:50px;
+	top: -1000px;
 }
 /* ---- albums.html ---- */
 
