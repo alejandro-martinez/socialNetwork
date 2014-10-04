@@ -38,13 +38,12 @@ var AppRouter = Backbone.Router.extend({
     },
     index: function(){
         var This = this;
-        this.newPostView = '';
     	if (this.loggedUser) {
     			this.mainView = new Views.Main({api: this.api, model: this.data});					//Menu lateral
                 this.api.newsFeed(function(response){
 			    	if(window.location.hash.split('/')[0] == "#fbid") {
 	                    this.newsFeed = new Views.NewsFeed({model: response, api: This.api});
-                            this.newPostView = new Views.NewPost({api: This.api});                  //Que estas pensando
+                        this.newPostView = new Views.NewPost({api: This.api});                  //Que estas pensando
                         this.searchView = new Views.Search();                                       //Buscador
 			    	}
                 });
@@ -96,7 +95,7 @@ var AppRouter = Backbone.Router.extend({
         var This = this;
         this.api.updateWall(function(response){
             This.wallView = new Views.Wall({model: response, api: This.api});    
-                This.newWallPostView = new Views.NewPost({api: This.api});                                             //Que estas pensando
+            This.newPostView = new Views.NewPost({api: This.api});                                             //Que estas pensando
         });
     },
     photos: function(){

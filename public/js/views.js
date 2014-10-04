@@ -66,7 +66,7 @@ var Views = {
 		render: function(){
 			var This = this;
 			utils.loadTemplate("newPost",function(html){
-				$("#body #wall").prepend(_.template(html));  
+				$("#body").prepend(_.template(html));  
 			});
 		},
 		selectPhotos: function(){
