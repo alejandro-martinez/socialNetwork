@@ -618,6 +618,7 @@ width: 187px;}
 
 a.postInfo{
 	font-size: 18px;
+    float: left;
 }
 
 .likes {display:none;}
