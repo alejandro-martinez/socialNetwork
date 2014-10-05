@@ -115,13 +115,9 @@ function AppController(){
 			callback(model);
 		});	
 	},
-	this.newPost = function(id,foto, mensaje, callback){
-		if (foto)
-			message = {message: mensaje, object_attachment: foto}
-		else
-			message = {message: mensaje}
+	this.newPost = function(id,mensaje, callback){
 
-		FB.api('/'+id+'/feed', 'post', message, function(response) {
+		FB.api('/'+id+'/feed', 'post', {message: mensaje}, function(response) {
 		  if (!response || response.error) {
 		  		callback(response.error);
 		  } else {
@@ -250,6 +246,77 @@ function AppController(){
 		      }
 		    }
 		);
+	},
+	this.get = { /* preparando para backbone collections */
+		home: function (callback){
+			FB.api("/me/home?locale="+This.locale,
+				function (response) {
+					if (response && !response.error) {
+						callback(response);
+					}
+				}
+			);
+		},
+		feed: function (callback){
+			FB.api("/me/feed?limit=1&locale="+This.locale,
+				function (response) {
+					if (response && !response.error) {
+						callback(response);
+					}
+				}
+			);
+		},
+		notifications: function(callback){
+			FB.api(
+				"/me/notifications?include_read=1&limit=5&locale="+This.locale,
+				function (response) {
+					if (response && !response.error) {
+						callback(response);
+					}
+				}
+			);
+		},
+		photos: function(callback){
+			fbUser('/me/photos?locale='+This.locale, function(model){
+				callback(model);
+			});
+		},
+		groups: function(callback){
+			fbUser('/me/groups/?locale='+This.locale, function(model){
+				console.log(model);
+				callback(model);
+			});
+		},
+		groupFeed: function(id,callback){
+			fbUser('/'+id+'/feed/?locale='+This.locale, function(model){
+				callback(model);
+			});
+		},
+		friends: function(callback){
+			fbUser('/me/friends?fields=id,name,birthday,gender,hometown,location&locale='+This.locale, function(model){
+				callback(model);
+			});
+		},
+		friend: function(id, callback){
+			fbUser('/'+id+'?locale='+This.locale, function(model){
+				callback(model);
+			});
+		},
+		friendPosts: function(id, callback){
+			fbUser('/'+id+'/posts?locale='+This.locale, function(model){
+				callback(model);
+			});
+		},
+		friendAlbum: function(id, callback){
+			fbUser('/'+id+'/albums?locale='+This.locale, function(model){
+				callback(model);
+			});
+		},
+		albumPhotos: function(id, callback){
+			fbUser('/'+id+'/photos?locale='+This.locale, function(model){
+				callback(model);
+			});	
+		},
 	}
 }
 

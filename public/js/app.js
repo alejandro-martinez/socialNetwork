@@ -19,24 +19,34 @@ var AppRouter = Backbone.Router.extend({
     initialize: function (appC) {
     	this.api = appC.ac;    									//Objeto AppController 
     	this.data = appC.ac.dataDefault;						//Info de usuario logueado
-    	this.loggedUser = appC.ac.loggedUser;					
+    	this.loggedUser = appC.ac.loggedUser;
+        This = this;
+
+        // instancio y actualizo por primera vez las colecciones criticas
+        actualizarListas = function(){ 
+            This.api.get.home(function(response){           // voy a actualizar
+                Colls.home.add(response.data);              // constantemente
+            });                                             // solo el home
+            This.api.get.notifications(function(response){  // y las notificaciones
+                Colls.notifications.add(response.data);     // que es la unica
+            });                                             // informacion critica
+        }
+        // intervalo de actualizacion de modelos
+        /*
+        setInterval(actualizarListas(), 300000); // 300000 ms = 5 minutos
+        */
     },
     index: function(){
         var This = this;
     	if (this.loggedUser) {
-            //if (!this.newPostView){
     			this.mainView = new Views.Main({api: this.api, model: this.data});					//Menu lateral
                 this.api.newsFeed(function(response){
 			    	if(window.location.hash.split('/')[0] == "#fbid") {
 	                    this.newsFeed = new Views.NewsFeed({model: response, api: This.api});
-                        //if (!this.newPostView){
-                            this.newPostView = new Views.NewPost({api: This.api});    //Que estas pensando
-                        //}
+                        this.newPostView = new Views.NewPost({api: This.api});                  //Que estas pensando
                         this.searchView = new Views.Search();                                       //Buscador
 			    	}
                 });
-
-            //}
 		}
 		else {
 			new Views.NotLoggedInView();						//Muestra logo de Facebook +
@@ -84,8 +94,8 @@ var AppRouter = Backbone.Router.extend({
     posts: function(){
         var This = this;
         this.api.updateWall(function(response){
-            this.wallView = new Views.Wall({model: response, api: This.api});    
-            this.newPostView = new Views.NewPost({api: This.api});                                             //Que estas pensando
+            This.wallView = new Views.Wall({model: response, api: This.api});    
+            This.newPostView = new Views.NewPost({api: This.api});                                             //Que estas pensando
         });
     },
     photos: function(){
