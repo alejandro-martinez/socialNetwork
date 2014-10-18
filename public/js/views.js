@@ -58,6 +58,7 @@ var Views = {
 		events: {
 			'click #publicarStatus': 'publishPost',
 			'click #adjuntarFoto': 'selectPhotos',
+			'click .selectedImage': 'deleteSelectedPhoto',
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -69,6 +70,10 @@ var Views = {
 				$("#body").prepend(_.template(html));  
 			});
 		},
+		deleteSelectedPhoto: function(){
+			This.attachment = null;
+			$('.selectedImage').remove();
+		},
 		selectPhotos: function(){
     		var This = this;
     		$("#examinar").on('change',function (e) {
@@ -78,6 +83,9 @@ var Views = {
 				    reader.readAsDataURL(F[0]);  
 				    reader.onloadend = function () {
 				    	This.attachment = reader.result;
+				    	var img = $('<img class="selectedImage">');
+						img.attr('src', reader.result);
+						img.appendTo('#que-estas-pensando');
 				    }			
 				}            
 			});
