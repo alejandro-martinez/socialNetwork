@@ -58,7 +58,7 @@ var Views = {
 		events: {
 			'click #publicarStatus': 'publishPost',
 			'click #adjuntarFoto': 'selectPhotos',
-			'click .selectedImage': 'deleteSelectedPhoto',
+			'click selectedImage': 'deleteSelectedPhoto',
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -544,10 +544,24 @@ var Views = {
 	Search: Backbone.View.extend({
 		el: $("#header"),
 		events: {
-			'click #SpeechConf': 'mute'
+			'click #SpeechConf': 'mute',
+			"keyup .ui-corner-all" : "navigateResultItem"
 		},
 		initialize: function(){
 			this.render();
+		},
+		removeAcentos: function(text){
+				    var acentos = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç";
+				    var original = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc";
+				    for (var i=0; i<acentos.length; i++) {
+				        text = text.replace(acentos.charAt(i), original.charAt(i));
+				    }
+				    return text;
+		},
+		navigateResultItem: function(event){
+		    if(event.keyCode == 13){
+		        window.location.href ='/#friend/'+$('.typeahead').val();
+		    }
 		},
 		render: function(){
 			var This = this;
@@ -555,7 +569,7 @@ var Views = {
 				template = _.template(html);
 				$("#header").append(template);
 
-							 $( ".typeahead" ).autocomplete({
+				$( ".typeahead" ).autocomplete({
 			 	create: function() {
 			        $(this).data('ui-autocomplete')._renderItem =	function( ul, item ) {
 					    var image_url = "http://graph.facebook.com/" + item.value +"/picture";
@@ -566,31 +580,39 @@ var Views = {
 			    },
 		        source: function( request, response ) {
 			        $.ajax({
-			          url: "https://graph.facebook.com/search?q="+request.term+"&type=user&limit=12&access_token="+FB.getAuthResponse()['accessToken']+"&callback=?",
+					  url: "https://graph.facebook.com/fql?q=SELECT uid,name,mutual_friend_count FROM user WHERE contains('"+request.term+"')&access_token="+FB.getAuthResponse()['accessToken'],			          
 			          dataType: "jsonp",
 			          data: {
 			            featureClass: "P",
 			            style: "full",
-			            maxRows: 12,
+			            maxRows: 20,
 			          },
 			           beforeSend: function(){
 						  $('.typeahead').addClass('searching');     
 					   },
 			          success: function( data ) {
+			          	jQuery.each(data.data, function(i, item) {
+			          		if (item.mutual_friend_count == 0){
+								data.data[i].name = ''
+			          		}
+						});
 			          	$('.typeahead').removeClass('searching');
 			            res = $.map( data.data, function( item ) {
-			              if (item.name.toLowerCase().indexOf(request.term.toLowerCase()) >= 0){
-			                return {
-			                  label: item.name,
-			                  value: item.id
-			                }
-			              }
-			            });
-			            response(res);
+				            itemNameSinAcentos = This.removeAcentos(item.name);
+								if (itemNameSinAcentos.toLowerCase().indexOf(request.term.toLowerCase()) >= 0){
+									if (itemNameSinAcentos != 0){
+									    return {
+									      label: item.name,
+									      value: item.uid
+									    }
+									}
+				          		}
+				            });
+				            response(res);
 			          }
 			        });
 		      },
-		      minLength: 3,
+		      minLength: 5,
 		      open: function() {
 		        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
 		      },
