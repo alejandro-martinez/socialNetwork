@@ -545,7 +545,9 @@ var Views = {
 		el: $("#header"),
 		events: {
 			'click #SpeechConf': 'mute',
-			"keyup .ui-corner-all" : "navigateResultItem"
+			"keyup .ui-corner-all" : "navigateResultItem",
+			'mouseover .speak': 'speak',
+			'mouseout .speak': 'shutUp'
 		},
 		initialize: function(){
 			this.render();
@@ -562,6 +564,12 @@ var Views = {
 		    if(event.keyCode == 13){
 		        window.location.href ='/#friend/'+$('.typeahead').val();
 		    }
+		},
+		speak: function(ev){
+			Speech.speak(ev.currentTarget.attributes['data-voice'].value);
+		},
+		shutUp: function(){
+			Speech.shutUp();
 		},
 		render: function(){
 			var This = this;
