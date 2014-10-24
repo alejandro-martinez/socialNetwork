@@ -158,7 +158,7 @@ function AppController(){
 		    }
 		);
 	},
-	this.createAlbum = function(nombre,descripcion,privacidad,callback){
+	this.createAlbum = function(nombre,descripcion,callback){
 		FB.api(
 		    "/me/albums",
 		    "POST",

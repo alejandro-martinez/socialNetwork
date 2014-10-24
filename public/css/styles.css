@@ -26,6 +26,9 @@ li{list-style: none;}
 .loading {
 	background:#fff url(colorbox/loading.gif) no-repeat no-repeat 600px;
 }
+.loading-big {
+	background: url(../img/ajax-loader-big.gif) no-repeat 0px;
+}
 .hidden {display: none;}
 .show {display: block;}
 
@@ -332,6 +335,7 @@ button:active{
 
 #albumPhotos{
 	width: 600px;
+	min-height: 240px;
 	margin: 0 auto;
 }
 #drop_zone{
@@ -798,6 +802,13 @@ left: -100px;
 div#container-album .nextPage {
 right: -12%;
 position: absolute;
+}
+
+#upload {
+	position: absolute;
+	top: 0px;
+	width: 152px;
+	right: 0;
 }
 }
 /*Plugin de autocompletar de Twitter*/

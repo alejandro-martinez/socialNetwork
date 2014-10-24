@@ -819,8 +819,7 @@ var Views = {
 	UpdateAlbum: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'click a.deletePhoto'		: 'deletePhotos',
-			'click button#selectPhotos'	: 'selectPhotos',
+			'click a.deletePhoto' : 'deletePhotos',
 			'click a.albumPhotos.nextPage' : 'nextPage',
 			'click a.albumPhotos.prevPage'	: 'prevPage',
 		},
@@ -839,47 +838,17 @@ var Views = {
 		deletePhotos: function(ev){
 			var id = ev.currentTarget.attributes['data-photo-id'].value;
 			this.api.deletePhoto(id,function(response){
-	            	$(ev.currentTarget).parents('.flip-container').remove();
+	            $(ev.currentTarget).parents('.flip-container').remove();
+	            $('.selectedImage').remove();
 	        });
     	},
-    	selectPhotos: function(event){
-    		var This = this;
-    		$.colorbox({
-				title:'Subir fotos al album',
-				width:'75%',
-				height:'73%',
-				html: $('#uploadForm').html()
-			});
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);	
-			$("#cboxLoadedContent #upload").on('click',This.uploadPhotos);
-			$("#cboxLoadedContent #examinar").on('change',function (e) {
-			    if(this.disabled) return alert('File upload not supported!');
-			    var F = this.files;
-			    if(F && F[0]) for(var i=0; i<F.length; i++) 
-			    	This.readImage( F[i] );
-			});
-			$('#cboxLoadedContent #drop_zone').on('drop',function(e){
-				$('#cboxLoadedContent h1.speak').addClass('loading');
-		        if(e.originalEvent.dataTransfer){
-		            if(e.originalEvent.dataTransfer.files.length) {
-		                e.preventDefault();
-		                e.stopPropagation();
-		                var reader = new FileReader();
-		                for (var i = 0, f; f = e.originalEvent.dataTransfer.files[i]; i++) {
-						    reader.readAsDataURL(f);  
-						    reader.onloadend = function () {
-					            This.api.uploadPhotos(reader.result,This.albumId,null,function(response){
-					            	$('#cboxLoadedContent #uploadPreview').append('<img src="'+ reader.result +'"/>');
-					            	$('#cboxLoadedContent h1.speak').removeClass('loading');
-					            });
-						    };
-		            }   
-		        }
-			    }
-			});
-        	
-    	},
+		refreshAlbumPhotos: function(id){
+			var This = this;
+			This.api.getAlbumPhotos(id,15,function(response){
+           		this.UpdateAlbumView = new Views.UpdateAlbum({model: response,albumId: id, api: This.api});
+				this.UpdateAlbumView.initialize();
+        	});   
+		},
     	readImage: function(file, albumId){
     		$('#cboxLoadedContent h1.speak').addClass('loading');
     		var This = this;
@@ -892,6 +861,24 @@ var Views = {
 	            });
 		    };
     	},
+    	listenUploadEvent: function(){
+    		var This = this;
+			$("#upload").on('change',function (e) {
+			    var F = this.files;
+			    if(F && F[0]) {
+			    	var reader = new FileReader();
+				    reader.readAsDataURL(F[0]);  
+				    $('#body').addClass('loading-big');
+				    reader.onloadend = function () {
+						This.api.uploadPhotos(reader.result,This.albumId,'',function(response){
+			            	$('#body').removeClass('loading-big');
+							This.refreshAlbumPhotos(This.albumId);
+			            });
+				    }			
+				}            
+				this.files= null;
+			});
+    	},
 		render: function(){
 			var This = this;
 			var Photos = Backbone.Model.extend({});
@@ -900,6 +887,7 @@ var Views = {
 			utils.loadTemplate("updateAlbum",function(html){
 				template = _.template(html);
 				$("#body").html(template({photos: photos.models}));
+				This.listenUploadEvent();
 			});
 		},
 		nextPage: function(){
@@ -970,13 +958,12 @@ var Views = {
     	},
     	saveAlbum: function(ev){
     		this.api = ev.handleObj.data;
-    		privacidad = $('#privacidad  option:selected').val();
     		nombre = $('#cboxLoadedContent #nombre').val();
     		descripcion = $('#cboxLoadedContent #descripcion').val();
-    		this.api.createAlbum(nombre, descripcion, privacidad,function(response){
+    		$.colorbox.close();
+    		this.api.createAlbum(nombre, descripcion, function(response){
     			window.location.href ='/#updateAlbum/'+response.id;
     		});
-    		
     	},
     	createAlbum: function(){
 			var This = this;
