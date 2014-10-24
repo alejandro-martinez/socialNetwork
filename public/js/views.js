@@ -235,6 +235,8 @@ var Views = {
 		events: {
 			'click a.groups.nextPage'	: 'nextPage',
 			'click a.groups.prevPage'	: 'prevPage',
+			'mouseover .speak': 'speak',
+			'mouseout .speak': 'shutUp'
 		},
 		initialize: function(){
 			this.render();
@@ -245,6 +247,12 @@ var Views = {
 				template = _.template(html);
 				$("#body").html(template({groups:This.model.data}));
 			});
+		},
+		speak: function(ev){
+			Speech.speak(ev.currentTarget.attributes['data-voice'].value);
+		},
+		shutUp: function(){
+			Speech.shutUp();
 		},
 		nextPage: function(){
 			var This = this;
@@ -748,7 +756,9 @@ var Views = {
 		events: {
 			'click h2'	: 'showLikesAndComments',
 			'click .post a.like'	: 'like',
-			'click .post a.unlike'	: 'unlike'
+			'click .post a.unlike'	: 'unlike',
+			'click a.comments.nextPage' : 'nextPage',
+			'click a.comments.prevPage'	: 'prevPage',
 		},
 		initialize: function(){
 			this.api = this.options.api;

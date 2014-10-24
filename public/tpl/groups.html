@@ -3,7 +3,7 @@
 <div id="groups">
 	<ul>
 		<% _.each(groups, function(group){ %>
-		<li><a href="/#groupFeed/<%= group.id %>"><%= group.name %></a></li>
+		<li><a class="speak" data-voice="<%=group.name %>" href="/#groupFeed/<%= group.id %>"><%= group.name %></a></li>
 		<% }); %>
 	</ul>
 </div>
