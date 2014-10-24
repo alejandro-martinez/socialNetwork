@@ -923,7 +923,15 @@ var Views = {
 		events: {
 			'click a.albums.nextPage' : 'nextPage',
 			'click a.albums.prevPage'	: 'prevPage',
-			'click #create-album'		: 'createAlbum'
+			'click #create-album'		: 'createAlbum',
+			'mouseover .speak': 'speak',
+			'mouseout .speak': 'shutUp'
+		},
+		speak: function(ev){
+			Speech.speak(ev.currentTarget.attributes['data-voice'].value);
+		},
+		shutUp: function(){
+			Speech.shutUp();
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -979,6 +987,8 @@ var Views = {
 				html: $('#uploadAlbumForm').html()
 			});
 			$('#cboxLoadedContent #saveAlbum').on('click',This.api,This.saveAlbum);	
+			$('#cboxLoadedContent .speak').on('mouseover', This.speak);	
+			$('#cboxLoadedContent .speak').on('mouseout', This.shutUp);	
     	},
 	}),
 	//Fotos de albums
