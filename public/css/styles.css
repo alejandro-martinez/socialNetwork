@@ -330,6 +330,7 @@ button:active{
 #examinar {
 	position:absolute;
 	top: -1000px;
+	display: none;
 }
 /* ---- albums.html ---- */
 
@@ -948,7 +949,5 @@ html {
 	height: 83px;
 	width: 101px;
 	position: absolute;
-	top: 10px;
-	right: 124px;
 	z-index: 9999;
 }
