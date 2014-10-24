@@ -582,7 +582,7 @@ var Views = {
 			        $(this).data('ui-autocomplete')._renderItem =	function( ul, item ) {
 					    var image_url = "http://graph.facebook.com/" + item.value +"/picture";
 					    return $( "<li>" ).append($("<img style=''>").attr('src',image_url))
-					    .append( $( '<a href="/#friend/'+item.value+'">' ).text( item.label ) )
+					    .append( $( '<a class="speak" data-voice="'+item.label+'" href="/#friend/'+item.value+'">' ).text( item.label ) )
 					    .appendTo( ul );
 					 }
 			    },
@@ -617,6 +617,9 @@ var Views = {
 				          		}
 				            });
 				            response(res);
+				   			$('.ui-autocomplete a.speak').on('mouseover', This.speak);	
+							$('.ui-autocomplete a.speak').on('mouseout', This.shutUp);	
+		
 			          }
 			        });
 		      },
