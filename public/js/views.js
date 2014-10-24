@@ -508,11 +508,19 @@ var Views = {
 		events: {
 			'click h1.icon-notificaciones'	: 'showNotifications',
 			'click a.notifications.nextPage' : 'nextPage',
-			'click a.notifications.prevPage'	: 'prevPage'
+			'click a.notifications.prevPage'	: 'prevPage',
+			'mouseover .speak': 'speak',
+			'mouseout .speak': 'shutUp'
 		},
 		initialize: function(){
 			this.api = this.options.api;
 	        this.render();
+		},
+		speak: function(ev){
+			Speech.speak(ev.currentTarget.attributes['data-voice'].value);
+		},
+		shutUp: function(){
+			Speech.shutUp();
 		},
 		showNotifications: function(){
 			var This = this;
