@@ -506,7 +506,8 @@ var Views = {
 	Header: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'click h1.icon-notificaciones'	: 'showNotifications',
+			'click #SpeechConf': 'mute',
+			'click #verNotificaciones'	: 'showNotifications',
 			'click a.notifications.nextPage' : 'nextPage',
 			'click a.notifications.prevPage'	: 'prevPage',
 			'mouseover .speak': 'speak',
@@ -555,12 +556,20 @@ var Views = {
 				template = _.template(html);
 				$("#header").html(template(This.model));
 	    	});
+		},
+		mute: function(){
+			if(Speech.config.mute){
+				$('#SpeechConf>img').attr('src','img/icons/sonido-on.png');
+				Speech.config.mute = false;
+			} else {
+				$('#SpeechConf>img').attr('src','img/icons/sonido-off.png');
+				Speech.config.mute = true;
+			}
 		}
 	}),
 	Search: Backbone.View.extend({
-		el: $("#header"),
+		el: $("#nav-content"),
 		events: {
-			'click #SpeechConf': 'mute',
 			"keyup .ui-corner-all" : "navigateResultItem",
 			'mouseover .speak': 'speak',
 			'mouseout .speak': 'shutUp'
@@ -591,7 +600,7 @@ var Views = {
 			var This = this;
 			utils.loadTemplate("search",function(html){
 				template = _.template(html);
-				$("#header").append(template);
+				$("#nav-content").append(template);
 
 				$( ".typeahead" ).autocomplete({
 			 	create: function() {
@@ -648,17 +657,6 @@ var Views = {
 		      }
 		    });
 			});
-		},
-		mute: function(){
-			if(Speech.config.mute){
-				$('#SpeechConf h1').removeClass('icon-volume-off');
-				$('#SpeechConf h1').addClass('icon-volume-on');
-				Speech.config.mute = false;
-			} else {
-				$('#SpeechConf h1').removeClass('icon-volume-on');
-				$('#SpeechConf h1').addClass('icon-volume-off');
-				Speech.config.mute = true;
-			}
 		}
 	}),
 	//Fotos del usuario

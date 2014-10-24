@@ -1,11 +1,22 @@
-<div class="header-right">
-	<a href="javascript:void(0)" id="SpeechConf">
-		<h1 class="icon-volume-on botonCircularChico bg-color-pinkDark speak" data-voice="Silenciar Sonidos"></h1>
-		<span></span>
+<li>
+	<form class="navbar-form" role="search">
+		<div class="form-group">
+			<input type="text" class="form-control typeahead speak" placeholder="Buscar amigos..." data-voice="Escribe el nombre o apellido de alguien">
+		</div>
+	</form>
+</li>
+<li>
+	<a id="verNotificaciones" href="javascript:void(0)" class="speak fg-white font2" data-voice="Notificaciones">
+		<img src="img/icons/noticias.png" alt="Sonido"> Notificaciones
 	</a>
-	<input class="typeahead speak" type="text" placeholder="Buscar personas" data-voice="Escribe el nombre o apellido de alguien"></input>
-	<a href="javascript:void(0)">
-		<h1 class="icon-notificaciones botonCircularChico bg-color-green speak" data-voice="Notificaciones"></h1>
-		<span></span>
+</li>
+<li>
+	<a href="#fbid/me" class="speak fg-white font2" data-voice="ir al inicio">
+		<img src="img/icons/inicio.png" alt="inicio"> Inicio
 	</a>
-</div>
+</li>
+<li>
+	<a id="SpeechConf" href="javascript:void(0)" class="speak fg-white font2" data-voice="Silenciar Sonidos">
+		<img src="img/icons/sonido-on.png" alt="Sonido"> Sonido
+	</a>
+</li>

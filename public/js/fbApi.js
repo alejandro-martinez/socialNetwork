@@ -333,7 +333,7 @@ function startApp(){
     		((ac.currentUser.gender.toUpperCase()=="FEMALE") ? sexo = "a" : sexo = "o");
     		ac.dataDefault.username = "Bienvenid" + sexo + " " + response.first_name;	
     		ac.dataDefault.logButtonEvent = "fbLogout();";					
-    		ac.dataDefault.logButtonText = "Desconectarme";
+    		ac.dataDefault.logButtonText = "Salir";
     		ac.dataDefault.id = response.id;
     		ac.dataDefault.photo = "http://graph.facebook.com/" + ac.currentUser.id + "/picture?type=normal";
     	}
