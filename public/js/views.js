@@ -58,7 +58,7 @@ var Views = {
 		events: {
 			'click #publicarStatus': 'publishPost',
 			'click #adjuntarFoto': 'selectPhotos',
-			'click selectedImage': 'deleteSelectedPhoto',
+			'click .selectedImage': 'deleteSelectedPhoto',
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -83,7 +83,7 @@ var Views = {
 				    reader.readAsDataURL(F[0]);  
 				    reader.onloadend = function () {
 				    	This.attachment = reader.result;
-				    	var img = $('<img class="selectedImage">');
+				    	var img = $('<img class="selectedImage speak" data-voice="Click para eliminar imagen">');
 						img.attr('src', reader.result);
 						img.appendTo('#que-estas-pensando');
 				    }			
