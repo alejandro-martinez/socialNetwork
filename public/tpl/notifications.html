@@ -3,10 +3,10 @@
 	<a class="nextPage notifications" href="javascript:void(0)"></a>
 <% _.each(notifications, function(notification) { %> 
 	<li>
-    	<div class="post">
+    	<div class="post col-xs-20">
     		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%= notification.from.id %>/picture?type=normal)">
     		</div>
-    		<h5><%=notification.title%></h5>
+    		<h5 class="speak font3" data-voice="<%=notification.title%>"><%=notification.title%></h5>
     	</div>	
     </li>		
 <% }); %>

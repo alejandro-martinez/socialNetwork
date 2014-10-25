@@ -20,7 +20,7 @@ html, body{min-width: 1100px;background:#e9eaed}
 .fg-white{color:#ffffff}
 
 *{font-family:arial !important}
-li, ul{list-style:none !important}
+li, ul{list-style:none !important;padding: 0}
 button{border:none!important}
 .font1{font-size:20pt;font-weight:bold}
 .font2{font-size:18pt;font-weight:bold}
@@ -31,6 +31,9 @@ button{border:none!important}
 #navbar img{height:30px}
 #nav-content a:hover{background-color:#5E79C7;color:#fff;}
 #SpeechConf>img{height:30px}
+
+/* notificaciones */
+.notificaciones .post{padding-top:10px;margin:5px 0;border-top:1px solid #eee}
 
 /* nav user control */
 .form-control{padding:18px 12px;font-size:16pt;margin:3px}
