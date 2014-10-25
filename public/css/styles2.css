@@ -21,10 +21,14 @@ html, body{min-width: 1100px;background:#e9eaed}
 
 *{font-family:arial !important}
 li, ul{list-style:none !important;padding: 0}
-button{border:none!important}
+button{border:none!important;padding:5px 20px}
 .font1{font-size:20pt;font-weight:bold}
 .font2{font-size:18pt;font-weight:bold}
 .font3{font-size:16pt;font-weight:normal}
+.font4{font-size:14pt;font-weight:normal}
+
+.middle{display:table!important;height:100%}
+.middle-content{display:table-cell;vertical-align:middle;text-align:center}
 
 /* header y navbar */
 #navbar {border:none}
@@ -73,3 +77,17 @@ button{border:none!important}
 
 /* likes */
 .likes {display:none;}
+
+/* flip albums */
+#albums, #albumPhotos{padding-left: calc(5% + 15px)}
+
+.flip-container{height:200px;margin:0 15px 15px 0;padding:0}
+.flip-container:hover .desc{display:none}
+.flip-container:hover .flipper,.flip-container.hover .flipper, .back{transition-delay: .3s;transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
+.flipper{transition:1s;transform-style:preserve-3d;cursor:pointer;height:200px}
+.front, .back{backface-visibility:hidden;position:absolute;top:0;left:0;height:200px}
+.front{padding:0;background-size:cover;background-repeat:no-repeat;background-position:center;box-shadow:inset 0px 0px 10px rgba(0,0,0,0.3)}
+
+.desc{position:absolute;background:rgba(0,0,0,0.5);bottom:0px;padding: 15px}
+.editAlbum{position:absolute;bottom:5px;left:0;z-index:99999;width:100%;text-align:center}
+.back{background: #fff;box-shadow:inset 0px 0px 10px rgba(0,0,0,0.3)}

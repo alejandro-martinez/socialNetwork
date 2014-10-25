@@ -2,16 +2,18 @@
 <a class="nextPage albumPhotos" href="javascript:void(0)"></a>
 <div id="albumPhotos">
 	<% _.each(photos, function(photo) { %> 
-	<div class="flip-container">
-		<div class="flipper">"
-			<div class="front">
-				<img src="<%= photo.attributes.source %>" width="100%" />
-			</div>
-			<div class="back">
-					<br>
-					<br>
-					<a href="javascript:void()" class="deletePhoto" data-photo-id="<%=photo.attributes.id%>" class="speak" data-voice="Borrar foto">Borrar foto</a>
+	<div class="flip-container col-xs-6">
+		<div class="flipper col-xs-20">
+			<div class="front col-xs-20 middle">
+				<div class="middle-content">
+					<img src="<%= photo.attributes.source %>" width="100%">
 				</div>
+			</div>
+			<div class="back speak col-xs-20 middle">
+				<div class="middle-content">
+					<a href="javascript:void()" class="deletePhoto speak font1 fg-red" data-photo-id="<%=photo.attributes.id%>"data-voice="Borrar foto">Borrar foto</a>
+				</div>
+			</div>
 		</div>
 	</div>
 	<% }); %>

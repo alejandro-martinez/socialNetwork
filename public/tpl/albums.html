@@ -1,40 +1,45 @@
-<a class="prevPage albums" href="javascript:void(0)"></a>
-<a class="nextPage albums" href="javascript:void(0)"></a>
-<% (friendId == 'me') ? soyYo = true: soyYo = false;
-	%>
-<div id="container-album">
-	<% _.each(albums, function(album) { %> 
-		<div class="flip-container">
-			<div class="flipper">"
-				<div class="front" style="background-image:url('https://graph.facebook.com/<%=album.attributes.id%>/picture?type=album&access_token=<%=access_token%>')">
-					<div class="desc">
-						<span><%= album.attributes.name %></span>
+<div class="col-xs-18 col-xs-offset-1">
+	<a class="prevPage albums" href="javascript:void(0)"></a>
+	<a class="nextPage albums" href="javascript:void(0)"></a>
+	<% (friendId == 'me') ? soyYo = true: soyYo = false;
+		%>
+	<div id="albums" class="col-xs-20">
+		<% _.each(albums, function(album) { %> 
+			<div class="flip-container col-xs-6">
+				<div class="flipper col-xs-20">
+					<div class="front col-xs-20" style="background-image:url('https://graph.facebook.com/<%=album.attributes.id%>/picture?type=album&access_token=<%=access_token%>')">
+						<div class="desc font4 fg-white col-xs-20">
+							<%= album.attributes.name %>
+						</div>
 					</div>
-				</div>
-				<div class="back speak" data-voice="<%= album.attributes.name %>" onclick="window.location.href = '/#albums/<%=album.attributes.id%>/photos'">
-					<label><%= album.attributes.name %></label>
-					<br><br>
-					<% if(soyYo){%>
-						<a href="#/updateAlbum/<%=album.attributes.id%>" class="speak" data-voice="Agregar fotos a este album">Editar album</a>
-					<%}%>
-				</div>
-			</div>	
-		</div>
-	<% }); 
-	 if(soyYo){%>
-	<button id="create-album" class="speak big image-button bg-color-darken fg-color-white login-button" data-voice="Click para crear album">
-	Crear album<img src="img/azul.png"></button>
+					<div class="back speak col-xs-20" data-voice="<%= album.attributes.name %>" onclick="window.location.href = '/#albums/<%=album.attributes.id%>/photos'">
+						<h1 class="font3"><%= album.attributes.name %></h1>
+						<% if(soyYo){%>
+						<div class="editAlbum">
+							<a href="#/updateAlbum/<%=album.attributes.id%>" class="speak font4 fg-blue" data-voice="Agregar fotos a este album">Editar album</a>	
+						</div>
+						<%}%>
+					</div>
+				</div>	
+			</div>
+		<% }); %>
+	</div>
+	<%if(soyYo){%>
+	<div class="col-xs-20 text-right">
+		<button id="create-album" class="speak fg-white bg-blue font2" data-voice="Click para crear album">Crear album</button>
+		
+	</div>
+	<%}%>
+	<%if(soyYo){%>
+	<div id="uploadAlbumForm" class="hidden">
+		<ul class="albumInfo">
+			<li><input type="text" id="nombre" placeholder="Nombre de album" class="speak" data-voice="Escribe un nombre para el album"/></li>
+			<li><input type="text" id="message" placeholder="Descripcion del album" class="speak" data-voice="Descripción del album"/></li>
+			<li>
+				<button id="saveAlbum" class="speak image-button bg-color-blue fg-color-white" data-voice="click para publicar album">Publicar album</button>
+			</li>
+		</ul>	
+		
+	</div>
 	<%}%>
 </div>
-<%if(soyYo){%>
-<div id="uploadAlbumForm" class="hidden">
-	<ul class="albumInfo">
-		<li><input type="text" id="nombre" placeholder="Nombre de album" class="speak" data-voice="Escribe un nombre para el album"/></li>
-		<li><input type="text" id="message" placeholder="Descripcion del album" class="speak" data-voice="Descripción del album"/></li>
-		<li>
-			<button id="saveAlbum" class="speak image-button bg-color-blue fg-color-white" data-voice="click para publicar album">Publicar album</button>
-		</li>
-	</ul>	
-	
-</div>
-<%}%>
