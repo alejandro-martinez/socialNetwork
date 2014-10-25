@@ -85,7 +85,7 @@ button{border:none!important;padding:5px 20px}
 .flip-container:hover .desc{display:none}
 .flip-container:hover .flipper,.flip-container.hover .flipper, .back{transition-delay: .3s;transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
 .flipper{transition:1s;transform-style:preserve-3d;cursor:pointer;height:200px}
-.front, .back{backface-visibility:hidden;position:absolute;top:0;left:0;height:200px}
+.front, .back{padding:15px;backface-visibility:hidden;position:absolute;top:0;left:0;height:200px}
 .front{padding:0;background-size:cover;background-repeat:no-repeat;background-position:center;box-shadow:inset 0px 0px 10px rgba(0,0,0,0.3)}
 .back{background: #fff;box-shadow:inset 0px 0px 10px rgba(0,0,0,0.3)}
 
