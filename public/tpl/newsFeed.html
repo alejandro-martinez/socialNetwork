@@ -71,20 +71,23 @@
 					</div>
 					<div class="post-footer bg-white col-xs-20">
 						<div class="col-xs-20">
-							<a href="javascript:void(0)" class="fg-blue font3 speak" data-voice="<%=postInfo %>" name="post-<%=post.id%>"><img src="img/icons/megusta-a.png" class="post-footer-icon"><%=postInfo %></a>
+							<a href="javascript:void(0)" class="fg-blue font3 speak postInfo" data-voice="<%=postInfo %>" name="infoLikes-<%=post.id%>"><img src="img/icons/megusta-a.png" class="post-footer-icon"><%=postInfo %></a>
 						</div>
 						<div class="col-xs-4 bg-lblue">
 							<a href="javascript:void(0)" id="<%=post.id%>" class="fg-blue font3 speak" data-voice="<%=likeText %>"><% if(likeClass=="like"){%><img src="img/icons/megusta-a.png" class=" post-footer-icon"><%}%><%=likeText %></a>
 						</div>
 						<%if (post.likes != null) {
 							var likes = post.likes.data;%>
-							<div id="post-<%=post.id%>" class="hidden">
+							<div id="infoLikes-<%=post.id%>" class="hidden">
 								<ul class="photo-comments">
-									<% _.each(post.likes.data, function(autorLike) { %> 
-									<div class="post">
-										<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=autorLike.id%>/picture?type=square)"></div>
-										<h5><a href="/#friend/<%=autorLike.id%>" class="speak" data-voice="<%=autorLike.name%>"><%=autorLike.name%></a></h5>
-									</div>
+									<% _.each(post.likes.data, function(autorLike) { %>
+									<li>
+										<div class="post col-xs-20 middle">
+											<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=autorLike.id%>/picture?type=square)">
+											</div>
+											<h5 class="font1"><a href="/#friend/<%=autorLike.id%>" class="speak" data-voice="<%=autorLike.name%>"><%=autorLike.name%></a></h5>
+										</div>
+									</li>
 									<% });%>	
 								</ul>
 							</div>	

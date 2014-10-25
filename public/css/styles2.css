@@ -30,6 +30,16 @@ button{border:none!important;padding:5px 20px}
 .middle{display:table!important;height:100%}
 .middle-content{display:table-cell;vertical-align:middle;text-align:center}
 
+
+/* inicio */
+#container-home{position:absolute;height:calc(100% - 290px);width:100%;min-width:1000px}
+.logo-home-header{width:750px;margin:0 auto;margin-left:15%;position:relative;padding-top:60px}
+.logo-home-header span{display:inline-block}
+.logo-home-header h1{font:bold 10em arial;float:left;color:#fff;margin:.67em 0}
+.pulse{-webkit-animation-name:pulse;-webkit-animation-duration:1.5s;-webkit-animation-iteration-count:infinite;animation-name:pulse;animation-duration:1.5s;animation-iteration-count:infinite}
+@keyframes pulse{0%{transform:scale(0.9);opacity:0.7;}50%{transform:scale(1);opacity:1;}100%{transform:scale(0.9);opacity:0.7;}}
+@-webkit-keyframes pulse{0%{-webkit-transform:scale(0.95);opacity:0.7;}50%{-webkit-transform:scale(1);opacity:1;}100%{-webkit-transform:scale(0.95);opacity:0.7;}}
+
 /* header y navbar */
 #navbar {border:none}
 #navbar img{height:30px}
@@ -64,6 +74,7 @@ button{border:none!important;padding:5px 20px}
 .newHeader{height:70px;display:block;padding:20px 0 0}
 .avatar{float:left;width:70px;height:70px;margin-right:20px;background-position:center;background-size:cover}
 .post-content{word-wrap:break-word;padding:15px}
+.post-content>span{display:block;padding: 28px 0px}
 .post-footer{padding:0}
 .post-footer-icon{height:20px;margin-right:7px}
 
@@ -73,6 +84,7 @@ button{border:none!important;padding:5px 20px}
 .post{margin:5px 0;border-top:1px solid #eee}
 .post .avatar{margin-top: 10px}
 .post>span{display:flex}
+.post h5{margin-top:26px}
 .ver-comentarios{padding:8px 15px;position:absolute;right:0}
 
 /* likes */
