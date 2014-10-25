@@ -19,10 +19,11 @@ html, body{min-width: 1100px;background:#e9eaed}
 .fg-red{color:#f12a38}
 .fg-white{color:#ffffff}
 
-*{font-family:arial}
+*{font-family:arial !important}
+li, ul{list-style:none !important}
 .font1{font-size:20pt;font-weight:bold}
-.font2{font-size:16pt;font-weight:bold}
-.font3{font-size:14pt;font-weight:normal}
+.font2{font-size:18pt;font-weight:bold}
+.font3{font-size:16pt;font-weight:normal}
 
 /* header y navbar */
 #navbar {border:none}
@@ -40,7 +41,7 @@ html, body{min-width: 1100px;background:#e9eaed}
 #nav-user-control li{margin-bottom: 15px}
 #nav-user-control li a{padding:0}
 #nav-user{padding:10px 10px 5px}
-#nav-user>span{bottom:58px;left:35px}
+#nav-user>span{bottom:58px;left:20px}
 #user-photo{display:inline-block;width:136px;height:136px;background-size:contain;background-position:center;background-repeat:no-repeat}
 
 /* que estas pensando */
@@ -49,3 +50,64 @@ html, body{min-width: 1100px;background:#e9eaed}
 #post-text{width:calc(100% - 58px);padding:10px 15px;border:0}
 #adjuntarFoto{width:58px;height:58px;padding:10px;margin:5px -3px;top:-6px;position:relative}
 #adjuntarFoto>img{width:100%}
+
+/* news feed */
+.nextPage,.prevPage{position:absolute;display:block;height:45px;width:33px;top:160px}
+.prevPage{left:-40px;background-image:url(../img/prev.png)}
+.nextPage{right:-40px;background-image:url(../img/next.png)}
+
+#wall-template{padding:0;margin-top:30px}
+.newHeader{height:70px;display:block;padding:20px 0 0}
+.avatar{float:left;width:70px;height:70px;margin-right:20px;background-position:center;background-size:cover}
+.post-content{word-wrap:break-word;padding:15px}
+.post-footer{padding:0}
+.post-footer-icon{height:20px;margin-right:7px}
+/*
+.post h1{
+	font-size: 24px;
+	line-height: 70px;
+}
+.post h1>a{
+	text-decoration: none;
+	color: #000;
+}
+.post h1>a:hover{
+	text-decoration: underline;
+}
+.post .text{
+	margin: 15px 0;
+}
+.post img{
+	margin: 0 auto;
+	margin-top: 10px;
+    max-height: 350px;
+	max-width: 100%;
+}
+
+/* Div para comentar en posts y fotos */
+#div-comment{
+	position: relative;
+	margin-top: 54px;
+}
+#div-comment h3{
+	position: absolute;
+	top:-15px;
+	left:5px;
+	color:#2d89ef;
+}
+#div-comment textarea {
+	height: 75px;
+	width: 97%;
+	margin-left: 7px;
+	margin-top: 13px;
+}
+#div-comment button {
+	position: absolute;
+	bottom: -71px;
+	right: 0px;
+}
+#div-comment img {
+	position: absolute;
+	bottom: -62px;
+	right: 124px;
+}
