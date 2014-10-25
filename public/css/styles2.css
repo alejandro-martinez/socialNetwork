@@ -1,4 +1,4 @@
-html, body{min-width: 1000px;}
+html, body{min-width: 1100px;background:#e9eaed}
 
 .bg-blue{background-color:#4a62a7}
 .bg-lblue{background-color:#c0c7e5}
@@ -27,3 +27,15 @@ html, body{min-width: 1000px;}
 #navbar img{height:30px}
 #nav-content a:hover{background-color:#5E79C7;color:#fff;}
 #SpeechConf>img{height:30px}
+
+.form-control{padding:18px 12px;font-size:16pt;margin:3px}
+
+.nav-icon{display:inline-block;width:50px;height:50px;text-align:center;background-size:contain;background-position:center;background-repeat:no-repeat;margin-right:15px}
+.nav-button{padding:10px 15px 5px;margin-bottom:15px;box-shadow:5px 5px 5px #d0d0d0}
+#nav-user-control, #nav-user-control ul{padding:0}
+#nav-user-control span{bottom:10px;position:relative}
+#nav-user-control li{margin-bottom: 15px}
+#nav-user-control li a{padding:0}
+#nav-user{padding:10px 10px 5px}
+#nav-user>span{bottom:58px;left:35px}
+#user-photo{display:inline-block;width:136px;height:136px;background-size:contain;background-position:center;background-repeat:no-repeat}
