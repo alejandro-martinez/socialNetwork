@@ -21,6 +21,7 @@ html, body{min-width: 1100px;background:#e9eaed}
 
 *{font-family:arial !important}
 li, ul{list-style:none !important}
+button{border:none!important}
 .font1{font-size:20pt;font-weight:bold}
 .font2{font-size:18pt;font-weight:bold}
 .font3{font-size:16pt;font-weight:normal}
@@ -45,7 +46,6 @@ li, ul{list-style:none !important}
 #user-photo{display:inline-block;width:136px;height:136px;background-size:contain;background-position:center;background-repeat:no-repeat}
 
 /* que estas pensando */
-#que-estas-pensando button{border:none}
 #examinar{display:none}
 #post-text{width:calc(100% - 58px);padding:10px 15px;border:0}
 #adjuntarFoto{width:58px;height:58px;padding:10px;margin:5px -3px;top:-6px;position:relative}
@@ -62,29 +62,13 @@ li, ul{list-style:none !important}
 .post-content{word-wrap:break-word;padding:15px}
 .post-footer{padding:0}
 .post-footer-icon{height:20px;margin-right:7px}
-/*
-.post h1{
-	font-size: 24px;
-	line-height: 70px;
-}
-.post h1>a{
-	text-decoration: none;
-	color: #000;
-}
-.post h1>a:hover{
-	text-decoration: underline;
-}
-.post .text{
-	margin: 15px 0;
-}
-.post img{
-	margin: 0 auto;
-	margin-top: 10px;
-    max-height: 350px;
-	max-width: 100%;
-}
 
-/* Div para comentar en posts y fotos */
+/* coments */
+#publicarComentario{float:right;width:150px;margin:10px 0}
+.comentario{margin:5px 0;border-top:1px solid #eee}
+.comentario .avatar{margin-top: 10px}
+.comentario>span{display:flex}
+/*
 #div-comment{
 	position: relative;
 	margin-top: 54px;
@@ -111,3 +95,4 @@ li, ul{list-style:none !important}
 	bottom: -62px;
 	right: 124px;
 }
+*/
