@@ -663,7 +663,7 @@ var Views = {
 	Photos: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'click h2'	: 'showLikesAndComments',
+			'click .ver-comentarios'	: 'showLikesAndComments',
 			'click a.comments.nextPage' : 'nextPage',
 			'click a.comments.prevPage'	: 'prevPage',
 		},

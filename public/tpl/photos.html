@@ -4,7 +4,7 @@
 			<%
 			 _.each(photos, function(photo) { %> 
 				<li>
-					<h2 href="#photo-<%=photo.attributes.id%>" class="icon-likes botonCircular bg-color-green"></h2>
+					<button href="#photo-<%=photo.attributes.id%>" class="ver-comentarios bg-blue fg-white"><img src="img/icons/comentar.png" width="50px"></button>
 					<a src="<%= photo.attributes.source %>"></a>
 				</li>
 			<% }); %>
@@ -42,46 +42,44 @@
 						} 
 					}
 				%>
-				<a href="javascript:void(0)" class="postInfo speak" data-voice="<%=postInfo %>" name="infoLikes-<%=photo.attributes.id%>"><%=postInfo %></a><br><br>
-				<a href="javascript:void(0)" id="<%=photo.attributes.id%>" class="<%=likeClass %> speak" data-voice="<%=likeText %>"><%=likeText %></a>
-					<ul class="photo-comments">
-						<%if (photo.attributes.comments != null){
-							_.each(photo.attributes.comments.data, function(comment) { %> 
-								<li>
-							    	<div class="post">
-							    		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=comment.from.id%>/picture?type=square)">
-							    		</div>
-							    		<h5><a href="/#friend/<%=comment.from.id%>" class="speak" data-voice="<%=comment.from.name%>"><%=comment.from.name%></a></h5>
-							    		<span class="speak" data-voice="<%=comment.message%>"> <%=comment.message%> </span>
-							    	</div>	
-							    </li>	
-								<%});
-						}%>
-						<li>
-							<div id="div-comment">
-									<h3 class="speak" data-voice="Escribe un comentario">Escribe un comentario</h3>
-									<textarea id="comentario" class="speak" data-voice="Qué estás pensando?"></textarea>
-									<img src="http://png-1.findicons.com/files/icons/2015/24x24_free_application/24/error.png" class="hidden error"/>
-									<img src="https://cdn2.iconfinder.com/data/icons/oxygen/48x48/actions/ok.png" class="hidden ok"/>
-									<button id="publicarComentario" data-comment-id="<%=photo.id%>" class="speak image-button bg-color-blue fg-color-white" data-voice="click para publicar comentario">Publicar</button>
+				<a href="javascript:void(0)" class="postInfo fg-blue font3 speak col-xs-15" data-voice="<%=postInfo %>" name="infoLikes-<%=photo.attributes.id%>"><%=postInfo %></>
+				<a href="javascript:void(0)" id="<%=photo.attributes.id%>" class="fg-blue font2 speak col-xs-5 text-right" data-voice="<%=likeText %>"><% if(likeClass == 'like'){ %><img width="25px" src="img/icons/megusta-a.png">&nbsp;<%}%><%=likeText %></a>
+				<ul>
+					<%if (photo.attributes.comments != null){
+					_.each(photo.attributes.comments.data, function(comment) { %> 
+					<li>
+						<div class="post col-xs-20 comentario">
+							<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=comment.from.id%>/picture?type=square)">
 							</div>
-						</li>
-					</ul>	
-				<%if (photo.attributes.likes != null) {
-						var likes = photo.attributes.likes.data;%>
-						<div id="infoLikes-<%=photo.attributes.id%>" class="hidden">
-							<ul class="photo-comments">
-								<% _.each(photo.attributes.likes.data, function(autorLike) { %> 
-										<div class="post">
-								            <div class="avatar" style="background-image: url(http://graph.facebook.com/<%=autorLike.id%>/picture?type=square)">
-								    		</div>
-								    		<h5> 
-								    		  <a href="/#friend/<%=autorLike.id%>" class="speak" data-voice="<%=autorLike.name%>"><%=autorLike.name%></a> 
-								    		  </h5>
-								    	</div>	
-								<% });%>    
-					    	</ul>
+							<h5 class="font2"><a class="fg-blue" href="/#friend/<%=comment.from.id%>"><%=comment.from.name%></a></h5>
+							<span class="speak font3" data-voice="<%=comment.message%>"><%=comment.message%></span>
 						</div>	
+					</li>		
+					<%});
+					}%>
+					<li>
+						<div id="div-comment">
+							<h5 for="comentario" class="speak font2 fg-blue" data-voice="Escribe un comentario">Escribe un comentario</h5>
+							<textarea id="comentario" class="speak col-xs-20" rows="5" data-voice="Qué estás pensando?"></textarea>
+							<img src="http://png-1.findicons.com/files/icons/2015/24x24_free_application/24/error.png" class="hidden error"/>
+							<img src="https://cdn2.iconfinder.com/data/icons/oxygen/48x48/actions/ok.png" class="hidden ok"/>
+							<button id="publicarComentario" data-comment-id="<%=photo.id%>" class="speak bg-blue fg-white font2" data-voice="click para publicar comentario">Publicar</button>
+						</div>
+					</li>
+				</ul>	
+				<%if (photo.attributes.likes != null) {
+				var likes = photo.attributes.likes.data;%>
+				<div id="infoLikes-<%=photo.attributes.id%>" class="hidden">
+					<ul class="photo-comments">
+						<% _.each(photo.attributes.likes.data, function(autorLike) { %> 
+								<div class="post col-xs-20">
+									<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=autorLike.id%>/picture?type=square)">
+									</div>
+									<h5><a href="/#friend/<%=autorLike.id%>" class="speak font2" data-voice="<%=autorLike.name%>"><%=autorLike.name%></a></h5>
+								</div>
+						<% });%>	
+					</ul>
+				</div>	
 				<%}%>	
 
 			</div>	

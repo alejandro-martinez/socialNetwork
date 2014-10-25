@@ -32,12 +32,9 @@ button{border:none!important}
 #nav-content a:hover{background-color:#5E79C7;color:#fff;}
 #SpeechConf>img{height:30px}
 
-/* notificaciones */
-.notificaciones .post{padding-top:10px;margin:5px 0;border-top:1px solid #eee}
-
 /* nav user control */
 .form-control{padding:18px 12px;font-size:16pt;margin:3px}
-.nav-icon{display:inline-block;width:50px;height:50px;text-align:center;background-size:contain;background-position:center;background-repeat:no-repeat;margin-right:15px}
+.nav-icon{display:inline-block;width:50px;height:37px;text-align:center;background-size:contain;background-position:center;background-repeat:no-repeat;margin-right:15px}
 .nav-button{padding:10px 15px 5px;margin-bottom:15px;box-shadow:5px 5px 5px #d0d0d0}
 #nav-user-control{padding-left: 15px} 
 #nav-user-control ul{padding:0}
@@ -68,34 +65,11 @@ button{border:none!important}
 
 /* coments */
 #publicarComentario{float:right;width:150px;margin:10px 0}
-.comentario{margin:5px 0;border-top:1px solid #eee}
-.comentario .avatar{margin-top: 10px}
-.comentario>span{display:flex}
-/*
-#div-comment{
-	position: relative;
-	margin-top: 54px;
-}
-#div-comment h3{
-	position: absolute;
-	top:-15px;
-	left:5px;
-	color:#2d89ef;
-}
-#div-comment textarea {
-	height: 75px;
-	width: 97%;
-	margin-left: 7px;
-	margin-top: 13px;
-}
-#div-comment button {
-	position: absolute;
-	bottom: -71px;
-	right: 0px;
-}
-#div-comment img {
-	position: absolute;
-	bottom: -62px;
-	right: 124px;
-}
-*/
+#div-comment{top:35px;position:relative}
+.post{margin:5px 0;border-top:1px solid #eee}
+.post .avatar{margin-top: 10px}
+.post>span{display:flex}
+.ver-comentarios{padding:8px 15px;position:absolute;right:0}
+
+/* likes */
+.likes {display:none;}
