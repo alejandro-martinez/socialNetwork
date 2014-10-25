@@ -92,3 +92,5 @@ button{border:none!important;padding:5px 20px}
 .desc{position:absolute;background:rgba(0,0,0,0.5);bottom:0px;padding: 15px}
 .editAlbum{position:absolute;bottom:5px;left:0;z-index:99999;width:100%;text-align:center}
 
+/* grupos */
+#groups li{padding-bottom: 20px}
