@@ -1,5 +1,6 @@
 html, body{min-width: 1100px;background:#e9eaed}
 
+/* General */
 .bg-blue{background-color:#4a62a7}
 .bg-lblue{background-color:#c0c7e5}
 .bg-green{background-color:#2ec66c}
@@ -23,19 +24,28 @@ html, body{min-width: 1100px;background:#e9eaed}
 .font2{font-size:16pt;font-weight:bold}
 .font3{font-size:14pt;font-weight:normal}
 
+/* header y navbar */
 #navbar {border:none}
 #navbar img{height:30px}
 #nav-content a:hover{background-color:#5E79C7;color:#fff;}
 #SpeechConf>img{height:30px}
 
+/* nav user control */
 .form-control{padding:18px 12px;font-size:16pt;margin:3px}
-
 .nav-icon{display:inline-block;width:50px;height:50px;text-align:center;background-size:contain;background-position:center;background-repeat:no-repeat;margin-right:15px}
 .nav-button{padding:10px 15px 5px;margin-bottom:15px;box-shadow:5px 5px 5px #d0d0d0}
-#nav-user-control, #nav-user-control ul{padding:0}
+#nav-user-control{padding-left: 15px} 
+#nav-user-control ul{padding:0}
 #nav-user-control span{bottom:10px;position:relative}
 #nav-user-control li{margin-bottom: 15px}
 #nav-user-control li a{padding:0}
 #nav-user{padding:10px 10px 5px}
 #nav-user>span{bottom:58px;left:35px}
 #user-photo{display:inline-block;width:136px;height:136px;background-size:contain;background-position:center;background-repeat:no-repeat}
+
+/* que estas pensando */
+#que-estas-pensando button{border:none}
+#examinar{display:none}
+#post-text{width:calc(100% - 58px);padding:10px 15px;border:0}
+#adjuntarFoto{width:58px;height:58px;padding:10px;margin:5px -3px;top:-6px;position:relative}
+#adjuntarFoto>img{width:100%}
