@@ -3,7 +3,7 @@
 	<a class="nextPage friends" href="javascript:void(0)"></a>
 	<div id="friends" class="col-xs-20">
 		<% _.each(friends, function(friend) { %> 
-		<div class="flip-container col-xs-6">
+		<div class="flip-container col-xs-5">
 			<div class="flipper col-xs-20">
 				<div class="front col-xs-20" data-voice="<%= friend.attributes.name %>" style="background-image:url('http://graph.facebook.com/<%= friend.attributes.id %>/picture?type=large')">
 					<div class="desc font4 fg-white col-xs-20">

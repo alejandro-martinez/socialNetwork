@@ -19,6 +19,12 @@ html, body{min-width: 1100px;background:#e9eaed}
 .fg-purple{color:#5a297d}
 .fg-white{color:#ffffff}
 
+a.fg-white:hover{color:#eee}
+a.fg-blue:hover{color:#374684}
+a.bg-white:hover, button.bg-white:hover{background-color:#eee}
+a.bg-blue:hover, button.bg-blue:hover{background-color:#374684}
+
+
 .bg-blue .nav-status{border-color:#5362a2}
 .bg-lblue .nav-status{border-color:#c0c5e2}
 .bg-green .nav-status{border-color:#64a246}
@@ -66,7 +72,7 @@ button{border:none!important;padding:5px 20px}
 .nav-button{padding:10px 15px 5px;margin-bottom:15px}
 .nav-status{display: none;background: transparent;border-top: 30px solid transparent !important;border-left: 15px solid;border-bottom: 31px solid transparent !important;position: absolute;right: -15px;top: 0;}
 .selected .nav-status {display: block;}
-#nav-user-control {padding:0; margin-top: -15px}
+#nav-user-control {padding:0; margin-top: -15px; float: left;width: 250px;}
 #nav-user-control ul{padding:0}
 #nav-user-control span{bottom:10px;position:relative}
 #nav-user-control li{margin-bottom: 15px;width: 230px !important}
@@ -93,7 +99,7 @@ button{border:none!important;padding:5px 20px}
 .newHeader{height:70px;display:block;padding:20px 0 0}
 .avatar{float:left;width:70px;height:70px;margin-right:20px;background-position:center;background-size:cover}
 .post-content{word-wrap:break-word;padding:15px}
-.post-content>span{display:block;padding: 28px 0px}
+.post-content>span{display:block;padding: 8px 0px;margin-bottom: 15px}
 .post-footer{padding:0}
 .post-footer-icon{height:20px;margin-right:7px}
 
@@ -101,7 +107,6 @@ button{border:none!important;padding:5px 20px}
 #publicarComentario{float:right;width:150px;margin:10px 0}
 #div-comment{top:35px;position:relative}
 .post{margin:5px 0;border-top:1px solid #eee}
-.post .avatar{margin-top: 10px}
 .post>span{display:flex}
 .post h5{margin-top:26px}
 .ver-comentarios{padding:8px 15px;position:absolute;right:0}
@@ -110,18 +115,20 @@ button{border:none!important;padding:5px 20px}
 .likes {display:none;}
 
 /* flip albums */
-#albums, #albumPhotos{padding-left: calc(5% + 15px)}
+#albums, #albumPhotos{padding:0}
 
-.flip-container{height:200px;margin:0 15px 15px 0;padding:0}
+.flip-container{margin: 16px 0;padding: 0 5px;height: 180px}
 .flip-container:hover .desc{display:none}
 .flip-container:hover .flipper,.flip-container.hover .flipper, .back{transition-delay: .3s;transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
 .flipper{transition:1s;transform-style:preserve-3d;cursor:pointer;height:200px}
 .front, .back{padding:15px;backface-visibility:hidden;position:absolute;top:0;left:0;height:200px}
 .front{padding:0;background-size:cover;background-repeat:no-repeat;background-position:center;box-shadow:inset 0px 0px 10px rgba(0,0,0,0.3)}
-.back{background: #fff;box-shadow:inset 0px 0px 10px rgba(0,0,0,0.3)}
-
-.desc{position:absolute;background:rgba(0,0,0,0.5);bottom:0px;padding: 15px}
-.editAlbum{position:absolute;bottom:5px;left:0;z-index:99999;width:100%;text-align:center}
+.back{background: #c0c5e2;color:#fff;}
+#create-album {line-height: 35px;margin-right: -10px;width: 270px;}
+span.icon>img{margin: 0 10px;height: 30px}
+span.icon{float: left;}
+.desc{position:absolute;bottom:0;background:rgba(0,0,0,0.5);bottom:0px;padding: 15px}
+.editAlbum{position:absolute;line-height:45px;bottom:0;left:0;z-index:99999;width:100%;text-align:center}
 
 /* grupos */
 #groups li{padding-bottom: 20px}
