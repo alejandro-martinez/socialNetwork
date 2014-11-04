@@ -1,5 +1,22 @@
-html, body{min-width: 1100px;background:#e9eaed}
+html, body{min-width: 1100px;background:#e9eaed;}
 
+#body {
+	margin-top: 4%;
+}
+#user-info {
+	position: absolute;
+	color: #4a62a7;
+	font-size: 20pt;
+	font-weight: bold;
+	margin-top: 2%;
+	margin-left: 50%;
+}
+ul#nav-content {
+margin-left: 20px;
+}
+span.fg-blue.font1.speak {
+left: 5% !important;
+}
 /* General */
 .bg-blue{background-color:#4a62a7}
 .bg-lblue{background-color:#c0c7e5}
@@ -66,12 +83,12 @@ button{border:none!important;padding:5px 20px}
 
 /* que estas pensando */
 #examinar{display:none}
-#post-text{width:calc(100% - 58px);padding:10px 15px;border:0}
-#adjuntarFoto{width:58px;height:58px;padding:10px;margin:5px -3px;top:-6px;position:relative}
+#post-text{width:calc(100% - 58px);width: calc(100% - 336px);padding: 7px 12px;border: 0;margin-left: 5%;font-size: 23pt;}
+#adjuntarFoto{width:58px;height:58px;padding:10px;margin:5px -3px;top:-8px;position:relative}
 #adjuntarFoto>img{width:100%}
 
 /* news feed */
-.nextPage,.prevPage{position:absolute;display:block;height:45px;width:33px;top:160px}
+.nextPage,.prevPage{position:absolute;display:block;height:45px;width:33px;top:45%;}
 .prevPage{left:-40px;background-image:url(../img/prev.png)}
 .nextPage{right:-40px;background-image:url(../img/next.png)}
 
@@ -90,7 +107,7 @@ button{border:none!important;padding:5px 20px}
 .post .avatar{margin-top: 10px}
 .post>span{display:flex}
 .post h5{margin-top:26px}
-.ver-comentarios{padding:8px 15px;position:absolute;right:0}
+.ver-comentarios{padding: 1px 15px;font-size:17pt;position:absolute;right:0;color: #4a62a7;font-weight: bold;}
 
 /* likes */
 .likes {display:none;}
@@ -111,3 +128,42 @@ button{border:none!important;padding:5px 20px}
 
 /* grupos */
 #groups li{padding-bottom: 20px}
+
+/*imagen*/
+img.selectedImage.speak {
+	width: 58px;
+	height: 58px;
+	float: right;
+	margin-top: -71px;
+	margin-right: 274px;
+	z-index: 99999;
+	position: relative;
+}
+
+/*publicar estado*/
+button#publicarStatus {
+	width: auto;
+	float: right;
+	position: relative;
+	margin: 0;
+	margin-right: 63px;
+	height: 58px;
+}
+
+/*Albumns*/
+button#create-album {
+	margin-top: -143px;
+	position: absolute;
+	width: auto;
+	right: 83px;
+}
+
+div#photos {
+	margin-top: -48px;
+}
+ul.bjqs {
+	background-color: white;
+	margin-left: 13%;
+	height: 635px !important;
+	width: 75% !important;
+}

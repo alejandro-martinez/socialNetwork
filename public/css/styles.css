@@ -93,13 +93,12 @@ button:active{
 	right: 5px;
 }
 #user-info {
-	color: #FFF;
-	font-size: 1.8em;
-	font-weight: normal;
-	display: inline-block;
-	float: right;
-	margin: 0;
-	padding: 18px;
+	position: absolute;
+	color: #4a62a7;
+	font-size: 20pt;
+	font-weight: bold;
+	margin-top: 7%;
+	margin-left: 50%;
 }
 /* ---- inicio.html ---- */
 #logo-home{
