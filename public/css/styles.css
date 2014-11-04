@@ -770,13 +770,13 @@ div#container-home {
     margin: 0 auto;
     margin-left: 15%;
     position: relative;
-    padding-top: 60px;
+    padding-top: 0px;
 }
 
 .logo-home-header > h1, .logo-home-header > h2{
 	font-family: Arial;
     font-weight: 200;
-    font-size: 10em;
+    font-size: 15em;
     float: left;
     color: white;
     margin: .67em 0;

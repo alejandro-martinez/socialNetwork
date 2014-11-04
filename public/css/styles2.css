@@ -52,10 +52,15 @@ button{border:none!important;padding:5px 20px}
 .middle-content{display:table-cell;vertical-align:middle;text-align:center}
 
 /* inicio */
-#container-home{position:absolute;height:calc(100% - 290px);width:100%;min-width:1000px}
-.logo-home-header{width:750px;margin:0 auto;margin-left:15%;position:relative;padding-top:60px}
+#container-home{position: absolute;
+height: 100%;
+width: 100%;
+min-width: 1000px;
+background-color: #5362a2;
+margin-top: -71px;}
+.logo-home-header{width:750px;margin:0 auto;margin-left:15%;position:relative;padding-top:0px}
 .logo-home-header span{display:inline-block}
-.logo-home-header h1{font:bold 10em arial;float:left;color:#fff;margin:.67em 0}
+.logo-home-header h1{font: bold 15em arial;float:left;color:#fff;margin:.67em 0}
 .pulse{-webkit-animation-name:pulse;-webkit-animation-duration:1.5s;-webkit-animation-iteration-count:infinite;animation-name:pulse;animation-duration:1.5s;animation-iteration-count:infinite}
 @keyframes pulse{0%{transform:scale(0.9);opacity:0.7;}50%{transform:scale(1);opacity:1;}100%{transform:scale(0.9);opacity:0.7;}}
 @-webkit-keyframes pulse{0%{-webkit-transform:scale(0.95);opacity:0.7;}50%{-webkit-transform:scale(1);opacity:1;}100%{-webkit-transform:scale(0.95);opacity:0.7;}}
@@ -134,3 +139,16 @@ span.icon{float: left;}
 
 /* grupos */
 #groups li{padding-bottom: 20px}
+
+/*MAIN PAGE*/
+h1.pulse {
+	margin-top: 45px;
+	margin-left: -42px;
+}
+a#login-button {
+	position: absolute;
+	z-index: 9999;
+	top: 22em;
+	right: 30em;
+	width: 218px;
+}
