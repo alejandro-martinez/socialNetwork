@@ -18,6 +18,7 @@ a {text-decoration: none}
 .font1{font-size:22pt;font-weight:bold}
 .font2{font-size:20pt;font-weight:bold}
 .font3{font-size:16pt;font-weight:bold}
+.font3l{font-size:16pt;font-weight:normal}
 .font4{font-size:14pt;font-weight:bold}
 .font5{font-size:14pt;font-weight:normal}
 .font6{font-size:10.5pt;font-weight:bold}
@@ -45,6 +46,7 @@ a {text-decoration: none}
 .hidden {display: none}
 
 #content{margin-top: 30px;}
+#body{width: calc(100% - 230px);float: left;margin: 0 20px;}
 
 /* header nav */
 
@@ -70,17 +72,18 @@ a {text-decoration: none}
 #nav-user{display: inline-block;float: left;}
 #user-photo{float: left;margin: 5px;width: 120px;height: 112px;background-size:contain;background-position:center;background-repeat:no-repeat}
 #miperfil>span{float:left;display: block;width: 60px;line-height: 122px;text-align: center}
-/*#navbar ul{list-style: none;}
+
+/* que estas pensando */
+#welcome{text-align: center;display: block;margin: 0 150px 0 65px;}
+#que-estas-pensando{margin: 10px 150px 0 65px;width: 647px}
+div#que-estas-pensando>*{margin: 0 -2px;}
+#examinar{display:none}
+#post-text{width: 478px;height: 38px;padding: 0 10px;}
+#adjuntarFoto{width: 36px;position: relative;line-height: 38px;top: -2px;}
+#adjuntarFoto>img{width: 25px;position: relative;top: 6px;}
+#publicarStatus{line-height: 38px;width: 117px;margin-left: -3px !important;}
+/* news feed */
 /*
-
-
-*{font-family:arial !important}
-li, ul{list-style:none !important;padding: 0}
-button{border:none!important;padding:5px 20px}
-.font1{font-size:20pt;font-weight:bold}
-.font2{font-size:18pt;font-weight:bold}
-.font3{font-size:16pt;font-weight:normal}
-.font4{font-size:14pt;font-weight:normal}
 
 .middle{display:table!important;width: 100%;height:100%}
 .middle-content{display:table-cell;vertical-align:middle;text-align:center}
@@ -94,25 +97,6 @@ button{border:none!important;padding:5px 20px}
 .pulse{-webkit-animation-name:pulse;-webkit-animation-duration:1.5s;-webkit-animation-iteration-count:infinite;animation-name:pulse;animation-duration:1.5s;animation-iteration-count:infinite}
 @keyframes pulse{0%{transform:scale(0.9);opacity:0.7;}50%{transform:scale(1);opacity:1;}100%{transform:scale(0.9);opacity:0.7;}}
 @-webkit-keyframes pulse{0%{-webkit-transform:scale(0.95);opacity:0.7;}50%{-webkit-transform:scale(1);opacity:1;}100%{-webkit-transform:scale(0.95);opacity:0.7;}}
-
-/* header y navbar */
-/*
-#navbar {height: 45px}
-#navbar *{padding: 0; margin: 0}
-#logo {height: 31px; margin: 6px 31px}
-
-/* nav user control */
-/*
-.nav-icon{display:inline-block;width:50px;height:37px;text-align:center;background-size:contain;background-position:center;background-repeat:no-repeat;margin-right:15px}
-.nav-button{padding:10px 15px 5px;margin-bottom:15px;box-shadow:5px 5px 5px #d0d0d0}
-#nav-user-control{padding-left: 15px} 
-#nav-user-control ul{padding:0}
-#nav-user-control span{bottom:10px;position:relative}
-#nav-user-control li{margin-bottom: 15px}
-#nav-user-control li a{padding:0}
-#nav-user{padding:10px 10px 5px}
-#nav-user>span{bottom:58px;left:20px}
-#user-photo{display:inline-block;width:136px;height:136px;background-size:contain;background-position:center;background-repeat:no-repeat}
 
 /* que estas pensando */
 /*
