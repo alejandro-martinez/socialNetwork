@@ -97,10 +97,10 @@ span.font5b.fg-blue {margin: 20px;line-height: 40px}
 .post-footer>div.bg-lblue:nth-child(2){float: left;width: 30%;line-height: 37px;}
 
 .nextPage,.prevPage{position:absolute;display:block;height:45px;width:33px;top:160px}
-.prevPage{left:0px;background-image:url(../img/Recursos/prev.png);background-size: contain;background-repeat: no-repeat;}
-.nextPage{right:0px;background-image:url(../img/Recursos/next.png);background-size: contain;background-repeat: no-repeat;}
+.prevPage{left:33px;background-image:url(../img/Recursos/prev.png);background-size: contain;background-repeat: no-repeat;}
+.nextPage{right:33px;background-image:url(../img/Recursos/next.png);background-size: contain;background-repeat: no-repeat;}
 
-#wall{position: relative;width: 780px;}
+#wall{position: relative;width: 787px;}
 /*
 
 .middle{display:table!important;width: 100%;height:100%}
