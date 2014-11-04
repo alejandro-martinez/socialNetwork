@@ -1,25 +1,34 @@
 html, body{min-width: 1100px;background:#e9eaed}
 
 /* General */
-.bg-blue{background-color:#4a62a7}
-.bg-lblue{background-color:#c0c7e5}
-.bg-green{background-color:#2ec66c}
-.bg-yellow{background-color:#fae100}
-.bg-orange{background-color:#fd9326}
-.bg-cyan{background-color:#01ade5}
-.bg-red{background-color:#f12a38}
+.bg-blue{background-color:#5362a2}
+.bg-lblue{background-color:#c0c5e2}
+.bg-green{background-color:#64a246}
+.bg-yellow{background-color:#e8c02d}
+.bg-orange{background-color:#c8582b}
+.bg-cyan{background-color:#61aae1}
+.bg-purple{background-color:#5a297d}
 .bg-white{background-color:#ffffff}
 
-.fg-blue{color:#4a62a7}
-.fg-lblue{color:#c0c7e5}
-.fg-green{color:#2ec66c}
-.fg-yellow{color:#fae100}
-.fg-orange{color:#fd9326}
-.fg-cyan{color:#01ade5}
-.fg-red{color:#f12a38}
+.fg-blue{color:#5362a2}
+.fg-lblue{color:#c0c5e2}
+.fg-green{color:#64a246}
+.fg-yellow{color:#e8c02d}
+.fg-orange{color:#c8582b}
+.fg-cyan{color:#61aae1}
+.fg-purple{color:#5a297d}
 .fg-white{color:#ffffff}
 
-.form-control{padding:18px 12px;font-size:16pt;border-radius:0}
+.bg-blue .nav-status{border-color:#5362a2}
+.bg-lblue .nav-status{border-color:#c0c5e2}
+.bg-green .nav-status{border-color:#64a246}
+.bg-yellow .nav-status{border-color:#e8c02d}
+.bg-orange .nav-status{border-color:#c8582b}
+.bg-cyan .nav-status{border-color:#61aae1}
+.bg-purple .nav-status{border-color:#5a297d}
+.bg-white .nav-status{border-color:#ffffff}
+
+.form-control{padding:12px;font-size:16pt;border-radius:0}
 ::-webkit-input-placeholder{color:#c0c7e5!important}
 :-moz-placeholder{color:#c0c7e5!important;opacity:1}
 ::-moz-placeholder{color:#c0c7e5!important;opacity:1}
@@ -46,23 +55,25 @@ button{border:none!important;padding:5px 20px}
 @-webkit-keyframes pulse{0%{-webkit-transform:scale(0.95);opacity:0.7;}50%{-webkit-transform:scale(1);opacity:1;}100%{-webkit-transform:scale(0.95);opacity:0.7;}}
 
 /* header y navbar */
-#navbar .form-control{margin:3px}
 #navbar {border:none}
-#navbar img{height:30px}
+#navbar img{height:26px}
+#navbar a{line-height: 50px;padding: 0 15px}
+#nav-content {width: calc(100% - 237px);position: relative;}
 #nav-content a:hover{background-color:#5E79C7;color:#fff;}
-#SpeechConf>img{height:30px}
 
 /* nav user control */
 .nav-icon{display:inline-block;width:50px;height:37px;text-align:center;background-size:contain;background-position:center;background-repeat:no-repeat;margin-right:15px}
-.nav-button{padding:10px 15px 5px;margin-bottom:15px;box-shadow:5px 5px 5px #d0d0d0}
-#nav-user-control{padding-left: 15px} 
+.nav-button{padding:10px 15px 5px;margin-bottom:15px}
+.nav-status{display: none;background: transparent;border-top: 30px solid transparent !important;border-left: 15px solid;border-bottom: 31px solid transparent !important;position: absolute;right: -15px;top: 0;}
+.selected .nav-status {display: block;}
+#nav-user-control {padding:0; margin-top: -15px}
 #nav-user-control ul{padding:0}
 #nav-user-control span{bottom:10px;position:relative}
-#nav-user-control li{margin-bottom: 15px}
+#nav-user-control li{margin-bottom: 15px;width: 230px !important}
 #nav-user-control li a{padding:0}
-#nav-user{padding:10px 10px 5px}
-#nav-user>span{bottom:58px;left:20px}
-#user-photo{display:inline-block;width:136px;height:136px;background-size:contain;background-position:center;background-repeat:no-repeat}
+#nav-user{padding:10px 10px 0px}
+#nav-user>span{position: absolute;bottom: 0;right: 0;padding: 0 12px;line-height: 120px;}
+#user-photo{margin-bottom: 5px;display:inline-block;width:100px;height:100px;background-size:contain;background-position:center;background-repeat:no-repeat}
 
 /* que estas pensando */
 #examinar{display:none}
