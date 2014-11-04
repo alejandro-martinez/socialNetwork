@@ -1,6 +1,28 @@
-html, body{min-width: 1100px;background:#e9eaed}
+html, body{min-width: 1092px;background:#e9eaed}
+
+section {display: none}
 
 /* General */
+* {padding:0;margin:0;border:0;font-family:arial !important}
+ul{list-style:none}
+a {text-decoration: none}
+
+.form-control{padding:18px 12px;font-size:16pt;border-radius:0}
+::-webkit-input-placeholder{color:#c0c7e5!important}
+:-moz-placeholder{color:#c0c7e5!important;opacity:1}
+::-moz-placeholder{color:#c0c7e5!important;opacity:1}
+:-ms-input-placeholder{color:#c0c7e5!important}
+
+.left{float:left}
+.right:{float:right}
+
+.font1{font-size:22pt;font-weight:bold}
+.font2{font-size:20pt;font-weight:bold}
+.font3{font-size:16pt;font-weight:bold}
+.font4{font-size:14pt;font-weight:bold}
+.font5{font-size:14pt;font-weight:normal}
+.font6{font-size:10.5pt;font-weight:bold}
+
 .bg-blue{background-color:#4a62a7}
 .bg-lblue{background-color:#c0c7e5}
 .bg-green{background-color:#2ec66c}
@@ -19,11 +41,21 @@ html, body{min-width: 1100px;background:#e9eaed}
 .fg-red{color:#f12a38}
 .fg-white{color:#ffffff}
 
-.form-control{padding:18px 12px;font-size:16pt;border-radius:0}
-::-webkit-input-placeholder{color:#c0c7e5!important}
-:-moz-placeholder{color:#c0c7e5!important;opacity:1}
-::-moz-placeholder{color:#c0c7e5!important;opacity:1}
-:-ms-input-placeholder{color:#c0c7e5!important}
+/* header nav */
+#navbar {height:45px;width:100%;position: relative;}
+#logo {height:31px;margin:5px 30px}
+#nav-content {width: calc(100% - 308px);position: relative;}
+#nav-content>li{float:right; display: inline-block}
+#login-button {width: 82px;position: absolute; right: 0}
+#navbar .icon {height: 20px;top: 5px;position: relative;}
+.nav-option{display: block; line-height: 45px;text-align: center;padding: 0 9px;}
+#search{width:300px; margin:9px 8px;position: absolute; left: 0}
+#search>input {padding:4px 12px;border:none;width:249px;height:19px}
+#buscar { display:block;height:27px;width:27px}
+
+/*#navbar ul{list-style: none;}
+/*
+
 
 *{font-family:arial !important}
 li, ul{list-style:none !important;padding: 0}
@@ -37,6 +69,7 @@ button{border:none!important;padding:5px 20px}
 .middle-content{display:table-cell;vertical-align:middle;text-align:center}
 
 /* inicio */
+/*
 #container-home{position:absolute;height:calc(100% - 290px);width:100%;min-width:1000px}
 .logo-home-header{width:750px;margin:0 auto;margin-left:15%;position:relative;padding-top:60px}
 .logo-home-header span{display:inline-block}
@@ -46,13 +79,13 @@ button{border:none!important;padding:5px 20px}
 @-webkit-keyframes pulse{0%{-webkit-transform:scale(0.95);opacity:0.7;}50%{-webkit-transform:scale(1);opacity:1;}100%{-webkit-transform:scale(0.95);opacity:0.7;}}
 
 /* header y navbar */
-#navbar .form-control{margin:3px}
-#navbar {border:none}
-#navbar img{height:30px}
-#nav-content a:hover{background-color:#5E79C7;color:#fff;}
-#SpeechConf>img{height:30px}
+/*
+#navbar {height: 45px}
+#navbar *{padding: 0; margin: 0}
+#logo {height: 31px; margin: 6px 31px}
 
 /* nav user control */
+/*
 .nav-icon{display:inline-block;width:50px;height:37px;text-align:center;background-size:contain;background-position:center;background-repeat:no-repeat;margin-right:15px}
 .nav-button{padding:10px 15px 5px;margin-bottom:15px;box-shadow:5px 5px 5px #d0d0d0}
 #nav-user-control{padding-left: 15px} 
@@ -65,12 +98,14 @@ button{border:none!important;padding:5px 20px}
 #user-photo{display:inline-block;width:136px;height:136px;background-size:contain;background-position:center;background-repeat:no-repeat}
 
 /* que estas pensando */
+/*
 #examinar{display:none}
 #post-text{width:calc(100% - 58px);padding:10px 15px;border:0}
 #adjuntarFoto{width:58px;height:58px;padding:10px;margin:5px -3px;top:-6px;position:relative}
 #adjuntarFoto>img{width:100%}
 
 /* news feed */
+/*
 .nextPage,.prevPage{position:absolute;display:block;height:45px;width:33px;top:160px}
 .prevPage{left:-40px;background-image:url(../img/prev.png)}
 .nextPage{right:-40px;background-image:url(../img/next.png)}
@@ -84,6 +119,7 @@ button{border:none!important;padding:5px 20px}
 .post-footer-icon{height:20px;margin-right:7px}
 
 /* coments */
+/*
 #publicarComentario{float:right;width:150px;margin:10px 0}
 #div-comment{top:35px;position:relative}
 .post{margin:5px 0;border-top:1px solid #eee}
@@ -93,9 +129,11 @@ button{border:none!important;padding:5px 20px}
 .ver-comentarios{padding:8px 15px;position:absolute;right:0}
 
 /* likes */
+/*
 .likes {display:none;}
 
 /* flip albums */
+/*
 #albums, #albumPhotos{padding-left: calc(5% + 15px)}
 
 .flip-container{height:200px;margin:0 15px 15px 0;padding:0}
@@ -110,4 +148,6 @@ button{border:none!important;padding:5px 20px}
 .editAlbum{position:absolute;bottom:5px;left:0;z-index:99999;width:100%;text-align:center}
 
 /* grupos */
+/*
 #groups li{padding-bottom: 20px}
+*/

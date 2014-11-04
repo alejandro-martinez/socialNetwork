@@ -1,22 +1,19 @@
 <li>
-	<form class="navbar-form" role="search">
-		<div class="form-group">
-			<input type="text" class="form-control typeahead speak" placeholder="Buscar amigos..." data-voice="Escribe el nombre o apellido de alguien">
-		</div>
-	</form>
-</li>
-<li>
-	<a id="verNotificaciones" href="javascript:void(0)" class="speak fg-white font3" data-voice="Notificaciones">
-		<img src="img/icons/noticias.png" alt="Sonido"> Notificaciones
+	<a id="SpeechConf" href="javascript:void(0)" class="speak fg-white font6 nav-option" data-voice="Silenciar Sonidos">
+		<img class="icon" src="img/icons/sonido-on.png" alt="Sonido"> SONIDO
 	</a>
 </li>
 <li>
-	<a href="#fbid/me" class="speak fg-white font3" data-voice="ir al inicio">
-		<img src="img/icons/inicio.png" alt="inicio"> Inicio
+	<a href="#fbid/me" class="speak fg-white font6 nav-option" data-voice="ir al inicio">
+		<img class="icon" src="img/icons/inicio.png" alt="inicio"> INICIO
 	</a>
 </li>
 <li>
-	<a id="SpeechConf" href="javascript:void(0)" class="speak fg-white font3" data-voice="Silenciar Sonidos">
-		<img src="img/icons/sonido-on.png" alt="Sonido"> Sonido
+	<a id="verNotificaciones" href="javascript:void(0)" class="speak fg-white font6 nav-option" data-voice="Notificaciones">
+		<img class="icon" src="img/icons/noticias.png" alt="Sonido"> NOTIFICACIONES
 	</a>
+</li>
+<li id="search">
+	<input type="text" class="form-control typeahead speak font6 left" placeholder="Buscar amigos..." data-voice="Escribe el nombre o apellido de alguien">
+	<a id="buscar" class="bg-lblue left"></a>
 </li>
