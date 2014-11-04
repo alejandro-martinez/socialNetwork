@@ -77,12 +77,14 @@ button{border:none!important;padding:5px 20px}
 
 /* que estas pensando */
 #examinar{display:none}
-#post-text{width:calc(100% - 58px);padding:10px 15px;border:0}
-#adjuntarFoto{width:58px;height:58px;padding:10px;margin:5px -3px;top:-6px;position:relative}
-#adjuntarFoto>img{width:100%}
+#post-text{width:calc(100% - 220px);height: 45px;border: 0;padding: 10px}
+#publicarStatus{width:150px}
+#que-estas-pensando button{padding:0px 15px;border:0;height: 45px}
+#adjuntarFoto{width:45px;height:45px;padding:0px !important;margin:5px -4px;top:-4px;position:relative}
+#adjuntarFoto>img{width:30px}
 
 /* news feed */
-.nextPage,.prevPage{position:absolute;display:block;height:45px;width:33px;top:160px}
+.nextPage,.prevPage{position: absolute;display: block;height: 58px;width: 33px;top: 160px;background-size: contain;background-repeat: no-repeat;}
 .prevPage{left:-40px;background-image:url(../img/prev.png)}
 .nextPage{right:-40px;background-image:url(../img/next.png)}
 
