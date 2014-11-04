@@ -1,51 +1,51 @@
 
-<nav id="nav-user-control" class="col-xs-5 col-lg-4">
+<nav id="nav-user-control">
 	<ul>
 		<li>
 			<a href="/#fbid/me" id="miperfil">
-				<div class="col-xs-20 nav-button bg-lblue" id="nav-user">
+				<div class="bg-lblue" id="nav-user">
 					<div id="user-photo" draggable="true" style="background-image:url(' <%= photo %> ')">
 					</div>
-					<span class="fg-blue font1">F. T.</span>
+				</div>
+				<span class="fg-white bg-blue font7">PERFIL</span>
+			</a>
+		</li>
+		<li>
+			<a class="nav-option" href="/#photos/<%= id %>">
+				<div class="nav-button fg-white font5 bg-green speak" id="nav-photos" data-voice="fotos">
+					<i class="nav-icon" style="background-image:url(img/icons/foto.png)"></i>FOTOS
 				</div>
 			</a>
 		</li>
 		<li>
-			<a href="/#photos/<%= id %>">
-				<div class="col-xs-20 nav-button fg-white font2 bg-green speak" id="nav-photos" data-voice="fotos">
-					<i class="nav-icon" style="background-image:url(img/icons/foto.png)"></i><span>FOTOS</span>
+			<a class="nav-option" href="/#albums/me">
+				<div class="nav-button fg-white font5 bg-yellow speak" id="nav-albums" data-voice="albums">
+					<i class="nav-icon" style="background-image:url(img/icons/albums.png)"></i>ALBUMS
 				</div>
 			</a>
 		</li>
 		<li>
-			<a href="/#albums/me">
-				<div class="col-xs-20 nav-button fg-white font2 bg-yellow speak" id="nav-albums" data-voice="albums">
-					<i class="nav-icon" style="background-image:url(img/icons/albums.png)"></i><span>ALBUMS</span>
+			<a class="nav-option" href="/#friends/<%= id %>">
+				<div class="nav-button fg-white font5 bg-orange speak" id="nav-friends" data-voice="amigos">
+					<i class="nav-icon" style="background-image:url(img/icons/amigos.png)"></i>AMIGOS
 				</div>
 			</a>
 		</li>
 		<li>
-			<a href="/#posts/<%= id %>">
-				<div class="col-xs-20 nav-button fg-white font2 bg-orange speak" id="nav-posts" data-voice="posts">
-					<i class="nav-icon" style="background-image:url(img/icons/comentar.png)"></i><span>POSTS</span>
+			<a class="nav-option" href="/#groupsList">
+				<div class="nav-button fg-white font5 bg-lblue2 speak" id="nav-groups" data-voice="grupos">
+					<i class="nav-icon" style="background-image:url(img/icons/grupos.png)"></i>GRUPOS
 				</div>
 			</a>
 		</li>
 		<li>
-			<a href="/#friends/<%= id %>">
-				<div class="col-xs-20 nav-button fg-white font2 bg-cyan speak" id="nav-friends" data-voice="amigos">
-					<i class="nav-icon" style="background-image:url(img/icons/amigos.png)"></i><span>AMIGOS</span>
-				</div>
-			</a>
-		</li>
-		<li>
-			<a href="/#groupsList">
-				<div class="col-xs-20 nav-button fg-white font2 bg-red speak" id="nav-groups" data-voice="grupos">
-					<i class="nav-icon" style="background-image:url(img/icons/grupos.png)"></i><span>GRUPOS</span>
+			<a class="nav-option" href="/#posts/<%= id %>">
+				<div class="nav-button fg-white font5 bg-purple speak" id="nav-posts" data-voice="posts">
+					<i class="nav-icon" style="background-image:url(img/icons/comentar.png)"></i>POSTS
 				</div>
 			</a>
 		</li>
 	</ul>
 </nav>
-<section id="body" class="col-xs-15 col-lg-16">
+<section id="body" class="col-xs-15 col-lg-16 hidden">
 </section>
