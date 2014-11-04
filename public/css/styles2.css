@@ -77,6 +77,8 @@ button{border:none!important;padding:5px 20px}
 #nav-user-control span{bottom:10px;position:relative}
 #nav-user-control li{margin-bottom: 15px;width: 230px !important}
 #nav-user-control li a{padding:0}
+#nav-user-control li a:hover .nav-status{display: block}
+#nav-user-control .active .nav-status{display: block}
 #nav-user{padding:10px 10px 0px}
 #nav-user>span{position: absolute;bottom: 0;right: 0;padding: 0 12px;line-height: 120px;}
 #user-photo{margin-bottom: 5px;display:inline-block;width:100px;height:100px;background-size:contain;background-position:center;background-repeat:no-repeat}
@@ -115,7 +117,7 @@ button{border:none!important;padding:5px 20px}
 .likes {display:none;}
 
 /* flip albums */
-#albums, #albumPhotos{padding:0}
+#albums, #albumPhotos, #friends{padding:0}
 
 .flip-container{margin: 16px 0;padding: 0 5px;height: 180px}
 .flip-container:hover .desc{display:none}
