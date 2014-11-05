@@ -180,9 +180,9 @@ h1.pulse {
 	margin-left: -42px;
 }
 a#login-button {
-	position: absolute;
+	position: fixed;
 	z-index: 9999;
-	top: 22em;
-	right: 30em;
+	right: calc(50% - 109px);
 	width: 218px;
+	top: 70%;
 }
