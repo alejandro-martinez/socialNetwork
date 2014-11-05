@@ -103,21 +103,55 @@ margin-top: -71px;}
 .nextPage{right:-40px;background-image:url(../img/next.png)}
 
 #wall-template, #wall{padding:0;margin-top:5px}
-.newHeader{height:70px;display:block;padding:20px 0 0}
 .avatar{float:left;width:70px;height:70px;margin-right:20px;background-position:center;background-size:cover}
 .post-content{word-wrap:break-word;padding:15px}
-.post-content>span{display:block;padding: 8px 0px;margin-bottom: 15px}
+.post-content>span{display:block;padding: 8px 0px;margin-bottom: 15px;height:70px;display:block;padding:20px 0 0}
 .post-footer{padding:0}
 .post-footer-icon{height:20px;margin-right:7px}
 
 /* coments */
+.comentario .avatar {margin-top: 15px;}
 #publicarComentario{float:right;width:150px;margin:10px 0}
-#div-comment{top:35px;position:relative}
+#div-comment{padding:15px;top:35px;position:relative}
 .post{margin:5px 0;border-top:1px solid #eee}
 .post>span{display:flex}
 .post h5{margin-top:26px}
 .ver-comentarios{padding:8px 15px;position:absolute;right:0}
 
+#cboxContent{border: 7px solid #c0c5e2}
+#cboxTitle{
+	background:  #c0c5e2;
+	text-align: left;
+	margin-left: 10px;
+	font-size: 14pt;
+	font-weight: bold;
+	color: #5362a2;
+	top:0;
+	height: 33px;
+	width: 100%;
+	margin: 0;
+	padding-left: 15px;
+}
+#cboxTopLeft,
+#cboxTopCenter,
+#cboxTopRight,
+#cboxMiddleLeft,
+#cboxMiddleRight,
+#cboxBottomLeft,
+#cboxBottomCenter,
+#cboxBottomRight{display: none;}
+#cboxLoadedContent{
+	margin: 33px 0 0;
+}
+#cboxClose{top:0;background: url(../img/close.png) no-repeat}
+#cboxClose:hover{background-position: 1px 1px}
+#cboxContent .post{margin:0;border-bottom:1px solid #eee;padding-bottom:5px}
+
+::-webkit-scrollbar {width: 24px}
+::-webkit-scrollbar-thumb {background: #5362a2; border: 1px solid #FFF; border-left: 2px solid #FFF}
+::-webkit-scrollbar-track {background: #eee}
+
+.notificaciones .avatar {margin: 15px 15px 10px 0px}
 /* likes */
 .likes {display:none;}
 

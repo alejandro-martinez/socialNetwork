@@ -38,7 +38,7 @@
 				<div class="post font3 bg-white">
 					<div class="post-content">
 						<div class="avatar" style="background-image: url(http://graph.facebook.com/<%= post.from.id %>/picture?type=normal)"></div>
-						<span class="font2 fg-blue">
+						<span class="font2 fg-blue newHeader">
 							<a class="speak fg-blue" data-voice="Publicado por <%=post.from.name %>" href="/#friend/<%= post.from.id%>"><%= post.from.name%></a>
 							<% if (post.to != null){%>
 							>> <a class="speak fg-blue" data-voice="para <%= post.to.data[0].name %>" href="/#friend/<%= post.to.data[0].id%>"><%= post.to.data[0].name %></a>
