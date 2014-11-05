@@ -110,12 +110,13 @@ margin-top: -71px;}
 .post-footer-icon{height:20px;margin-right:7px}
 
 /* coments */
-.comentario .avatar {margin-top: 15px;}
+.comentario .avatar {margin: 15px 15px 15px 0}
+.post h5{margin-top:26px}
+.comentario h5 {margin-top: 15px}
 #publicarComentario{float:right;width:150px;margin:10px 0}
-#div-comment{padding:15px;top:35px;position:relative}
+#div-comment{padding:15px;top:35px;position:relative;display: inline-block;width: 100%}
 .post{margin:5px 0;border-top:1px solid #eee}
 .post>span{display:flex}
-.post h5{margin-top:26px}
 .ver-comentarios{padding:8px 15px;position:absolute;right:0}
 
 #cboxContent{border: 7px solid #c0c5e2}
