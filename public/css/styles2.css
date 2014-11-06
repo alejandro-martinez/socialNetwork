@@ -88,26 +88,16 @@ margin-top: -71px;}
 .nav-button{padding:10px 15px 5px;margin-bottom:15px}
 .nav-status{display: none;background: transparent;border-top: 30px solid transparent !important;border-left: 15px solid;border-bottom: 31px solid transparent !important;position: absolute;right: -15px;top: 0;}
 .selected .nav-status {display: block;}
-#nav-user-control {padding:0; margin-top: -15px}
+#nav-user-control {padding:0; margin-top: -15px; float: left;width: 250px;}
 #nav-user-control ul{padding:0}
 #nav-user-control span{bottom:10px;position:relative}
 #nav-user-control li{margin-bottom: 15px;width: 230px !important}
 #nav-user-control li a{padding:0}
+#nav-user-control li a:hover .nav-status{display: block}
+#nav-user-control .active .nav-status{display: block}
 #nav-user{padding:10px 10px 0px}
 #nav-user>span{position: absolute;bottom: 0;right: 0;padding: 0 12px;line-height: 120px;}
 #user-photo{margin-bottom: 5px;display:inline-block;width:100px;height:100px;background-size:contain;background-position:center;background-repeat:no-repeat}
-
-/* nav user control */
-.nav-icon{display:inline-block;width:50px;height:37px;text-align:center;background-size:contain;background-position:center;background-repeat:no-repeat;margin-right:15px}
-.nav-button{padding:10px 15px 5px;margin-bottom:15px;box-shadow:5px 5px 5px #d0d0d0}
-#nav-user-control{padding-left: 15px} 
-#nav-user-control ul{padding:0}
-#nav-user-control span{bottom:10px;position:relative}
-#nav-user-control li{margin-bottom: 15px}
-#nav-user-control li a{padding:0}
-#nav-user{padding:10px 10px 5px}
-#nav-user>span{bottom:58px;left:20px}
-#user-photo{display:inline-block;width:136px;height:136px;background-size:contain;background-position:center;background-repeat:no-repeat}
 
 /* que estas pensando */
 #examinar{display:none}
