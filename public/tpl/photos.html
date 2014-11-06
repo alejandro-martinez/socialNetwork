@@ -1,93 +1,115 @@
 <div id="photos">
 	<div id="banner-fade">
-		<ul class="bjqs">
+		<ul class="bjqs col-xs-18 col-xs-offset-1">
+			<input hidden="" id="destinoPost" value="<%= miID %>">
+			<a class="prevPage newsFeed" href="javascript:void(0)"></a>
+			<a class="nextPage newsFeed" href="javascript:void(0)"></a>
 			<%
-			 _.each(photos, function(photo) { %> 
-				<li>
-					<button href="#photo-<%=photo.attributes.id%>" class="ver-comentarios bg-blue fg-white"><img src="img/icons/comentar.png" width="50px"></button>
-					<a src="<%= photo.attributes.source %>"></a>
-				</li>
-			<% }); %>
-		</ul>
-		<div class="likes">
-		<% _.each(photos, function(photo) { %> 
-			<div class="photo" id="photo-<%=photo.attributes.id%>">
-				<%if (photo.attributes.likes != null) {
-					var likes = photo.attributes.likes.data;
-					var count = photo.attributes.likes.data.length;
-					var likeText = "Me gusta";
-					var likeClass="like";
-					var postInfo = "A nadie le gusta esto";
-						if(count == 1){ 
+			console.log(photos)
+			 _.each(photos, function(photo) { 
+				var postInfo = "Se el primero en dar me gusta";
+				var likeText = "Me gusta";
+				var likeClass="like"
+
+				photo = photo.attributes
+				if (photo.likes != null) {
+
+					var likes = photo.likes.data;
+					var count = photo.likes.data.length;
+					if(count == 1){ 
+						if(likes[0].id == miID){
+							postInfo = "Te gusta esto!"
+							likeText = "Ya no me gusta!"
+							likeClass="unlike"
+						}
+						else{
+							postInfo = "A " + likes[0].name + " le gusta esto!"
+						}
+					}
+					else {
+						if (count > 1) { 
+							total = count - 1;
 							if(likes[0].id == miID){
-								postInfo = "Te gusta esto!"
+								postInfo = "A ti y a " + total + " personas les gusta esto"
 								likeText = "Ya no me gusta!"
 								likeClass="unlike"
 							}
-							else{
-								postInfo = "A " + likes[0].name + " le gusta esto!"
-							}
+							else
+								postInfo = "A " + likes[0].name + " y a " + total + " personas les gusta esto"
 						}
-						else {
-							if (count > 1) { 
-								total = count - 1;
-								if(likes[0].id == miID){
-									postInfo = "A ti y a " + total + " personas les gusta esto"
-									likeText = "Ya no me gusta!"
-									likeClass="unlike"
-								}
-								else
-									postInfo = "A " + likes[0].name + " y a " + total + " personas les gusta esto"
-							}
-						} 
-					}
-				%>
-				<a href="javascript:void(0)" class="postInfo fg-blue font3 speak col-xs-15" data-voice="<%=postInfo %>" name="infoLikes-<%=photo.attributes.id%>"><%=postInfo %></>
-				<a href="javascript:void(0)" id="<%=photo.attributes.id%>" class="fg-blue font2 speak col-xs-5 text-right" data-voice="<%=likeText %>"><% if(likeClass == 'like'){ %><img width="25px" src="img/icons/megusta-a.png">&nbsp;<%}%><%=likeText %></a>
-				<ul>
-					<%if (photo.attributes.comments != null){
-					_.each(photo.attributes.comments.data, function(comment) { %> 
-					<li>
-						<div class="post col-xs-20 comentario">
-							<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=comment.from.id%>/picture?type=square)">
-							</div>
-							<h5 class="font2"><a class="fg-blue" href="/#friend/<%=comment.from.id%>"><%=comment.from.name%></a></h5>
-							<span class="speak font3" data-voice="<%=comment.message%>"><%=comment.message%></span>
-						</div>	
-					</li>		
-					<%});
-					}%>
-					<li>
-						<div id="div-comment">
-							<h5 for="comentario" class="speak font2 fg-blue" data-voice="Escribe un comentario">Escribe un comentario</h5>
-							<textarea id="comentario" class="speak col-xs-20" rows="5" data-voice="Qué estás pensando?"></textarea>
-							<img src="http://png-1.findicons.com/files/icons/2015/24x24_free_application/24/error.png" class="hidden error"/>
-							<img src="https://cdn2.iconfinder.com/data/icons/oxygen/48x48/actions/ok.png" class="hidden ok"/>
-							<button id="publicarComentario" data-comment-id="<%=photo.attributes.id%>" class="speak bg-blue fg-white font2" data-voice="click para publicar comentario">Publicar</button>
-						</div>
-					</li>
-				</ul>	
-				<%if (photos.likes != null) {
-					var likes = photos.likes.data;%>
-					<div id="infoLikes-<%=photos.id%>" class="hidden">
-						<ul class="photo-comments">
-							<% _.each(photos.likes.data, function(autorLike) { %>
-							<li>
-								<div class="post col-xs-20 middle">
-									<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=autorLike.id%>/picture?type=square)">
-									</div>
-									<h5 class="font1"><a href="/#friend/<%=autorLike.id%>" class="speak" data-voice="<%=autorLike.name%>"><%=autorLike.name%></a></h5>
-								</div>
-							</li>
-							<% });%>
-						</ul>
+					} 
+				} %>
+				<li>
+				<div class="post font3 bg-white">
+					<div class="post-content">
+						<div class="avatar" style="background-image: url(http://graph.facebook.com/<%= photo.from.id %>/picture?type=normal)"></div>
+						<span class="font2 fg-blue">
+							<a class="speak fg-blue" data-voice="Publicado por <%=photo.from.name %>" href="/#friend/<%= photo.from.id%>"><%= photo.from.name%></a>
+							<% if (photo.to != null){%>
+							>> <a class="speak fg-blue" data-voice="para <%= photo.to.data[0].name %>" href="/#friend/<%= photo.to.data[0].id%>"><%= photo.to.data[0].name %></a>
+							<% }%>
+						</span> 
+						<center>
+							<img src="<%= photo.source %>" height="366px"/>
+						</center>
 					</div>
-				<%}%>
-			</div>	
+					<div class="post-footer bg-white col-xs-20">
+						<div class="col-xs-20">
+							<a href="javascript:void(0)" class="fg-blue font3 speak postInfo" data-voice="<%=postInfo %>" name="infoLikes-<%=photo.id%>"><img src="img/icons/megusta-a.png" class="post-footer-icon"><%=postInfo %></a>
+						</div>
+						<div class="col-xs-4 bg-lblue">
+							<a href="javascript:void(0)" id="<%=photo.id%>" class="fg-blue font3 speak" data-voice="<%=likeText %>"><% if(likeClass=="like"){%><img src="img/icons/megusta-a.png" class=" post-footer-icon"><%}%><%=likeText %></a>
+						</div>
+						<%if (photo.likes != null) {
+							var likes = photo.likes.data;%>
+							<div id="infoLikes-<%=photo.id%>" class="hidden">
+								<ul class="photo-comments">
+									<% _.each(photo.likes.data, function(autorLike) { %>
+									<li>
+										<div class="post col-xs-20 middle">
+											<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=autorLike.id%>/picture?type=square)">
+											</div>
+											<h5 class="font1"><a href="/#friend/<%=autorLike.id%>" class="speak" data-voice="<%=autorLike.name%>"><%=autorLike.name%></a></h5>
+										</div>
+									</li>
+									<% });%>	
+								</ul>
+							</div>	
+						<%}%>	
+						<ul id="comments-post-<%=photo.id%>" class="hidden photo-comments">
+							<%
+							var totalComentarios=0;
+							if (photo.comments != null){
+								totalComentarios = photo.comments.data.length;
+								_.each(photo.comments.data, function(comment) { %> 
+								<li>
+									<div class="post col-xs-20 comentario">
+										<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=comment.from.id%>/picture?type=square)">
+										</div>
+										<h5 class="font2"><a class="fg-blue speak" href="/#friend/<%=comment.from.id%>" data-voice="<%=comment.from.name%>"><%=comment.from.name%></a></h5>
+										<span class="speak font3" data-voice="<%=comment.message%>"><%=comment.message%></span>
+									</div>
+								</li>	
+								<%});%>
+							<%}%>
+							<div id="div-comment">
+								<h5 class="speak font2 fg-blue" data-voice="Escribe un comentario">Escribe un comentario</h5>
+								<textarea id="comentario" class="speak col-xs-20" rows="5" data-voice="Qué estás pensando?"></textarea>
+								<img src="http://png-1.findicons.com/files/icons/2015/24x24_free_application/24/error.png" class="hidden error"/>
+								<img src="https://cdn2.iconfinder.com/data/icons/oxygen/48x48/actions/ok.png" class="hidden ok"/>
+								<button id="publicarComentario" data-comment-id="<%=photo.id%>" class="speak bg-blue fg-white font2" data-voice="click para publicar comentario">Publicar</button>
+							</div>	
+						</ul>	
+						<div class="col-xs-16 bg-lblue">
+							<a href="javascript:void(0)" class="comments fg-blue speak" data-voice="<%=totalComentarios%> Comentarios " name="comments-post-<%=photo.id%>">Comentarios (<%=totalComentarios%>)</a>
+						</div>
+					</div>
+				</div>
+			</li>
 		<% }); %>
-		</div>
-	</div>
+	</ul>
 </div>
+
 <script type="text/javascript">
 	$("#banner-fade").bjqs({height:'550px',width:'100%',responsive:true, animspeed : 15000, keyboardnav : true,hoverpause : true,nexttext:'<img src="/img/next.png">', prevtext:'<img src="/img/prev.png">'})
 </script>

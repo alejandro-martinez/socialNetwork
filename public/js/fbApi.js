@@ -204,6 +204,7 @@ function AppController(){
 	        contentType:false,
 	        cache:false,
 	        success:function(data){
+	        	console.log(data);
 	        	callback(data);
 	        },
 	        error:function(shr,status,data){

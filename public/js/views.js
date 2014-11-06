@@ -666,9 +666,12 @@ var Views = {
 	Photos: Backbone.View.extend({
 		el: $("body"),
 		events: {
-			'click .ver-comentarios'	: 'showLikesAndComments',
-			'click a.comments.nextPage' : 'nextPage',
-			'click a.comments.prevPage'	: 'prevPage',
+			'click a.postInfo'			: 'showLikes',
+			'click a.comments'			: 'showComments',
+			'click a.newsFeed.nextPage' : 'nextPage',
+			'click a.newsFeed.prevPage'	: 'prevPage',
+			'click .post a.like'		: 'like',
+			'click .post a.unlike'		: 'unlike'
 		},
 		initialize: function(){
 			this.api = this.options.api;
@@ -692,37 +695,12 @@ var Views = {
 				$("#body").html(template({photos: photos.models,miID: This.miID}));
 			});
 		},
-		showLikesAndComments: function(ev){
+		nextPage: function(){
 			var This = this;
-			var id = ev.currentTarget.attributes['href'].value;
-			$.colorbox({
-				title:'Comentarios y likes',
-				width:'70%',
-				height:'85%',
-				html: $(id).html()
+			$.getJSON(this.model.paging.next + '&callback=?', function(response){
+				This.model = response;
+				This.refreshFeed();
 			});
-			$('#colorbox .like').on('click', This.api, this.like);	
-			$('#colorbox .unlike').on('click', This.api, this.unlike);	
-			$('#colorbox .postInfo').on('click',this.showAuthorsLikes);	
-			$('#div-comment #publicarComentario').on('click',This.api,This.publishComment);	
-			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
-			    $('#div-comment img').addClass('hidden');
-			});			
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);	
-    	},
-    	showAuthorsLikes: function(ev){
-    		var This = this;
-			var id = ev.currentTarget.attributes['name'].value;
-			var popup = $("#" + id).html();
-			$.colorbox({
-				title:'Likes',
-				width:'45%',
-				height:'65%',
-				html: popup
-			});
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);	
     	},
     	publishComment: function(ev){
     		this.api = ev.handleObj.data;
@@ -741,26 +719,63 @@ var Views = {
     		});
     		}
     	},
+    	prevPage: function(){
+    		var This = this;
+			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
+				This.model = response;
+				This.refreshFeed();
+			});
+    	},
     	like: function(ev){
-    		this.api = ev.handleObj.data;
+    		var This = this;
     		var id = ev.currentTarget.attributes['id'].value;
-    		this.api.like(id,function(response){
+    		This.api.like(id,function(response){
     			if (response == true)
-    				$(ev.currentTarget).text("Ya no me gusta!");
-    				$(ev.currentTarget).addClass("unlike");
+    				$(ev.currentTarget).text("Te gusta esto!");
     				$(ev.currentTarget).removeClass("like");
+    				$(ev.currentTarget).addClass("unlike");
     		});
     	},
     	unlike: function(ev){
-    		this.api = ev.handleObj.data;
+    		var This = this;
     		var id = ev.currentTarget.attributes['id'].value;
-    		this.api.unlike(id,function(response){
+    		This.api.unlike(id,function(response){
     			if (response == true)
     				$(ev.currentTarget).text("Me gusta!");
     				$(ev.currentTarget).removeClass("unlike");
     				$(ev.currentTarget).addClass("like");
     		});
-    	}
+    	},
+		showComments: function(ev){
+			var This = this;
+			var id = ev.currentTarget.attributes['name'].value;
+			var popup = $("#" + id).html();
+			$.colorbox({
+				title:'Comentarios',
+				width:'55%',
+				height:'70%',
+				html: popup
+			});
+			$('#div-comment #publicarComentario').on('click',This.api,This.publishComment);	
+			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
+			    $('#div-comment img').addClass('hidden');
+			});				
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);	
+    	},
+		showLikes: function(ev){
+			var This = this;
+			var id = ev.currentTarget.attributes['name'].value;
+			var popup = $("#" + id).html();
+			$.colorbox({
+				title:'Comentarios y likes',
+				width:'40%',
+				height:'60%',
+				html: popup
+			});
+			$('#colorbox .speak').on('mouseover', this.speak);	
+			$('#colorbox .speak').on('mouseout', this.shutUp);	
+    	},
 	}),
 	//Fotos de amigos
 	friendPhotos: Backbone.View.extend({
