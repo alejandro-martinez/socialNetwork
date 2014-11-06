@@ -208,3 +208,48 @@ textarea#comentario {
 .photo-comments li {
 	margin-top: 10px;
 }
+
+/*Friend wall*/
+#header-info {
+width: 100%;
+height: 100px;
+}
+
+#profilePhoto {
+width: 96px;
+height: 96px;
+float: left;
+border-radius: 100%;
+border: 2px solid #AAA;
+background-size: contain;
+background-position: center;
+background-color: #CCC;
+background-repeat: no-repeat;
+}
+#header-info span {
+width: calc(100% - 500px);
+margin: 0 20px;
+display: inline-block;
+float: left;
+}
+
+/*Botones*/
+.botonCircular {
+font-family: iconFont;
+text-align: center;
+text-decoration: none;
+width: 100px;
+line-height: 100px;
+display: block;
+border-radius: 100%;
+float: left;
+color: #FFF;
+margin: 0 10px;
+}
+
+.icon-albums:before {
+content: "\e004";
+}
+.icon-photos:before {
+content: "\e005";
+}
