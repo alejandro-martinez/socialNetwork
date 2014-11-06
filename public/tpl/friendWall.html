@@ -1,11 +1,10 @@
 <div id="header-info">
-	<div id="profilePhoto" style="background-image:url('http://graph.facebook.com/<%= friend.id %>/picture?type=normal')"></div>
-	<span><h1 id="name" class="speak" data-voice="<%= friend.name %>"><%= friend.name%></h2></span>
 	<% if (!amigo) {%>
 		<a href="/#friendAdd/<%= friend.id %>"><h1 class="icon-friend-add botonCircular bg-color-pinkDark speak" data-voice="Agregar a <%= friend.name%> a mis amigos"></h1></a>
 	<%}%>	
-	<a id="friendPhotos" href="/#friendPhotos/<%= friend.username %>"><h1 class="icon-photos botonCircular bg-color-pinkDark speak" data-voice="ver fotos de <%= friend.name%>"></h1></a>
-	<a id="friendAlbums" href="/#albums/<%= friend.id %>"><h1 class="icon-albums botonCircular bg-color-green speak" data-voice="ver albums de <%= friend.name%>"></h1></a>
+	<a id="friendPhotos" href="/#friendPhotos/<%= friend.username %>"><h1 class="icon-photos botonCircular bg-purple speak" data-voice="ver fotos de <%= friend.name%>" style=" background-image: url(img/icons/foto.png); background-size: 40px; background-repeat: no-repeat; background-position-x: 5px; background-position-y: 10px; "></h1></a>
+	<a id="friendAlbums" href="/#albums/<%= friend.id %>"><h1 class="icon-albums botonCircular bg-green speak" data-voice="ver albums de <%= friend.name%>" style="  background-image: url(img/icons/albums.png); background-size: 40px; background-repeat: no-repeat; background-position-x: 5px; background-position-y: 10px; "></h1></a>
+</h1></a>
 </div>
 <div id="wall">
 	<ul id="wall-template" class="col-xs-18 col-xs-offset-1">
