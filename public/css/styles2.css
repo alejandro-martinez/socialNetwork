@@ -249,7 +249,9 @@ margin: 0 10px;
 
 .icon-albums:before {
 content: "\e004";
+visibility: hidden;
 }
 .icon-photos:before {
 content: "\e005";
+visibility: hidden;
 }

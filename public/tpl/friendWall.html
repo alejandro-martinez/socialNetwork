@@ -4,8 +4,8 @@
 	<% if (!amigo) {%>
 		<a href="/#friendAdd/<%= friend.id %>"><h1 class="icon-friend-add botonCircular bg-purple speak" data-voice="Agregar a <%= friend.name%> a mis amigos"></h1></a>
 	<%}%>	
-	<a id="friendPhotos" href="/#friendPhotos/<%= friend.username %>"><h1 class="icon-photos botonCircular bg-purple speak" data-voice="ver fotos de <%= friend.name%>"></h1></a>
-	<a id="friendAlbums" href="/#albums/<%= friend.id %>"><h1 class="icon-albums botonCircular bg-green speak" data-voice="ver albums de <%= friend.name%>"></h1></a>
+	<a id="friendPhotos" href="/#friendPhotos/<%= friend.username %>"><h1 class="icon-photos botonCircular bg-purple speak" data-voice="ver fotos de <%= friend.name%>" style=" background-image: url(img/icons/foto.png); background-size: 57px; background-repeat: no-repeat; background-position-x: 21px; background-position-y: 20px; "></h1></a>
+	<a id="friendAlbums" href="/#albums/<%= friend.id %>"><h1 class="icon-albums botonCircular bg-green speak" data-voice="ver albums de <%= friend.name%>" style=" background-image: url(img/icons/albums.png); background-size: 57px; background-repeat: no-repeat; background-position-x: 25px; background-position-y: 22px; "></h1></a>
 </div>
 <div id="wall">
 	<ul id="wall-template" class="col-xs-18 col-xs-offset-1">
