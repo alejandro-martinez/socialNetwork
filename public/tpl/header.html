@@ -10,7 +10,11 @@
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li>
-				<a href="#" id="login-button" onclick="<%= logButtonEvent %>" data-voice="<%= logButtonText %>" class="bg-lblue fg-blue font2"><img src="img/icons/salir-a.png"><%= logButtonText %></a>
+				<% if (logButtonText == 'Conectarme') { %>
+					<a href="#" id="login-button" onclick="<%= logButtonEvent %>" data-voice="<%= logButtonText %>" class="bg-lblue fg-blue font2"><img src="img/icons/salir-a.png"><%= logButtonText %></a>
+				<% } else { %>
+					<a href="#" id="logout-button" onclick="<%= logButtonEvent %>" data-voice="<%= logButtonText %>" class="bg-lblue fg-blue font2"><img src="img/icons/salir-a.png"><%= logButtonText %></a>
+				<% } %>
 			</li>
 		</ul>
 	</div>
