@@ -83,9 +83,12 @@ var Views = {
 				    reader.readAsDataURL(F[0]);  
 				    reader.onloadend = function () {
 				    	This.attachment = reader.result;
-				    	var img = $('<img class="selectedImage speak" data-voice="Click para eliminar imagen">');
-						img.attr('src', reader.result);
-						img.appendTo('#que-estas-pensando');
+				    	//var img = $('<img class="selectedImage speak" data-voice="Click para eliminar imagen">');
+						//img.attr('src', reader.result);
+						$('#adjuntarFoto img').attr('src', reader.result);
+						$('#adjuntarFoto img').attr('class', "selectedImage speak");
+						$('#adjuntarFoto img').attr('data-voice', "Click para eliminar imagen");
+						//img.appendTo('#que-estas-pensando');
 				    }			
 				}            
 			});
