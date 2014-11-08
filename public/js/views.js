@@ -148,7 +148,8 @@ var Views = {
 			var This = this;
 			utils.loadTemplate("newsFeed",function(html){
 				template = _.template(html);
-				$("#body").html(template({news:This.model.data, miID: This.miID}));
+				$("#body #wall").html("");
+				$("#body").append(template({news:This.model.data, miID: This.miID}));
 			});
 		},
 		nextPage: function(){
@@ -298,7 +299,8 @@ var Views = {
 			var This = this;
 			utils.loadTemplate("groupFeed",function(html){
 				template = _.template(html);
-				$("#body").html(template({updates:This.model.data, destinoPost: This.options.group_id, miID: This.miID}));
+				$("#body").html("");
+				$("#body").append(template({updates:This.model.data, destinoPost: This.options.group_id, miID: This.miID}));
 			});
 		},
 		refreshFeed: function(){
@@ -413,6 +415,16 @@ var Views = {
 		shutUp: function(){
 			Speech.shutUp();
 		},
+		refreshWall: function(){			
+			var This = this;
+			var WallUpdates = Backbone.Model.extend({});
+			var updatesCollection = Backbone.Collection.extend({model: WallUpdates});
+			var updates = new updatesCollection(this.model.data);
+			utils.loadTemplate("wall",function(html){
+				template = _.template(html);
+				$("#body #wall").replaceWith(template({updates: updates.models,miID: This.miID}));
+			});
+		},
 		render: function(){
 			var This = this;
 			var WallUpdates = Backbone.Model.extend({});
@@ -420,21 +432,22 @@ var Views = {
 			var updates = new updatesCollection(this.model.data);
 			utils.loadTemplate("wall",function(html){
 				var template = _.template(html);
-				$("#body").html(template({updates: updates.models,miID: This.miID}));
+				$("#body").html("");
+				$("#body").append(template({updates: updates.models,miID: This.miID}));
 			});
 		},
 		nextPage: function(){
 			var This = this;
 			$.getJSON(this.model.paging.next + '&callback=?', function(response){
 				This.model = response;
-				This.render();
+				This.refreshWall();
 			});
     	},
     	prevPage: function(){
     		var This = this;
 			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
 				This.model = response;
-				This.render();
+				This.refreshWall();
 			});
     	},
     	like: function(ev){
