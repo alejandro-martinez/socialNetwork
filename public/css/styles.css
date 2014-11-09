@@ -26,6 +26,9 @@ li{list-style: none;}
 .loading {
 	background:#fff url(colorbox/loading.gif) no-repeat no-repeat 600px;
 }
+.loading-big {
+	background: url(../img/ajax-loader-big.gif) no-repeat 0px;
+}
 .hidden {display: none;}
 .show {display: block;}
 
@@ -173,15 +176,15 @@ button:active{
 .bg-color-greenDark{background-color:#1e7145!important;}
 .bg-color-red{background-color:#FF8C00!important;}
 .bg-color-purple{background-color:#4444dd!important;}
-.bg-color-yellow{background-color:#FFEE00!important;}
+.bg-color-yellow{background-color:#800080!important;}
 .bg-color-orange{background-color:#e3a21a!important;}
-.bg-color-orangeDark{background-color:#da532c!important;}
+.bg-color-orangeDark{background-color:#800000!important;}
 .bg-color-pink{background-color:#9f00a7!important;}
-.bg-color-pinkDark{background-color:#7e3878!important;}
+.bg-color-pinkDark{background-color:#C000C0!important;}
 .bg-color-purple{background-color:#FF0006!important;}
 .bg-color-darken{background-color:transparent!important;}
 /*.bg-color-darken{background-color:#1d1d1d!important;}*/
-.bg-color-lighten{background-color:#d5e7ec!important;}
+.bg-color-lighten{background-color:#525252!important;}
 .bg-color-white{background-color:#ffffff!important;}
 .bg-color-grayDark{background-color:#525252!important;}
 .bg-color-magenta{background-color:#ff0097!important;}
@@ -249,6 +252,7 @@ button:active{
 	padding: 0 10px;
 	float: left;
 }
+
 #adjuntarFoto{
 	float: left;
 	margin: 0 auto;
@@ -326,11 +330,13 @@ button:active{
 #examinar {
 	position:absolute;
 	top: -1000px;
+	display: none;
 }
 /* ---- albums.html ---- */
 
 #albumPhotos{
 	width: 600px;
+	min-height: 240px;
 	margin: 0 auto;
 }
 #drop_zone{
@@ -764,13 +770,13 @@ div#container-home {
     margin: 0 auto;
     margin-left: 15%;
     position: relative;
-    padding-top: 60px;
+    padding-top: 0px;
 }
 
 .logo-home-header > h1, .logo-home-header > h2{
 	font-family: Arial;
     font-weight: 200;
-    font-size: 10em;
+    font-size: 15em;
     float: left;
     color: white;
     margin: .67em 0;
@@ -797,6 +803,13 @@ left: -100px;
 div#container-album .nextPage {
 right: -12%;
 position: absolute;
+}
+
+#upload {
+	position: absolute;
+	top: 0px;
+	width: 152px;
+	right: 0;
 }
 }
 /*Plugin de autocompletar de Twitter*/
@@ -913,4 +926,28 @@ html {
   z-index: 1002;
   margin: 0px;
   font-size: 3em;
+}
+
+/*Placeholders*/
+
+::-webkit-input-placeholder {
+   color: black;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: black;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: black;  
+}
+
+:-ms-input-placeholder {  
+   color: black;  
+}
+.selectedImage {
+	height: 83px;
+	width: 101px;
+	position: absolute;
+	z-index: 9999;
 }

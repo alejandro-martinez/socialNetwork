@@ -1,27 +1,29 @@
-<a class="prevPage friends" href="javascript:void(0)"></a>
-<a class="nextPage friends" href="javascript:void(0)"></a>
-<div id="friends">
-	<% _.each(friends, function(friend) { %> 
-	<div class="flip-container">
-		<div class="flipper">"
-			<div class="front" data-voice="<%= friend.attributes.name %>" style="background-image:url('http://graph.facebook.com/<%= friend.attributes.id %>/picture?type=large')">
-				<div class="desc">
-					<span><%= friend.attributes.name %></span>
+<div class="col-xs-18 col-xs-offset-1">
+	<a class="prevPage friends" href="javascript:void(0)"></a>
+	<a class="nextPage friends" href="javascript:void(0)"></a>
+	<div id="friends" class="col-xs-20">
+		<% _.each(friends, function(friend) { %> 
+		<div class="flip-container col-xs-5">
+			<div class="flipper col-xs-20">
+				<div class="front col-xs-20" data-voice="<%= friend.attributes.name %>" style="background-image:url('http://graph.facebook.com/<%= friend.attributes.id %>/picture?type=large')">
+					<div class="desc font4 fg-white col-xs-20">
+						<span><%= friend.attributes.name %></span>
+					</div>
+				</div>
+				<div class="back speak col-xs-20" data-voice="<%= friend.attributes.name %>" onclick="window.location.href='/#friend/<%= friend.attributes.id%>'">
+					<label class="fg-blue">Nombre:&nbsp;</label><%= friend.attributes.name %></br>
+					<% if (friend.attributes.birthday != null){%>
+						<label class="fg-blue">Nacimiento:&nbsp;</label><%= friend.attributes.birthday %></br>
+					<% }%>
+					<% if (friend.attributes.hometown != null){%>
+						<label class="fg-blue">De:&nbsp;</label><%= friend.attributes.hometown.name %></br>
+					<% }%>
+					<% if (friend.attributes.location != null){%>
+						<label class="fg-blue">Vive en:&nbsp;</label><%= friend.attributes.location.name %></br>
+					<% }%>
 				</div>
 			</div>
-			<div class="back speak" data-voice="<%= friend.attributes.name %>" onclick="window.location.href='/#friend/<%= friend.attributes.id%>'">
-				<label><strong>Nombre:</strong><%= friend.attributes.name %></label></br>
-				<% if (friend.attributes.birthday != null){%>
-					<label><strong>Nacimiento:</strong><%= friend.attributes.birthday %></label></br>
-				<% }%>
-				<% if (friend.attributes.hometown != null){%>
-					<label><strong>Vive en:</strong><%= friend.attributes.hometown.name %></label></br>
-				<% }%>
-				<% if (friend.attributes.location != null){%>
-					<label><strong>De:</strong><%= friend.attributes.location.name %></label></br>
-				<% }%>
-			</div>
 		</div>
+		<% }); %>
 	</div>
-	<% }); %>
 </div>

@@ -1,4 +1,26 @@
-<button id="login-button" class="big image-button bg-color-darken fg-color-white login-button" onclick="<%= logButtonEvent %>">
-	<%= logButtonText %><img src="img/azul.png">
+<nav id="navbar" class="navbar bg-blue" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">
+				<img id="logo" src="img/logo.png" alt="facebook+">
+			</a>
+		</div>
+		<ul class="nav navbar-nav" id="nav-content">
+			
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				<% if (logButtonText == 'Conectarme') { %>
+					<a href="#" id="login-button" onclick="<%= logButtonEvent %>" data-voice="<%= logButtonText %>" class="bg-lblue fg-blue font2"><img src="img/icons/salir-a.png"><%= logButtonText %></a>
+				<% } else { %>
+					<a href="#" id="logout-button" onclick="<%= logButtonEvent %>" data-voice="<%= logButtonText %>" class="bg-lblue fg-blue font2"><img src="img/icons/salir-a.png"><%= logButtonText %></a>
+				<% } %>
+			</li>
+		</ul>
+	</div>
+</nav>
+<!--
+<button id="login-button" class="big image-button bg-color-darken fg-color-white login-button speak" onclick="<%= logButtonEvent %>" data-voice="<%= logButtonText %>"><%= logButtonText %><img src="img/azul.png">
 </button>
-<h1 id="user-info"><%= username %></h1>
+<h1 id="user-info" class="speak" data-voice="<%= username %>"><%= username %></h1>
+-->

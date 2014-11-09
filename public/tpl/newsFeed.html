@@ -1,119 +1,125 @@
 <div id="wall">
-	<ul id="wall-template">
+	<ul id="wall-template" class="col-xs-18 col-xs-offset-1">
 		<input hidden="" id="destinoPost" value="me">
 		<a class="prevPage newsFeed" href="javascript:void(0)"></a>
 		<a class="nextPage newsFeed" href="javascript:void(0)"></a>
-
-		<% _.each(news, function(post) { %> 
-		    <li>
-		    	<div class="post">
-		    		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%= post.from.id %>/picture?type=normal)"></div>
-					<h1>
-						<a class="speak" data-voice="Publicado por <%=post.from.name %>" href="/#friend/<%= post.from.id%>"><%= post.from.name%></a>
-						<% if (post.to != null){%>
-						>> <a class="speak" data-voice="para <%= post.to.data[0].name %>" href="/#friend/<%= post.to.data[0].id%>"><%= post.to.data[0].name %></a>
-						<% }%>
-					</h1> 
-					<!--
-				    <div class="avatar" style="background-image: url(http://graph.facebook.com/<%= post.from.id %>/picture)">
-					</div>
-					<h1 data-voice="De <%=post.from.name%>" class="speak"><%= post.from.name%>
-						<% if (post.to != null){%>
-							>> <%= post.to.data[0].name%>
-						<% }%>
-					</h1>
-				-->
-					<% 
-						if (post.story != null) { %>
-						<div data-voice="<%=post.story%>" class="text speak"><%= post.story %></div>
-					<% }%>
-
-					<% if (post.message != null) { %>
-						<div data-voice="<%=post.message%>" class="text speak"><%= post.message %></div>
-					<% }%>
-
-					<% if (post.source != null) { %>
-						<center>
-						  <iframe width="470" height="350" margin-left= "20%" src="<%= post.source %>?autoplay=0" frameborder="0" allowfullscreen>
-						</iframe>
-						</center>
-					<% } else if (post.object_id != null) { %>
-							<%var foto = post.picture;%>
-							<center><img src="<%= foto.replace('s.jpg','n.jpg')%>" /></center>
-					<% } %>
-					
-					<% var postInfo = "A nadie le gusta esto";
-						var likeText = "Me gusta";
-						var likeClass="like"
-					if (post.likes != null) {
-						var likes = post.likes.data;
-						var count = post.likes.data.length;
-						if(count == 1){ 
-							if(likes[0].id == miID){
-								postInfo = "Te gusta esto!"
-								likeText = "Ya no me gusta!"
-								likeClass="unlike"
-							}
-							else{
-								postInfo = "A " + likes[0].name + " le gusta esto!"
-							}
-						}
-						else {
-							if (count > 1) { 
-								total = count - 1;
-								if(likes[0].id == miID){
-									postInfo = "A ti y a " + total + " personas les gusta esto"
-									likeText = "Ya no me gusta!"
-									likeClass="unlike"
-								}
-								else
-									postInfo = "A " + likes[0].name + " y a " + total + " personas les gusta esto"
-							}
-						} 
+		<% _.each(news, function(post) { 
+			var postInfo = "Se el primero en dar me gusta";
+			var likeText = "Me gusta";
+			var likeClass="like"
+			if (post.likes != null) {
+				var likes = post.likes.data;
+				var count = post.likes.data.length;
+				if(count == 1){ 
+					if(likes[0].id == miID){
+						postInfo = "Te gusta esto!"
+						likeText = "Ya no me gusta!"
+						likeClass="unlike"
 					}
-					%>
-					
-					<a href="javascript:void(0)" class="postInfo speak" data-voice="<%=postInfo %>" name="post-<%=post.id%>"><%=postInfo %></a><br><br>
-					<a href="javascript:void(0)" id="<%=post.id%>" class="<%=likeClass %> speak" data-voice="<%=likeText %>"><%=likeText %></a>
-					<%if (post.likes != null) {
-						var likes = post.likes.data;%>
-						<div id="post-<%=post.id%>" class="hidden">
-							<ul class="photo-comments">
-								<% _.each(post.likes.data, function(autorLike) { %> 
-										<div class="post">
-								    		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=autorLike.id%>/picture?type=square)">
-								    		</div>
-								    		<h5><a href="/#friend/<%=autorLike.id%>" class="speak" data-voice="<%=autorLike.name%>"><%=autorLike.name%></a><h5>
-								    	</div>	
-								<% });%>    
-					    	</ul>
-						</div>	
-					<%}%>	
+					else{
+						postInfo = "A " + likes[0].name + " le gusta esto!"
+					}
+				}
+				else {
+					if (count > 1) { 
+						total = count - 1;
+						if(likes[0].id == miID){
+							postInfo = "A ti y a " + total + " personas les gusta esto"
+							likeText = "Ya no me gusta!"
+							likeClass="unlike"
+						}
+						else
+							postInfo = "A " + likes[0].name + " y a " + total + " personas les gusta esto"
+					}
+				} 
+			}
+		%>
+			<li>
+				<div class="post font3 bg-white">
+					<div class="post-content">
+						<div class="avatar" style="background-image: url(http://graph.facebook.com/<%= post.from.id %>/picture?type=normal)"></div>
+						<span class="font2 fg-blue">
+							<a class="speak fg-blue" data-voice="Publicado por <%=post.from.name %>" href="/#friend/<%= post.from.id%>"><%= post.from.name%></a>
+							<% if (post.to != null){%>
+							>> <a class="speak fg-blue" data-voice="para <%= post.to.data[0].name %>" href="/#friend/<%= post.to.data[0].id%>"><%= post.to.data[0].name %></a>
+							<% }%>
+						</span> 
+						<!--
+						<div class="avatar" style="background-image: url(http://graph.facebook.com/<%= post.from.id %>/picture)">
+						</div>
+						<h1 data-voice="De <%=post.from.name%>" class="speak"><%= post.from.name%>
+							<% if (post.to != null){%>
+								>> <%= post.to.data[0].name%>
+							<% }%>
+						</h1>
+						-->
+						<% 
+							if (post.story != null) { %>
+							<div data-voice="<%=post.story%>" class="text speak"><%= post.story %></div>
+						<% }%>
+
+						<% if (post.message != null) { %>
+							<div data-voice="<%=post.message%>" class="text speak"><%= post.message %></div>
+						<% }%>
+
+						<% if (post.source != null) { %>
+							<center><iframe width="640" height="360" src="<%= post.source %>?autoplay=0" frameborder="0" allowfullscreen></iframe></center>
+						<% } else if (post.object_id != null) { 
+							var foto = post.picture;%>
+							<center><img src="<%= foto.replace('s.jpg','n.jpg')%>" /></center>
+						<% } %>
+					</div>
+					<div class="post-footer bg-white col-xs-20">
+						<div class="col-xs-20">
+							<a href="javascript:void(0)" class="fg-blue font3 speak postInfo" data-voice="<%=postInfo %>" name="infoLikes-<%=post.id%>"><img src="img/icons/megusta-a.png" class="post-footer-icon"><%=postInfo %></a>
+						</div>
+						<div class="col-xs-4 bg-lblue">
+							<a href="javascript:void(0)" id="<%=post.id%>" class="fg-blue font3 speak" data-voice="<%=likeText %>"><% if(likeClass=="like"){%><img src="img/icons/megusta-a.png" class=" post-footer-icon"><%}%><%=likeText %></a>
+						</div>
+						<%if (post.likes != null) {
+							var likes = post.likes.data;%>
+							<div id="infoLikes-<%=post.id%>" class="hidden">
+								<ul class="photo-comments">
+									<% _.each(post.likes.data, function(autorLike) { %>
+									<li>
+										<div class="post col-xs-20 middle">
+											<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=autorLike.id%>/picture?type=square)">
+											</div>
+											<h5 class="font1"><a href="/#friend/<%=autorLike.id%>" class="speak" data-voice="<%=autorLike.name%>"><%=autorLike.name%></a></h5>
+										</div>
+									</li>
+									<% });%>	
+								</ul>
+							</div>	
+						<%}%>	
 						<ul id="comments-post-<%=post.id%>" class="hidden photo-comments">
 							<%
 							var totalComentarios=0;
 							if (post.comments != null){
 								totalComentarios = post.comments.data.length;
-									_.each(post.comments.data, function(comment) { %> 
+								_.each(post.comments.data, function(comment) { %> 
 								<li>
-							    	<div class="post">
-							    		<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=comment.from.id%>/picture?type=square)">
-							    		</div>
-							    		<h5><a href="/#friend/<%=comment.from.id%>"><%=comment.from.name%></a><h5>
-							    		<span class="speak" data-voice="<%=comment.message%>"><%=comment.message%></span>
-							    	</div>	
-							    </li>	
+									<div class="post col-xs-20 comentario">
+										<div class="avatar" style="background-image: url(http://graph.facebook.com/<%=comment.from.id%>/picture?type=square)">
+										</div>
+										<h5 class="font2"><a class="fg-blue speak" href="/#friend/<%=comment.from.id%>" data-voice="<%=comment.from.name%>"><%=comment.from.name%></a></h5>
+										<span class="speak font3" data-voice="<%=comment.message%>"><%=comment.message%></span>
+									</div>
+								</li>	
 								<%});%>
 							<%}%>
 							<div id="div-comment">
-								<h3 class="speak" data-voice="Escribe un comentario">Escribe un comentario</h3>
-								<textarea id="comentario" class="speak" data-voice="Qué estás pensando?"></textarea>
+								<h5 class="speak font2 fg-blue" data-voice="Escribe un comentario">Escribe un comentario</h5>
+								<textarea id="comentario" class="speak col-xs-20" rows="5" data-voice="Qué estás pensando?"></textarea>
 								<img src="http://png-1.findicons.com/files/icons/2015/24x24_free_application/24/error.png" class="hidden error"/>
 								<img src="https://cdn2.iconfinder.com/data/icons/oxygen/48x48/actions/ok.png" class="hidden ok"/>
-								<button id="publicarComentario" data-comment-id="<%=post.id%>" class="speak image-button bg-color-blue fg-color-white" data-voice="click para publicar comentario">Publicar</button>
+								<button id="publicarComentario" data-comment-id="<%=post.id%>" class="speak bg-blue fg-white font2" data-voice="click para publicar comentario">Publicar</button>
 							</div>	
 						</ul>	
-					<a href="javascript:void(0)" class="comments speak" data-voice="<%=totalComentarios%> Comentarios " name="comments-post-<%=post.id%>">Comentarios (<%=totalComentarios%>)</a>
+						<div class="col-xs-16 bg-lblue">
+							<a href="javascript:void(0)" class="comments fg-blue speak" data-voice="<%=totalComentarios%> Comentarios " name="comments-post-<%=post.id%>">Comentarios (<%=totalComentarios%>)</a>
+						</div>
+					</div>
 				</div>
 			</li>
 		<% }); %>

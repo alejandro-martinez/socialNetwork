@@ -158,7 +158,7 @@ function AppController(){
 		    }
 		);
 	},
-	this.createAlbum = function(nombre,descripcion,privacidad,callback){
+	this.createAlbum = function(nombre,descripcion,callback){
 		FB.api(
 		    "/me/albums",
 		    "POST",
@@ -204,6 +204,7 @@ function AppController(){
 	        contentType:false,
 	        cache:false,
 	        success:function(data){
+	        	console.log(data);
 	        	callback(data);
 	        },
 	        error:function(shr,status,data){
@@ -333,7 +334,7 @@ function startApp(){
     		((ac.currentUser.gender.toUpperCase()=="FEMALE") ? sexo = "a" : sexo = "o");
     		ac.dataDefault.username = "Bienvenid" + sexo + " " + response.first_name;	
     		ac.dataDefault.logButtonEvent = "fbLogout();";					
-    		ac.dataDefault.logButtonText = "Desconectarme";
+    		ac.dataDefault.logButtonText = "Salir";
     		ac.dataDefault.id = response.id;
     		ac.dataDefault.photo = "http://graph.facebook.com/" + ac.currentUser.id + "/picture?type=normal";
     	}

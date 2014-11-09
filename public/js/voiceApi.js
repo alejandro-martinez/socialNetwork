@@ -20,6 +20,7 @@ var Speech = {
 			msg.lang = This.config.lang;
 			msg.text = texto;
 			speechSynthesis.speak(msg);
+			msg = null;
 		}
 	},
 	shutUp: function(){

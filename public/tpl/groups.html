@@ -1,9 +1,24 @@
-<a href="javascript:void(0)" class="prevPage groups"></a>
-<a href="javascript:void(0)" class="nextPage groups"></a>
-<div id="groups">
-	<ul>
-		<% _.each(groups, function(group){ %>
-		<li><a href="/#groupFeed/<%= group.id %>"><%= group.name %></a></li>
-		<% }); %>
-	</ul>
+<div class="col-xs-18 col-xs-offset-1">
+	<a href="javascript:void(0)" class="prevPage groups"></a>
+	<a href="javascript:void(0)" class="nextPage groups"></a>
+	<div id="groups">
+		<ul>
+			<% _.each(groups, function(group){ %>
+			<div class="flip-container col-xs-6">
+				<div class="flipper col-xs-20">
+					<a class="speak font1 fg-blue" data-voice="<%=group.name %>" href="/#groupFeed/<%= group.id %>">
+						<div class="front col-xs-20" data-voice="<%= group.name %>" style="background-image:url('http://graph.facebook.com/144718082374960/picture?type=large')">
+							<div class="desc font4 fg-white col-xs-20">
+								<span><%= group.name %></span>
+							</div>
+						</div>
+					</a>
+					<div class="back speak col-xs-20" data-voice="<%= group.name %>" onclick="window.location.href='/#groupFeed/<%= group.id%>'">
+						<h1 class="font2"><%= group.name %></h1>
+					</div>
+				</div>
+			</div>
+			<% }); %>
+		</ul>
+	</div>
 </div>

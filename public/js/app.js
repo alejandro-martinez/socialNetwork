@@ -52,30 +52,35 @@ var AppRouter = Backbone.Router.extend({
 			new Views.NotLoggedInView();						//Muestra logo de Facebook +
 		}
 		new Views.Header({model: this.data,api: this.api});					//Barra superior con los datos del usuario
+        selectMenu('nav-user')
     },
     albumPhotos: function(id){
         var This = this;
         this.api.getAlbumPhotos(id,9,function(response){
            this.albumsPhotoView = new Views.albumPhotos({model: response, api: This.api});
         });   
+        selectMenu('nav-albums')
     },
     albums: function(id){
         var This = this;
         this.api.getAlbums(id,function(response){
            this.albumsView = new Views.Albums({model: response, api: This.api, friendId: id});
         });   
+        selectMenu('nav-albums')
     },
     updateAlbum: function(id){
         var This = this;
         this.api.getAlbumPhotos(id,9,function(response){
            this.UpdateAlbumView = new Views.UpdateAlbum({model: response,albumId: id, api: This.api});
         });   
+        selectMenu('nav-albums')
     },
     friends: function(){
         var This = this;
         this.api.getFriends(function(response){
             this.friendsView = new Views.Friends({api: This.api,model: response}); 
         });
+        selectMenu('nav-friends')
     },
     friendProfile: function(id){
         var This = this;
@@ -87,6 +92,7 @@ var AppRouter = Backbone.Router.extend({
                 This.friendView = new Views.friendProfile({wall: friendWall, friendInfo: friendInfo, amigo: This.esAmigo, api: This.api}); 
             });
         });
+        selectMenu('nav-friends')
     },
     friendAdd: function(id){
         this.api.addFriend(id);
@@ -97,23 +103,27 @@ var AppRouter = Backbone.Router.extend({
             This.wallView = new Views.Wall({model: response, api: This.api});    
             This.newPostView = new Views.NewPost({api: This.api});                                             //Que estas pensando
         });
+        selectMenu('nav-posts')
     },
     photos: function(){
         var This = this;
         this.api.getPhotos(function(response){
             this.photos = new Views.Photos({model: response,api: This.api});
         });
+        selectMenu('nav-photos')
     },
     friendPhotos: function(id){
         var This = this;
         this.api.getFriendPhotos(id,function(response){
             this.friendPhotos = new Views.friendPhotos({model: response,api: This.api});
         });
+        selectMenu('nav-photos')
     },
     groupsList: function(){
         this.api.getUserGroups(function(response){
             this.groupsView = new Views.Groups({model: response});
         });
+        selectMenu('nav-groups')
     },
     groupFeed: function(id){
         var This = this;
@@ -121,5 +131,11 @@ var AppRouter = Backbone.Router.extend({
             This.groupFeedView = new Views.GroupFeed({model: response, group_id:id, api: This.api});
             This.newGroupPostView = new Views.NewPost({api: This.api});
         });
+        selectMenu('nav-groups')
     },
 });
+
+var selectMenu = function(op){
+    $('.nav-button').removeClass("active");
+    $('#' + op).addClass("active");
+}
