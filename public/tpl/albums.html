@@ -1,11 +1,13 @@
 <div class="col-xs-18 col-xs-offset-1">
 	<a class="prevPage albums" href="javascript:void(0)"></a>
 	<a class="nextPage albums" href="javascript:void(0)"></a>
-	<% (friendId == 'me') ? soyYo = true: soyYo = false;
-		%>
-	<div class="col-xs-20 text-right">
-		<button id="create-album" class="speak fg-white bg-yellow font2" data-voice="Click para crear album"><span class="font1 icon">+<img src="img/icons/albums.png"></span>Crear album</button>
-	</div>
+	<% (friendId == 'me') ? userCanEdit = true: userCanEdit = false;
+		
+	if(userCanEdit){%>	
+		<div class="col-xs-20 text-right">
+			<button id="create-album" class="speak fg-white bg-yellow font2" data-voice="Click para crear album"><span class="font1 icon">+<img src="img/icons/albums.png"></span>Crear album</button>
+		</div>
+	<%}%>	
 	<div id="albums" class="col-xs-20">
 		<% _.each(albums, function(album) { %> 
 		<div class="flip-container col-xs-5 fg-white">
@@ -17,7 +19,7 @@
 				</div>
 				<div class="back speak col-xs-20 bg-lblue" data-voice="<%= album.attributes.name %>" onclick="window.location.href = '/#albums/<%=album.attributes.id%>/photos'">
 					<h1 class="font3"><%= album.attributes.name %></h1>
-					<% if(soyYo){%>
+					<% if(userCanEdit){%>
 					<div class="editAlbum bg-blue">
 						<a href="#/updateAlbum/<%=album.attributes.id%>" class="speak font2 fg-white" data-voice="Agregar fotos a este album">EDITAR</a>	
 					</div>
@@ -27,9 +29,7 @@
 		</div>
 		<% }); %>
 	</div>
-	<%if(soyYo){%>
-	<%}%>
-	<%if(soyYo){%>
+	<%if(userCanEdit){%>
 	<div id="uploadAlbumForm" class="hidden">
 		<div class="middle">
 			<div class="col-xs-20 middle-content">
