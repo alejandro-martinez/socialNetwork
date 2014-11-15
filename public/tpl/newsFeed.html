@@ -44,18 +44,13 @@
 							>> <a class="speak fg-blue" data-voice="para <%= post.to.data[0].name %>" href="/#friend/<%= post.to.data[0].id%>"><%= post.to.data[0].name %></a>
 							<% }%>
 						</span> 
-						<!--
-						<div class="avatar" style="background-image: url(http://graph.facebook.com/<%= post.from.id %>/picture)">
-						</div>
-						<h1 data-voice="De <%=post.from.name%>" class="speak"><%= post.from.name%>
-							<% if (post.to != null){%>
-								>> <%= post.to.data[0].name%>
-							<% }%>
-						</h1>
-						-->
 						<% 
 							if (post.story != null) { %>
 							<div data-voice="<%=post.story%>" class="text speak"><%= post.story %></div>
+						<% }%>
+
+						<% if (post.name != null) { %>
+							<div data-voice="<%=post.name%>" class="text speak"><%= post.name %></div>
 						<% }%>
 
 						<% if (post.message != null) { %>
@@ -74,7 +69,7 @@
 							<a href="javascript:void(0)" class="fg-blue font3 speak postInfo" data-voice="<%=postInfo %>" name="infoLikes-<%=post.id%>"><img src="img/icons/megusta-a.png" class="post-footer-icon"><%=postInfo %></a>
 						</div>
 						<div class="col-xs-4 bg-lblue">
-							<a href="javascript:void(0)" id="<%=post.id%>" class="fg-blue font3 speak" data-voice="<%=likeText %>"><% if(likeClass=="like"){%><img src="img/icons/megusta-a.png" class=" post-footer-icon"><%}%><%=likeText %></a>
+							<a href="javascript:void(0)" id="<%=post.id%>" class="fg-blue font3 speak <%=likeClass %>" data-voice="<%=likeText %>"><% if(likeClass=="like"){%><img src="img/icons/megusta-a.png" class=" post-footer-icon"><%}%><%=likeText %></a>
 						</div>
 						<%if (post.likes != null) {
 							var likes = post.likes.data;%>

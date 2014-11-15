@@ -23,7 +23,7 @@ var AppRouter = Backbone.Router.extend({
         This = this;
 
         // instancio y actualizo por primera vez las colecciones criticas
-        actualizarListas = function(){ 
+      /*  actualizarListas = function(){ 
             This.api.get.home(function(response){           // voy a actualizar
                 Colls.home.add(response.data);              // constantemente
             });                                             // solo el home
@@ -89,6 +89,7 @@ var AppRouter = Backbone.Router.extend({
                 (response.data.length > 0) ? This.esAmigo = true : This.esAmigo = false;
             });
             This.api.getFriendsWall(friendInfo.id,function(friendWall){
+                console.log(friendWall)
                 This.friendView = new Views.friendProfile({wall: friendWall, friendInfo: friendInfo, amigo: This.esAmigo, api: This.api}); 
             });
         });

@@ -437,6 +437,7 @@ var Views = {
 			var This = this;
 			$.getJSON(this.model.paging.next + '&callback=?', function(response){
 				This.model = response;
+				console.log(response);
 				This.refreshWall();
 			});
     	},
@@ -1102,7 +1103,6 @@ var Views = {
 			var FriendWall = Backbone.Model.extend({});
 			var friendUpdatesCollection = Backbone.Collection.extend({model: FriendWall});
 			var wallUpdates = new friendUpdatesCollection(This.options.wall.data);
-			console.log(This.options.amigo);
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
 				$("#body").html(template({

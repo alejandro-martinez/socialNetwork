@@ -75,7 +75,7 @@ function AppController(){
 		});	
 	},
 	this.getFriendsWall = function(id, callback){
-		fbUser('/' + id + '/posts?limit=1&locale='+This.locale, function(model){
+		fbUser('/' + id + '/posts?locale='+This.locale, function(model){
 		    callback(model);
 		});	
 	},

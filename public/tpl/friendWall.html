@@ -7,9 +7,12 @@
 </h1></a>
 </div>
 <div id="wall">
-	<ul id="wall-template" class="col-xs-18 col-xs-offset-1">
+
+	<div id="banner-fade">
+	<ul id="wall-template" class="bjqs col-xs-18 col-xs-offset-1">
 		<a class="prevPage friendWall" href="javascript:void(0)"></a>
 		<a class="nextPage friendWall" href="javascript:void(0)"></a>
+	
 		<% _.each(wall, function(post) { 
 			var postInfo = "Se el primero en dar me gusta";
 			var likeText = "Me gusta";
@@ -124,3 +127,7 @@
 		<% }); %>
 	</ul>
 </div>
+
+<script type="text/javascript">
+	$("#banner-fade").bjqs({height:'600px',width:'100%',responsive:true, animspeed : 15000, keyboardnav : true,hoverpause : true,nexttext:'<img src="/img/next.png">', prevtext:'<img src="/img/prev.png">'})
+</script>
