@@ -89,12 +89,13 @@ margin-top: -71px;}
 #user-photo{margin-bottom: 5px;display:inline-block;width:100px;height:100px;background-size:contain;background-position:center;background-repeat:no-repeat}
 
 /* que estas pensando */
+.loading {background:#fff url(colorbox/loading.gif) no-repeat right;}
 #examinar{display:none}
 #post-text{width:calc(100% - 195px);height: 45px;border: 0;padding: 10px}
 #publicarStatus{width:150px}
 #que-estas-pensando {padding: 0}
 #que-estas-pensando button{padding:0px 15px;border:0;height: 45px}
-#adjuntarFoto{width:45px;height:45px;padding:0px !important;margin:5px -4px;top:-4px;position:relative}
+#adjuntarFoto{width:45px;height:45px;padding:0px !important;margin:5px -4px;top:-5px;position:relative}
 #adjuntarFoto>img{width:30px}
 
 /* news feed */
@@ -231,3 +232,57 @@ content: "\e004";visibility: hidden;
 .icon-photos:before {
 content: "\e005";visibility: hidden;
 }
+
+html {
+  overflow-y: scroll;
+  *overflow-x: hidden;
+}
+
+.container {
+  max-width: 750px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Buscador */
+.typehead {font-size:22px;}
+.tt-dropdown-menu,
+.gist {
+  text-align: left;
+}
+
+.ui-menu-item{
+	display: flex;
+}
+.ui-menu-item img{
+	float: left;
+}
+.ui-menu-item a{
+	float: left;
+	width: 200px;
+	font-size:22px;
+}
+.searching { 
+	background: #fff url('../img/ajax-loader.gif') no-repeat;
+	background-position: 231px 2px;
+}
+
+.tt-query,
+.tt-hint {
+  width: 200px;
+  height: 30px;
+  padding: 8px 12px;
+  font-size: 24px;
+  line-height: 30px;
+  outline: none;
+}
+
+.tt-dropdown-menu {
+  width: 200px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  background-color: #fff;
+  }
+
+
+/* Buscador*/
