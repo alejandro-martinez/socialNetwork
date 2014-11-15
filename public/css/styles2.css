@@ -286,3 +286,15 @@ html {
 
 
 /* Buscador*/
+
+/* Netbook */
+@media (max-width:1099px){
+	body, html{
+		min-width: 1000px !important;
+		zoom: .909;
+	}
+	#banner-fade center>img {
+		height: 300px;
+	}
+
+}
