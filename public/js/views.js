@@ -16,7 +16,7 @@ var Views = {
 		events: {
 			'drop #user-photo' : 'dropProfilePhoto',
 			'mouseover .speak': 'speak',
-			'mouseout .speak': 'shutUp'
+			'mouseout .speak': 'shutUp',
 		},
 		speak: function(ev){
 			Speech.speak(ev.currentTarget.attributes['data-voice'].value);
@@ -203,34 +203,14 @@ var Views = {
     		});
     	},
 		showComments: function(ev){
-			var This = this;
-			var id = ev.currentTarget.attributes['name'].value;
-			var popup = $("#" + id).html();
-			$.colorbox({
-				title:'Comentarios',
-				width:'55%',
-				height:'70%',
-				html: popup
-			});
-			$('#div-comment #publicarComentario').on('click',This.api,This.publishComment);	
+			utils.launchPopup("Comentarios","55%","70%",$("#" + ev.currentTarget.attributes['name'].value).html(),this);
+			$('#div-comment #publicarComentario').on('click',this.api,this.publishComment);	
 			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
 			    $('#div-comment img').addClass('hidden');
 			});				
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);	
     	},
 		showLikes: function(ev){
-			var This = this;
-			var id = ev.currentTarget.attributes['name'].value;
-			var popup = $("#" + id).html();
-			$.colorbox({
-				title:'Comentarios y likes',
-				width:'40%',
-				height:'60%',
-				html: popup
-			});
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);	
+			utils.launchPopup("Likes","40%","60%",$("#" + ev.currentTarget.attributes['name'].value).html(),this);
     	},
 	}),
 	Groups: Backbone.View.extend({
@@ -344,34 +324,14 @@ var Views = {
     		});
     	},
 		showLikes: function(ev){
-			var This = this;
-			var id = ev.currentTarget.attributes['name'].value;
-			var popup = $("#" + id).html();
-			$.colorbox({
-				title:'Comentarios y likes',
-				width:'40%',
-				height:'60%',
-				html: popup
-			});
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);	
+			utils.launchPopup("Comentarios y likes","40%","60%",$("#" + ev.currentTarget.attributes['name'].value).html(),this);
     	},
     	showComments: function(ev){
-			var This = this;
-			var id = ev.currentTarget.attributes['name'].value;
-			var popup = $("#" + id).html();
-			$.colorbox({
-				title:'Comentarios',
-				width:'55%',
-				height:'70%',
-				html: popup
-			});
-			$('#div-comment #publicarComentario').on('click',This.api,This.publishComment);	
+    		utils.launchPopup("Comentarios","55%","70%",$("#" + ev.currentTarget.attributes['name'].value).html(),this);
+			$('#div-comment #publicarComentario').on('click',this.api,this.publishComment);	
 			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
 			    $('#div-comment img').addClass('hidden');
 			});
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);					
     	},
     	publishComment: function(ev){
     		this.api = ev.handleObj.data;
@@ -471,18 +431,8 @@ var Views = {
     		});
     	},
 		showLikes: function(ev){
-			var This = this;
-			var id = ev.currentTarget.attributes['name'].value;
-			var popup = $("#" + id).html();
-			$.colorbox({
-				title:'Comentarios y likes',
-				width:'40%',
-				height:'60%',
-				html: popup
-			});
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);					
-    	},
+			utils.launchPopup("Comentarios y likes","40%","60%",$("#" + ev.currentTarget.attributes['name'].value).html(),this);
+    	},	
     	publishComment: function(ev){
     		this.api = ev.handleObj.data;
     		var id = ev.currentTarget.attributes['data-comment-id'].value;
@@ -501,21 +451,11 @@ var Views = {
     		}
     	},
 		showComments: function(ev){
-			var This = this;
-			var id = ev.currentTarget.attributes['name'].value;
-			var popup = $("#" + id).html();
-			$.colorbox({
-				title:'Comentarios',
-				width:'55%',
-				height:'70%',
-				html: popup
-			});
+			utils.launchPopup("Comentarios","55%","70%",$("#" + ev.currentTarget.attributes['name'].value).html(),this);
 			$('#div-comment #publicarComentario').on('click',This.api,This.publishComment);	
 			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
 			    $('#div-comment img').addClass('hidden');
 			});				
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);					
     	},
 	}),
 	//La barra superior con Nombre y boton Conectar
@@ -549,7 +489,7 @@ var Views = {
     	loadNotifications: function(model){
 			utils.loadTemplate("notifications",function(html){
 				template = _.template(html);
-				$.colorbox({title:'Notificaciones',width:'70%',height:'85%',html: template({notifications: model.data})});
+				utils.launchPopup("Notificaciones","70%","85%",template({notifications: model.data}),this);
 			});
     	},
 		nextPage: function(){
@@ -760,34 +700,14 @@ var Views = {
     		});
     	},
 		showComments: function(ev){
-			var This = this;
-			var id = ev.currentTarget.attributes['name'].value;
-			var popup = $("#" + id).html();
-			$.colorbox({
-				title:'Comentarios',
-				width:'55%',
-				height:'70%',
-				html: popup
-			});
+			utils.launchPopup("Comentarios","55%","70%",$("#" + ev.currentTarget.attributes['name'].value).html(),this);
 			$('#div-comment #publicarComentario').on('click',This.api,This.publishComment);	
 			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
 			    $('#div-comment img').addClass('hidden');
 			});				
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);	
     	},
 		showLikes: function(ev){
-			var This = this;
-			var id = ev.currentTarget.attributes['name'].value;
-			var popup = $("#" + id).html();
-			$.colorbox({
-				title:'Comentarios y likes',
-				width:'40%',
-				height:'60%',
-				html: popup
-			});
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);	
+			utils.launchPopup("Comentarios","40%","60%",$("#" + ev.currentTarget.attributes['name'].value).html(),this);
     	},
 	}),
 	//Fotos de amigos
@@ -813,14 +733,7 @@ var Views = {
 			Speech.shutUp();
 		},
 		showLikesAndComments: function(ev){
-			var This = this;
-			var id = ev.currentTarget.attributes['href'].value;
-			$.colorbox({
-				title:'Comentarios y likes',
-				width:'70%',
-				height:'85%',
-				html: $(id).html()
-			});
+			utils.launchPopup("Comentarios y likes","70%","85%",$(ev.currentTarget.attributes['href'].value).html(),this);
 			$('#colorbox .like').on('click', This.api, this.like);	
 			$('#colorbox .unlike').on('click', This.api, this.unlike);	
 			$('#colorbox .postInfo').on('click',this.showAuthorsLikes);	
@@ -1013,16 +926,8 @@ var Views = {
     		});
     	},
     	createAlbum: function(){
-			var This = this;
-			$.colorbox({
-				title:'Crear Album',
-				width:'45%',
-				height:'45%',
-				html: $('#uploadAlbumForm').html()
-			});
-			$('#cboxLoadedContent #saveAlbum').on('click',This.api,This.saveAlbum);	
-			$('#cboxLoadedContent .speak').on('mouseover', This.speak);	
-			$('#cboxLoadedContent .speak').on('mouseout', This.shutUp);	
+			utils.launchPopup("Crear Album","45%","45%",$('#uploadAlbumForm').html(),this);
+			$('#cboxLoadedContent #saveAlbum').on('click',this.api,this.saveAlbum);	
     	},
 	}),
 	//Fotos de albums
@@ -1167,34 +1072,14 @@ var Views = {
     		}
     	},
 		showLikes: function(ev){
-			var This = this;
-			var id = ev.currentTarget.attributes['name'].value;
-			var popup = $("#" + id).html();
-			$.colorbox({
-				title:'Comentarios y likes',
-				width:'40%',
-				height:'60%',
-				html: popup
-			});
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);	
+			utils.launchPopup("Comentarios y likes","40%","60%",$("#" + ev.currentTarget.attributes['name'].value).html(),this);
     	},
     	showComments: function(ev){
-			var This = this;
-			var id = ev.currentTarget.attributes['name'].value;
-			var popup = $("#" + id).html();
-			$.colorbox({
-				title:'Comentarios',
-				width:'55%',
-				height:'70%',
-				html: popup
-			});
+    		utils.launchPopup("Comentarios","55%","70%",$("#" + ev.currentTarget.attributes['name'].value).html(),this);
 			$('#div-comment #publicarComentario').on('click',This.api,This.publishComment);	
 			$('#cboxLoadedContent #comentario').bind('input propertychange', function() {
 			    $('#div-comment img').addClass('hidden');
 			});				
-			$('#colorbox .speak').on('mouseover', this.speak);	
-			$('#colorbox .speak').on('mouseout', this.shutUp);	
     	},
 	})
 }

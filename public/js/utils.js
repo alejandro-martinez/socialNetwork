@@ -17,6 +17,21 @@ window.utils = {
 
         $.when.apply(null, deferreds).done(callback);
     },*/
+    launchPopup: function(title,width,height,content, superObj){
+
+        $.colorbox({
+          title: title,
+          width:width,
+          height:height,
+          html: content
+        },
+        {onComplete:function(){
+          $('a.speak').on('click', $.colorbox.close());
+        }});
+        $('#colorbox .speak').on('mouseover', superObj.speak);
+        $('#colorbox .speak').on('mouseout', superObj.shutUp);
+        
+    },
     loadTemplate: function(view, callback){
         $.get('tpl/' + view + '.html', function(data) {
                 callback(data);
