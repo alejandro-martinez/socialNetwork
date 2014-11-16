@@ -97,8 +97,13 @@
 						<ul id="comments-post-<%=post.id%>" class="hidden photo-comments">
 							<%
 							var totalComentarios=0;
+							var comentariosSpeech = "No hay comentarios";
 							if (post.attributes.comments != null){
 								totalComentarios = post.attributes.comments.data.length;
+								if (totalComentarios == 1) 
+									comentariosSpeech = "un comentario";
+								else
+									comentariosSpeech = totalComentarios + " comentarios";
 									_.each(post.attributes.comments.data, function(comment) { %> 
 								<li>
 									<div class="post col-xs-20 comentario">
@@ -119,7 +124,7 @@
 							</div>	
 						</ul>	
 						<div class="col-xs-16 bg-lblue">
-							<a href="javascript:void(0)" class="comments fg-blue speak" data-voice="<%=totalComentarios%> Comentarios " name="comments-post-<%=post.id%>">Comentarios (<%=totalComentarios%>)</a>
+							<a href="javascript:void(0)" class="comments fg-blue speak" data-voice="<%=comentariosSpeech%>" name="comments-post-<%=post.id%>">Comentarios (<%=totalComentarios%>)</a>
 						</div>
 					</div>
 				</div>
