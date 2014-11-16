@@ -1035,6 +1035,7 @@ var Views = {
 					miID: This.miID
 				}));
 			});
+			$.colorbox.close();
 		},
 		nextPage: function(){
 			var This = this;
