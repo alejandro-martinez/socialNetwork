@@ -920,7 +920,6 @@ var Views = {
     		this.api = ev.handleObj.data;
     		nombre = $('#cboxLoadedContent #nombre').val();
     		descripcion = $('#cboxLoadedContent #descripcion').val();
-    		$.colorbox.close();
     		this.api.createAlbum(nombre, descripcion, function(response){
     			window.location.href ='/#updateAlbum/'+response.id;
     		});
