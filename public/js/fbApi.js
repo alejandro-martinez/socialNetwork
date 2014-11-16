@@ -102,8 +102,7 @@ function AppController(){
 		});	
 	},
 	this.getUserGroups = function(callback){
-		fbUser('/me/groups/?locale='+This.locale+'&limit=5', function(model){
-			console.log(model);
+		fbUser('/me/groups/?locale='+This.locale+'&limit=6', function(model){
 			callback(model);
 		});	
 	},
@@ -293,7 +292,6 @@ function AppController(){
 		},
 		groups: function(callback){
 			fbUser('/me/groups/?locale='+This.locale, function(model){
-				console.log(model);
 				callback(model);
 			});
 		},
