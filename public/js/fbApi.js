@@ -238,13 +238,15 @@ function AppController(){
 	    });
 	},
 	this.updateWall = function (callback){
-		FB.api("/me/feed?limit=1&locale="+This.locale,
-		    function (response) {
-		      if (response && !response.error) {
-		       	  callback(response);
-		      }
-		    }
-		);
+		fbUser('me/tagged?locale='+This.locale, function(tagged){
+			fbUser('/me/links?locale='+This.locale, function(links){
+				fbUser('/me/statuses?locale='+This.locale, function(statuses){
+					fbUser('/me/posts?locale='+This.locale, function(posts){
+		    			callback({'tagged':tagged,'links':links,'statuses':statuses,'posts':posts});
+					});	
+				});	    
+			});	    
+		});	
 	},
 	this.newsFeed = function (callback){
 		FB.api("/me/home?limit=1&locale="+This.locale,

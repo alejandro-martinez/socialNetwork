@@ -7,7 +7,6 @@
 </h1></a>
 </div>
 <div id="wall">
-
 	<div id="banner-fade">
 	<ul id="wall-template" class="bjqs col-xs-18 col-xs-offset-1">
 		<a class="prevPage friendWall" href="javascript:void(0)"></a>
@@ -16,7 +15,6 @@
 		var arrays = [feed[0],feed[1],feed[2],feed[3]];
 		var merged = [];
 		merged = merged.concat.apply(merged, arrays);
-		console.log(merged)
 		%>
 		<% _.each(merged, function(post) { 
 			
@@ -72,7 +70,6 @@
 								var foto = post.attributes.picture;%>
 								<img src="<%= foto.replace('s.jpg','n.jpg')%>" width="36%"/>
 						<% }%>
-
 
 						<% if (post.attributes.source != null) { %>
 							<center>
@@ -143,6 +140,7 @@
 			</li>
 		<% }); %>
 	</ul>
+	</div>
 </div>
 
 <script type="text/javascript">

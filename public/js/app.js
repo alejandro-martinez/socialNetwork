@@ -100,7 +100,7 @@ var AppRouter = Backbone.Router.extend({
     posts: function(){
         var This = this;
         this.api.updateWall(function(response){
-            This.wallView = new Views.Wall({model: response, api: This.api});    
+            This.wallView = new Views.Wall({wall: response, api: This.api});    
             This.newPostView = new Views.NewPost({api: This.api});                                             //Que estas pensando
         });
         selectMenu('nav-posts')

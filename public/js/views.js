@@ -388,11 +388,17 @@ var Views = {
 			var This = this;
 			var WallUpdates = Backbone.Model.extend({});
 			var updatesCollection = Backbone.Collection.extend({model: WallUpdates});
-			var updates = new updatesCollection(this.model.data);
+			var wallLinks = new updatesCollection(This.options.wall.links.data);
+			var wallPosts = new updatesCollection(This.options.wall.posts.data);
+			var wallTagged = new updatesCollection(This.options.wall.tagged.data);
+			var wallStatuses = new updatesCollection(This.options.wall.statuses.data);
+
+			var wall= $.merge([], [wallLinks.models,wallPosts.models,wallTagged.models,wallStatuses.models]);
+
 			utils.loadTemplate("wall",function(html){
 				var template = _.template(html);
 				$("#body").html("");
-				$("#body").append(template({updates: updates.models,miID: This.miID}));
+				$("#body").append(template({feed: wall,miID: This.miID}));
 			});
 		},
 		nextPage: function(){
