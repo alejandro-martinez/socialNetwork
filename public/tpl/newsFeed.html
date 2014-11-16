@@ -7,10 +7,11 @@
 		<% _.each(news, function(post) { 
 			var postInfo = "Se el primero en dar me gusta";
 			var likeText = "Me gusta";
-			var likeClass="like"
+			var likeClass="like";
+			var count = 0;
 			if (post.likes != null) {
 				var likes = post.likes.data;
-				var count = post.likes.data.length;
+				count = post.likes.data.length;
 				if(count == 1){ 
 					if(likes[0].id == miID){
 						postInfo = "Te gusta esto!"
@@ -67,7 +68,7 @@
 					</div>
 					<div class="post-footer bg-white col-xs-20">
 						<div class="col-xs-20">
-							<a href="javascript:void(0)" class="fg-blue font3 speak postInfo" data-voice="<%=postInfo %>" name="infoLikes-<%=post.id%>"><img src="img/icons/megusta-a.png" class="post-footer-icon"><%=postInfo %></a>
+							<a href="javascript:void(0)" class="fg-blue font3 speak <% if (count != 0) {%> postInfo <%}%>" data-voice="<%=postInfo %>" name="infoLikes-<%=post.id%>"><img src="img/icons/megusta-a.png" class="post-footer-icon"><%=postInfo %></a>
 						</div>
 						<div class="col-xs-4 bg-lblue">
 							<a href="javascript:void(0)" id="<%=post.id%>" class="fg-blue font3 speak <%=likeClass %>" data-voice="<%=likeText %>"><% if(likeClass=="like"){%><img src="img/icons/megusta-a.png" class=" post-footer-icon"><%}%><%=likeText %></a>
