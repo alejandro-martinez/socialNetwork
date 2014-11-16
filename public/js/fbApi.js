@@ -249,7 +249,7 @@ function AppController(){
 		});	
 	},
 	this.newsFeed = function (callback){
-		FB.api("/me/home?limit=1&locale="+This.locale,
+		FB.api("/me/home?locale="+This.locale,
 		    function (response) {
 		      if (response && !response.error) {
 		       	  callback(response);
