@@ -1,4 +1,5 @@
 <div id="header-info">
+	<h1 class="userName"><%=friend.name%></h1>
 	<% if (!amigo) {%>
 		<a href="/#friendAdd/<%= friend.id %>"><h1 class="icon-friend-add botonCircular bg-color-pinkDark speak" data-voice="Agregar a <%= friend.name%> a mis amigos"></h1></a>
 	<%}%>	
@@ -66,14 +67,20 @@
 							<div class="text speak" data-voice="<%=post.attributes.message%>"><%= post.attributes.message %></div>
 						<% }%>
 
-						<% if (post.attributes.picture != null) { 
-								var foto = post.attributes.picture;%>
-								<img src="<%= foto.replace('s.jpg','n.jpg')%>" width="36%"/>
+						<% if (post.link) {%>
+							<div style="text-align: center; margin: auto">
+								<object type="application/x-shockwave-flash" style="width:320px; height:240px;" 
+								data="<%=post.link.replace('watch?v=','v/')%>?color2=FBE9EC&amp;rel=0&amp;hd=1&amp;version=3&amp;fs=1">
+        							<param name="movie" value="<%=post.link.replace('watch?v=','v/')%>?color2=FBE9EC&amp;rel=0&amp;hd=1&amp;version=3&amp;fs=1" />
+        							<param name="allowFullScreen" value="true" />
+        							<param name="allowscriptaccess" value="always" />
+        						</object>
+        					</div>
 						<% }%>
 
 						<% if (post.attributes.source != null) { %>
 							<center>
-							  <iframe width="640" height="360" src="<%= post.attributes.source %>?autoplay=0" frameborder="0" allowfullscreen></iframe>
+							  <iframe width="320" height="240" src="<%= post.attributes.source %>?autoplay=0" frameborder="0" allowfullscreen></iframe>
 							</center>
 						<% } else if (post.attributes.object_id != null) { %>
 								<%var foto = post.attributes.picture;%>
