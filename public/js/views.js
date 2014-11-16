@@ -72,7 +72,7 @@ var Views = {
 		},
 		deleteSelectedPhoto: function(){
 			This.attachment = null;
-			$('.selectedImage').remove();
+			$('#adjuntarFoto img.selectedImage').remove();
 		},
 		selectPhotos: function(){
     		var This = this;
@@ -83,9 +83,11 @@ var Views = {
 				    reader.readAsDataURL(F[0]);  
 				    reader.onloadend = function () {
 				    	This.attachment = reader.result;
-						$('#adjuntarFoto img').attr('src', reader.result);
-						$('#adjuntarFoto img').attr('class', "selectedImage speak");
-						$('#adjuntarFoto img').attr('data-voice', "Click para eliminar imagen");
+				    	$('<img class=selectedImage />').appendTo("#adjuntarFoto");
+				    	preview = $('#adjuntarFoto .selectedImage');
+						preview.attr('src', reader.result);
+						preview.attr('class', "selectedImage speak");
+						preview.attr('data-voice', "Click para eliminar imagen");
 				    }			
 				}            
 			});

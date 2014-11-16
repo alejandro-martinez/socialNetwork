@@ -97,6 +97,7 @@ margin-top: -71px;}
 #que-estas-pensando button{padding:0px 15px;border:0;height: 45px}
 #adjuntarFoto{width:45px;height:45px;padding:0px !important;margin:5px -4px;top:-5px;position:relative}
 #adjuntarFoto>img{width:30px}
+#adjuntarFoto .selectedImage{width:100%;position: absolute;width: 100%;top: 4px;left: 0;}
 
 /* news feed */
 .nextPage,.prevPage{position: absolute;display: block;height: 58px;width: 33px;top: 160px;background-size: contain;background-repeat: no-repeat;}
