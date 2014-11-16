@@ -1,6 +1,13 @@
 html, body{min-width: 1100px;background:#e9eaed}
 
 /* General */
+@font-face {
+	font-family:iconFont;
+	src:url(../fonts/iconFont.eot?#iefix) format(embedded-opentype), url(../fonts/iconFont.svg#iconFont) format(svg), url(../fonts/iconFont.woff) format(woff), url(../fonts/iconFont.ttf) format(truetype);
+	font-weight:400;
+	font-style:normal;
+}
+
 .bg-blue{background-color:#5362a2}
 .bg-lblue{background-color:#c0c5e2}
 .bg-green{background-color:#64a246}
@@ -216,7 +223,7 @@ float: left;
 
 /*Botones*/
 .botonCircular {
-font-family: iconFont;
+font-family: iconFont !important;
 text-align: center;
 text-decoration: none;
 width: 50px;
@@ -226,7 +233,8 @@ float: right;
 color: #FFF;
 margin: 0 3px;
 }
-
+.icon-friend-add:before{content: "\e083"}
+.icon-friend-add{background: #ee3}
 .icon-albums:before {
 content: "\e004";visibility: hidden;
 }
