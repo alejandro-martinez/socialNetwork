@@ -109,10 +109,11 @@ margin-top: -71px;}
 
 /* news feed */
 .nextPage,.prevPage{position: absolute;display: block;height: 58px;width: 33px;top: 160px;background-size: contain;background-repeat: no-repeat;}
-.prevPage{left:0px;background-image:url(../img/prev.png)}
+.prevPage{left:-40px;background-image:url(../img/prev.png)}
 .nextPage{right:-40px;background-image:url(../img/next.png)}
 
 #wall-template, #wall{padding:0}
+#wall{margin-top:30px;}
 .avatar{float:left;width:70px;height:70px;margin-right:20px;background-position:center;background-size:cover}
 .post-content{word-wrap:break-word;padding:15px}
 .post-content>span{display:block;padding: 8px 0px;margin-bottom: 15px;height:70px;display:block;padding:20px 0 0}
