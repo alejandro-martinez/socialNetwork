@@ -97,6 +97,7 @@ margin-top: -71px;}
 
 /* que estas pensando */
 .loading {background:#fff url(colorbox/loading.gif) no-repeat right;}
+.loading-big {background: url(../img/ajax-loader-big.gif) no-repeat center;}
 #examinar{display:none}
 #post-text{width:calc(100% - 195px);height: 45px;border: 0;padding: 10px}
 #publicarStatus{width:150px}
@@ -108,7 +109,7 @@ margin-top: -71px;}
 
 /* news feed */
 .nextPage,.prevPage{position: absolute;display: block;height: 58px;width: 33px;top: 160px;background-size: contain;background-repeat: no-repeat;}
-.prevPage{left:-40px;background-image:url(../img/prev.png)}
+.prevPage{left:0px;background-image:url(../img/prev.png)}
 .nextPage{right:-40px;background-image:url(../img/next.png)}
 
 #wall-template, #wall{padding:0}
@@ -180,7 +181,8 @@ span.icon>img{margin: 0 10px;height: 30px}
 span.icon{float: left;}
 .desc{position:absolute;bottom:0;background:rgba(0,0,0,0.5);bottom:0px;padding: 15px}
 .editAlbum{position:absolute;line-height:45px;bottom:0;left:0;z-index:99999;width:100%;text-align:center}
-
+.albumActions{position:absolute;height: 425px;}
+#file {width: 251px;position: absolute;height: 40px;background: #e8c02d;right: 0;color: #fff;cursor: pointer;}
 /* grupos */
 #groups li{padding-bottom: 20px}
 
@@ -242,7 +244,6 @@ content: "\e004";visibility: hidden;
 .icon-photos:before {
 content: "\e005";visibility: hidden;
 }
-
 html {
   overflow-y: scroll;
   *overflow-x: hidden;
