@@ -12,8 +12,14 @@
 	<ul id="wall-template" class="bjqs col-xs-18 col-xs-offset-1">
 		<a class="prevPage friendWall" href="javascript:void(0)"></a>
 		<a class="nextPage friendWall" href="javascript:void(0)"></a>
-	
-		<% _.each(wall, function(post) { 
+		<% 
+		var arrays = [feed[0],feed[1],feed[2],feed[3]];
+		var merged = [];
+		merged = merged.concat.apply(merged, arrays);
+		console.log(merged)
+		%>
+		<% _.each(merged, function(post) { 
+			
 			var postInfo = "Se el primero en dar me gusta";
 			var likeText = "Me gusta";
 			var likeClass="like"
@@ -61,6 +67,12 @@
 						<% if (post.attributes.message != null) { %>
 							<div class="text speak" data-voice="<%=post.attributes.message%>"><%= post.attributes.message %></div>
 						<% }%>
+
+						<% if (post.attributes.picture != null) { 
+								var foto = post.attributes.picture;%>
+								<img src="<%= foto.replace('s.jpg','n.jpg')%>" width="36%"/>
+						<% }%>
+
 
 						<% if (post.attributes.source != null) { %>
 							<center>

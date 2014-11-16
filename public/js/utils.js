@@ -23,7 +23,8 @@ window.utils = {
           title: title,
           width:width,
           height:height,
-          html: content
+          html: content,
+          fastIframe:false
         },
         {onComplete:function(){
           $('a.speak').on('click', $.colorbox.close());

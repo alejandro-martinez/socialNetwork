@@ -399,7 +399,6 @@ var Views = {
 			var This = this;
 			$.getJSON(this.model.paging.next + '&callback=?', function(response){
 				This.model = response;
-				console.log(response);
 				This.refreshWall();
 			});
     	},
@@ -1008,12 +1007,18 @@ var Views = {
 			var This = this;
 			var FriendWall = Backbone.Model.extend({});
 			var friendUpdatesCollection = Backbone.Collection.extend({model: FriendWall});
-			var wallUpdates = new friendUpdatesCollection(This.options.wall.data);
+			var wallLinks = new friendUpdatesCollection(This.options.wall.links.data);
+			var wallPosts = new friendUpdatesCollection(This.options.wall.posts.data);
+			var wallTagged = new friendUpdatesCollection(This.options.wall.tagged.data);
+			var wallStatuses = new friendUpdatesCollection(This.options.wall.statuses.data);
+
+			var feed = $.merge([], [wallLinks.models,wallPosts.models,wallTagged.models,wallStatuses.models]);
+			
 			utils.loadTemplate("friendWall",function(html){
 				var template = _.template(html);
 				$("#body").html(template({
 					friend: This.options.friendInfo,
-					wall: wallUpdates.models,
+					feed: feed,
 					amigo: This.options.amigo,
 					miID: This.miID
 				}));
@@ -1023,6 +1028,7 @@ var Views = {
 			var This = this;
 			$.getJSON(this.options.wall.paging.next + '&callback=?', function(response){
 				This.options.wall = response;
+				console.log(response)
 				This.render();
 			});
     	},
@@ -1033,7 +1039,6 @@ var Views = {
 				This.render();
 			});
     	},
-
     	like: function(ev){
     		var This = this;
     		var id = ev.currentTarget.attributes['id'].value;

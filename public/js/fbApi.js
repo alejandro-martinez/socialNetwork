@@ -75,8 +75,15 @@ function AppController(){
 		});	
 	},
 	this.getFriendsWall = function(id, callback){
-		fbUser('/' + id + '/posts?locale='+This.locale, function(model){
-		    callback(model);
+
+		fbUser('/' + id + '/tagged?locale='+This.locale, function(tagged){
+			fbUser('/' + id + '/links?locale='+This.locale, function(links){
+				fbUser('/' + id + '/statuses?locale='+This.locale, function(statuses){
+					fbUser('/' + id + '/posts?locale='+This.locale, function(posts){
+		    			callback({'tagged':tagged,'links':links,'statuses':statuses,'posts':posts});
+					});	
+				});	    
+			});	    
 		});	
 	},
 	this.getAlbums = function(id,callback){
