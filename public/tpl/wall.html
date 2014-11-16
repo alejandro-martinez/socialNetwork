@@ -60,7 +60,7 @@
 								<div class="text speak" data-voice="<%=post.message%>"><%= post.message %></div>
 							<% }%>
 
-							<% if (post.picture != null) { 
+							<% if (post.picture != null && post.source == null) { 
 									var foto = post.picture;%>
 									<img src="<%= foto.replace('s.jpg','n.jpg')%>" width="36%"/>
 							<% }%>
