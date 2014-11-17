@@ -95,9 +95,9 @@ margin-top:-71px}
 .loading-big{background:url(../img/ajax-loader-big.gif) no-repeat center}
 #examinar{display:none}
 #post-text{width:calc(100% - 195px);height:45px;border:0;padding:10px}
-#publicarStatus{width:150px}
+#publicarStatus{width:150px;font-size:20pt;}
 #que-estas-pensando{padding:0}
-#que-estas-pensando button{padding:0px 15px;border:0;height:45px}
+#que-estas-pensando button{padding:0px 7px;border:0;height:45px}
 #adjuntarFoto{width:45px;height:45px;padding:0px!important;margin:5px -4px;top:-5px;position:relative}
 #adjuntarFoto>img{width:30px}
 #adjuntarFoto .selectedImage{width:100%;position:absolute;width:100%;top:4px;left:0}
@@ -168,13 +168,13 @@ a#login-button{position:fixed;z-index:9999;right:calc(50% - 109px);width:218px;t
 
 /*Friend wall*/
 #header-info{width:100%;height:50px}
-#header-info h1.userName{position:absolute;top:-25px;color:#120172;weight:600}
+#header-info h1.userName{position:absolute;top:-25px;color:#120172;left: 80px;color: #5362a2;font-weight: 700;}
 
 #profilePhoto{width:96px;height:96px;float:left;border-radius:100%;border:2px solid #AAA;background-size:contain;background-position:center;background-color:#CCC;background-repeat:no-repeat}
 #header-info span{width:calc(100% - 500px);margin:0 20px;display:inline-block;float:left}
 
 /*Botones*/
-.botonCircular{font-family:iconFont !important;text-align:center;text-decoration:none;width:50px;line-height:50px;display:block;float:right;color:#FFF;margin:0 3px}
+.botonCircular{font-family:iconFont !important;text-align:center;text-decoration:none;width:80px;height:80px;line-height:50px;display:block;float:right;color:#FFF;margin:0 3px}
 .icon-friend-add:before{content:"\e083"}
 .icon-friend-add{background:#ee3}
 .icon-albums:before{content:"\e004";visibility:hidden}
