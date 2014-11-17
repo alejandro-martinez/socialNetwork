@@ -24,11 +24,7 @@ window.utils = {
           width:width,
           height:height,
           html: content,
-          fastIframe:false
-        },
-        {onComplete:function(){
-          $('a.speak').on('click', $.colorbox.close());
-        }});
+        });
         $('#colorbox .speak').on('mouseover', superObj.speak);
         $('#colorbox .speak').on('mouseout', superObj.shutUp);
         

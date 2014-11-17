@@ -108,10 +108,10 @@ margin-top: -71px;}
 #adjuntarFoto .selectedImage{width:100%;position: absolute;width: 100%;top: 4px;left: 0;}
 
 /* news feed */
-.nextPage,.prevPage{position: absolute;display: block;height: 58px;width: 33px;top: 160px;background-size: contain;background-repeat: no-repeat;}
+.nextPage,.prevPage{position: absolute;display: block;height: 58px;width: 33px;top: 238px;background-size: contain;background-repeat: no-repeat;}
 .prevPage{left:-40px;background-image:url(../img/prev.png)}
 .nextPage{right:-40px;background-image:url(../img/next.png)}
-
+.prevPage.albumPhotos{left:0;}
 #wall-template, #wall{padding:0}
 #wall{margin-top:30px;}
 .avatar{float:left;width:70px;height:70px;margin-right:20px;background-position:center;background-size:cover}
@@ -126,7 +126,7 @@ margin-top: -71px;}
 .comentario h5 {margin-top: 15px}
 #publicarComentario{float:right;width:150px;margin:10px 0}
 #div-comment{padding:15px;top:35px;position:relative;display: inline-block;width: 100%}
-.post{margin:5px 0;border-top:1px solid #eee}
+.post{margin: 5px 50px;width: 90%;border-top:1px solid #eee}
 .post>span{display:flex}
 .ver-comentarios{padding:8px 15px;position:absolute;right:0}
 
@@ -169,7 +169,7 @@ margin-top: -71px;}
 
 /* flip albums */
 #albums, #albumPhotos, #friends{padding:0}
-
+#photos ul.bjqs-controls {top:45%;}
 .flip-container{margin: 16px 0;padding: 0 5px;height: 180px}
 .flip-container:hover .desc{display:none}
 .flip-container:hover .flipper,.flip-container.hover .flipper, .back{transition-delay: .3s;transform:rotateY(180deg);-webkit-transform:rotateY(180deg)}
