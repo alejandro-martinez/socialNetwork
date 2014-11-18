@@ -168,8 +168,8 @@ a#login-button{position:fixed;z-index:9999;right:calc(50% - 109px);width:218px;t
 
 /*Friend wall*/
 #header-info{width:100%;height:50px}
-#header-info h1.userName{position:absolute;top:-25px;color:#120172;weight:600}
-
+#header-info h1.userName{position:absolute;top:-25px;color:#120172;weight:600;left:140px}
+#header-info h3.city{position:absolute;top:18px;color:#120172;weight:600;left:140px}
 #profilePhoto{width:96px;height:96px;float:left;border-radius:100%;border:2px solid #AAA;background-size:contain;background-position:center;background-color:#CCC;background-repeat:no-repeat}
 #header-info span{width:calc(100% - 500px);margin:0 20px;display:inline-block;float:left}
 
