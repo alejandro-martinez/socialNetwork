@@ -187,7 +187,7 @@ html{overflow-x:hidden}
 a.commonFriends{font-size:16px !important;padding-top:7px !important;font-weight: bold !important;}
 .typehead{font-size:21px}
 .tt-dropdown-menu,.gist{text-align:left}
-
+.ui-autocomplete{z-index:999999;}
 .ui-menu-item{display:flex}
 .ui-menu-item img{float:left}
 .ui-menu-item a{float:left;width:200px;font-size:21px}

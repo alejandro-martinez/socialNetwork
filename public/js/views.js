@@ -529,24 +529,6 @@ var Views = {
 		        return sortStatus;
 		    };
 		},
-		buscarEnAmigos: function(query,callback){
-			$.ajax({
-					  url: "https://graph.facebook.com/fql?q=SELECT uid,name FROM friend WHERE contains('"+request.term.toLowerCase()+"') LIMIT 2000&access_token="+FB.getAuthResponse()['accessToken'],			          
-			          dataType: "jsonp",
-			          success: function( data ) {
-			          	callback(data)
-					  }
-		    });
-
-		},
-		removeAcentos: function(text){
-				    var acentos = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç";
-				    var original = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc";
-				    for (var i=0; i<acentos.length; i++) {
-				        text = text.replace(acentos.charAt(i), original.charAt(i));
-				    }
-				    return text;
-		},
 		navigateResultItem: function(event){
 		    if(event.keyCode == 13){
 		        window.location.href ='/#friend/'+$('.typeahead').val();
@@ -567,18 +549,29 @@ var Views = {
 				$( ".typeahead" ).autocomplete({
 			 	create: function() {
 			        $(this).data('ui-autocomplete')._renderItem =	function( ul, item ) {	        	
-			        	if (item.commonCount > 0)
-			        		var image_url = "http://graph.facebook.com/" + item.value +"/picture";
-			        	else
-			        		var image_url = "http://graph.facebook.com/1022554477/picture";
-
+			        		
+			        	if (item.commonCount == 99) {
+			        		leyenda = 'Es tu amigo';
+			        		image_url = "http://graph.facebook.com/" + item.value +"/picture";
+			        	}
+			        	else {
+			        		if (item.commonCount > 0) {
+				        		leyenda = item.commonCount + ' amigos en común';
+				        		image_url = "http://graph.facebook.com/1022554477/picture";		
+							}
+							else {
+								leyenda = item.commonCount + ' amigos en común';
+			        			image_url = "http://graph.facebook.com/1022554477/picture";		
+							}
+						}
 					    return $( "<li>" ).append($("<img style=''>").attr('src',image_url))
 					    .append( $( '<a class="speak" data-voice="'+item.label+'" href="/#friend/'+item.value+'">' ).text( item.label ) )
-					    .append( $( '<a class="speak commonFriends" data-voice="'+item.commonCount+' amigos en común">' ).text( item.commonCount + " amigos en común" ) )
+					    .append( $( '<a class="speak commonFriends" data-voice="'+leyenda+'">' ).text(leyenda ) )
 					    .appendTo( ul );
 					 }
 			    },
 		        source: function( request, response ) {
+		        	
 			        $.ajax({
 					  url: "https://graph.facebook.com/fql?q=SELECT uid,name,mutual_friend_count FROM user WHERE contains('"+request.term.toLowerCase()+"') LIMIT 5000&access_token="+FB.getAuthResponse()['accessToken'],			          
 			          dataType: "jsonp",
@@ -590,25 +583,37 @@ var Views = {
 			           beforeSend: function(){
 						  $('.typeahead').addClass('searching');     
 					   },
-			          success: function( data ) {
+			          success: function( data, callback ) {
 						data.data.sort(This.sortByProperty("mutual_friend_count"));
-			          	$('.typeahead').removeClass('searching');
-			            res = $.map( data.data, function( item ) {
-				            itemNameSinAcentos = This.removeAcentos(item.name);
-								if (itemNameSinAcentos.toLowerCase().indexOf(request.term.toLowerCase()) >= 0){
-									if (itemNameSinAcentos != 0){
+						friends=[];
+						This.api.getFriends(4000,function(resp){
+							friends = [];
+							for(i=0;i<resp.data.length;i++){
+								resp.data[i].mutual_friend_count = '99';
+								resp.data[i].name = resp.data[i].name;
+								resp.data[i].uid = resp.data[i].id;
+								friends.push(resp.data[i]);
+							}
+							for(i=0;i<data.data.length;i++){
+								friends.push(data.data[i]);
+							}
+
+			            res = $.map(friends, function( item ) {
+								if (item.name.toLowerCase().indexOf(request.term.toLowerCase()) >= 0){	
 									    return {
 									      label: item.name,
 									      value: item.uid,
 									      commonCount: item.mutual_friend_count
 									    }
-									}
 				          		}
-				            });
-				            response(res);
-				   			$('.ui-autocomplete a.speak').on('mouseover', This.speak);	
-							$('.ui-autocomplete a.speak').on('mouseout', This.shutUp);	
-			          }
+				        });
+			            response(res);
+			            $('.typeahead').removeClass('searching');
+			   			$('.ui-autocomplete a.speak').on('mouseover', This.speak);	
+						$('.ui-autocomplete a.speak').on('mouseout', This.shutUp);	
+
+						});
+			          	}						
 			        });
 		      },
 		      minLength: 3,
