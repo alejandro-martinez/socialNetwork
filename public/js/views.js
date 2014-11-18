@@ -374,16 +374,6 @@ var Views = {
 		shutUp: function(){
 			Speech.shutUp();
 		},
-		refreshWall: function(){			
-			var This = this;
-			var WallUpdates = Backbone.Model.extend({});
-			var updatesCollection = Backbone.Collection.extend({model: WallUpdates});
-			var updates = new updatesCollection(this.model.data);
-			utils.loadTemplate("wall",function(html){
-				template = _.template(html);
-				$("#body #wall").replaceWith(template({updates: updates.models,miID: This.miID}));
-			});
-		},
 		render: function(){
 			var This = this;
 			var WallUpdates = Backbone.Model.extend({});
@@ -401,20 +391,6 @@ var Views = {
 				$("#body").append(template({feed: wall,miID: This.miID}));
 			});
 		},
-		nextPage: function(){
-			var This = this;
-			$.getJSON(this.model.paging.next + '&callback=?', function(response){
-				This.model = response;
-				This.refreshWall();
-			});
-    	},
-    	prevPage: function(){
-    		var This = this;
-			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
-				This.model = response;
-				This.refreshWall();
-			});
-    	},
     	like: function(ev){
     		var This = this;
     		var id = ev.currentTarget.attributes['id'].value;
@@ -536,7 +512,32 @@ var Views = {
 			'mouseout .speak': 'shutUp'
 		},
 		initialize: function(){
+			var This = this;
+			This.api = this.options.api;
 			this.render();
+		},
+		sortByProperty: function(property) {
+		    'use strict';
+		    return function (a, b) {
+		        var sortStatus = 0;
+		        if (a[property] < b[property]) {
+		            sortStatus = 1;
+		        } else if (a[property] > b[property]) {
+		            sortStatus = -1;
+		        }
+		 
+		        return sortStatus;
+		    };
+		},
+		buscarEnAmigos: function(query,callback){
+			$.ajax({
+					  url: "https://graph.facebook.com/fql?q=SELECT uid,name FROM friend WHERE contains('"+request.term.toLowerCase()+"') LIMIT 2000&access_token="+FB.getAuthResponse()['accessToken'],			          
+			          dataType: "jsonp",
+			          success: function( data ) {
+			          	callback(data)
+					  }
+		    });
+
 		},
 		removeAcentos: function(text){
 				    var acentos = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç";
@@ -565,31 +566,32 @@ var Views = {
 
 				$( ".typeahead" ).autocomplete({
 			 	create: function() {
-			        $(this).data('ui-autocomplete')._renderItem =	function( ul, item ) {
-					    var image_url = "http://graph.facebook.com/" + item.value +"/picture";
+			        $(this).data('ui-autocomplete')._renderItem =	function( ul, item ) {	        	
+			        	if (item.commonCount > 0)
+			        		var image_url = "http://graph.facebook.com/" + item.value +"/picture";
+			        	else
+			        		var image_url = "http://graph.facebook.com/1022554477/picture";
+
 					    return $( "<li>" ).append($("<img style=''>").attr('src',image_url))
 					    .append( $( '<a class="speak" data-voice="'+item.label+'" href="/#friend/'+item.value+'">' ).text( item.label ) )
+					    .append( $( '<a class="speak commonFriends" data-voice="'+item.commonCount+' amigos en común">' ).text( item.commonCount + " amigos en común" ) )
 					    .appendTo( ul );
 					 }
 			    },
 		        source: function( request, response ) {
 			        $.ajax({
-					  url: "https://graph.facebook.com/fql?q=SELECT uid,name,mutual_friend_count FROM user WHERE contains('"+request.term+"')&access_token="+FB.getAuthResponse()['accessToken'],			          
+					  url: "https://graph.facebook.com/fql?q=SELECT uid,name,mutual_friend_count FROM user WHERE contains('"+request.term.toLowerCase()+"') LIMIT 5000&access_token="+FB.getAuthResponse()['accessToken'],			          
 			          dataType: "jsonp",
 			          data: {
 			            featureClass: "P",
 			            style: "full",
-			            maxRows: 20,
+			            maxRows: 100,
 			          },
 			           beforeSend: function(){
 						  $('.typeahead').addClass('searching');     
 					   },
 			          success: function( data ) {
-			          	jQuery.each(data.data, function(i, item) {
-			          		if (item.mutual_friend_count == 0){
-								data.data[i].name = ''
-			          		}
-						});
+						data.data.sort(This.sortByProperty("mutual_friend_count"));
 			          	$('.typeahead').removeClass('searching');
 			            res = $.map( data.data, function( item ) {
 				            itemNameSinAcentos = This.removeAcentos(item.name);
@@ -597,7 +599,8 @@ var Views = {
 									if (itemNameSinAcentos != 0){
 									    return {
 									      label: item.name,
-									      value: item.uid
+									      value: item.uid,
+									      commonCount: item.mutual_friend_count
 									    }
 									}
 				          		}
@@ -605,11 +608,10 @@ var Views = {
 				            response(res);
 				   			$('.ui-autocomplete a.speak').on('mouseover', This.speak);	
 							$('.ui-autocomplete a.speak').on('mouseout', This.shutUp);	
-		
 			          }
 			        });
 		      },
-		      minLength: 5,
+		      minLength: 3,
 		      open: function() {
 		        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
 		      },
@@ -653,36 +655,22 @@ var Views = {
 				$("#body").html(template({photos: photos.models,miID: This.miID}));
 			});
 		},
-		nextPage: function(){
-			var This = this;
-			$.getJSON(this.model.paging.next + '&callback=?', function(response){
-				This.model = response;
-				This.refreshFeed();
-			});
-    	},
     	publishComment: function(ev){
     		this.api = ev.handleObj.data;
     		var id = ev.currentTarget.attributes['data-comment-id'].value;
     		var mensaje = $('#cboxLoadedContent textarea').val();
     		if (mensaje){
-				utils.utf8_encode($('#mensaje').val(),function(encoded_message){
-					mensaje = encoded_message;
-				});
-			
-    		this.api.comment(id,mensaje,function(response){
-    				if(response)
-    					$('#div-comment .ok').removeClass('hidden');
-    				else
-    					$('#div-comment .error').removeClass('hidden');
-    		});
+					utils.utf8_encode($('#mensaje').val(),function(encoded_message){
+						mensaje = encoded_message;
+					});
+				
+	    		this.api.comment(id,mensaje,function(response){
+	    				if(response)
+	    					$('#div-comment .ok').removeClass('hidden');
+	    				else
+	    					$('#div-comment .error').removeClass('hidden');
+	    		});
     		}
-    	},
-    	prevPage: function(){
-    		var This = this;
-			$.getJSON(this.model.paging.previous + '&callback=?', function(response){
-				This.model = response;
-				This.refreshFeed();
-			});
     	},
     	like: function(ev){
     		var This = this;

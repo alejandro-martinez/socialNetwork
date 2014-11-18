@@ -44,7 +44,7 @@ var AppRouter = Backbone.Router.extend({
 			    	if(window.location.hash.split('/')[0] == "#fbid") {
 	                    this.newsFeed = new Views.NewsFeed({model: response, api: This.api});
                         this.newPostView = new Views.NewPost({api: This.api});                  //Que estas pensando
-                        this.searchView = new Views.Search();                                       //Buscador
+                        this.searchView = new Views.Search({api: This.api});                                       //Buscador
 			    	}
                 });
 		}
@@ -77,7 +77,7 @@ var AppRouter = Backbone.Router.extend({
     },
     friends: function(){
         var This = this;
-        this.api.getFriends(function(response){
+        this.api.getFriends(8,function(response){
             this.friendsView = new Views.Friends({api: This.api,model: response}); 
         });
         selectMenu('nav-friends')

@@ -116,8 +116,8 @@ function AppController(){
 			callback(model);
 		});	
 	},
-	this.getFriends = function(callback){
-		fbUser('/me/friends?fields=id,name,birthday,gender,hometown,location&limit=8&locale='+This.locale, function(model){
+	this.getFriends = function(limite,callback){
+		fbUser('/me/friends?fields=id,name,birthday,gender,hometown,location&limit='+limite+'&locale='+This.locale, function(model){
 			callback(model);
 		});	
 	},
