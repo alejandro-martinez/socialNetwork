@@ -2,7 +2,9 @@
 	<div id="user-photo" style="background-image:url(' http://graph.facebook.com/<%= friend.id %>/picture?type=normal ')">
 	</div>
 	<h1 class="userName"><%=friend.name%></h1>
-	<h3 class="city">Vive en <%=friend.hometown.name%></h3>
+	<% if (friend.hometown.name != null) {%>
+		<h3 class="city">Vive en <%=friend.hometown.name%></h3>
+	<%}%>
 	<% if (!amigo) {%>
 		<a href="/#friendAdd/<%= friend.id %>"><h1 class="icon-friend-add botonCircular bg-color-pinkDark speak" data-voice="Agregar a <%= friend.name%> a mis amigos"></h1></a>
 	<%}%>	
