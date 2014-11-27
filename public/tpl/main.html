@@ -5,13 +5,21 @@
 				<div class="col-xs-20 nav-button bg-lblue" id="nav-user">
 					<div id="user-photo" draggable="true" style="background-image:url(' <%= photo %> ')">
 					</div>
-					<span class="fg-white bg-blue font2"></span>
+					<span class="fg-white bg-blue font2"><i id="cambiar-foto" class="nav-icon" style="background-image:url(img/icons/cambiarfotoperfil.png)"></i></span>
+				</div>
+			</a>
+		</li>
+		<li>
+			<a href="/#posts/<%= id %>">
+				<div class="col-xs-20 nav-button fg-white font2 bg-green speak" id="nav-posts" data-voice="perfil">
+					<i class="nav-icon" style="background-image:url(img/icons/perfil.png)"></i><span>PERFIL</span>
+					<div class="nav-status"></div>
 				</div>
 			</a>
 		</li>
 		<li>
 			<a href="/#photos/<%= id %>">
-				<div class="col-xs-20 nav-button fg-white font2 bg-green speak" id="nav-photos" data-voice="fotos">
+				<div class="col-xs-20 nav-button fg-white font2 bg-yellow speak" id="nav-photos" data-voice="fotos">
 					<i class="nav-icon" style="background-image:url(img/icons/foto.png)"></i><span>FOTOS</span>
 					<div class="nav-status"></div>
 				</div>
@@ -19,16 +27,8 @@
 		</li>
 		<li>
 			<a href="/#albums/me">
-				<div class="col-xs-20 nav-button fg-white font2 bg-yellow speak" id="nav-albums" data-voice="albums">
+				<div class="col-xs-20 nav-button fg-white font2 bg-orange speak" id="nav-albums" data-voice="albums">
 					<i class="nav-icon" style="background-image:url(img/icons/albums.png)"></i><span>ALBUMS</span>
-					<div class="nav-status"></div>
-				</div>
-			</a>
-		</li>
-		<li>
-			<a href="/#posts/<%= id %>">
-				<div class="col-xs-20 nav-button fg-white font2 bg-orange speak" id="nav-posts" data-voice="perfil">
-					<i class="nav-icon" style="background-image:url(img/icons/comentar.png)"></i><span>PERFIL</span>
 					<div class="nav-status"></div>
 				</div>
 			</a>
