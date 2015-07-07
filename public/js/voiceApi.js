@@ -2,8 +2,8 @@ var Speech = {
 	config: {
 		mute: false,
 		volume: 1,		// 0 to 1
-		rate: 2,		// 0.1 to 10
-		pitch: 2,		//0 to 2
+		rate: 1,		// 0.1 to 10
+		pitch: 1,		//0 to 2
 		lang: 'es-ES'
 	},
 	speak: function (texto){
